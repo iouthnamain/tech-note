@@ -1,10 +1,83 @@
+# **📘 NỘI DUNG KHÓA ĐÀO TẠO LẬP TRÌNH VIÊN FULL-STACK LEVEL JUNIOR**
+## Full-Stack Junior Developer Training Course Content
+
 Dưới đây là **phần Nội dung khóa đào tạo** được viết lại **cực kỳ chi tiết, đầy đủ, rõ ràng**, giúp học viên hiểu chính xác mình sẽ học gì, đạt được gì và lộ trình tăng cấp kỹ năng ra sao.
+
+**English:** This is a comprehensive self-learning guide for becoming a Full-Stack Junior Developer, with detailed content, practical examples, and exercises.
 
 ---
 
-# **📘 NỘI DUNG KHÓA ĐÀO TẠO LẬP TRÌNH VIÊN FULL-STACK LEVEL JUNIOR**
+## 🎯 Self-Learning Guide
 
-Khóa học bao gồm **khoảng 250 topic**, được chia thành **17 nhóm nội dung lớn**. Mỗi nhóm được thiết kế để học viên đi từ nền tảng → thực chiến → Junior-ready.
+This course includes **260+ topics** organized into **17 content groups**. Each group is designed to take you from foundation → practical → Junior-ready.
+
+### 📁 Folder Structure
+
+All content is organized in folders for easy navigation:
+
+- **17 Group Folders** - Each group has its own folder (e.g., `Group-01-Foundation-Review/`)
+- **260+ Topic Folders** - Each topic has its own folder with:
+  - `README.md` - Topic content and explanation
+  - `examples/` - Working code examples
+  - `exercises/` - Practice exercises
+  - `solutions/` - Reference solutions
+  - `resources.md` - External learning resources
+
+See [FOLDER_STRUCTURE.md](FOLDER_STRUCTURE.md) for detailed navigation guide.
+
+### 🗺️ Learning Path
+
+**Recommended Learning Sequence:**
+
+1. **Start with Group 1** - Foundation Review (Essential prerequisites)
+2. **Continue with Group 2** - Basic Functions (Core programming skills)
+3. **Progress through Groups 3-17** - Build advanced skills systematically
+
+**Estimated Time:**
+- Foundation topics: 2-4 hours each
+- Intermediate topics: 4-6 hours each
+- Advanced topics: 6-8 hours each
+- **Total estimated time:** 800-1200 hours
+
+### 📚 Quick Links
+
+- [📁 Folder Structure Guide](FOLDER_STRUCTURE.md) - Navigate the folder structure
+- [🏋️ Practice Exercises](PRACTICE_EXERCISES.md) - All exercises index
+- [📚 Learning Resources](RESOURCES.md) - External resources
+- [✅ Self-Assessment](SELF_ASSESSMENT.md) - Track your progress
+- [📖 Detailed Topics](NOI_DUNG_KHOA_HOC_CHI_TIET.md) - Complete topic list
+
+### 🎓 How to Use This Course
+
+1. **Read the topic README** - Understand concepts first
+2. **Study code examples** - Review examples in `examples/` folder
+3. **Practice exercises** - Complete exercises in `exercises/` folder
+4. **Check solutions** - Compare with solutions in `solutions/` folder
+5. **Track progress** - Update [SELF_ASSESSMENT.md](SELF_ASSESSMENT.md)
+
+### 🎯 Practice Projects
+
+**Mini Projects (2-4 hours each):**
+- **Todo List App** (Group 2) - CRUD, validation, search, pagination
+- **User Management System** (Group 2) - Authentication, authorization, audit log
+- **File Sharing App** (Group 2) - File upload/download, access control
+- **Algorithm Visualizer** (Group 3) - Visualize sorting/searching algorithms
+- **Code Review Tool** (Group 8) - Automated code quality checks
+
+**Capstone Projects (1-2 weeks each):**
+- **E-Commerce Platform** - Combines Groups 1-9: Full CRUD, authentication, payments, reports
+- **Social Media App** - Groups 1-9: Real-time features, file handling, complex queries
+- **Project Management Tool** - Groups 1-12: Full-stack app with team collaboration
+- **Blog Platform** - Groups 1-6: Content management, search, comments, file uploads
+
+**Project Templates:**
+- Starter templates available in topic folders
+- Each project includes requirements checklist
+- Reference implementations provided
+
+---
+
+## 📋 Course Overview
 
 ---
 

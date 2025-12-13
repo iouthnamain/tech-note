@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NOI_DUNG_KHOA_HOC_CHI_TIET.md",
+                "file": "FULL-STACK LEVEL JUNIOR.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "NOI_DUNG_KHOA_HOC_CHI_TIET"
+              "title": "FULL-STACK LEVEL JUNIOR"
             }
           }
         ]
@@ -183,10 +183,43 @@
       "bases:Create new base": false
     }
   },
-  "active": "4fd45f5886609a06",
+  "active": "21633749ea8b2dc7",
   "lastOpenFiles": [
-    "BAOD_AI_TIKTOK_VIDEO_CREATION.md",
-    "FULL-STACK LEVEL JUNIOR.md",
-    "NOI_DUNG_KHOA_HOC_CHI_TIET.md"
+    "Group-01-Foundation-Review/typescript-best-practices.md",
+    "Group-01-Foundation-Review/javascript-best-practices.md",
+    "NOI_DUNG_KHOA_HOC_CHI_TIET.md",
+    "FOLDER_STRUCTURE.md",
+    "SELF_ASSESSMENT.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.15-learning-new-technologies-học-công-nghệ-mới/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.14-cost-optimization-tối-ưu-chi-phí/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.13-backup-và-disaster-recovery/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.12-security-trong-devops/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.11-deployment-strategies/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.10-version-control-best-practices/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.09-infrastructure-as-code/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.08-logging-và-monitoring/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.07-environment-management-quản-lý-môi-trường/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.06-langchain-ai-application-framework/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.05-langflow-ai-workflow-builder/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.04-n8n-workflow-automation/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.03-docker-cơ-bản-containerization/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.02-cicd-pipelines-pipeline-tự-động/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.01-aws-cơ-bản-ec2-s3-iam/README.md",
+    "Group-16-performance-testing-tối-ưu-hệ-thống/Topic-16.16-performance-optimization-process/README.md",
+    "Group-16-performance-testing-tối-ưu-hệ-thống/Topic-16.15-performance-budget-ngân-sách-hiệu-năng/README.md",
+    "Group-16-performance-testing-tối-ưu-hệ-thống/Topic-16.14-performance-testing-trong-cicd/README.md",
+    "Group-16-performance-testing-tối-ưu-hệ-thống/Topic-16.13-performance-metrics-các-chỉ-số-hiệu-năng/README.md",
+    "Group-16-performance-testing-tối-ưu-hệ-thống/Topic-16.12-monitoring-và-alerting/README.md",
+    "Group-16-performance-testing-tối-ưu-hệ-thống/Topic-16.11-big-data-processing-performance/README.md",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.15-learning-new-technologies-học-công-nghệ-mới/solutions",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.15-learning-new-technologies-học-công-nghệ-mới/exercises",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.15-learning-new-technologies-học-công-nghệ-mới/examples",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.14-cost-optimization-tối-ưu-chi-phí/solutions",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.14-cost-optimization-tối-ưu-chi-phí/exercises",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.14-cost-optimization-tối-ưu-chi-phí/examples",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.13-backup-và-disaster-recovery/solutions",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.13-backup-và-disaster-recovery/exercises",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.13-backup-và-disaster-recovery/examples",
+    "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.12-security-trong-devops/solutions"
   ]
 }
