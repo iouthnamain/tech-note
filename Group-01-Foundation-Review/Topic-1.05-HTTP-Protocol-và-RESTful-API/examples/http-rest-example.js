@@ -378,8 +378,8 @@ app.get('/api/users', (req, res, next) => {
                 limit: limitNum,
                 total: filteredUsers.length,
                 totalPages: Math.ceil(filteredUsers.length / limitNum)
-            }
-        });
+        }
+    });
     } catch (error) {
         next(error);
     }
@@ -398,11 +398,11 @@ app.get('/api/users/:id', (req, res, next) => {
         }
         
         const user = users.find(u => u.id === id);
-        
-        if (!user) {
+    
+    if (!user) {
             throw new ApiError(HTTP_STATUS.NOT_FOUND, 'User not found');
-        }
-        
+    }
+    
         res.status(HTTP_STATUS.OK).json({ data: user });
     } catch (error) {
         next(error);
@@ -416,27 +416,27 @@ app.get('/api/users/:id', (req, res, next) => {
 app.post('/api/users', validateBody(createUserSchema), (req, res, next) => {
     try {
         const { name, email, age } = req.body;
-        
+    
         // Check for duplicate email
         if (users.some(u => u.email === email)) {
             throw new ApiError(HTTP_STATUS.CONFLICT, 'Email already exists');
-        }
-        
-        const newUser = {
+    }
+    
+    const newUser = {
             id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
-            name,
-            email,
+        name,
+        email,
             age: age || null,
             createdAt: new Date().toISOString(),
             updatedAt: null
-        };
-        
-        users.push(newUser);
-        
+    };
+    
+    users.push(newUser);
+    
         res.status(HTTP_STATUS.CREATED).json({
-            message: 'User created successfully',
-            data: newUser
-        });
+        message: 'User created successfully',
+        data: newUser
+    });
     } catch (error) {
         next(error);
     }
@@ -453,10 +453,10 @@ app.put('/api/users/:id', validateBody(createUserSchema), (req, res, next) => {
         if (isNaN(id)) {
             throw new ApiError(HTTP_STATUS.BAD_REQUEST, 'Invalid user ID');
         }
-        
+    
         const userIndex = users.findIndex(u => u.id === id);
-        
-        if (userIndex === -1) {
+    
+    if (userIndex === -1) {
             throw new ApiError(HTTP_STATUS.NOT_FOUND, 'User not found');
         }
         
@@ -464,20 +464,20 @@ app.put('/api/users/:id', validateBody(createUserSchema), (req, res, next) => {
         const { email } = req.body;
         if (users.some((u, index) => u.email === email && index !== userIndex)) {
             throw new ApiError(HTTP_STATUS.CONFLICT, 'Email already exists');
-        }
-        
-        // Replace entire resource
-        users[userIndex] = {
-            ...users[userIndex],
+    }
+    
+    // Replace entire resource
+    users[userIndex] = {
+        ...users[userIndex],
             ...req.body,
             id, // Preserve ID
-            updatedAt: new Date().toISOString()
-        };
-        
+        updatedAt: new Date().toISOString()
+    };
+    
         res.status(HTTP_STATUS.OK).json({
-            message: 'User updated successfully',
-            data: users[userIndex]
-        });
+        message: 'User updated successfully',
+        data: users[userIndex]
+    });
     } catch (error) {
         next(error);
     }
@@ -494,10 +494,10 @@ app.patch('/api/users/:id', (req, res, next) => {
         if (isNaN(id)) {
             throw new ApiError(HTTP_STATUS.BAD_REQUEST, 'Invalid user ID');
         }
-        
+    
         const userIndex = users.findIndex(u => u.id === id);
-        
-        if (userIndex === -1) {
+    
+    if (userIndex === -1) {
             throw new ApiError(HTTP_STATUS.NOT_FOUND, 'User not found');
         }
         
@@ -510,20 +510,20 @@ app.patch('/api/users/:id', (req, res, next) => {
         // Check for duplicate email
         if (updates.email && users.some((u, index) => u.email === updates.email && index !== userIndex)) {
             throw new ApiError(HTTP_STATUS.CONFLICT, 'Email already exists');
-        }
-        
-        // Update only provided fields
-        users[userIndex] = {
-            ...users[userIndex],
-            ...updates,
+    }
+    
+    // Update only provided fields
+    users[userIndex] = {
+        ...users[userIndex],
+        ...updates,
             id, // Preserve ID
-            updatedAt: new Date().toISOString()
-        };
-        
+        updatedAt: new Date().toISOString()
+    };
+    
         res.status(HTTP_STATUS.OK).json({
-            message: 'User updated successfully',
-            data: users[userIndex]
-        });
+        message: 'User updated successfully',
+        data: users[userIndex]
+    });
     } catch (error) {
         next(error);
     }
@@ -542,16 +542,16 @@ app.delete('/api/users/:id', authenticate, authorize('admin'), (req, res, next) 
         }
         
         const userIndex = users.findIndex(u => u.id === id);
-        
-        if (userIndex === -1) {
+    
+    if (userIndex === -1) {
             throw new ApiError(HTTP_STATUS.NOT_FOUND, 'User not found');
-        }
-        
-        const deletedUser = users.splice(userIndex, 1)[0];
-        
+    }
+    
+    const deletedUser = users.splice(userIndex, 1)[0];
+    
         res.status(HTTP_STATUS.OK).json({
-            message: 'User deleted successfully',
-            data: deletedUser
+        message: 'User deleted successfully',
+        data: deletedUser
         });
     } catch (error) {
         next(error);

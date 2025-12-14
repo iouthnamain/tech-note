@@ -63,14 +63,14 @@ class BankAccount {
             throw new Error('Deposit amount must be a positive number');
         }
         
-        this.#balance += amount;
+            this.#balance += amount;
         this.#transactionHistory.push({
             type: 'DEPOSIT',
             amount,
             timestamp: new Date()
         });
         return this.#balance;
-    }
+        }
     
     /**
      * Withdraw money from account
@@ -86,14 +86,14 @@ class BankAccount {
             throw new Error('Insufficient funds');
         }
         
-        this.#balance -= amount;
+            this.#balance -= amount;
         this.#transactionHistory.push({
             type: 'WITHDRAWAL',
             amount,
             timestamp: new Date()
         });
         return this.#balance;
-    }
+        }
     
     /**
      * Get current balance
@@ -707,13 +707,13 @@ console.log(`Celsius: ${temp.celsius}, Fahrenheit: ${temp.fahrenheit}`);
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        BankAccount,
-        Animal,
-        Dog,
-        Cat,
-        Shape,
-        Circle,
+module.exports = {
+    BankAccount,
+    Animal,
+    Dog,
+    Cat,
+    Shape,
+    Circle,
         Rectangle,
         Engine,
         Car,
@@ -728,5 +728,5 @@ if (typeof module !== 'undefined' && module.exports) {
         SMSNotifier,
         Temperature,
         MathUtils
-    };
+};
 }

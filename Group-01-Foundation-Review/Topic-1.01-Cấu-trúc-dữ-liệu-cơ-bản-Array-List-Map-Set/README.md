@@ -41,6 +41,7 @@ See code examples in the [`examples/`](examples/) folder:
 - `set-example.js` - Set operations with WeakSet examples and performance considerations
 
 ### TypeScript Examples (Type-Safe Implementations)
+- `variable-declarations-example.ts` - **NEW!** Comprehensive guide to TypeScript variable declarations with type safety and best practices
 - `array-example.ts` - TypeScript arrays with generics, readonly arrays, tuple types, and utility types
 - `map-example.ts` - Typed Maps with generic key-value pairs and WeakMap patterns
 - `set-example.ts` - Typed Sets with generics and type-safe set operations

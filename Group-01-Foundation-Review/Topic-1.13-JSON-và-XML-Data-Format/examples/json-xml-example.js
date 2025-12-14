@@ -192,9 +192,9 @@ function validateJSON(data, schema) {
                 }
                 if (fieldSchema.maximum !== undefined && value > fieldSchema.maximum) {
                     errors.push(`${field} must be at most ${fieldSchema.maximum}`);
-                }
             }
         }
+    }
     }
     
     return {
@@ -216,7 +216,7 @@ function validateJSON(data, schema) {
  */
 function deepClone(obj) {
     try {
-        return JSON.parse(JSON.stringify(obj));
+    return JSON.parse(JSON.stringify(obj));
     } catch (error) {
         throw new Error('Cannot clone object: ' + error.message);
     }
@@ -634,10 +634,10 @@ console.log('Unflattened:', unflattened);
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        isValidJSON,
+module.exports = {
+    isValidJSON,
         parseJSONSafe,
-        validateJSON,
+    validateJSON,
         deepClone,
         filterData,
         transformData,
@@ -651,5 +651,5 @@ if (typeof module !== 'undefined' && module.exports) {
         compareJSON,
         getJSONDiff,
         userSchema
-    };
+};
 }

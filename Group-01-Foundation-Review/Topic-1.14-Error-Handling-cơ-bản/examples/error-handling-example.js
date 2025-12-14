@@ -200,7 +200,7 @@ class CircuitBreaker {
         if (this.state === 'OPEN') {
             if (Date.now() < this.nextAttempt) {
                 throw new Error('Circuit breaker is OPEN');
-            }
+    }
             this.state = 'HALF_OPEN';
         }
         
@@ -406,11 +406,11 @@ function fetchDataWithPromise(url) {
                 throw new NetworkError(`HTTP error! status: ${response.status}`, url);
             }
             return response.json();
-        })
-        .catch(error => {
+    })
+    .catch(error => {
             ErrorLogger.log(error, { url }, 'error');
             throw error;
-        });
+    });
 }
 
 // ============================================================================
@@ -461,7 +461,7 @@ class ErrorBoundary {
             const result = await fn();
             this.reset();
             return result;
-        } catch (error) {
+} catch (error) {
             this.catchError(error);
             
             if (fallback) {
@@ -522,11 +522,11 @@ function getUserFriendlyError(error) {
  */
 function formatErrorResponse(error, includeDetails = false) {
     const response = {
-        success: false,
+                success: false,
         error: getUserFriendlyError(error),
         timestamp: new Date().toISOString()
     };
-    
+
     // Include details only in development
     if (includeDetails || process.env.NODE_ENV === 'development') {
         response.details = {
@@ -636,8 +636,8 @@ function expressErrorHandler(err, req, res, next) {
     );
     
     res.status(statusCode).json(response);
-}
-
+    }
+    
 /**
  * Async error wrapper for Express routes
  * ✅ Best Practice: Wrap async route handlers
@@ -717,12 +717,12 @@ function validateUser(user) {
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        divide,
+module.exports = {
+    divide,
         handleError,
         AppError,
-        ValidationError,
-        DatabaseError,
+    ValidationError,
+    DatabaseError,
         NetworkError,
         PermissionError,
         retryWithBackoff,
@@ -730,7 +730,7 @@ if (typeof module !== 'undefined' && module.exports) {
         CircuitBreaker,
         ErrorLogger,
         ErrorMonitor,
-        fetchData,
+    fetchData,
         fetchDataWithPromise,
         ErrorBoundary,
         getUserFriendlyError,
@@ -739,5 +739,5 @@ if (typeof module !== 'undefined' && module.exports) {
         expressErrorHandler,
         asyncHandler,
         validateUser
-    };
+};
 }

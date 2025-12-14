@@ -197,8 +197,8 @@ function iterateMapEntries(map) {
         throw new TypeError('Argument must be a Map');
     }
     for (const [key, value] of map.entries()) {
-        console.log(`${key} = ${value}`);
-    }
+    console.log(`${key} = ${value}`);
+}
 }
 
 // ✅ Best Practice: Direct iteration (entries() is default)
@@ -319,16 +319,16 @@ function memoize(fn) {
     if (typeof fn !== 'function') {
         throw new TypeError('Argument must be a function');
     }
-    const cache = new Map();
+const cache = new Map();
     
     return function(...args) {
         const key = JSON.stringify(args);
-        if (cache.has(key)) {
-            return cache.get(key);
-        }
+    if (cache.has(key)) {
+        return cache.get(key);
+    }
         const result = fn.apply(this, args);
-        cache.set(key, result);
-        return result;
+    cache.set(key, result);
+    return result;
     };
 }
 

@@ -511,13 +511,13 @@ fullHandler.rename('/path/to/newfile.txt');
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        IPaymentProcessor,
-        AbstractShape,
-        CreditCardProcessor,
-        PayPalProcessor,
-        Circle,
-        Rectangle,
+module.exports = {
+    IPaymentProcessor,
+    AbstractShape,
+    CreditCardProcessor,
+    PayPalProcessor,
+    Circle,
+    Rectangle,
         PaymentService,
         IReadable,
         IWritable,
@@ -532,5 +532,5 @@ if (typeof module !== 'undefined' && module.exports) {
         Person,
         DataStore,
         ConsoleLogger
-    };
+};
 }

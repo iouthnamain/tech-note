@@ -334,8 +334,8 @@ class Config {
      */
     getEnvironment() {
         return this.get('NODE_ENV');
+        }
     }
-}
 
 // ============================================================================
 // 5. Environment-Specific Configuration
@@ -347,9 +347,9 @@ class Config {
  */
 const environmentConfigs = {
     development: {
-        db: {
-            host: 'localhost',
-            port: 5432,
+    db: {
+        host: 'localhost',
+        port: 5432,
             name: 'myapp_dev',
             ssl: false
         },
@@ -369,25 +369,25 @@ const environmentConfigs = {
             port: parseInt(process.env.DB_PORT) || 5432,
             name: process.env.DB_NAME || 'myapp_staging',
             ssl: true
-        },
-        api: {
+    },
+    api: {
             baseUrl: process.env.API_BASE_URL || 'https://staging-api.example.com',
             timeout: 10000
         },
         logging: {
             level: 'info',
             format: 'json'
-        }
+    }
     },
     
     production: {
-        db: {
-            host: process.env.DB_HOST,
+    db: {
+        host: process.env.DB_HOST,
             port: parseInt(process.env.DB_PORT) || 5432,
             name: process.env.DB_NAME,
             ssl: true
-        },
-        api: {
+    },
+    api: {
             baseUrl: process.env.API_BASE_URL,
             timeout: 15000
         },
@@ -546,9 +546,9 @@ function validateRequiredEnv(required = []) {
             `Missing required environment variables: ${missing.join(', ')}\n` +
             `Please check your .env file or environment configuration.`
         );
+        }
     }
-}
-
+    
 /**
  * Validate environment variable format
  * ✅ Best Practice: Validate format, not just presence
@@ -591,7 +591,7 @@ const appConfig = {
     // Server configuration
     server: {
         port: coerceNumber(process.env.PORT, 3000),
-        host: process.env.HOST || '0.0.0.0',
+    host: process.env.HOST || '0.0.0.0',
         env: process.env.NODE_ENV || 'development'
     },
     
@@ -709,8 +709,8 @@ try {
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        Config,
+module.exports = {
+    Config,
         ConfigBuilder,
         SecretsManager,
         validateEnvSchema,

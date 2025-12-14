@@ -615,15 +615,15 @@ const reversed = original.toReversed(); // [2, 4, 1, 3] (original unchanged)
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        add,
-        greet,
-        Person,
-        Student,
+module.exports = {
+    add,
+    greet,
+    Person,
+    Student,
         BankAccount,
         MathUtils,
-        fetchData,
+    fetchData,
         fetchUserData,
         sum
-    };
+};
 }

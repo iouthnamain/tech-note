@@ -153,7 +153,7 @@ function quickSort(arr, compareFn = (a, b) => a - b) {
             right.push(element);
         } else {
             middle.push(element);
-        }
+    }
     }
     
     // Recursively sort and combine
@@ -571,13 +571,13 @@ if (typeof performance !== 'undefined') {
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        bubbleSort,
-        quickSort,
-        mergeSort,
+module.exports = {
+    bubbleSort,
+    quickSort,
+    mergeSort,
         insertionSort,
         selectionSort,
-        linearSearch,
+    linearSearch,
         binarySearch,
         binarySearchRecursive,
         merge,
