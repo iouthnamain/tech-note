@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Developer-Guides/SYSTEM_DESIGN_GUIDE_COMPREHENSIVE.md",
-                "mode": "source",
-                "source": false
+                "file": "Developer-Guides/SENIOR_JS_TS_NEXTJS_DEVELOPER_GUIDE_COMPREHENSIVE.md",
+                "mode": "preview",
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "SYSTEM_DESIGN_GUIDE_COMPREHENSIVE"
+              "title": "SENIOR_JS_TS_NEXTJS_DEVELOPER_GUIDE_COMPREHENSIVE"
             }
           }
         ],
@@ -202,7 +202,17 @@
   },
   "active": "7116e26d7094e593",
   "lastOpenFiles": [
+    "temp.txt",
+    "Developer-Guides/SENIOR_JAVA_FULL_STACK_DEVELOPER_GUIDE_COMPREHENSIVE.md",
+    "Developer-Guides/SECURITY_BEST_PRACTICES_GUIDE.md",
     "Developer-Guides/README.md",
+    "Developer-Guides/PERFORMANCE_OPTIMIZATION_GUIDE.md",
+    "Developer-Guides/OOP_DESIGN_PATTERNS_GUIDE.md",
+    "Developer-Guides/DEVOPS_CICD_GUIDE.md",
+    "Developer-Guides/ARCHITECTURE_PATTERNS_GUIDE.md",
+    "Developer-Guides/API_DESIGN_INTEGRATION_GUIDE.md",
+    "Developer-Guides/SYSTEM_DESIGN_GUIDE_COMPREHENSIVE.md",
+    "Developer-Guides/SENIOR_JS_TS_NEXTJS_DEVELOPER_GUIDE_COMPREHENSIVE.md",
     "Developer-Guides/TESTING_STRATEGIES_GUIDE.md",
     "Excalidraw/Drawing 2025-12-14 05.10.39.excalidraw.md",
     "Excalidraw/Drawing 2025-12-14 05.09.30.excalidraw.md",
@@ -212,24 +222,14 @@
     "1.1.md",
     "video making.md",
     "Developer-Guides/0-README.md",
-    "Developer-Guides/SENIOR_JS_TS_NEXTJS_DEVELOPER_GUIDE_COMPREHENSIVE.md",
-    "Developer-Guides/SYSTEM_DESIGN_GUIDE_COMPREHENSIVE.md",
-    "Developer-Guides/ARCHITECTURE_PATTERNS_GUIDE.md",
-    "Developer-Guides/API_DESIGN_INTEGRATION_GUIDE.md",
     "SYSTEM_DESIGN_GUIDE.md",
-    "Developer-Guides/PERFORMANCE_OPTIMIZATION_GUIDE.md",
-    "Developer-Guides/DEVOPS_CICD_GUIDE.md",
-    "Developer-Guides/SECURITY_BEST_PRACTICES_GUIDE.md",
     "Developer-Guides/DATABASE_DESIGN_OPTIMIZATION_GUIDE.md",
-    "Developer-Guides/OOP_DESIGN_PATTERNS_GUIDE.md",
-    "Developer-Guides/SENIOR_JAVA_FULL_STACK_DEVELOPER_GUIDE_COMPREHENSIVE.md",
     "Developer-Guides",
     "SENIOR_JAVA_FULL_STACK_DEVELOPER_GUIDE.md",
     "SENIOR_JS_TS_NEXTJS_DEVELOPER_GUIDE.md",
     "Group-01-Foundation-Review/typescript-best-practices.md",
     "Group-01-Foundation-Review/javascript-best-practices.md",
     "FOLDER_STRUCTURE.md",
-    "SELF_ASSESSMENT.md",
     "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.15-learning-new-technologies-học-công-nghệ-mới/solutions",
     "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.15-learning-new-technologies-học-công-nghệ-mới/exercises",
     "Group-17-devops-cơ-bản-low-code-ai-automation/Topic-17.15-learning-new-technologies-học-công-nghệ-mới/examples",

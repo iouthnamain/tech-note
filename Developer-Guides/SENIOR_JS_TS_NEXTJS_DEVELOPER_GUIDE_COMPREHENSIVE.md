@@ -436,6 +436,39 @@ type UserPublic = Omit<User, 'email'>;
 type UserRequired = Required<User>;
 ```
 
+### TypeScript 5.9 Highlights (2025)
+
+- **`--erasableSyntaxOnly` flag**: run TypeScript directly in Node.js 23.6+ without emitting JS as long as the code only uses syntax the runtime can erase safely.
+- **Better conditional inference**: reducers and state machines get correct discriminated unions without `as const`, thanks to smarter return-type analysis.
+- **`moduleResolution: "nodenext"` parity**: `require()` fallbacks now honor `package.json` `"exports"`, fixing the last gaps between the compiler and Node 22/23 loaders.
+- **Lean default configs**: the refreshed `tsconfig.json --init` output sticks to modern targets (`ES2022`, `NodeNext`) so greenfield apps match the tooling ecosystem.
+
+> 📌 **Upgrade tip**: set `"target": "ES2022"` / `"module": "NodeNext"`, enable `strict`, and run `npx @tsconfig/upgrade` before adopting TS 5.9 in monorepos.
+
+### Node.js 23.6+ Native TypeScript Execution
+
+Modern Node can execute `.ts` files directly—no Babel or ts-node CLI wiring required:
+
+```bash
+# One-off execution
+NODE_OPTIONS="--import ts-node/register" node src/server.ts
+
+# package.json script
+"scripts": {
+  "dev": "NODE_OPTIONS='--import ts-node/register' node app.ts"
+}
+```
+
+- Node currently ignores `tsconfig.json`, so path aliases, legacy downlevel transforms, and experimental decorators still need a build step.
+- Ideal for tooling scripts, CLIs, and Server Actions prototypes.
+- Still compile to JavaScript for production bundles (Next.js, Vite, Remix) to keep deploy artifacts deterministic.
+
+### Native Compiler Roadmap (TypeScript 7)
+
+- **Project Corsa**: the TypeScript team is porting the compiler and language service to native code, yielding faster cold builds and lower memory pressure in large workspaces.
+- **Editor tooling**: the VS Code native preview is already usable—test it early to surface plugin incompatibilities.
+- **Action item**: audit custom transformers and language-service plugins now, because TypeScript 7 will ship as the first native-by-default release in 2026.
+
 #### 3. **Type Guards and Narrowing**
 
 ```typescript
@@ -602,6 +635,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(user, { status: 201 });
 }
 ```
+
+### Next.js 16 Highlights (2025)
+
+- **Cache Components + `use cache`**: Partial Pre-Rendering (PPR) now lets you mark fragments that stay hot between requests while still streaming fresh data around them.
+- **React Compiler (stable)**: the release ships with compiler-backed automatic memoization, so most components no longer need manual `useMemo` / `memo` wrappers.
+- **Turbopack by default**: both dev and prod builds use Rust-powered Turbopack; fall back with `next build --no-turbo` only when legacy webpack plugins are still required.
+- **`proxy.ts` network boundary**: middleware rewrites and auth headers move into `proxy.ts`, which runs on the Node runtime and makes outbound dependencies explicit.
+- **Next.js DevTools + MCP**: the overlay now surfaces fetch cache misses, route waterfalls, and AI-assisted remediation steps.
+- **Expanded cache APIs**: helpers like `updateTag()`, `refresh()`, and improved `revalidateTag()` give finer control when mixing Server Components and Route Handlers.
+- **Image defaults**: AVIF is first-class with automatic `sizes` hints, cutting layout shift on content-heavy landing pages.
+
+> ✅ **Upgrade tip**: run `npx @next/codemod@latest upgrade` to migrate middleware to `proxy.ts`, flag legacy webpack configs, and surface `"use cache"` opportunities automatically.
 
 ---
 
@@ -981,6 +1026,22 @@ export class PrismaUserRepository implements UserRepository {
 
 ---
 
+## DevOps & Deployment
+
+### Next.js 16 Build & Cache Strategy
+
+- **Turbopack CI**: default `next build` already runs Turbopack—pin `NEXT_TELEMETRY_DISABLED=1` and cache `.next/cache/turbo` between CI jobs for 3x faster cold builds.
+- **Partial Pre-Rendering (PPR)**: pair `Cache Components` with `prerender-manifest.json` auditing so that every deploy documents which routes stream vs hydrate.
+- **`proxy.ts` rollout**: treat the file as infrastructure-as-code—gate PRs that add new upstreams, enforce secret injection via typed helpers, and keep the legacy `middleware.ts` only for Edge runtime use cases.
+
+### Operational Guardrails
+
+- **Cache invalidation**: build runbooks around `revalidateTag()`, `updateTag()`, and `refresh()` so incidents are solved with targeted invalidations instead of full redeploys.
+- **Security feed automation**: subscribe CI to `nextjs.org/blog/security` and `devblogs.microsoft.com/typescript` RSS feeds; fail builds when vulnerable versions are detected.
+- **Release verification**: smoke-test Server Actions, `use cache` components, and React Compiler output under production-like load before rolling traffic to the new release.
+
+---
+
 ## Security
 
 ### XSS Prevention
@@ -1016,6 +1077,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
 }
 ```
+
+### Next.js Security Advisories (Dec 2025)
+
+- **CVE-2025-55184**: crafted RSC payloads can trigger infinite loops and DoS unpatched servers—upgrade to Next.js ≥16.0.10 immediately.
+- **CVE-2025-55183**: the same RSC window could leak compiled server code; rotate secrets and redeploy after patching.
+- **CVE-2025-66478**: fixes a remote code execution vector in the RSC protocol—treat it as critical and automate dependency alerts for future advisories.
 
 ---
 
@@ -1190,6 +1257,12 @@ export default function Dashboard() {
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [React Documentation](https://react.dev/)
+
+### Release Notes & Advisories
+- [Next.js 16 Release Notes](https://nextjs.org/blog/next-16)
+- [Next.js Security Update – December 2025](https://nextjs.org/blog/security-update-2025-12-11)
+- [Announcing TypeScript 5.9](https://devblogs.microsoft.com/typescript/announcing-typescript-5-9/)
+- [Progress on TypeScript 7 (Project Corsa)](https://devblogs.microsoft.com/typescript/progress-on-typescript-7-december-2025/)
 
 ### Tools
 - [ESLint](https://eslint.org/)
