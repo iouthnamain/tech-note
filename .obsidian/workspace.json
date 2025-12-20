@@ -4,63 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "237a428d5c0bd26b",
+        "id": "69ce047e194bbfe8",
         "type": "tabs",
         "children": [
           {
-            "id": "4fd45f5886609a06",
+            "id": "b7515867cb4cd1ae",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Developer-Guides/NOI_DUNG_KHOA_HOC_CHI_TIET.md",
+                "file": "PM-Guides/PROJECT_METHODOLOGIES_GUIDE.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "NOI_DUNG_KHOA_HOC_CHI_TIET"
-            }
-          },
-          {
-            "id": "356a8f0532a882b3",
-            "type": "leaf",
-            "state": {
-              "type": "mk-uri-view",
-              "state": {
-                "path": "https://www.make.md/static/latest.md"
-              },
-              "icon": "lucide-file",
-              "title": "https://www.make.md/static/latest.md"
-            }
-          },
-          {
-            "id": "f8f5c80c4ab7aee8",
-            "type": "leaf",
-            "state": {
-              "type": "mk-space",
-              "state": {
-                "path": "Group-01-Foundation-Review"
-              },
-              "icon": "lucide-file",
-              "title": "Group-01-Foundation-Review"
-            }
-          },
-          {
-            "id": "d3688147f90b0fb0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "SAP/SAP 19-12-25.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "SAP 19-12-25"
+              "title": "PROJECT_METHODOLOGIES_GUIDE"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -114,7 +75,7 @@
             }
           },
           {
-            "id": "dc766ea91fb46b1d",
+            "id": "82b2191f39d20c9a",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -235,43 +196,43 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "d3688147f90b0fb0",
+  "active": "b7515867cb4cd1ae",
   "lastOpenFiles": [
+    "Business-Management-Guides/PRACTICAL_APPLICATION_GUIDE.md",
+    "Business-Management-Guides/ENTREPRENEURSHIP_GUIDE.md",
+    "Business-Management-Guides/GLOBAL_BUSINESS_LEGAL_GUIDE.md",
+    "Business-Management-Guides/CHANGE_MANAGEMENT_GUIDE.md",
+    "Business-Management-Guides/OPERATIONS_PROJECT_MANAGEMENT_GUIDE.md",
+    "Business-Management-Guides/HUMAN_RESOURCE_MANAGEMENT_GUIDE.md",
+    "Business-Management-Guides/MARKETING_MANAGEMENT_GUIDE.md",
+    "Business-Management-Guides/FINANCIAL_ACCOUNTING_GUIDE.md",
+    "Business-Management-Guides/STRATEGIC_MANAGEMENT_GUIDE.md",
+    "Business-Management-Guides/MANAGEMENT_FUNDAMENTALS_GUIDE.md",
+    "Business-Management-Guides/README.md",
+    "Business-Management-Guides",
+    "PM-Guides/DELIVERY_HANDOVER_GUIDE.md",
+    "PM-Guides/RISK_ISSUE_MANAGEMENT_GUIDE.md",
+    "PM-Guides/MONITORING_CONTROL_REPORTING_GUIDE.md",
+    "PM-Guides/COMMUNICATION_NEGOTIATION_GUIDE.md",
+    "Excalidraw/Drawing 2025-12-14 05.10.39.excalidraw.md",
+    "PM-Guides/TEAM_MANAGEMENT_LEADERSHIP_GUIDE.md",
+    "SAP/SAP 19-12-25.md",
+    "PM-Guides/PLANNING_ESTIMATION_GUIDE.md",
+    "PM-Guides/PROJECT_METHODOLOGIES_GUIDE.md",
+    "References/Mini_MBA.md",
+    "PM-Guides/README.md",
+    "PM-Guides",
+    "References/NOI_DUNG_KHOA_HOC_CHI_TIET.md",
+    "References/PM.md",
+    "References",
     "Developer-Guides/SYSTEM_DESIGN_GUIDE_COMPREHENSIVE.md",
     "Developer-Guides/ARCHITECTURE_PATTERNS_GUIDE.md",
-    "Developer-Guides/API_DESIGN_INTEGRATION_GUIDE.md",
-    "SAP/SAP 19-12-25.md",
-    "Developer-Guides/NOI_DUNG_KHOA_HOC_CHI_TIET.md",
-    "Developer-Guides/PERFORMANCE_OPTIMIZATION_GUIDE.md",
-    "Developer-Guides/README.md",
-    "Developer-Guides/DEVOPS_CICD_GUIDE.md",
-    "Group-01-Foundation-Review/Topic-1.01-Cấu-trúc-dữ-liệu-cơ-bản-Array-List-Map-Set/README.md",
-    "Vault.md",
-    "SAP/SAP.md",
     "SAP",
-    "examples.md",
-    "Developer-Guides/FULL-STACK LEVEL JUNIOR.md",
     "Tags",
     "temp.txt",
-    "Group-01-Foundation-Review/Topic-1.15-Environment-Variables-và-Configuration/exercises/exercise-1.md",
-    "Group-01-Foundation-Review/Topic-1.12-Database-Normalization-1NF-2NF-3NF/exercises/exercise-1.md",
     "Group-01-Foundation-Review/Topic-1.15-Environment-Variables-và-Configuration/examples/env-config-example.ts",
     "Group-01-Foundation-Review/Topic-1.15-Environment-Variables-và-Configuration/examples/env-config-example.js",
     "Group-01-Foundation-Review/Topic-1.12-Database-Normalization-1NF-2NF-3NF/examples/normalization-example.sql",
-    "Group-01-Foundation-Review/Topic-1.14-Error-Handling-cơ-bản/exercises/exercise-1.md",
-    "Group-01-Foundation-Review/Topic-1.14-Error-Handling-cơ-bản/examples/error-handling-example.ts",
-    "Group-01-Foundation-Review/Topic-1.14-Error-Handling-cơ-bản/examples/error-handling-example.js",
-    "Group-01-Foundation-Review/Topic-1.13-JSON-và-XML-Data-Format/exercises/exercise-1.md",
-    "Group-01-Foundation-Review/Topic-1.13-JSON-và-XML-Data-Format/examples/json-xml-example.ts",
-    "Group-01-Foundation-Review/Topic-1.13-JSON-và-XML-Data-Format/examples/json-xml-example.js",
-    "Group-01-Foundation-Review/Topic-1.11-Database-cơ-bản-SQL-và-Queries/exercises/exercise-1.md",
-    "Group-01-Foundation-Review/Topic-1.10-JavaScript-ES6-Modern-JavaScript/exercises/exercise-1.md",
-    "Group-01-Foundation-Review/Topic-1.09-CSS3-Layout-và-Styling/exercises/exercise-1.md",
-    "Group-01-Foundation-Review/Topic-1.08-HTML5-Cấu-trúc-và-Semantic-Elements/exercises/exercise-1.md",
-    "Group-01-Foundation-Review/Topic-1.07-Git-căn-bản-Commit-Branch-Merge/exercises/exercise-1.md",
-    "Group-01-Foundation-Review/Topic-1.07-Git-căn-bản-Commit-Branch-Merge/examples/git-example.md",
-    "Group-01-Foundation-Review/Topic-1.05-HTTP-Protocol-và-RESTful-API/exercises/exercise-1.md",
-    "Group-01-Foundation-Review/Topic-1.04-Interface-và-Abstract-Class/exercises/exercise-1.md",
-    "Group-01-Foundation-Review/Topic-1.03-Lập-trình-hướng-đối-tượng-OOP-Kế-thừa-Đa-hình-Đóng-gói/exercises/exercise-1.md"
+    "Group-01-Foundation-Review/Topic-1.14-Error-Handling-cơ-bản/examples/error-handling-example.ts"
   ]
 }

@@ -22,7 +22,7 @@
   "spacesEnabled": true,
   "syncFormulaToFrontmatter": true,
   "spacesPerformance": false,
-  "currentWaypoint": 3,
+  "currentWaypoint": 1,
   "enableFolderNote": true,
   "folderIndentationLines": true,
   "revealActiveFile": false,
@@ -38,10 +38,11 @@
   "vaultSelector": true,
   "deleteFileOption": "trash",
   "expandedSpaces": [
-    "Developer-Guides",
     "SAP",
     "/",
-    "//Group-01-Foundation-Review/Group-01-Foundation-Review/Topic-1.01-Cấu-trúc-dữ-liệu-cơ-bản-Array-List-Map-Set"
+    "//Group-01-Foundation-Review/Group-01-Foundation-Review/Topic-1.01-Cấu-trúc-dữ-liệu-cơ-bản-Array-List-Map-Set",
+    "Excalidraw",
+    "PM-Guides"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
