@@ -20,6 +20,93 @@
 
 Design patterns are reusable solutions to common problems in software design. This guide covers all 23 GoF (Gang of Four) design patterns plus SOLID principles, with examples in both JavaScript/TypeScript and Java.
 
+### Design Pattern Categories Overview
+
+```mermaid
+graph TB
+    subgraph Patterns[Design Patterns]
+        Creational[Creational Patterns<br/>Object Creation]
+        Structural[Structural Patterns<br/>Object Composition]
+        Behavioral[Behavioral Patterns<br/>Object Communication]
+    end
+    
+    subgraph CreationalPatterns[Creational Patterns]
+        Singleton[Singleton]
+        Factory[Factory Method]
+        AbstractFactory[Abstract Factory]
+        Builder[Builder]
+        Prototype[Prototype]
+    end
+    
+    subgraph StructuralPatterns[Structural Patterns]
+        Adapter[Adapter]
+        Decorator[Decorator]
+        Facade[Facade]
+        Proxy[Proxy]
+        Bridge[Bridge]
+        Composite[Composite]
+        Flyweight[Flyweight]
+    end
+    
+    subgraph BehavioralPatterns[Behavioral Patterns]
+        Observer[Observer]
+        Strategy[Strategy]
+        Command[Command]
+        Iterator[Iterator]
+        State[State]
+        Template[Template Method]
+        Chain[Chain of Responsibility]
+        Mediator[Mediator]
+        Memento[Memento]
+        Visitor[Visitor]
+    end
+    
+    Patterns --> Creational
+    Patterns --> Structural
+    Patterns --> Behavioral
+    
+    Creational --> CreationalPatterns
+    Structural --> StructuralPatterns
+    Behavioral --> BehavioralPatterns
+    
+    style Patterns fill:#e1f5ff
+    style Creational fill:#fff4e6
+    style Structural fill:#e1f5ff
+    style Behavioral fill:#fff4e6
+```
+
+### Design Pattern Classification
+
+```mermaid
+mindmap
+    root((Design Patterns))
+        Creational
+            Singleton
+            Factory Method
+            Abstract Factory
+            Builder
+            Prototype
+        Structural
+            Adapter
+            Decorator
+            Facade
+            Proxy
+            Bridge
+            Composite
+            Flyweight
+        Behavioral
+            Observer
+            Strategy
+            Command
+            Iterator
+            State
+            Template Method
+            Chain of Responsibility
+            Mediator
+            Memento
+            Visitor
+```
+
 ### What Are Design Patterns?
 - **Creational**: Object creation mechanisms
 - **Structural**: Object composition and relationships
@@ -332,6 +419,60 @@ public class DatabaseConnection {
 
 Define an interface for creating objects, but let subclasses decide which class to instantiate.
 
+#### Class Diagram
+
+```mermaid
+classDiagram
+    class Creator {
+        <<abstract>>
+        +factoryMethod() Product
+        +someOperation()
+    }
+    class ConcreteCreatorA {
+        +factoryMethod() Product
+    }
+    class ConcreteCreatorB {
+        +factoryMethod() Product
+    }
+    class Product {
+        <<interface>>
+        +operation()
+    }
+    class ConcreteProductA {
+        +operation()
+    }
+    class ConcreteProductB {
+        +operation()
+    }
+    
+    Creator <|-- ConcreteCreatorA
+    Creator <|-- ConcreteCreatorB
+    Product <|.. ConcreteProductA
+    Product <|.. ConcreteProductB
+    ConcreteCreatorA ..> ConcreteProductA : creates
+    ConcreteCreatorB ..> ConcreteProductB : creates
+```
+
+#### Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Creator as Creator
+    participant ConcreteCreator as ConcreteCreator
+    participant Product as Product
+    
+    Client->>Creator: someOperation()
+    Creator->>Creator: factoryMethod()
+    Creator->>ConcreteCreator: factoryMethod()
+    ConcreteCreator->>Product: new ConcreteProduct()
+    Product-->>ConcreteCreator: Product instance
+    ConcreteCreator-->>Creator: Product
+    Creator->>Product: operation()
+    Product-->>Creator: Result
+    Creator-->>Client: Result
+```
+
 ```typescript
 // Product interface
 interface Logger {
@@ -378,6 +519,76 @@ class ConsoleLoggerFactory extends LoggerFactory {
 ### 3. Abstract Factory Pattern
 
 Provide an interface for creating families of related objects.
+
+#### Class Diagram
+
+```mermaid
+classDiagram
+    class AbstractFactory {
+        <<interface>>
+        +createProductA() AbstractProductA
+        +createProductB() AbstractProductB
+    }
+    class ConcreteFactory1 {
+        +createProductA() AbstractProductA
+        +createProductB() AbstractProductB
+    }
+    class ConcreteFactory2 {
+        +createProductA() AbstractProductA
+        +createProductB() AbstractProductB
+    }
+    class AbstractProductA {
+        <<interface>>
+        +operationA()
+    }
+    class AbstractProductB {
+        <<interface>>
+        +operationB()
+    }
+    class ProductA1 {
+        +operationA()
+    }
+    class ProductA2 {
+        +operationA()
+    }
+    class ProductB1 {
+        +operationB()
+    }
+    class ProductB2 {
+        +operationB()
+    }
+    
+    AbstractFactory <|.. ConcreteFactory1
+    AbstractFactory <|.. ConcreteFactory2
+    AbstractProductA <|.. ProductA1
+    AbstractProductA <|.. ProductA2
+    AbstractProductB <|.. ProductB1
+    AbstractProductB <|.. ProductB2
+    ConcreteFactory1 ..> ProductA1 : creates
+    ConcreteFactory1 ..> ProductB1 : creates
+    ConcreteFactory2 ..> ProductA2 : creates
+    ConcreteFactory2 ..> ProductB2 : creates
+```
+
+#### Abstract Factory Flow
+
+```mermaid
+graph LR
+    Client[Client] --> Factory[Abstract Factory]
+    Factory --> Factory1[Windows Factory]
+    Factory --> Factory2[Mac Factory]
+    
+    Factory1 --> Button1[Windows Button]
+    Factory1 --> Checkbox1[Windows Checkbox]
+    
+    Factory2 --> Button2[Mac Button]
+    Factory2 --> Checkbox2[Mac Checkbox]
+    
+    style Client fill:#e1f5ff
+    style Factory fill:#fff4e6
+    style Factory1 fill:#e1f5ff
+    style Factory2 fill:#fff4e6
+```
 
 ```typescript
 // Abstract products
@@ -428,6 +639,55 @@ class MacFactory implements UIFactory {
 ### 4. Builder Pattern
 
 Construct complex objects step by step.
+
+#### Class Diagram
+
+```mermaid
+classDiagram
+    class Director {
+        -builder: Builder
+        +construct()
+    }
+    class Builder {
+        <<interface>>
+        +buildPartA()
+        +buildPartB()
+        +getResult() Product
+    }
+    class ConcreteBuilder {
+        -product: Product
+        +buildPartA()
+        +buildPartB()
+        +getResult() Product
+    }
+    class Product {
+        +parts: List
+        +addPart(part)
+    }
+    
+    Director --> Builder
+    Builder <|.. ConcreteBuilder
+    ConcreteBuilder --> Product : builds
+```
+
+#### Builder Pattern Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Director
+    participant Builder as Concrete Builder
+    participant Product
+    
+    Client->>Director: construct()
+    Director->>Builder: buildPartA()
+    Builder->>Product: add part A
+    Director->>Builder: buildPartB()
+    Builder->>Product: add part B
+    Director->>Builder: getResult()
+    Builder-->>Director: Product
+    Director-->>Client: Product
+```
 
 ```typescript
 class Pizza {
@@ -481,6 +741,49 @@ const pizza = new PizzaBuilder()
 
 Create objects by cloning existing instances.
 
+#### Class Diagram
+
+```mermaid
+classDiagram
+    class Prototype {
+        <<interface>>
+        +clone() Prototype
+    }
+    class ConcretePrototype1 {
+        -field: string
+        +clone() Prototype
+    }
+    class ConcretePrototype2 {
+        -field: number
+        +clone() Prototype
+    }
+    class Client {
+        +operation(prototype: Prototype)
+    }
+    
+    Prototype <|.. ConcretePrototype1
+    Prototype <|.. ConcretePrototype2
+    Client --> Prototype : uses
+```
+
+#### Prototype Pattern Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Prototype as Prototype Registry
+    participant ConcretePrototype as Concrete Prototype
+    participant Clone as Cloned Object
+    
+    Client->>Prototype: getPrototype(key)
+    Prototype->>ConcretePrototype: clone()
+    ConcretePrototype->>Clone: new instance (copy)
+    Clone-->>ConcretePrototype: Clone
+    ConcretePrototype-->>Prototype: Clone
+    Prototype-->>Client: Clone
+    Client->>Clone: use cloned object
+```
+
 ```typescript
 interface Cloneable {
     clone(): Cloneable;
@@ -510,6 +813,45 @@ const copy = original.clone();
 ### 1. Adapter Pattern
 
 Allow incompatible interfaces to work together.
+
+#### Class Diagram
+
+```mermaid
+classDiagram
+    class Target {
+        <<interface>>
+        +request()
+    }
+    class Adaptee {
+        +specificRequest()
+    }
+    class Adapter {
+        -adaptee: Adaptee
+        +request()
+    }
+    class Client
+    
+    Target <|.. Adapter
+    Adapter --> Adaptee : uses
+    Client --> Target : uses
+```
+
+#### Adapter Pattern Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Target
+    participant Adapter
+    participant Adaptee
+    
+    Client->>Target: request()
+    Target->>Adapter: request()
+    Adapter->>Adaptee: specificRequest()
+    Adaptee-->>Adapter: Result
+    Adapter-->>Target: Result (adapted)
+    Target-->>Client: Result
+```
 
 ```typescript
 // Target interface
@@ -552,6 +894,55 @@ class MediaAdapter implements MediaPlayer {
 
 Attach additional responsibilities to objects dynamically.
 
+#### Class Diagram
+
+```mermaid
+classDiagram
+    class Component {
+        <<interface>>
+        +operation()
+    }
+    class ConcreteComponent {
+        +operation()
+    }
+    class Decorator {
+        -component: Component
+        +operation()
+    }
+    class ConcreteDecoratorA {
+        +operation()
+        +addedBehavior()
+    }
+    class ConcreteDecoratorB {
+        +operation()
+        +addedBehavior()
+    }
+    
+    Component <|.. ConcreteComponent
+    Component <|.. Decorator
+    Decorator <|-- ConcreteDecoratorA
+    Decorator <|-- ConcreteDecoratorB
+    Decorator --> Component : wraps
+```
+
+#### Decorator Pattern Flow
+
+```mermaid
+graph LR
+    Component[Component] --> Decorator1[Decorator A]
+    Decorator1 --> Decorator2[Decorator B]
+    Decorator2 --> ConcreteComponent[Concrete Component]
+    
+    Component -->|wraps| Decorator1
+    Decorator1 -->|wraps| Decorator2
+    Decorator2 -->|wraps| ConcreteComponent
+    
+    style Component fill:#e1f5ff
+    style Decorator1 fill:#fff4e6
+    style Decorator2 fill:#e1f5ff
+    style ConcreteComponent fill:#fff4e6
+```
+
 ```typescript
 interface Coffee {
     cost(): number;
@@ -591,6 +982,53 @@ console.log(coffee.cost()); // 8
 ### 3. Facade Pattern
 
 Provide a simplified interface to a complex subsystem.
+
+#### Class Diagram
+
+```mermaid
+classDiagram
+    class Facade {
+        -subsystem1: Subsystem1
+        -subsystem2: Subsystem2
+        -subsystem3: Subsystem3
+        +operation()
+    }
+    class Subsystem1 {
+        +operation1()
+    }
+    class Subsystem2 {
+        +operation2()
+    }
+    class Subsystem3 {
+        +operation3()
+    }
+    class Client
+    
+    Facade --> Subsystem1
+    Facade --> Subsystem2
+    Facade --> Subsystem3
+    Client --> Facade : uses
+```
+
+#### Facade Pattern Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Facade
+    participant Subsystem1
+    participant Subsystem2
+    participant Subsystem3
+    
+    Client->>Facade: operation()
+    Facade->>Subsystem1: operation1()
+    Subsystem1-->>Facade: Result
+    Facade->>Subsystem2: operation2()
+    Subsystem2-->>Facade: Result
+    Facade->>Subsystem3: operation3()
+    Subsystem3-->>Facade: Result
+    Facade-->>Client: Simplified Result
+```
 
 ```typescript
 class CPU {
@@ -640,6 +1078,47 @@ computer.start();
 ### 4. Proxy Pattern
 
 Provide a surrogate or placeholder for another object.
+
+#### Class Diagram
+
+```mermaid
+classDiagram
+    class Subject {
+        <<interface>>
+        +request()
+    }
+    class RealSubject {
+        +request()
+    }
+    class Proxy {
+        -realSubject: RealSubject
+        +request()
+        -checkAccess()
+        -logAccess()
+    }
+    class Client
+    
+    Subject <|.. RealSubject
+    Subject <|.. Proxy
+    Proxy --> RealSubject : uses
+    Client --> Subject : uses
+```
+
+#### Proxy Pattern Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Proxy
+    participant RealSubject
+    
+    Client->>Proxy: request()
+    Proxy->>Proxy: checkAccess()
+    Proxy->>RealSubject: request()
+    RealSubject-->>Proxy: Result
+    Proxy->>Proxy: logAccess()
+    Proxy-->>Client: Result
+```
 
 ```typescript
 interface Image {
@@ -1000,6 +1479,52 @@ subject.setState('New state');
 
 Define a family of algorithms, encapsulate each one, and make them interchangeable.
 
+#### Class Diagram
+
+```mermaid
+classDiagram
+    class Context {
+        -strategy: Strategy
+        +setStrategy(Strategy)
+        +executeStrategy()
+    }
+    class Strategy {
+        <<interface>>
+        +algorithm()
+    }
+    class ConcreteStrategyA {
+        +algorithm()
+    }
+    class ConcreteStrategyB {
+        +algorithm()
+    }
+    class ConcreteStrategyC {
+        +algorithm()
+    }
+    
+    Context --> Strategy : uses
+    Strategy <|.. ConcreteStrategyA
+    Strategy <|.. ConcreteStrategyB
+    Strategy <|.. ConcreteStrategyC
+```
+
+#### Strategy Pattern Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Context
+    participant Strategy as Strategy Interface
+    participant ConcreteStrategy as Concrete Strategy
+    
+    Client->>Context: setStrategy(strategy)
+    Context->>Strategy: algorithm()
+    Strategy->>ConcreteStrategy: algorithm()
+    ConcreteStrategy-->>Strategy: Result
+    Strategy-->>Context: Result
+    Context-->>Client: Result
+```
+
 ```typescript
 interface PaymentStrategy {
     pay(amount: number): void;
@@ -1042,6 +1567,61 @@ cart.checkout(100);
 ### 3. Command Pattern
 
 Encapsulate a request as an object.
+
+#### Class Diagram
+
+```mermaid
+classDiagram
+    class Invoker {
+        -command: Command
+        +setCommand(Command)
+        +executeCommand()
+    }
+    class Command {
+        <<interface>>
+        +execute()
+        +undo()
+    }
+    class ConcreteCommand {
+        -receiver: Receiver
+        +execute()
+        +undo()
+    }
+    class Receiver {
+        +action()
+    }
+    class Client
+    
+    Invoker --> Command : uses
+    Command <|.. ConcreteCommand
+    ConcreteCommand --> Receiver : uses
+    Client --> Invoker : uses
+    Client --> ConcreteCommand : creates
+```
+
+#### Command Pattern Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Invoker
+    participant Command
+    participant Receiver
+    
+    Client->>Command: create command
+    Client->>Invoker: setCommand(command)
+    Client->>Invoker: executeCommand()
+    Invoker->>Command: execute()
+    Command->>Receiver: action()
+    Receiver-->>Command: Result
+    Command-->>Invoker: Result
+    Invoker-->>Client: Result
+    
+    Note over Client,Receiver: Undo Operation
+    Client->>Invoker: undo()
+    Invoker->>Command: undo()
+    Command->>Receiver: reverse action()
+```
 
 ```typescript
 interface Command {
@@ -1638,6 +2218,79 @@ Design patterns provide proven solutions to common design problems:
 5. **Pattern Combinations**: Using multiple patterns together
 6. **Anti-Patterns**: What to avoid
 7. **Modern Alternatives**: Contemporary approaches
+
+### Design Pattern Decision Tree
+
+```mermaid
+flowchart TD
+    Start[Need a Design Pattern?] --> Category{What Problem?}
+    
+    Category -->|Object Creation| Creational{How Complex?}
+    Category -->|Object Structure| Structural{What Need?}
+    Category -->|Object Behavior| Behavioral{What Need?}
+    
+    Creational -->|Single Instance| Singleton[Singleton]
+    Creational -->|Complex Creation| Factory[Factory Method]
+    Creational -->|Family of Objects| AbstractFactory[Abstract Factory]
+    Creational -->|Step-by-Step| Builder[Builder]
+    Creational -->|Clone Existing| Prototype[Prototype]
+    
+    Structural -->|Incompatible Interface| Adapter[Adapter]
+    Structural -->|Add Behavior| Decorator[Decorator]
+    Structural -->|Simplify Interface| Facade[Facade]
+    Structural -->|Control Access| Proxy[Proxy]
+    Structural -->|Separate Abstraction| Bridge[Bridge]
+    Structural -->|Part-Whole| Composite[Composite]
+    Structural -->|Many Objects| Flyweight[Flyweight]
+    
+    Behavioral -->|Notify Changes| Observer[Observer]
+    Behavioral -->|Interchangeable Algorithm| Strategy[Strategy]
+    Behavioral -->|Encapsulate Request| Command[Command]
+    Behavioral -->|Traverse Collection| Iterator[Iterator]
+    Behavioral -->|State-Dependent| State[State]
+    Behavioral -->|Algorithm Skeleton| Template[Template Method]
+    Behavioral -->|Request Chain| Chain[Chain of Responsibility]
+    Behavioral -->|Reduce Coupling| Mediator[Mediator]
+    Behavioral -->|Save/Restore State| Memento[Memento]
+    Behavioral -->|Operations on Structure| Visitor[Visitor]
+    
+    style Start fill:#e1f5ff
+    style Category fill:#fff4e6
+    style Creational fill:#e1f5ff
+    style Structural fill:#fff4e6
+    style Behavioral fill:#e1f5ff
+```
+
+### Pattern Usage Comparison
+
+```mermaid
+graph TB
+    subgraph MostUsed[Most Commonly Used Patterns]
+        Observer[Observer Pattern<br/>Event Systems]
+        Strategy[Strategy Pattern<br/>Algorithm Selection]
+        Factory[Factory Pattern<br/>Object Creation]
+        Singleton[Singleton Pattern<br/>Single Instance]
+        Decorator[Decorator Pattern<br/>Dynamic Behavior]
+    end
+    
+    subgraph MediumUsed[Medium Usage Patterns]
+        Adapter[Adapter Pattern<br/>Interface Compatibility]
+        Facade[Facade Pattern<br/>Simplified Interface]
+        Command[Command Pattern<br/>Request Encapsulation]
+        Builder[Builder Pattern<br/>Complex Construction]
+    end
+    
+    subgraph Specialized[Specialized Patterns]
+        Visitor[Visitor Pattern<br/>Operations on Structure]
+        Memento[Memento Pattern<br/>State Management]
+        Flyweight[Flyweight Pattern<br/>Memory Optimization]
+        Mediator[Mediator Pattern<br/>Object Communication]
+    end
+    
+    style MostUsed fill:#e1f5ff
+    style MediumUsed fill:#fff4e6
+    style Specialized fill:#ffcccc
+```
 
 Master these patterns to write maintainable, extensible, and robust code.
 

@@ -44,6 +44,61 @@ Effective monitoring, control, and reporting are essential for project success. 
 
 Progress tracking involves monitoring project activities, deliverables, and milestones to ensure the project is on track. Effective tracking enables early problem detection and timely corrective actions.
 
+### Progress Tracking Flow
+
+```mermaid
+flowchart TD
+    Start([Project Start]) --> Setup[Setup Tracking System]
+    
+    Setup --> DefineMetrics[Define Metrics & KPIs]
+    DefineMetrics --> SetupTools[Setup Tracking Tools]
+    SetupTools --> CreateBaseline[Create Baseline]
+    
+    CreateBaseline --> DailyTracking[Daily Tracking]
+    DailyTracking --> CollectData[Collect Progress Data]
+    
+    CollectData --> TaskStatus[Task Status Updates]
+    CollectData --> TimeTracking[Time Tracking]
+    CollectData --> Blockers[Blockers & Issues]
+    
+    TaskStatus --> UpdateSystem[Update Tracking System]
+    TimeTracking --> UpdateSystem
+    Blockers --> UpdateSystem
+    
+    UpdateSystem --> Analyze[Analyze Progress]
+    Analyze --> Compare[Compare Actual vs Planned]
+    Compare --> CalculateVariance[Calculate Variance]
+    
+    CalculateVariance --> OnTrack{On Track?}
+    OnTrack -->|Yes| Continue[Continue Monitoring]
+    OnTrack -->|No| IdentifyIssues[Identify Issues]
+    
+    IdentifyIssues --> RootCause[Root Cause Analysis]
+    RootCause --> CorrectiveAction[Plan Corrective Actions]
+    CorrectiveAction --> Implement[Implement Actions]
+    Implement --> Monitor[Monitor Impact]
+    
+    Monitor --> WeeklyReview[Weekly Review]
+    Continue --> WeeklyReview
+    
+    WeeklyReview --> GenerateReport[Generate Progress Report]
+    GenerateReport --> Share[Share with Stakeholders]
+    Share --> Feedback[Gather Feedback]
+    Feedback --> Adjust[Adjust if Needed]
+    
+    Adjust --> DailyTracking
+    Adjust --> MonthlyReview[Monthly Review]
+    MonthlyReview --> StrategicAdjust[Strategic Adjustments]
+    StrategicAdjust --> DailyTracking
+    
+    style Start fill:#e1f5ff
+    style Setup fill:#fff4e6
+    style DailyTracking fill:#e1f5ff
+    style Analyze fill:#fff4e6
+    style OnTrack fill:#e1f5ff
+    style GenerateReport fill:#fff4e6
+```
+
 ### Progress Tracking Methods
 
 #### 1. Task-Level Tracking
@@ -171,6 +226,56 @@ Progress tracking involves monitoring project activities, deliverables, and mile
 ### Overview
 
 Quality control ensures that project deliverables meet requirements and standards. It involves processes, tools, and techniques to monitor and verify quality throughout the project.
+
+### Quality Control Process Flow
+
+```mermaid
+flowchart TD
+    Start([Work Item Created]) --> DefineStandards[Define Quality Standards]
+    DefineStandards --> Development[Development Phase]
+    
+    Development --> CodeReview[Code Review]
+    CodeReview --> PassReview{Pass<br/>Review?}
+    
+    PassReview -->|No| FixIssues[Fix Issues]
+    FixIssues --> CodeReview
+    
+    PassReview -->|Yes| UnitTesting[Unit Testing]
+    UnitTesting --> PassUnit{All Tests<br/>Pass?}
+    
+    PassUnit -->|No| FixBugs[Fix Bugs]
+    FixBugs --> UnitTesting
+    
+    PassUnit -->|Yes| IntegrationTesting[Integration Testing]
+    IntegrationTesting --> PassIntegration{Integration<br/>OK?}
+    
+    PassIntegration -->|No| FixIntegration[Fix Integration Issues]
+    FixIntegration --> IntegrationTesting
+    
+    PassIntegration -->|Yes| QATesting[QA Testing]
+    QATesting --> PassQA{QA<br/>Approved?}
+    
+    PassQA -->|No| FixQA[Fix QA Issues]
+    FixQA --> QATesting
+    
+    PassQA -->|Yes| UAT[User Acceptance Testing]
+    UAT --> PassUAT{UAT<br/>Approved?}
+    
+    PassUAT -->|No| FixUAT[Fix UAT Issues]
+    FixUAT --> UAT
+    
+    PassUAT -->|Yes| QualityGate[Quality Gate Passed]
+    QualityGate --> Deploy[Deploy to Production]
+    Deploy --> Monitor[Monitor in Production]
+    Monitor --> End([Quality Control Complete])
+    
+    style Start fill:#e1f5ff
+    style CodeReview fill:#fff4e6
+    style UnitTesting fill:#e1f5ff
+    style QATesting fill:#fff4e6
+    style QualityGate fill:#e1f5ff
+    style End fill:#fff4e6
+```
 
 ### Quality Control Processes
 
@@ -559,6 +664,126 @@ CPI = Earned Value / Actual Cost
 ### Overview
 
 Dashboards provide visual representation of project status, enabling quick understanding of project health. Effective dashboards are clear, concise, and actionable.
+
+### Dashboard Architecture
+
+```mermaid
+graph TB
+    subgraph DataSources[Data Sources]
+        Jira[Jira]
+        Excel[Excel]
+        Database[Database]
+        APIs[APIs]
+    end
+    
+    subgraph DataLayer[Data Layer]
+        ETL[ETL Process]
+        DataModel[Data Model]
+        DataWarehouse[Data Warehouse]
+    end
+    
+    subgraph Visualization[Visualization Layer]
+        PowerBI[Power BI]
+        ExcelDash[Excel Dashboard]
+        Custom[Custom Dashboard]
+    end
+    
+    subgraph Presentation[Presentation Layer]
+        Executive[Executive Dashboard]
+        Team[Team Dashboard]
+        Project[Project Dashboard]
+    end
+    
+    Jira --> ETL
+    Excel --> ETL
+    Database --> ETL
+    APIs --> ETL
+    
+    ETL --> DataModel
+    DataModel --> DataWarehouse
+    
+    DataWarehouse --> PowerBI
+    DataWarehouse --> ExcelDash
+    DataWarehouse --> Custom
+    
+    PowerBI --> Executive
+    PowerBI --> Team
+    PowerBI --> Project
+    
+    ExcelDash --> Executive
+    ExcelDash --> Team
+    
+    Custom --> Project
+    
+    style DataSources fill:#e1f5ff
+    style DataLayer fill:#fff4e6
+    style Visualization fill:#e1f5ff
+    style Presentation fill:#fff4e6
+```
+
+### Reporting Workflow
+
+```mermaid
+flowchart TD
+    Start([Reporting Cycle]) --> CollectData[Collect Data from Sources]
+    
+    CollectData --> JiraData[Jira Data]
+    CollectData --> TimeData[Time Tracking Data]
+    CollectData --> BudgetData[Budget Data]
+    CollectData --> QualityData[Quality Metrics]
+    
+    JiraData --> ProcessData[Process & Clean Data]
+    TimeData --> ProcessData
+    BudgetData --> ProcessData
+    QualityData --> ProcessData
+    
+    ProcessData --> CalculateMetrics[Calculate Metrics & KPIs]
+    CalculateMetrics --> Schedule[Schedule Performance]
+    CalculateMetrics --> Cost[Cost Performance]
+    CalculateMetrics --> Quality[Quality Metrics]
+    CalculateMetrics --> Scope[Scope Metrics]
+    
+    Schedule --> Analyze[Analyze Results]
+    Cost --> Analyze
+    Quality --> Analyze
+    Scope --> Analyze
+    
+    Analyze --> IdentifyIssues[Identify Issues & Variances]
+    IdentifyIssues --> GenerateInsights[Generate Insights]
+    
+    GenerateInsights --> CreateReport[Create Report]
+    CreateReport --> ExecutiveReport[Executive Summary]
+    CreateReport --> DetailedReport[Detailed Report]
+    CreateReport --> Dashboard[Update Dashboard]
+    
+    ExecutiveReport --> Review[Review Report]
+    DetailedReport --> Review
+    Dashboard --> Review
+    
+    Review --> Approve{Approve<br/>Report?}
+    Approve -->|No| Revise[Revise Report]
+    Revise --> Review
+    
+    Approve -->|Yes| Distribute[Distribute to Stakeholders]
+    Distribute --> Executive[Executive Team]
+    Distribute --> Client[Client]
+    Distribute --> Team[Project Team]
+    
+    Executive --> Feedback[Gather Feedback]
+    Client --> Feedback
+    Team --> Feedback
+    
+    Feedback --> ActionItems[Create Action Items]
+    ActionItems --> Implement[Implement Actions]
+    Implement --> NextCycle[Next Reporting Cycle]
+    NextCycle --> Start
+    
+    style Start fill:#e1f5ff
+    style CollectData fill:#fff4e6
+    style Analyze fill:#e1f5ff
+    style CreateReport fill:#fff4e6
+    style Distribute fill:#e1f5ff
+```
 
 ### Dashboard Design Principles
 
@@ -1059,4 +1284,7 @@ Remember: Effective monitoring and reporting provide visibility, enable decision
 - [Planning & Estimation Guide](./PLANNING_ESTIMATION_GUIDE.md)
 - [Risk & Issue Management Guide](./RISK_ISSUE_MANAGEMENT_GUIDE.md)
 - [Team Management & Leadership Guide](./TEAM_MANAGEMENT_LEADERSHIP_GUIDE.md)
+
+
+
 

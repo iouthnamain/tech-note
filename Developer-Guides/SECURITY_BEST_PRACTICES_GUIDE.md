@@ -40,16 +40,124 @@ sequenceDiagram
     participant Client
     participant AuthService
     participant Database
+    participant TokenService as Token Service
     
     User->>Client: Enter credentials
     Client->>AuthService: POST /login (email, password)
-    AuthService->>Database: Verify credentials
-    Database-->>AuthService: User data
-    AuthService->>AuthService: Hash password & compare
-    AuthService->>AuthService: Generate JWT tokens
-    AuthService-->>Client: Access token + Refresh token
-    Client->>Client: Store tokens securely
-    Client-->>User: Authenticated
+    AuthService->>Database: Query user by email
+    Database-->>AuthService: User data (hashed password)
+    
+    alt Valid Credentials
+        AuthService->>AuthService: Verify password hash
+        AuthService->>TokenService: Generate Access Token
+        TokenService-->>AuthService: JWT Access Token
+        AuthService->>TokenService: Generate Refresh Token
+        TokenService-->>AuthService: JWT Refresh Token
+        AuthService->>Database: Store refresh token
+        AuthService-->>Client: Access token + Refresh token
+        Client->>Client: Store tokens securely (httpOnly cookie)
+        Client-->>User: Authenticated
+    else Invalid Credentials
+        AuthService->>AuthService: Log failed attempt
+        AuthService-->>Client: 401 Unauthorized
+        Client-->>User: Authentication failed
+    end
+```
+
+### Authorization Check Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API as API Gateway
+    participant AuthMiddleware as Auth Middleware
+    participant TokenService as Token Service
+    participant AuthzService as Authorization Service
+    participant Resource as Protected Resource
+    
+    Client->>API: Request with JWT Token
+    API->>AuthMiddleware: Extract Token
+    AuthMiddleware->>TokenService: Validate Token
+    
+    alt Token Valid
+        TokenService->>TokenService: Decode & Verify Token
+        TokenService-->>AuthMiddleware: User Claims (id, role, permissions)
+        AuthMiddleware->>AuthzService: Check Authorization
+        
+        AuthzService->>AuthzService: Check User Role
+        AuthzService->>AuthzService: Check Permissions
+        AuthzService->>AuthzService: Check Resource Access
+        
+        alt Authorized
+            AuthzService-->>AuthMiddleware: Authorized
+            AuthMiddleware->>Resource: Forward Request
+            Resource-->>AuthMiddleware: Response
+            AuthMiddleware-->>API: Response
+            API-->>Client: 200 OK + Data
+        else Not Authorized
+            AuthzService-->>AuthMiddleware: Forbidden
+            AuthMiddleware-->>API: 403 Forbidden
+            API-->>Client: Access Denied
+        end
+    else Token Invalid/Expired
+        TokenService-->>AuthMiddleware: Token Invalid
+        AuthMiddleware-->>API: 401 Unauthorized
+        API-->>Client: Please Re-authenticate
+    end
+```
+
+### Authorization Architecture
+
+```mermaid
+graph TB
+    subgraph Request[Incoming Request]
+        HTTPRequest[HTTP Request<br/>+ JWT Token]
+    end
+    
+    subgraph Auth[Authentication Layer]
+        TokenExtractor[Token Extractor]
+        TokenValidator[Token Validator]
+        UserContext[User Context]
+    end
+    
+    subgraph Authz[Authorization Layer]
+        RoleChecker[Role Checker]
+        PermissionChecker[Permission Checker]
+        PolicyEngine[Policy Engine]
+        ResourceChecker[Resource Access Checker]
+    end
+    
+    subgraph Storage[Storage]
+        UserDB[(User Database)]
+        RoleDB[(Role Database)]
+        PolicyDB[(Policy Database)]
+    end
+    
+    subgraph Resource[Protected Resource]
+        APIEndpoint[API Endpoint]
+        Data[Data]
+    end
+    
+    HTTPRequest --> TokenExtractor
+    TokenExtractor --> TokenValidator
+    TokenValidator --> UserContext
+    UserContext --> RoleChecker
+    
+    RoleChecker --> UserDB
+    RoleChecker --> RoleDB
+    RoleChecker --> PermissionChecker
+    
+    PermissionChecker --> PolicyEngine
+    PolicyEngine --> PolicyDB
+    PolicyEngine --> ResourceChecker
+    
+    ResourceChecker --> Resource
+    Resource --> APIEndpoint
+    APIEndpoint --> Data
+    
+    style Auth fill:#e1f5ff
+    style Authz fill:#fff4e6
+    style Resource fill:#e1f5ff
 ```
 
 ### Password Hashing
@@ -151,18 +259,69 @@ app.delete('/api/users/:id',
 
 ```mermaid
 graph TB
-    A1[Broken Access Control] --> A2[Cryptographic Failures]
-    A2 --> A3[Injection]
-    A3 --> A4[Insecure Design]
-    A4 --> A5[Security Misconfiguration]
-    A5 --> A6[Vulnerable Components]
-    A6 --> A7[Auth Failures]
-    A7 --> A8[Data Integrity Failures]
-    A8 --> A9[Logging Failures]
-    A9 --> A10[SSRF]
+    subgraph Critical[Critical Risks]
+        A1[#1 Broken Access Control<br/>Unauthorized access to resources]
+        A3[#3 Injection<br/>SQL, NoSQL, Command injection]
+        A7[#7 Auth Failures<br/>Weak authentication mechanisms]
+    end
+    
+    subgraph High[High Risks]
+        A2[#2 Cryptographic Failures<br/>Sensitive data exposure]
+        A4[#4 Insecure Design<br/>Flawed security architecture]
+        A5[#5 Security Misconfiguration<br/>Default/incomplete configs]
+        A8[#8 Data Integrity Failures<br/>Unsafe deserialization]
+    end
+    
+    subgraph Medium[Medium Risks]
+        A6[#6 Vulnerable Components<br/>Outdated dependencies]
+        A9[#9 Logging Failures<br/>Insufficient logging/monitoring]
+        A10[#10 SSRF<br/>Server-Side Request Forgery]
+    end
     
     style A1 fill:#ff6b6b
     style A2 fill:#ff8787
+    style A3 fill:#ff6b6b
+    style A4 fill:#ff8787
+    style A5 fill:#ff8787
+    style A6 fill:#ffa94d
+    style A7 fill:#ff6b6b
+    style A8 fill:#ff8787
+    style A9 fill:#ffa94d
+    style A10 fill:#ffa94d
+```
+
+### OWASP Top 10 Risk Matrix
+
+```mermaid
+graph LR
+    subgraph Impact[Impact]
+        HighImpact[High Impact]
+        MediumImpact[Medium Impact]
+        LowImpact[Low Impact]
+    end
+    
+    subgraph Likelihood[Likelihood]
+        HighLikelihood[High Likelihood]
+        MediumLikelihood[Medium Likelihood]
+        LowLikelihood[Low Likelihood]
+    end
+    
+    HighImpact --> A1
+    HighImpact --> A3
+    HighImpact --> A7
+    MediumImpact --> A2
+    MediumImpact --> A4
+    MediumImpact --> A5
+    LowImpact --> A6
+    LowImpact --> A9
+    LowImpact --> A10
+    
+    HighLikelihood --> A1
+    HighLikelihood --> A3
+    MediumLikelihood --> A2
+    MediumLikelihood --> A7
+    LowLikelihood --> A6
+    LowLikelihood --> A9
     style A3 fill:#ffa8a8
 ```
 
@@ -565,6 +724,84 @@ app.use(helmet({
 
 ## Security Testing
 
+### Security Testing Flow
+
+```mermaid
+flowchart TD
+    Start([Security Testing]) --> StaticAnalysis[Static Analysis<br/>SAST]
+    StaticAnalysis --> DependencyScan[Dependency Scanning<br/>SCA]
+    DependencyScan --> DynamicAnalysis[Dynamic Analysis<br/>DAST]
+    DynamicAnalysis --> InteractiveAnalysis[Interactive Analysis<br/>IAST]
+    InteractiveAnalysis --> PenetrationTest[Penetration Testing]
+    
+    StaticAnalysis --> CodeReview[Code Review]
+    DependencyScan --> VulnerabilityDB[Vulnerability Database]
+    DynamicAnalysis --> RuntimeScan[Runtime Scanning]
+    InteractiveAnalysis --> RuntimeAnalysis[Runtime Analysis]
+    PenetrationTest --> ManualTesting[Manual Testing]
+    
+    CodeReview --> Report[Security Report]
+    VulnerabilityDB --> Report
+    RuntimeScan --> Report
+    RuntimeAnalysis --> Report
+    ManualTesting --> Report
+    
+    Report --> Remediate[Remediate Issues]
+    Remediate --> Retest[Re-test]
+    Retest --> Approve{All Issues<br/>Resolved?}
+    Approve -->|No| Remediate
+    Approve -->|Yes| Deploy[Approve for Deployment]
+    
+    style Start fill:#e1f5ff
+    style Deploy fill:#fff4e6
+```
+
+### Security Testing Architecture
+
+```mermaid
+graph TB
+    subgraph SAST[Static Application Security Testing]
+        CodeScanner[Code Scanner]
+        Linter[Security Linter]
+        PatternMatcher[Pattern Matcher]
+    end
+    
+    subgraph SCA[Software Composition Analysis]
+        DependencyScanner[Dependency Scanner]
+        CVE[Vulnerability Database]
+        LicenseChecker[License Checker]
+    end
+    
+    subgraph DAST[Dynamic Application Security Testing]
+        WebScanner[Web Application Scanner]
+        APIScanner[API Scanner]
+        Fuzzer[Fuzzing Tool]
+    end
+    
+    subgraph IAST[Interactive Application Security Testing]
+        Agent[IAST Agent]
+        RuntimeMonitor[Runtime Monitor]
+    end
+    
+    subgraph PenTest[Penetration Testing]
+        ManualTester[Security Tester]
+        ExploitFramework[Exploit Framework]
+    end
+    
+    CodeScanner --> Report[Security Report]
+    Linter --> Report
+    DependencyScanner --> CVE
+    CVE --> Report
+    WebScanner --> Report
+    Agent --> Report
+    ManualTester --> Report
+    
+    style SAST fill:#e1f5ff
+    style SCA fill:#fff4e6
+    style DAST fill:#e1f5ff
+    style IAST fill:#fff4e6
+```
+
 ```typescript
 // Security testing with Jest
 describe('Security Tests', () => {
@@ -740,6 +977,71 @@ app.post('/api/orders', requirePermission('orders:create'), async (req, res) => 
 
 ## Incident Response
 
+### Incident Response Flow
+
+```mermaid
+flowchart TD
+    Detect([Security Incident Detected]) --> Classify[Classify Incident]
+    Classify --> Assess[Assess Severity]
+    
+    Assess --> Critical{Critical?}
+    Critical -->|Yes| Immediate[Immediate Response]
+    Critical -->|No| Standard[Standard Response]
+    
+    Immediate --> Contain[Contain Incident]
+    Standard --> Contain
+    
+    Contain --> Isolate[Isolate Affected Systems]
+    Isolate --> Preserve[Preserve Evidence]
+    Preserve --> Investigate[Investigate Root Cause]
+    
+    Investigate --> Remediate[Remediate Vulnerability]
+    Remediate --> Restore[Restore Services]
+    Restore --> Monitor[Monitor for Recurrence]
+    
+    Monitor --> Document[Document Incident]
+    Document --> Review[Post-Incident Review]
+    Review --> Improve[Improve Security]
+    Improve --> End([Incident Closed])
+    
+    style Detect fill:#ffcccc
+    style End fill:#fff4e6
+```
+
+### Incident Response Process
+
+```mermaid
+sequenceDiagram
+    participant Monitor as Monitoring System
+    participant SOC as Security Operations
+    participant Team as Incident Response Team
+    participant Systems as Affected Systems
+    participant Management as Management
+    participant Legal as Legal/Compliance
+    
+    Monitor->>SOC: Alert: Security Incident
+    SOC->>Team: Activate Response Team
+    Team->>Team: Classify & Assess
+    
+    Team->>Systems: Contain & Isolate
+    Systems-->>Team: Systems Isolated
+    
+    Team->>Team: Investigate Root Cause
+    Team->>Team: Collect Evidence
+    
+    Team->>Management: Report Status
+    Team->>Legal: Notify if Required
+    
+    Team->>Systems: Remediate & Patch
+    Systems-->>Team: Systems Secured
+    
+    Team->>Systems: Restore Services
+    Systems-->>Team: Services Restored
+    
+    Team->>Team: Post-Incident Review
+    Team->>Team: Update Security Measures
+```
+
 ### Incident Response Plan
 
 ```typescript
@@ -873,6 +1175,105 @@ class PaymentProcessor {
 ---
 
 ## Security in CI/CD
+
+### Security in CI/CD Pipeline
+
+```mermaid
+flowchart TD
+    Start([Code Commit]) --> Checkout[Checkout Code]
+    Checkout --> SAST[SAST Scan<br/>Static Analysis]
+    SAST --> DependencyScan[Dependency Scan<br/>SCA]
+    DependencyScan --> SecretScan[Secret Scanning]
+    
+    SecretScan --> Build[Build Application]
+    Build --> ContainerScan[Container Image Scan]
+    ContainerScan --> UnitTest[Unit Tests]
+    
+    UnitTest --> SecurityTest[Security Tests]
+    SecurityTest --> DAST[DAST Scan<br/>Dynamic Analysis]
+    
+    DAST --> QualityGate{Security Quality<br/>Gate Pass?}
+    QualityGate -->|No| Block[Block Deployment]
+    QualityGate -->|Yes| Deploy[Deploy to Environment]
+    
+    Deploy --> RuntimeScan[Runtime Security Scan]
+    RuntimeScan --> Monitor[Continuous Monitoring]
+    
+    Block --> Remediate[Remediate Issues]
+    Remediate --> Retest[Re-run Pipeline]
+    Retest --> Start
+    
+    style Start fill:#e1f5ff
+    style Block fill:#ffcccc
+    style Deploy fill:#fff4e6
+```
+
+### CI/CD Security Architecture
+
+```mermaid
+graph TB
+    subgraph Source[Source Control]
+        Git[Git Repository]
+        PreCommit[Pre-commit Hooks]
+    end
+    
+    subgraph CI[CI Pipeline]
+        SAST[SAST Scanner]
+        SCA[Dependency Scanner]
+        SecretScan[Secret Scanner]
+        Build[Build Process]
+        ContainerScan[Container Scanner]
+    end
+    
+    subgraph Testing[Security Testing]
+        UnitSecurity[Security Unit Tests]
+        IntegrationSecurity[Security Integration Tests]
+        DAST[DAST Scanner]
+    end
+    
+    subgraph Artifacts[Artifacts]
+        ContainerImage[Container Image]
+        SBOM[Software Bill of Materials]
+        SecurityReport[Security Report]
+    end
+    
+    subgraph Registry[Container Registry]
+        RegistryScan[Registry Scanning]
+        PolicyCheck[Policy Enforcement]
+    end
+    
+    subgraph CD[CD Pipeline]
+        Deploy[Deployment]
+        RuntimeSecurity[Runtime Security]
+        Monitoring[Security Monitoring]
+    end
+    
+    Git --> PreCommit
+    PreCommit --> SAST
+    SAST --> SCA
+    SCA --> SecretScan
+    SecretScan --> Build
+    Build --> ContainerScan
+    
+    ContainerScan --> UnitSecurity
+    UnitSecurity --> IntegrationSecurity
+    IntegrationSecurity --> DAST
+    
+    ContainerScan --> ContainerImage
+    SCA --> SBOM
+    DAST --> SecurityReport
+    
+    ContainerImage --> RegistryScan
+    RegistryScan --> PolicyCheck
+    PolicyCheck --> Deploy
+    
+    Deploy --> RuntimeSecurity
+    RuntimeSecurity --> Monitoring
+    
+    style CI fill:#e1f5ff
+    style Testing fill:#fff4e6
+    style CD fill:#e1f5ff
+```
 
 ### Security Scanning in Pipeline
 

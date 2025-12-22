@@ -22,7 +22,7 @@
   "spacesEnabled": true,
   "syncFormulaToFrontmatter": true,
   "spacesPerformance": false,
-  "currentWaypoint": 1,
+  "currentWaypoint": 2,
   "enableFolderNote": true,
   "folderIndentationLines": true,
   "revealActiveFile": false,
@@ -42,7 +42,7 @@
     "/",
     "//Group-01-Foundation-Review/Group-01-Foundation-Review/Topic-1.01-Cấu-trúc-dữ-liệu-cơ-bản-Array-List-Map-Set",
     "Excalidraw",
-    "PM-Guides"
+    "SAP-Guides"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

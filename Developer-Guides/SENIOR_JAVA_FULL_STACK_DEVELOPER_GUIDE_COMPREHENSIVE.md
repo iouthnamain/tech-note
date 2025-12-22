@@ -224,25 +224,113 @@ public class StreamExamples {
 
 ```mermaid
 graph TB
-    Client[Client] --> DispatcherServlet[DispatcherServlet]
-    
-    DispatcherServlet --> HandlerMapping[Handler Mapping]
-    DispatcherServlet --> Controller[Controller]
-    DispatcherServlet --> ViewResolver[View Resolver]
-    
-    Controller --> Service[Service Layer]
-    Service --> Repository[Repository Layer]
-    Repository --> Database[(Database)]
-    
-    Controller --> Model[Model]
-    Model --> View[View]
-    ViewResolver --> View
-    
-    subgraph Spring["Spring Container"]
-        Service
-        Repository
-        Controller
+    subgraph Client[Client Layer]
+        Browser[Web Browser]
+        MobileApp[Mobile App]
+        APIClient[API Client]
     end
+    
+    subgraph Web[Web Layer]
+        DispatcherServlet[DispatcherServlet]
+        HandlerMapping[Handler Mapping]
+        Controller[Controller]
+        ViewResolver[View Resolver]
+        Interceptor[Interceptors]
+    end
+    
+    subgraph Business[Business Layer]
+        Service[Service Layer]
+        AOP[AOP Proxy]
+        Transaction[Transaction Manager]
+    end
+    
+    subgraph Data[Data Layer]
+        Repository[Repository Layer]
+        JPA[JPA Entity Manager]
+        DataSource[DataSource]
+    end
+    
+    subgraph Infrastructure[Infrastructure]
+        Database[(Database)]
+        Cache[(Cache)]
+        MessageQueue[Message Queue]
+    end
+    
+    subgraph SpringContainer[Spring IoC Container]
+        BeanFactory[Bean Factory]
+        ApplicationContext[Application Context]
+        DependencyInjection[DI Container]
+    end
+    
+    Browser --> DispatcherServlet
+    MobileApp --> DispatcherServlet
+    APIClient --> DispatcherServlet
+    
+    DispatcherServlet --> HandlerMapping
+    HandlerMapping --> Interceptor
+    Interceptor --> Controller
+    
+    Controller --> Service
+    Service --> AOP
+    AOP --> Transaction
+    Transaction --> Repository
+    
+    Repository --> JPA
+    JPA --> DataSource
+    DataSource --> Database
+    
+    Service --> Cache
+    Service --> MessageQueue
+    
+    SpringContainer --> BeanFactory
+    SpringContainer --> ApplicationContext
+    SpringContainer --> DependencyInjection
+    
+    DependencyInjection -.->|Manages| Controller
+    DependencyInjection -.->|Manages| Service
+    DependencyInjection -.->|Manages| Repository
+    
+    style Web fill:#e1f5ff
+    style Business fill:#fff4e6
+    style Data fill:#e1f5ff
+    style SpringContainer fill:#ffcccc
+```
+
+### Spring Request Processing Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant DispatcherServlet
+    participant HandlerMapping
+    participant Interceptor
+    participant Controller
+    participant Service
+    participant Repository
+    participant Database
+    
+    Client->>DispatcherServlet: HTTP Request
+    DispatcherServlet->>HandlerMapping: Find Handler
+    HandlerMapping-->>DispatcherServlet: Handler Method
+    
+    DispatcherServlet->>Interceptor: PreHandle
+    Interceptor-->>DispatcherServlet: Continue
+    
+    DispatcherServlet->>Controller: Invoke Handler
+    Controller->>Service: Business Logic
+    Service->>Repository: Data Access
+    Repository->>Database: SQL Query
+    Database-->>Repository: Result Set
+    Repository-->>Service: Entity
+    Service->>Service: Business Logic
+    Service-->>Controller: DTO
+    
+    Controller->>Interceptor: PostHandle
+    Interceptor-->>Controller: Continue
+    Controller-->>DispatcherServlet: ModelAndView/Response
+    
+    DispatcherServlet->>DispatcherServlet: Render View/JSON
+    DispatcherServlet-->>Client: HTTP Response
 ```
 
 ### Spring Boot Configuration
@@ -419,6 +507,79 @@ public class SecurityConfig {
 
 ## Backend Architecture
 
+### Dependency Injection Flow
+
+```mermaid
+sequenceDiagram
+    participant App as Application Startup
+    participant Container as Spring Container
+    participant Scanner as Component Scanner
+    participant BeanFactory as Bean Factory
+    participant Bean as Bean Instance
+    
+    App->>Container: Initialize Application Context
+    Container->>Scanner: Scan for Components
+    Scanner->>Scanner: Find @Component, @Service, @Repository
+    Scanner-->>Container: Component Definitions
+    
+    Container->>BeanFactory: Create Bean Definitions
+    BeanFactory->>BeanFactory: Resolve Dependencies
+    
+    loop For each Bean
+        BeanFactory->>Bean: Instantiate Bean
+        BeanFactory->>Bean: Inject Dependencies
+        BeanFactory->>Bean: Apply AOP Proxies
+        BeanFactory->>Bean: Initialize (@PostConstruct)
+        BeanFactory->>Container: Register Bean
+    end
+    
+    Container->>Container: All Beans Ready
+    Container-->>App: Application Context Ready
+```
+
+### Dependency Injection Architecture
+
+```mermaid
+graph TB
+    subgraph Container[Spring IoC Container]
+        ApplicationContext[Application Context]
+        BeanFactory[Bean Factory]
+        DependencyResolver[Dependency Resolver]
+    end
+    
+    subgraph Beans[Beans]
+        ControllerBean[@Controller Bean]
+        ServiceBean[@Service Bean]
+        RepositoryBean[@Repository Bean]
+        ConfigBean[@Configuration Bean]
+    end
+    
+    subgraph Injection[Injection Types]
+        Constructor[Constructor Injection]
+        Field[Field Injection]
+        Setter[Setter Injection]
+    end
+    
+    ApplicationContext --> BeanFactory
+    BeanFactory --> DependencyResolver
+    
+    DependencyResolver --> Constructor
+    DependencyResolver --> Field
+    DependencyResolver --> Setter
+    
+    Constructor --> ControllerBean
+    Constructor --> ServiceBean
+    Field --> RepositoryBean
+    Setter --> ConfigBean
+    
+    ServiceBean -.->|Depends on| RepositoryBean
+    ControllerBean -.->|Depends on| ServiceBean
+    
+    style Container fill:#e1f5ff
+    style Beans fill:#fff4e6
+    style Injection fill:#e1f5ff
+```
+
 ### Layered Architecture
 
 ```java
@@ -528,6 +689,84 @@ public class User {
 
 ### Transaction Management
 
+### Transaction Management Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Service as @Transactional Service
+    participant AOP as AOP Proxy
+    participant TM as Transaction Manager
+    participant DataSource as DataSource
+    participant DB as Database
+    
+    Client->>Service: Method Call
+    Service->>AOP: Intercept Call
+    AOP->>TM: Begin Transaction
+    TM->>DataSource: Get Connection
+    DataSource->>DB: Open Connection
+    DB-->>DataSource: Connection
+    DataSource-->>TM: Connection
+    TM->>TM: Set AutoCommit(false)
+    TM-->>AOP: Transaction Started
+    
+    AOP->>Service: Invoke Method
+    Service->>Service: Business Logic
+    Service->>DataSource: Execute SQL
+    DataSource->>DB: Execute Query
+    DB-->>DataSource: Result
+    DataSource-->>Service: Result
+    
+    alt Success
+        Service-->>AOP: Return Success
+        AOP->>TM: Commit Transaction
+        TM->>DB: COMMIT
+        DB-->>TM: Committed
+        TM->>DataSource: Release Connection
+        TM-->>AOP: Transaction Committed
+        AOP-->>Client: Return Result
+    else Exception
+        Service-->>AOP: Throw Exception
+        AOP->>TM: Rollback Transaction
+        TM->>DB: ROLLBACK
+        DB-->>TM: Rolled Back
+        TM->>DataSource: Release Connection
+        TM-->>AOP: Transaction Rolled Back
+        AOP-->>Client: Throw Exception
+    end
+```
+
+### Transaction Propagation
+
+```mermaid
+graph TB
+    Start([Method Call]) --> Check{Has Active<br/>Transaction?}
+    
+    Check -->|No| CreateNew[REQUIRED:<br/>Create New Transaction]
+    Check -->|Yes| UseExisting[REQUIRED:<br/>Use Existing Transaction]
+    
+    Check -->|Always New| RequiresNew[REQUIRES_NEW:<br/>Always New Transaction]
+    Check -->|Must Exist| Mandatory[MANDATORY:<br/>Must Have Transaction]
+    Check -->|No Transaction| Never[NEVER:<br/>No Transaction Allowed]
+    Check -->|Optional| Supports[SUPPORTS:<br/>Use if Exists]
+    Check -->|Nested| Nested[NESTED:<br/>Nested Transaction]
+    
+    CreateNew --> Execute[Execute Method]
+    UseExisting --> Execute
+    RequiresNew --> Execute
+    Mandatory --> Execute
+    Never --> Execute
+    Supports --> Execute
+    Nested --> Execute
+    
+    Execute --> Commit{Success?}
+    Commit -->|Yes| CommitTx[Commit Transaction]
+    Commit -->|No| Rollback[Rollback Transaction]
+    
+    style Start fill:#e1f5ff
+    style Execute fill:#fff4e6
+```
+
 ```java
 @Service
 @Transactional
@@ -560,6 +799,86 @@ public class OrderService {
 ---
 
 ## Microservices Architecture
+
+### Microservices Architecture
+
+```mermaid
+graph TB
+    subgraph Client[Client Layer]
+        WebApp[Web Application]
+        MobileApp[Mobile App]
+    end
+    
+    subgraph Gateway[API Gateway Layer]
+        SpringGateway[Spring Cloud Gateway]
+        LoadBalancer[Load Balancer]
+        CircuitBreaker[Circuit Breaker]
+    end
+    
+    subgraph Services[Microservices]
+        UserService[User Service<br/>Port 8081]
+        OrderService[Order Service<br/>Port 8082]
+        ProductService[Product Service<br/>Port 8083]
+        PaymentService[Payment Service<br/>Port 8084]
+    end
+    
+    subgraph Infrastructure[Infrastructure Services]
+        Eureka[Eureka Server<br/>Service Discovery]
+        ConfigServer[Config Server]
+        Zipkin[Zipkin<br/>Distributed Tracing]
+    end
+    
+    subgraph Data[Data Layer]
+        UserDB[(User DB)]
+        OrderDB[(Order DB)]
+        ProductDB[(Product DB)]
+        PaymentDB[(Payment DB)]
+    end
+    
+    subgraph Messaging[Messaging]
+        RabbitMQ[RabbitMQ<br/>Message Queue]
+        Kafka[Kafka<br/>Event Stream]
+    end
+    
+    WebApp --> SpringGateway
+    MobileApp --> SpringGateway
+    
+    SpringGateway --> LoadBalancer
+    LoadBalancer --> CircuitBreaker
+    CircuitBreaker --> UserService
+    CircuitBreaker --> OrderService
+    CircuitBreaker --> ProductService
+    CircuitBreaker --> PaymentService
+    
+    UserService -.->|Register| Eureka
+    OrderService -.->|Register| Eureka
+    ProductService -.->|Register| Eureka
+    PaymentService -.->|Register| Eureka
+    
+    UserService --> ConfigServer
+    OrderService --> ConfigServer
+    ProductService --> ConfigServer
+    
+    UserService --> UserDB
+    OrderService --> OrderDB
+    ProductService --> ProductDB
+    PaymentService --> PaymentDB
+    
+    OrderService --> RabbitMQ
+    PaymentService --> RabbitMQ
+    RabbitMQ --> NotificationService[Notification Service]
+    
+    OrderService --> Kafka
+    ProductService --> Kafka
+    
+    UserService -.->|Trace| Zipkin
+    OrderService -.->|Trace| Zipkin
+    
+    style Gateway fill:#e1f5ff
+    style Services fill:#fff4e6
+    style Infrastructure fill:#e1f5ff
+    style Messaging fill:#fff4e6
+```
 
 ### Microservices Communication
 
@@ -907,6 +1226,115 @@ class UserControllerIntegrationTest {
 
 ## Security
 
+### Spring Security Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant FilterChain as Security Filter Chain
+    participant AuthFilter as Authentication Filter
+    participant AuthManager as Authentication Manager
+    participant UserDetailsService as User Details Service
+    participant PasswordEncoder as Password Encoder
+    participant AuthProvider as Authentication Provider
+    participant SecurityContext as Security Context
+    participant AuthzFilter as Authorization Filter
+    participant Controller as Controller
+    
+    Client->>FilterChain: HTTP Request
+    FilterChain->>AuthFilter: Process Request
+    
+    alt Not Authenticated
+        AuthFilter->>AuthFilter: Extract Credentials
+        AuthFilter->>AuthManager: Authenticate
+        AuthManager->>AuthProvider: Authenticate
+        AuthProvider->>UserDetailsService: Load User
+        UserDetailsService-->>AuthProvider: User Details
+        AuthProvider->>PasswordEncoder: Verify Password
+        PasswordEncoder-->>AuthProvider: Password Valid
+        AuthProvider-->>AuthManager: Authentication
+        AuthManager-->>AuthFilter: Authentication
+        AuthFilter->>SecurityContext: Set Authentication
+        SecurityContext-->>AuthFilter: Stored
+    end
+    
+    AuthFilter->>AuthzFilter: Continue Filter Chain
+    AuthzFilter->>AuthzFilter: Check Authorization
+    AuthzFilter->>SecurityContext: Get Authentication
+    SecurityContext-->>AuthzFilter: Authentication
+    
+    alt Authorized
+        AuthzFilter->>Controller: Forward Request
+        Controller-->>AuthzFilter: Response
+        AuthzFilter-->>FilterChain: Response
+        FilterChain-->>Client: HTTP Response
+    else Not Authorized
+        AuthzFilter-->>FilterChain: 403 Forbidden
+        FilterChain-->>Client: Error Response
+    end
+```
+
+### Security Architecture
+
+```mermaid
+graph TB
+    subgraph Client[Client Layer]
+        Browser[Web Browser]
+        MobileApp[Mobile App]
+    end
+    
+    subgraph Security[Security Layer]
+        FilterChain[Security Filter Chain]
+        AuthFilter[Authentication Filter]
+        AuthzFilter[Authorization Filter]
+        CSRFProtection[CSRF Protection]
+    end
+    
+    subgraph Auth[Authentication]
+        AuthManager[Authentication Manager]
+        AuthProvider[Authentication Provider]
+        UserDetailsService[User Details Service]
+        PasswordEncoder[Password Encoder]
+        JWTDecoder[JWT Decoder]
+    end
+    
+    subgraph Authz[Authorization]
+        AccessDecisionManager[Access Decision Manager]
+        MethodSecurity[Method Security]
+        RoleHierarchy[Role Hierarchy]
+    end
+    
+    subgraph Storage[Storage]
+        UserDB[(User Database)]
+        TokenStore[Token Store]
+        SessionStore[Session Store]
+    end
+    
+    Browser --> FilterChain
+    MobileApp --> FilterChain
+    
+    FilterChain --> AuthFilter
+    FilterChain --> CSRFProtection
+    FilterChain --> AuthzFilter
+    
+    AuthFilter --> AuthManager
+    AuthManager --> AuthProvider
+    AuthProvider --> UserDetailsService
+    AuthProvider --> PasswordEncoder
+    AuthProvider --> JWTDecoder
+    
+    UserDetailsService --> UserDB
+    JWTDecoder --> TokenStore
+    
+    AuthzFilter --> AccessDecisionManager
+    AccessDecisionManager --> MethodSecurity
+    AccessDecisionManager --> RoleHierarchy
+    
+    style Security fill:#e1f5ff
+    style Auth fill:#fff4e6
+    style Authz fill:#e1f5ff
+```
+
 ### Spring Security Configuration
 
 ```java
@@ -1168,6 +1596,120 @@ spec:
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "production"
+```
+
+### Build and Deployment Pipeline
+
+```mermaid
+flowchart TD
+    Start([Code Commit]) --> GitPush[Push to Git Repository]
+    GitPush --> Trigger[CI/CD Pipeline Triggered]
+    
+    Trigger --> Checkout[Checkout Code]
+    Checkout --> Build[Build Stage]
+    
+    Build --> MavenBuild[Maven Build<br/>mvn clean package]
+    MavenBuild --> Compile[Compile Java Code]
+    Compile --> Package[Package JAR/WAR]
+    Package --> BuildDocker[Build Docker Image]
+    BuildDocker --> PushRegistry[Push to Container Registry]
+    
+    PushRegistry --> Test[Test Stage]
+    Test --> UnitTest[Unit Tests<br/>mvn test]
+    UnitTest --> IntegrationTest[Integration Tests]
+    IntegrationTest --> CodeQuality[Code Quality Checks<br/>SonarQube]
+    
+    CodeQuality --> QualityGate{Quality Gate<br/>Pass?}
+    QualityGate -->|No| Fail[Build Failed]
+    QualityGate -->|Yes| SecurityScan[Security Scan]
+    
+    SecurityScan --> Deploy[Deploy Stage]
+    Deploy --> DeployDev[Deploy to Dev Environment]
+    DeployDev --> SmokeTest[Smoke Tests]
+    
+    SmokeTest --> DeployQA{Deploy to QA?}
+    DeployQA -->|Yes| DeployQAEnv[Deploy to QA]
+    DeployQAEnv --> QATest[QA Testing]
+    QATest --> DeployProd{Deploy to Prod?}
+    DeployQA -->|No| DeployProd
+    
+    DeployProd -->|Yes| DeployProdEnv[Deploy to Production<br/>Kubernetes]
+    DeployProd -->|No| End([Pipeline Complete])
+    
+    DeployProdEnv --> HealthCheck[Health Checks]
+    HealthCheck --> Monitor[Monitoring & Logging]
+    Monitor --> End
+    
+    style Start fill:#e1f5ff
+    style End fill:#fff4e6
+    style Fail fill:#ffcccc
+```
+
+### CI/CD Pipeline Architecture
+
+```mermaid
+graph TB
+    subgraph Source[Source Control]
+        Git[Git Repository]
+        Webhook[Webhook]
+    end
+    
+    subgraph CI[CI Pipeline]
+        Jenkins[Jenkins/GitHub Actions]
+        Build[Build Stage]
+        Test[Test Stage]
+        Quality[Quality Stage]
+    end
+    
+    subgraph Artifacts[Artifacts]
+        JAR[JAR/WAR File]
+        DockerImage[Docker Image]
+        Reports[Test Reports]
+    end
+    
+    subgraph Registry[Container Registry]
+        DockerHub[Docker Hub]
+        ECR[ECR/ACR]
+    end
+    
+    subgraph CD[CD Pipeline]
+        Deploy[Deployment]
+        K8s[Kubernetes]
+        Monitoring[Monitoring]
+    end
+    
+    subgraph Environments[Environments]
+        Dev[Development]
+        QA[Quality Assurance]
+        Prod[Production]
+    end
+    
+    Git --> Webhook
+    Webhook --> Jenkins
+    Jenkins --> Build
+    Build --> Test
+    Test --> Quality
+    
+    Build --> JAR
+    Build --> DockerImage
+    Test --> Reports
+    
+    DockerImage --> DockerHub
+    DockerImage --> ECR
+    
+    Quality --> Deploy
+    Deploy --> K8s
+    K8s --> Dev
+    K8s --> QA
+    K8s --> Prod
+    
+    Dev --> Monitoring
+    QA --> Monitoring
+    Prod --> Monitoring
+    
+    style CI fill:#e1f5ff
+    style CD fill:#fff4e6
+    style Environments fill:#e1f5ff
 ```
 
 ### CI/CD with Jenkins

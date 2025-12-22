@@ -1,0 +1,38 @@
+# Cursor Rules for iouthna
+
+## Learning Preferences
+
+### Visual Learning Style
+- **Primary Learning Method**: Visual learner - learns better with diagrams and visual representations
+- **Preference**: When creating documentation, guides, or explaining concepts, always include:
+  - Process flow diagrams (using Mermaid)
+  - Architecture diagrams
+  - Sequence diagrams
+  - Data flow diagrams
+  - Entity relationship diagrams
+  - Workflow diagrams
+  - Hierarchy diagrams
+  - Visual examples and illustrations
+
+### Documentation Standards
+- Always add visual diagrams to documentation to enhance understanding
+- Use Mermaid diagrams for technical documentation
+- Place diagrams in relevant sections to support visual learning
+- Include multiple diagram types when explaining complex concepts
+- Diagrams should be clear, well-labeled, and connected to text explanations
+
+### Example Implementation
+- When creating guides or documentation, follow the pattern established in SAP-Guides:
+  - Add diagrams after section introductions
+  - Include process flows for business processes
+  - Add architecture diagrams for system designs
+  - Use sequence diagrams for interactions
+  - Include ER diagrams for data models
+  - Add workflow diagrams for approval processes
+
+## General Preferences
+- Prefer comprehensive, detailed documentation
+- Include practical examples in documentation
+- Use structured formats (tables, lists, diagrams)
+- Maintain consistency across documentation
+

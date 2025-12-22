@@ -41,20 +41,137 @@ Effective risk and issue management is critical for project success. This guide 
 
 Risk management involves identifying, assessing, and mitigating risks that could impact project success. Proactive risk management prevents problems and reduces negative impact.
 
-### Risk Management Process
+### Risk Management Process Flow
 
 ```mermaid
-graph TD
-    A[Identify Risks] --> B[Assess Risks]
-    B --> C[Plan Responses]
-    C --> D[Implement Responses]
-    D --> E[Monitor Risks]
-    E --> F[Update Risk Register]
-    F --> A
+flowchart TD
+    Start([Project Start]) --> Identify[Identify Risks]
     
-    style A fill:#e1f5ff
-    style C fill:#fff4e6
-    style E fill:#e1f5ff
+    Identify --> Brainstorm[Brainstorming Sessions]
+    Identify --> Checklists[Use Risk Checklists]
+    Identify --> Assumptions[Analyze Assumptions]
+    Identify --> SWOT[SWOT Analysis]
+    Identify --> Expert[Expert Judgment]
+    
+    Brainstorm --> Assess
+    Checklists --> Assess
+    Assumptions --> Assess
+    SWOT --> Assess
+    Expert --> Assess
+    
+    Assess[Assess Risks] --> Probability[Assess Probability]
+    Assess --> Impact[Assess Impact]
+    
+    Probability --> CalculateScore[Calculate Risk Score]
+    Impact --> CalculateScore
+    
+    CalculateScore --> Categorize[Categorize Risk Level]
+    Categorize --> Extreme{Extreme<br/>Risk?}
+    Categorize --> High{High<br/>Risk?}
+    Categorize --> Medium{Medium<br/>Risk?}
+    Categorize --> Low{Low<br/>Risk?}
+    
+    Extreme --> ImmediateAction[Immediate Action Required]
+    High --> ActionPlan[Action Plan Needed]
+    Medium --> MonitorPlan[Monitor and Plan]
+    Low --> AcceptMonitor[Accept and Monitor]
+    
+    ImmediateAction --> PlanResponse[Plan Risk Response]
+    ActionPlan --> PlanResponse
+    MonitorPlan --> PlanResponse
+    AcceptMonitor --> Register
+    
+    PlanResponse --> SelectStrategy{Select Response<br/>Strategy}
+    SelectStrategy -->|Eliminate| Avoid[Avoid Risk]
+    SelectStrategy -->|Reduce| Mitigate[Mitigate Risk]
+    SelectStrategy -->|Transfer| Transfer[Transfer Risk]
+    SelectStrategy -->|Accept| Accept[Accept Risk]
+    
+    Avoid --> Implement[Implement Response]
+    Mitigate --> Implement
+    Transfer --> Implement
+    Accept --> Register
+    
+    Implement --> Monitor[Monitor Risks]
+    Monitor --> Review[Review Risk Status]
+    Review --> Update[Update Risk Register]
+    Update --> Register[Risk Register]
+    
+    Register --> Ongoing{Project<br/>Ongoing?}
+    Ongoing -->|Yes| Identify
+    Ongoing -->|No| End([Risk Management Complete])
+    
+    style Start fill:#e1f5ff
+    style Identify fill:#fff4e6
+    style Assess fill:#e1f5ff
+    style PlanResponse fill:#fff4e6
+    style Monitor fill:#e1f5ff
+    style End fill:#fff4e6
+```
+
+### Risk Assessment Matrix
+
+```mermaid
+graph TB
+    subgraph Matrix[Risk Assessment Matrix]
+        direction TB
+        VH[Very High<br/>90-100%]
+        H[High<br/>70-90%]
+        M[Medium<br/>30-70%]
+        L[Low<br/>10-30%]
+        VL[Very Low<br/>0-10%]
+        
+        Crit[Critical Impact]
+        HighI[High Impact]
+        MedI[Medium Impact]
+        LowI[Low Impact]
+        VLowI[Very Low Impact]
+    end
+    
+    VH -->|Extreme| E1[Extreme Risk]
+    VH -->|Extreme| E2[Extreme Risk]
+    VH -->|High| H1[High Risk]
+    VH -->|Medium| M1[Medium Risk]
+    VH -->|Low| L1[Low Risk]
+    
+    H -->|Extreme| E3[Extreme Risk]
+    H -->|High| H2[High Risk]
+    H -->|High| H3[High Risk]
+    H -->|Medium| M2[Medium Risk]
+    H -->|Low| L2[Low Risk]
+    
+    M -->|High| H4[High Risk]
+    M -->|High| H5[High Risk]
+    M -->|Medium| M3[Medium Risk]
+    M -->|Low| L3[Low Risk]
+    M -->|Very Low| VL1[Very Low Risk]
+    
+    L -->|High| H6[High Risk]
+    L -->|Medium| M4[Medium Risk]
+    L -->|Very Low| VL2[Very Low Risk]
+    L -->|Very Low| VL3[Very Low Risk]
+    L -->|Very Low| VL4[Very Low Risk]
+    
+    VL -->|Medium| M5[Medium Risk]
+    VL -->|Very Low| VL5[Very Low Risk]
+    VL -->|Very Low| VL6[Very Low Risk]
+    VL -->|Very Low| VL7[Very Low Risk]
+    VL -->|Very Low| VL8[Very Low Risk]
+    
+    style E1 fill:#ff0000
+    style E2 fill:#ff0000
+    style E3 fill:#ff0000
+    style H1 fill:#ff8800
+    style H2 fill:#ff8800
+    style H3 fill:#ff8800
+    style H4 fill:#ff8800
+    style H5 fill:#ff8800
+    style H6 fill:#ff8800
+    style M1 fill:#ffaa00
+    style M2 fill:#ffaa00
+    style M3 fill:#ffaa00
+    style M4 fill:#ffaa00
+    style M5 fill:#ffaa00
 ```
 
 ### Risk Identification
@@ -310,21 +427,106 @@ Issue management involves identifying, tracking, and resolving issues that have 
 | **Focus** | Future impact | Current impact |
 | **Action** | Planning | Immediate action |
 
-### Issue Management Process
+### Issue Management Process Flow
 
 ```mermaid
-graph TD
-    A[Identify Issue] --> B[Log Issue]
-    B --> C[Assess Issue]
-    C --> D[Assign Owner]
-    D --> E[Develop Solution]
-    E --> F[Implement Solution]
-    F --> G[Verify Resolution]
-    G --> H[Close Issue]
+flowchart TD
+    Start([Issue Identified]) --> Log[Log Issue]
+    Log --> Assess[Assess Issue]
     
-    style A fill:#e1f5ff
-    style E fill:#fff4e6
-    style H fill:#e1f5ff
+    Assess --> Priority{Determine<br/>Priority}
+    Priority -->|Critical P1| Critical[Critical Priority]
+    Priority -->|High P2| High[High Priority]
+    Priority -->|Medium P3| Medium[Medium Priority]
+    Priority -->|Low P4| Low[Low Priority]
+    
+    Critical --> Immediate[Immediate Action]
+    High --> Plan[Plan Resolution]
+    Medium --> Schedule[Schedule Resolution]
+    Low --> Backlog[Add to Backlog]
+    
+    Immediate --> Assign[Assign Owner]
+    Plan --> Assign
+    Schedule --> Assign
+    
+    Assign --> Analyze[Analyze Root Cause]
+    Analyze --> Develop[Develop Solution]
+    Develop --> Review{Solution<br/>Approved?}
+    
+    Review -->|No| Revise[Revise Solution]
+    Revise --> Develop
+    
+    Review -->|Yes| Implement[Implement Solution]
+    Implement --> Test[Test Solution]
+    Test --> Verify{Issue<br/>Resolved?}
+    
+    Verify -->|No| Debug[Debug & Fix]
+    Debug --> Implement
+    
+    Verify -->|Yes| Document[Document Resolution]
+    Document --> Close[Close Issue]
+    Close --> Lessons[Document Lessons Learned]
+    Lessons --> End([Issue Resolved])
+    
+    Backlog --> Prioritize[Prioritize in Backlog]
+    Prioritize --> NextSprint{Next<br/>Sprint?}
+    NextSprint -->|Yes| Assign
+    NextSprint -->|No| Backlog
+    
+    style Start fill:#e1f5ff
+    style Log fill:#fff4e6
+    style Assess fill:#e1f5ff
+    style Implement fill:#fff4e6
+    style Close fill:#e1f5ff
+    style End fill:#fff4e6
+```
+
+### Issue Escalation Process
+
+```mermaid
+flowchart TD
+    Start([Issue Identified]) --> Assess[Assess Issue]
+    Assess --> Blocks{Blocks<br/>Project?}
+    
+    Blocks -->|Yes| Escalate[Escalate Immediately]
+    Blocks -->|No| Control{Within Team<br/>Control?}
+    
+    Control -->|No| Escalate
+    Control -->|Yes| Resolve[Try to Resolve]
+    
+    Resolve --> Success{Resolution<br/>Successful?}
+    Success -->|Yes| Close[Close Issue]
+    Success -->|No| TimeLimit{Within Time<br/>Limit?}
+    
+    TimeLimit -->|No| Escalate
+    TimeLimit -->|Yes| Resolve
+    
+    Escalate --> Document[Document Issue]
+    Document --> Impact[Assess Impact]
+    Impact --> Notify[Notify Stakeholders]
+    Notify --> EscalateLevel1[Escalate to Team Lead]
+    
+    EscalateLevel1 --> Resolved1{Resolved at<br/>Level 1?}
+    Resolved1 -->|Yes| Close
+    Resolved1 -->|No| EscalateLevel2[Escalate to PM]
+    
+    EscalateLevel2 --> Resolved2{Resolved at<br/>Level 2?}
+    Resolved2 -->|Yes| Close
+    Resolved2 -->|No| EscalateLevel3[Escalate to Management]
+    
+    EscalateLevel3 --> Decision[Management Decision]
+    Decision --> Action[Take Action]
+    Action --> Monitor[Monitor Resolution]
+    Monitor --> Close
+    
+    Close --> End([Escalation Complete])
+    
+    style Start fill:#e1f5ff
+    style Escalate fill:#fff4e6
+    style Document fill:#e1f5ff
+    style EscalateLevel3 fill:#ff0000
+    style Close fill:#fff4e6
+    style End fill:#e1f5ff
 ```
 
 ### Issue Identification
@@ -956,4 +1158,7 @@ Remember: Effective risk and issue management prevents problems, minimizes impac
 - [Monitoring, Control & Reporting Guide](./MONITORING_CONTROL_REPORTING_GUIDE.md)
 - [Project Methodologies Guide](./PROJECT_METHODOLOGIES_GUIDE.md)
 - [Delivery & Handover Guide](./DELIVERY_HANDOVER_GUIDE.md)
+
+
+
 

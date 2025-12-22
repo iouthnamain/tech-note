@@ -48,22 +48,61 @@ Work Breakdown Structure (WBS) is a hierarchical decomposition of the total scop
 
 ```mermaid
 graph TD
-    A[Project] --> B[Phase 1]
-    A --> C[Phase 2]
-    A --> D[Phase 3]
-    B --> E[Task 1.1]
-    B --> F[Task 1.2]
-    E --> G[Subtask 1.1.1]
-    E --> H[Subtask 1.1.2]
-    F --> I[Subtask 1.2.1]
-    C --> J[Task 2.1]
-    C --> K[Task 2.2]
-    D --> L[Task 3.1]
+    A[1.0 Project] --> B[1.1 Phase 1]
+    A --> C[1.2 Phase 2]
+    A --> D[1.3 Phase 3]
+    
+    B --> E[1.1.1 Work Package 1]
+    B --> F[1.1.2 Work Package 2]
+    
+    E --> G[1.1.1.1 Task 1]
+    E --> H[1.1.1.2 Task 2]
+    E --> I[1.1.1.3 Task 3]
+    
+    F --> J[1.1.2.1 Task 1]
+    F --> K[1.1.2.2 Task 2]
+    
+    C --> L[1.2.1 Work Package 1]
+    C --> M[1.2.2 Work Package 2]
+    
+    D --> N[1.3.1 Work Package 1]
     
     style A fill:#e1f5ff
     style B fill:#fff4e6
-    style C fill:#fff4e6
+    style C fill:#e1f5ff
     style D fill:#fff4e6
+    style E fill:#e1f5ff
+    style F fill:#fff4e6
+    style G fill:#e1f5ff
+    style H fill:#fff4e6
+    style I fill:#e1f5ff
+```
+
+### WBS Creation Process
+
+```mermaid
+flowchart TD
+    Start([Project Start]) --> IdentifyDeliverables[Identify Major Deliverables]
+    IdentifyDeliverables --> Decompose[Decompose Each Deliverable]
+    Decompose --> Continue{Work Packages<br/>Small Enough?}
+    
+    Continue -->|No| DecomposeFurther[Decompose Further]
+    DecomposeFurther --> Continue
+    Continue -->|Yes| AssignCodes[Assign WBS Codes]
+    
+    AssignCodes --> CreateDictionary[Create WBS Dictionary]
+    CreateDictionary --> Review{Review WBS}
+    
+    Review -->|Needs Changes| IdentifyDeliverables
+    Review -->|Approved| Estimate[Estimate Work Packages]
+    Estimate --> End([WBS Complete])
+    
+    style Start fill:#e1f5ff
+    style IdentifyDeliverables fill:#fff4e6
+    style Decompose fill:#e1f5ff
+    style AssignCodes fill:#fff4e6
+    style Estimate fill:#e1f5ff
+    style End fill:#fff4e6
 ```
 
 ### WBS Principles
@@ -204,6 +243,45 @@ A WBS Dictionary provides detailed information about each WBS element:
 
 Lines of Code (LOC) estimation is a quantitative method that estimates project effort based on the number of lines of code to be written.
 
+### LOC Estimation Process Flow
+
+```mermaid
+flowchart TD
+    Start([Estimation Start]) --> Analyze[Analyze Requirements]
+    Analyze --> EstimateLOC[Estimate Total LOC]
+    
+    EstimateLOC --> Methods{Estimation Method}
+    Methods -->|Historical Data| UseHistorical[Use Similar Projects]
+    Methods -->|Expert Judgment| ExpertEstimate[Expert Estimation]
+    Methods -->|Function Points| ConvertFP[Convert Function Points]
+    
+    UseHistorical --> DetermineProductivity[Determine Productivity Rate]
+    ExpertEstimate --> DetermineProductivity
+    ConvertFP --> DetermineProductivity
+    
+    DetermineProductivity --> ConsiderFactors[Consider Factors]
+    ConsiderFactors --> Language{Language Type}
+    ConsiderFactors --> Complexity{Complexity Level}
+    ConsiderFactors --> Experience{Team Experience}
+    
+    Language --> Calculate[Calculate Base Effort<br/>LOC / Productivity Rate]
+    Complexity --> Calculate
+    Experience --> Calculate
+    
+    Calculate --> AddBuffer[Add Buffer 20-30%]
+    AddBuffer --> Review{Review Estimate}
+    
+    Review -->|Adjust| Calculate
+    Review -->|Approve| FinalEstimate[Final Estimate]
+    FinalEstimate --> End([Estimation Complete])
+    
+    style Start fill:#e1f5ff
+    style EstimateLOC fill:#fff4e6
+    style Calculate fill:#e1f5ff
+    style FinalEstimate fill:#fff4e6
+    style End fill:#e1f5ff
+```
+
 ### LOC Estimation Process
 
 #### Step 1: Estimate Total LOC
@@ -301,6 +379,83 @@ Average LOC per function point:
 ### Overview
 
 Entity-Based Estimation uses the number of entities in an Entity-Relationship (ER) diagram to estimate project effort. This method is particularly useful for database-centric applications.
+
+### ER Diagram Example
+
+```mermaid
+erDiagram
+    USER ||--o{ ORDER : places
+    USER {
+        int user_id PK
+        string name
+        string email
+        string phone
+    }
+    
+    PRODUCT ||--o{ ORDER_ITEM : contains
+    PRODUCT {
+        int product_id PK
+        string name
+        decimal price
+        int stock
+    }
+    
+    ORDER ||--o{ ORDER_ITEM : has
+    ORDER {
+        int order_id PK
+        int user_id FK
+        date order_date
+        decimal total
+    }
+    
+    ORDER_ITEM {
+        int item_id PK
+        int order_id FK
+        int product_id FK
+        int quantity
+    }
+    
+    CATEGORY ||--o{ PRODUCT : categorizes
+    CATEGORY {
+        int category_id PK
+        string name
+    }
+```
+
+### Entity-Based Estimation Process Flow
+
+```mermaid
+flowchart TD
+    Start([Estimation Start]) --> CreateER[Create ER Diagram]
+    CreateER --> CountEntities[Count Entities]
+    
+    CountEntities --> Classify[Classify Entities by Complexity]
+    Classify --> Simple[Simple Entities<br/>1-5 attributes]
+    Classify --> Medium[Medium Entities<br/>6-15 attributes]
+    Classify --> Complex[Complex Entities<br/>16+ attributes]
+    
+    Simple --> EstimateSimple[Estimate: 12-24 hours each]
+    Medium --> EstimateMedium[Estimate: 36-60 hours each]
+    Complex --> EstimateComplex[Estimate: 90-180 hours each]
+    
+    EstimateSimple --> Calculate[Calculate Total Effort]
+    EstimateMedium --> Calculate
+    EstimateComplex --> Calculate
+    
+    Calculate --> AddBuffer[Add Buffer 25%]
+    AddBuffer --> Review{Review Estimate}
+    
+    Review -->|Adjust| Classify
+    Review -->|Approve| FinalEstimate[Final Estimate]
+    FinalEstimate --> End([Estimation Complete])
+    
+    style Start fill:#e1f5ff
+    style CreateER fill:#fff4e6
+    style Classify fill:#e1f5ff
+    style Calculate fill:#fff4e6
+    style FinalEstimate fill:#e1f5ff
+    style End fill:#fff4e6
+```
 
 ### ER Diagram Basics
 
@@ -447,6 +602,33 @@ XS, S, M, L, XL, XXL
 
 Planning Poker is a consensus-based estimation technique:
 
+#### Planning Poker Process Flow
+
+```mermaid
+sequenceDiagram
+    participant PO as Product Owner
+    participant Team as Development Team
+    participant SM as Scrum Master
+    
+    PO->>Team: Present User Story
+    Team->>Team: Read Story
+    SM->>Team: Start Estimation
+    
+    Note over Team: Each member selects card<br/>(No discussion)
+    Team->>Team: Reveal Cards Simultaneously
+    
+    alt Estimates Match
+        Team->>PO: Consensus Reached
+        PO->>PO: Record Story Points
+    else Estimates Differ
+        Team->>Team: Discuss Differences
+        Note over Team: Highest & Lowest explain
+        Team->>Team: Re-estimate
+        Team->>Team: Reveal Cards Again
+        Team->>PO: Consensus Reached
+    end
+```
+
 #### Process
 1. **Product Owner** presents user story
 2. **Team** discusses story
@@ -460,6 +642,39 @@ Planning Poker is a consensus-based estimation technique:
 - No discussion before first vote
 - Discuss differences
 - Re-estimate after discussion
+
+### Story Point Estimation Flow
+
+```mermaid
+flowchart TD
+    Start([Sprint Planning]) --> PO[Product Owner Presents Story]
+    PO --> TeamRead[Team Reads Story]
+    TeamRead --> Discussion{Need Discussion?}
+    
+    Discussion -->|Yes| Discuss[Team Discusses Story]
+    Discuss --> Estimate
+    Discussion -->|No| Estimate[Team Estimates Story Points]
+    
+    Estimate --> Reveal[Reveal Cards]
+    Reveal --> Match{Estimates Match?}
+    
+    Match -->|Yes| Record[Record Story Points]
+    Match -->|No| DiscussDiff[Discuss Differences]
+    DiscussDiff --> ReEstimate[Re-estimate]
+    ReEstimate --> Reveal
+    
+    Record --> MoreStories{More Stories?}
+    MoreStories -->|Yes| PO
+    MoreStories -->|No| CalculateVelocity[Calculate Sprint Velocity]
+    CalculateVelocity --> SelectStories[Select Stories for Sprint]
+    SelectStories --> End([Sprint Backlog Created])
+    
+    style Start fill:#e1f5ff
+    style PO fill:#fff4e6
+    style Estimate fill:#e1f5ff
+    style Record fill:#fff4e6
+    style End fill:#e1f5ff
+```
 
 ### Story Point Reference
 
@@ -734,6 +949,52 @@ A proposal (RFP response, bid document) is a formal document submitted to win a 
 
 ### Proposal Writing Process
 
+**Proposal Writing Flow**:
+
+```mermaid
+flowchart TD
+    Start([RFP Received]) --> Phase1[Phase 1: Preparation<br/>Week 1]
+    
+    Phase1 --> AnalyzeRFP[Analyze RFP Thoroughly]
+    AnalyzeRFP --> Research[Research Client & Industry]
+    Research --> IdentifyReq[Identify Key Requirements]
+    IdentifyReq --> FormTeam[Form Proposal Team]
+    FormTeam --> CreatePlan[Create Proposal Plan]
+    
+    CreatePlan --> Phase2[Phase 2: Writing<br/>Week 2-3]
+    
+    Phase2 --> WriteExec[Write Executive Summary]
+    WriteExec --> WriteSolution[Write Proposed Solution]
+    WriteSolution --> WritePlan[Write Project Plan]
+    WritePlan --> WriteTeam[Write Team & Experience]
+    WriteTeam --> DevelopPricing[Develop Pricing]
+    DevelopPricing --> CreateDiagrams[Create Diagrams/Charts]
+    CreateDiagrams --> ReviewDraft[Review Draft]
+    
+    ReviewDraft --> Phase3[Phase 3: Review<br/>Week 4]
+    
+    Phase3 --> InternalReview[Internal Review]
+    InternalReview --> TechReview[Technical Review]
+    TechReview --> PricingReview[Pricing Review]
+    PricingReview --> LegalReview[Legal Review]
+    LegalReview --> FinalPolish[Final Polish]
+    
+    FinalPolish --> Phase4[Phase 4: Submission<br/>Week 4]
+    
+    Phase4 --> Format[Final Formatting]
+    Format --> QualityCheck[Quality Check]
+    QualityCheck --> Submit[Submit Before Deadline]
+    Submit --> FollowUp[Follow Up]
+    FollowUp --> End([Proposal Submitted])
+    
+    style Start fill:#e1f5ff
+    style Phase1 fill:#fff4e6
+    style Phase2 fill:#e1f5ff
+    style Phase3 fill:#fff4e6
+    style Phase4 fill:#e1f5ff
+    style End fill:#fff4e6
+```
+
 #### Phase 1: Preparation (Week 1)
 - Analyze RFP thoroughly
 - Research client and industry
@@ -857,6 +1118,49 @@ A proposal (RFP response, bid document) is a formal document submitted to win a 
 ---
 
 ## Estimation Accuracy and Buffers
+
+### Estimation Accuracy Tracking Flow
+
+```mermaid
+flowchart TD
+    Start([Project Start]) --> InitialEstimate[Initial Estimate<br/>Concept Stage]
+    InitialEstimate --> TrackProgress[Track Actual Progress]
+    
+    TrackProgress --> Compare[Compare Actual vs Estimated]
+    Compare --> CalculateVariance[Calculate Variance]
+    
+    CalculateVariance --> Analyze{Within<br/>Acceptable Range?}
+    
+    Analyze -->|Yes| Continue[Continue Project]
+    Analyze -->|No| ReviewEstimate[Review Estimate]
+    
+    ReviewEstimate --> IdentifyIssues[Identify Issues]
+    IdentifyIssues --> AdjustEstimate[Adjust Estimate]
+    AdjustEstimate --> UpdatePlan[Update Project Plan]
+    UpdatePlan --> Continue
+    
+    Continue --> FeasibilityEstimate[Feasibility Estimate<br/>-20% to +50%]
+    FeasibilityEstimate --> TrackProgress
+    
+    Continue --> BudgetEstimate[Budget Estimate<br/>-15% to +30%]
+    BudgetEstimate --> TrackProgress
+    
+    Continue --> DetailedEstimate[Detailed Estimate<br/>-10% to +20%]
+    DetailedEstimate --> TrackProgress
+    
+    Continue --> FinalEstimate[Final Estimate<br/>-5% to +10%]
+    FinalEstimate --> ProjectComplete[Project Complete]
+    ProjectComplete --> LearnLessons[Learn Lessons]
+    LearnLessons --> UpdateHistorical[Update Historical Data]
+    UpdateHistorical --> End([Estimation Process Complete])
+    
+    style Start fill:#e1f5ff
+    style InitialEstimate fill:#fff4e6
+    style Compare fill:#e1f5ff
+    style Analyze fill:#fff4e6
+    style FinalEstimate fill:#e1f5ff
+    style End fill:#fff4e6
+```
 
 ### Estimation Accuracy
 
@@ -1186,4 +1490,7 @@ Remember: Estimation is both art and science. Combine quantitative methods with 
 - [Project Methodologies Guide](./PROJECT_METHODOLOGIES_GUIDE.md)
 - [Team Management & Leadership Guide](./TEAM_MANAGEMENT_LEADERSHIP_GUIDE.md)
 - [Monitoring, Control & Reporting Guide](./MONITORING_CONTROL_REPORTING_GUIDE.md)
+
+
+
 

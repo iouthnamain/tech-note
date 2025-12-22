@@ -36,18 +36,124 @@ This guide covers DevOps practices, CI/CD pipelines, containerization, orchestra
 ### CI/CD Pipeline Flow
 
 ```mermaid
-graph LR
-    A[Source Code] --> B[Build]
-    B --> C[Test]
-    C --> D{Tests Pass?}
-    D -->|Yes| E[Package]
-    D -->|No| F[Notify Team]
-    E --> G[Deploy to Staging]
-    G --> H[Integration Tests]
-    H --> I{Tests Pass?}
-    I -->|Yes| J[Deploy to Production]
-    I -->|No| K[Rollback]
-    J --> L[Monitor]
+flowchart TD
+    Start([Code Commit]) --> Trigger[CI/CD Triggered]
+    Trigger --> Checkout[Checkout Code]
+    Checkout --> Install[Install Dependencies]
+    
+    Install --> Lint[Lint Code]
+    Lint --> Build[Build Application]
+    Build --> UnitTest[Unit Tests]
+    
+    UnitTest --> TestPass{Tests<br/>Pass?}
+    TestPass -->|No| Notify[Notify Team]
+    TestPass -->|Yes| SecurityScan[Security Scan]
+    
+    SecurityScan --> QualityCheck{Quality<br/>Gate Pass?}
+    QualityCheck -->|No| Notify
+    QualityCheck -->|Yes| Package[Package Artifact]
+    
+    Package --> BuildImage[Build Docker Image]
+    BuildImage --> PushRegistry[Push to Registry]
+    
+    PushRegistry --> DeployStaging[Deploy to Staging]
+    DeployStaging --> IntegrationTest[Integration Tests]
+    IntegrationTest --> E2ETest[E2E Tests]
+    
+    E2ETest --> StagingPass{Staging<br/>Tests Pass?}
+    StagingPass -->|No| RollbackStaging[Rollback Staging]
+    StagingPass -->|Yes| DeployProd[Deploy to Production]
+    
+    DeployProd --> SmokeTest[Smoke Tests]
+    SmokeTest --> ProdPass{Production<br/>Healthy?}
+    ProdPass -->|No| RollbackProd[Rollback Production]
+    ProdPass -->|Yes| Monitor[Monitor Application]
+    
+    Notify --> End([Pipeline Failed])
+    RollbackStaging --> End
+    RollbackProd --> End
+    Monitor --> Success([Deployment Successful])
+    
+    style Start fill:#e1f5ff
+    style Success fill:#6bcf7f
+    style End fill:#ff6b6b
+```
+
+### CI/CD Pipeline Architecture
+
+```mermaid
+graph TB
+    subgraph Source[Source Control]
+        Git[Git Repository]
+        Webhook[Webhook]
+    end
+    
+    subgraph CI[CI Pipeline]
+        Build[Build Stage]
+        Test[Test Stage]
+        Security[Security Stage]
+        Package[Package Stage]
+    end
+    
+    subgraph Artifacts[Artifacts]
+        DockerImage[Docker Image]
+        Artifact[Application Artifact]
+        SBOM[Software Bill of Materials]
+    end
+    
+    subgraph Registry[Container Registry]
+        DockerHub[Docker Hub]
+        ECR[ECR/ACR/GCR]
+    end
+    
+    subgraph CD[CD Pipeline]
+        DeployStaging[Deploy to Staging]
+        DeployProd[Deploy to Production]
+        Rollback[Rollback Mechanism]
+    end
+    
+    subgraph Environments[Environments]
+        Staging[Staging Environment]
+        Production[Production Environment]
+    end
+    
+    subgraph Monitoring[Monitoring]
+        Metrics[Metrics Collection]
+        Logs[Log Aggregation]
+        Alerts[Alerting]
+    end
+    
+    Git --> Webhook
+    Webhook --> Build
+    Build --> Test
+    Test --> Security
+    Security --> Package
+    
+    Package --> DockerImage
+    Package --> Artifact
+    Security --> SBOM
+    
+    DockerImage --> DockerHub
+    DockerImage --> ECR
+    
+    DockerHub --> DeployStaging
+    ECR --> DeployStaging
+    DeployStaging --> Staging
+    Staging --> DeployProd
+    DeployProd --> Production
+    
+    DeployProd --> Rollback
+    Rollback --> Production
+    
+    Production --> Metrics
+    Production --> Logs
+    Metrics --> Alerts
+    Logs --> Alerts
+    
+    style CI fill:#e1f5ff
+    style CD fill:#fff4e6
+    style Environments fill:#e1f5ff
+    style Monitoring fill:#fff4e6
 ```
 
 ### Continuous Integration (CI)
@@ -288,6 +394,98 @@ pipeline {
 
 ## Docker Containerization
 
+### Docker Container Architecture
+
+```mermaid
+graph TB
+    subgraph Host[Host Machine]
+        DockerEngine[Docker Engine]
+        Container1[Container 1<br/>Application A]
+        Container2[Container 2<br/>Application B]
+        Container3[Container 3<br/>Database]
+    end
+    
+    subgraph Images[Container Images]
+        Image1[Image: app-a:latest]
+        Image2[Image: app-b:latest]
+        Image3[Image: postgres:15]
+    end
+    
+    subgraph Registry[Container Registry]
+        DockerHub[Docker Hub]
+        PrivateRegistry[Private Registry]
+    end
+    
+    subgraph Network[Docker Network]
+        BridgeNetwork[Bridge Network]
+        OverlayNetwork[Overlay Network]
+    end
+    
+    subgraph Storage[Docker Storage]
+        Volumes[Volumes]
+        BindMounts[Bind Mounts]
+    end
+    
+    Image1 --> Container1
+    Image2 --> Container2
+    Image3 --> Container3
+    
+    DockerHub --> Image1
+    DockerHub --> Image2
+    PrivateRegistry --> Image3
+    
+    Container1 --> BridgeNetwork
+    Container2 --> BridgeNetwork
+    Container3 --> BridgeNetwork
+    
+    Container1 --> Volumes
+    Container2 --> Volumes
+    Container3 --> Volumes
+    
+    DockerEngine --> Container1
+    DockerEngine --> Container2
+    DockerEngine --> Container3
+    
+    style Host fill:#e1f5ff
+    style Images fill:#fff4e6
+    style Network fill:#e1f5ff
+    style Storage fill:#fff4e6
+```
+
+### Docker Build Process
+
+```mermaid
+sequenceDiagram
+    participant Developer
+    participant Dockerfile as Dockerfile
+    participant DockerEngine as Docker Engine
+    participant BuildCache as Build Cache
+    participant ImageLayer as Image Layers
+    participant Registry as Container Registry
+    
+    Developer->>Dockerfile: Write Dockerfile
+    Developer->>DockerEngine: docker build
+    DockerEngine->>Dockerfile: Read Instructions
+    
+    loop For Each Instruction
+        DockerEngine->>BuildCache: Check Cache
+        BuildCache-->>DockerEngine: Cache Hit/Miss
+        
+        alt Cache Miss
+            DockerEngine->>DockerEngine: Execute Instruction
+            DockerEngine->>ImageLayer: Create Layer
+            ImageLayer->>BuildCache: Update Cache
+        else Cache Hit
+            DockerEngine->>ImageLayer: Use Cached Layer
+        end
+    end
+    
+    DockerEngine->>ImageLayer: Combine Layers
+    ImageLayer->>DockerEngine: Final Image
+    DockerEngine->>Registry: Push Image
+    Registry-->>Developer: Image Available
+```
+
 ### Dockerfile
 
 ```dockerfile
@@ -356,6 +554,116 @@ volumes:
 
 ## Kubernetes Orchestration
 
+### Kubernetes Cluster Architecture
+
+```mermaid
+graph TB
+    subgraph ControlPlane[Control Plane]
+        APIServer[API Server]
+        Scheduler[Scheduler]
+        ControllerManager[Controller Manager]
+        etcd[etcd<br/>Cluster State]
+    end
+    
+    subgraph WorkerNodes[Worker Nodes]
+        subgraph Node1[Node 1]
+            Kubelet1[Kubelet]
+            KubeProxy1[kube-proxy]
+            Pod1[Pod 1]
+            Pod2[Pod 2]
+        end
+        
+        subgraph Node2[Node 2]
+            Kubelet2[Kubelet]
+            KubeProxy2[kube-proxy]
+            Pod3[Pod 3]
+            Pod4[Pod 4]
+        end
+        
+        subgraph Node3[Node 3]
+            Kubelet3[Kubelet]
+            KubeProxy3[kube-proxy]
+            Pod5[Pod 5]
+            Pod6[Pod 6]
+        end
+    end
+    
+    subgraph Services[Services]
+        Service1[Service: app-service]
+        Service2[Service: db-service]
+        Ingress[Ingress Controller]
+    end
+    
+    subgraph Storage[Storage]
+        PV1[Persistent Volume 1]
+        PV2[Persistent Volume 2]
+        StorageClass[Storage Class]
+    end
+    
+    APIServer --> Scheduler
+    APIServer --> ControllerManager
+    APIServer --> etcd
+    
+    APIServer --> Kubelet1
+    APIServer --> Kubelet2
+    APIServer --> Kubelet3
+    
+    Kubelet1 --> Pod1
+    Kubelet1 --> Pod2
+    Kubelet2 --> Pod3
+    Kubelet2 --> Pod4
+    Kubelet3 --> Pod5
+    Kubelet3 --> Pod6
+    
+    Service1 --> Pod1
+    Service1 --> Pod2
+    Service1 --> Pod3
+    Service2 --> Pod4
+    
+    Ingress --> Service1
+    Ingress --> Service2
+    
+    Pod4 --> PV1
+    Pod5 --> PV2
+    StorageClass --> PV1
+    StorageClass --> PV2
+    
+    style ControlPlane fill:#e1f5ff
+    style WorkerNodes fill:#fff4e6
+    style Services fill:#e1f5ff
+    style Storage fill:#fff4e6
+```
+
+### Kubernetes Deployment Flow
+
+```mermaid
+sequenceDiagram
+    participant Developer
+    participant kubectl as kubectl
+    participant APIServer as API Server
+    participant Scheduler as Scheduler
+    participant Kubelet as Kubelet
+    participant Container as Container Runtime
+    
+    Developer->>kubectl: kubectl apply -f deployment.yaml
+    kubectl->>APIServer: Create Deployment
+    APIServer->>APIServer: Validate & Store
+    
+    APIServer->>Scheduler: Schedule Pods
+    Scheduler->>Scheduler: Select Node
+    Scheduler->>APIServer: Bind Pod to Node
+    
+    APIServer->>Kubelet: Create Pod
+    Kubelet->>Container: Pull Image
+    Container-->>Kubelet: Image Ready
+    Kubelet->>Container: Start Container
+    Container-->>Kubelet: Container Running
+    
+    Kubelet->>APIServer: Update Pod Status
+    APIServer->>kubectl: Pod Status
+    kubectl-->>Developer: Deployment Ready
+```
+
 ### Deployment
 
 ```yaml
@@ -411,6 +719,85 @@ spec:
 
 ## Infrastructure as Code
 
+### Infrastructure as Code Flow
+
+```mermaid
+flowchart TD
+    Start([Infrastructure Change]) --> WriteCode[Write IaC Code<br/>Terraform/CloudFormation]
+    WriteCode --> Validate[Validate Code]
+    
+    Validate --> Plan[Generate Plan]
+    Plan --> Review{Review<br/>Plan?}
+    
+    Review -->|Changes Needed| WriteCode
+    Review -->|Approve| Apply[Apply Changes]
+    
+    Apply --> Provision[Provision Resources]
+    Provision --> Configure[Configure Resources]
+    Configure --> Verify[Verify Infrastructure]
+    
+    Verify --> StateUpdate[Update State]
+    StateUpdate --> Document[Document Changes]
+    Document --> End([Infrastructure Updated])
+    
+    style Start fill:#e1f5ff
+    style End fill:#fff4e6
+```
+
+### Infrastructure as Code Architecture
+
+```mermaid
+graph TB
+    subgraph Source[Source Code]
+        Terraform[Terraform Files]
+        CloudFormation[CloudFormation Templates]
+        Ansible[Ansible Playbooks]
+    end
+    
+    subgraph VersionControl[Version Control]
+        Git[Git Repository]
+        CI[CI Pipeline]
+    end
+    
+    subgraph Provisioning[Provisioning]
+        TerraformCLI[Terraform CLI]
+        CloudProvider[Cloud Provider APIs]
+    end
+    
+    subgraph Infrastructure[Infrastructure]
+        Compute[Compute Resources]
+        Network[Network Resources]
+        Storage[Storage Resources]
+        Security[Security Resources]
+    end
+    
+    subgraph State[State Management]
+        StateFile[State File]
+        StateBackend[State Backend<br/>S3/Terraform Cloud]
+    end
+    
+    Terraform --> Git
+    CloudFormation --> Git
+    Ansible --> Git
+    
+    Git --> CI
+    CI --> TerraformCLI
+    
+    TerraformCLI --> CloudProvider
+    CloudProvider --> Compute
+    CloudProvider --> Network
+    CloudProvider --> Storage
+    CloudProvider --> Security
+    
+    TerraformCLI --> StateFile
+    StateFile --> StateBackend
+    
+    style Source fill:#e1f5ff
+    style Provisioning fill:#fff4e6
+    style Infrastructure fill:#e1f5ff
+    style State fill:#fff4e6
+```
+
 ### Terraform
 
 ```hcl
@@ -440,6 +827,94 @@ resource "aws_s3_bucket" "app_bucket" {
 ---
 
 ## Monitoring and Logging
+
+### Monitoring and Logging Architecture
+
+```mermaid
+graph TB
+    subgraph Applications[Applications]
+        App1[Application 1]
+        App2[Application 2]
+        App3[Application 3]
+    end
+    
+    subgraph MetricsCollection[Metrics Collection]
+        Prometheus[Prometheus<br/>Metrics Server]
+        Exporters[Exporters<br/>Node/App Exporters]
+    end
+    
+    subgraph LogCollection[Log Collection]
+        Fluentd[Fluentd<br/>Log Aggregator]
+        Filebeat[Filebeat<br/>Log Shipper]
+    end
+    
+    subgraph Storage[Storage]
+        TSDB[(Time Series DB<br/>Prometheus)]
+        Elasticsearch[(Elasticsearch<br/>Log Storage)]
+    end
+    
+    subgraph Visualization[Visualization]
+        Grafana[Grafana<br/>Dashboards]
+        Kibana[Kibana<br/>Log Analysis]
+    end
+    
+    subgraph Alerting[Alerting]
+        AlertManager[Alert Manager]
+        PagerDuty[PagerDuty]
+        Slack[Slack]
+    end
+    
+    App1 --> Exporters
+    App2 --> Exporters
+    App3 --> Exporters
+    Exporters --> Prometheus
+    
+    App1 --> Fluentd
+    App2 --> Filebeat
+    App3 --> Fluentd
+    Filebeat --> Fluentd
+    Fluentd --> Elasticsearch
+    
+    Prometheus --> TSDB
+    TSDB --> Grafana
+    Elasticsearch --> Kibana
+    
+    Prometheus --> AlertManager
+    AlertManager --> PagerDuty
+    AlertManager --> Slack
+    
+    Grafana --> AlertManager
+    
+    style Applications fill:#e1f5ff
+    style MetricsCollection fill:#fff4e6
+    style LogCollection fill:#e1f5ff
+    style Visualization fill:#fff4e6
+```
+
+### Monitoring Data Flow
+
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant Exporter as Metrics Exporter
+    participant Prometheus as Prometheus
+    participant Grafana as Grafana
+    participant AlertManager as Alert Manager
+    
+    App->>Exporter: Expose Metrics
+    Exporter->>Prometheus: Scrape Metrics
+    Prometheus->>Prometheus: Store in TSDB
+    
+    Grafana->>Prometheus: Query Metrics
+    Prometheus-->>Grafana: Return Data
+    Grafana->>Grafana: Render Dashboard
+    
+    Prometheus->>AlertManager: Evaluate Rules
+    alt Alert Condition Met
+        AlertManager->>AlertManager: Trigger Alert
+        AlertManager->>Team: Send Notification
+    end
+```
 
 ### Prometheus
 
@@ -477,6 +952,117 @@ scrape_configs:
 ---
 
 ## Deployment Strategies
+
+### Deployment Strategies Comparison
+
+```mermaid
+graph TB
+    subgraph Strategies[Deployment Strategies]
+        Rolling[Rolling Deployment<br/>Gradual Replacement]
+        BlueGreen[Blue-Green Deployment<br/>Two Environments]
+        Canary[Canary Deployment<br/>Gradual Rollout]
+        Recreate[Recreate Deployment<br/>Stop & Replace]
+    end
+    
+    subgraph Characteristics[Characteristics]
+        Downtime[Downtime: None/Some]
+        Risk[Risk: Low/Medium/High]
+        Rollback[Rollback: Easy/Medium/Hard]
+        Cost[Cost: Low/Medium/High]
+    end
+    
+    Rolling --> Downtime
+    BlueGreen --> Downtime
+    Canary --> Downtime
+    Recreate --> Downtime
+    
+    Rolling --> Risk
+    BlueGreen --> Risk
+    Canary --> Risk
+    Recreate --> Risk
+    
+    Rolling --> Rollback
+    BlueGreen --> Rollback
+    Canary --> Rollback
+    Recreate --> Rollback
+    
+    Rolling --> Cost
+    BlueGreen --> Cost
+    Canary --> Cost
+    Recreate --> Cost
+    
+    style Strategies fill:#e1f5ff
+    style Characteristics fill:#fff4e6
+```
+
+### Blue-Green Deployment Flow
+
+```mermaid
+sequenceDiagram
+    participant Developer
+    participant LoadBalancer as Load Balancer
+    participant BlueEnv as Blue Environment<br/>Current Version
+    participant GreenEnv as Green Environment<br/>New Version
+    participant Monitor as Monitoring
+    
+    Note over LoadBalancer,GreenEnv: Initial State
+    LoadBalancer->>BlueEnv: Route Traffic (100%)
+    BlueEnv-->>LoadBalancer: Serve Requests
+    
+    Developer->>GreenEnv: Deploy New Version
+    GreenEnv->>GreenEnv: Start Services
+    GreenEnv->>Monitor: Health Checks
+    Monitor-->>GreenEnv: Healthy
+    
+    Developer->>LoadBalancer: Switch Traffic
+    LoadBalancer->>GreenEnv: Route Traffic (100%)
+    GreenEnv-->>LoadBalancer: Serve Requests
+    
+    Note over LoadBalancer,GreenEnv: Verification Period
+    GreenEnv->>Monitor: Monitor Metrics
+    Monitor-->>Developer: Metrics OK
+    
+    alt Issues Detected
+        Developer->>LoadBalancer: Rollback
+        LoadBalancer->>BlueEnv: Route Traffic (100%)
+    else No Issues
+        Developer->>BlueEnv: Decommission
+        BlueEnv->>BlueEnv: Shutdown
+    end
+```
+
+### Canary Deployment Flow
+
+```mermaid
+flowchart TD
+    Start([New Version Ready]) --> DeployCanary[Deploy Canary<br/>5% Traffic]
+    DeployCanary --> Monitor1[Monitor Metrics]
+    
+    Monitor1 --> Check1{Metrics<br/>OK?}
+    Check1 -->|No| Rollback[Rollback Canary]
+    Check1 -->|Yes| Increase1[Increase to 25%]
+    
+    Increase1 --> Monitor2[Monitor Metrics]
+    Monitor2 --> Check2{Metrics<br/>OK?}
+    Check2 -->|No| Rollback
+    Check2 -->|Yes| Increase2[Increase to 50%]
+    
+    Increase2 --> Monitor3[Monitor Metrics]
+    Monitor3 --> Check3{Metrics<br/>OK?}
+    Check3 -->|No| Rollback
+    Check3 -->|Yes| Increase3[Increase to 100%]
+    
+    Increase3 --> Monitor4[Monitor Metrics]
+    Monitor4 --> Check4{Metrics<br/>OK?}
+    Check4 -->|No| Rollback
+    Check4 -->|Yes| Complete([Deployment Complete])
+    
+    Rollback --> End([Deployment Failed])
+    
+    style Start fill:#e1f5ff
+    style Complete fill:#6bcf7f
+    style End fill:#ff6b6b
+```
 
 ### Deployment Strategies Comparison
 

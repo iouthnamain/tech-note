@@ -33,20 +33,72 @@ This guide covers comprehensive testing strategies for building reliable softwar
 
 ## Testing Pyramid
 
+### Testing Pyramid Overview
+
 ```mermaid
 graph TB
     subgraph Pyramid["Testing Pyramid"]
-        E2E[E2E Tests<br/>Few, Slow, Expensive]
-        Integration[Integration Tests<br/>Some, Medium Speed]
-        Unit[Unit Tests<br/>Many, Fast, Cheap]
+        E2E[E2E Tests<br/>10%<br/>Few, Slow, Expensive<br/>Critical User Flows]
+        Integration[Integration Tests<br/>20%<br/>Some, Medium Speed<br/>Component Interactions]
+        Unit[Unit Tests<br/>70%<br/>Many, Fast, Cheap<br/>Individual Functions]
+    end
+    
+    subgraph Characteristics[Characteristics]
+        Speed[Speed: Fast → Slow]
+        Cost[Cost: Low → High]
+        Coverage[Coverage: High → Low]
+        Maintenance[Maintenance: Easy → Hard]
     end
     
     E2E --> Integration
     Integration --> Unit
     
+    Unit --> Speed
+    Integration --> Cost
+    E2E --> Coverage
+    E2E --> Maintenance
+    
     style E2E fill:#ff6b6b
     style Integration fill:#ffd93d
     style Unit fill:#6bcf7f
+```
+
+### Testing Pyramid with Test Types
+
+```mermaid
+graph TB
+    subgraph E2ELayer[E2E Layer - 10%]
+        E2E1[User Journey Tests]
+        E2E2[Critical Path Tests]
+        E2E3[Smoke Tests]
+    end
+    
+    subgraph IntegrationLayer[Integration Layer - 20%]
+        Int1[API Integration Tests]
+        Int2[Database Integration Tests]
+        Int3[Service Integration Tests]
+        Int4[Component Integration Tests]
+    end
+    
+    subgraph UnitLayer[Unit Layer - 70%]
+        Unit1[Function Tests]
+        Unit2[Component Tests]
+        Unit3[Class Tests]
+        Unit4[Method Tests]
+    end
+    
+    E2E1 --> Int1
+    E2E2 --> Int2
+    E2E3 --> Int3
+    
+    Int1 --> Unit1
+    Int2 --> Unit2
+    Int3 --> Unit3
+    Int4 --> Unit4
+    
+    style E2ELayer fill:#ff6b6b
+    style IntegrationLayer fill:#ffd93d
+    style UnitLayer fill:#6bcf7f
 ```
 
 ### Unit Tests (70%)
@@ -82,6 +134,38 @@ graph LR
     style Red fill:#ff6b6b
     style Green fill:#6bcf7f
     style Refactor fill:#ffd93d
+```
+
+### TDD Process Flow
+
+```mermaid
+sequenceDiagram
+    participant Developer
+    participant TestRunner as Test Runner
+    participant Code as Production Code
+    participant Refactor as Refactoring
+    
+    Note over Developer,Refactor: Red Phase
+    Developer->>TestRunner: Write Failing Test
+    TestRunner->>Code: Run Test
+    Code-->>TestRunner: Test Fails (Expected)
+    TestRunner-->>Developer: Red Status
+    
+    Note over Developer,Refactor: Green Phase
+    Developer->>Code: Write Minimal Code
+    Developer->>TestRunner: Run Test Again
+    TestRunner->>Code: Execute Test
+    Code-->>TestRunner: Test Passes
+    TestRunner-->>Developer: Green Status
+    
+    Note over Developer,Refactor: Refactor Phase
+    Developer->>Refactor: Improve Code Quality
+    Developer->>TestRunner: Run Tests
+    TestRunner->>Code: Execute All Tests
+    Code-->>TestRunner: All Tests Pass
+    TestRunner-->>Developer: All Green
+    
+    Developer->>Developer: Repeat Cycle
 ```
 
 ### TDD Cycle
@@ -193,6 +277,58 @@ describe('User API Integration', () => {
 ---
 
 ## Behavior-Driven Development (BDD)
+
+### BDD Workflow
+
+```mermaid
+flowchart TD
+    Start([Feature Request]) --> WriteFeature[Write Feature File<br/>Gherkin Syntax]
+    WriteFeature --> DefineSteps[Define Step Definitions]
+    DefineSteps --> WriteTest[Write Test Code]
+    WriteTest --> RunTest[Run BDD Tests]
+    
+    RunTest --> TestPass{All Tests<br/>Pass?}
+    TestPass -->|No| ImplementCode[Implement Feature Code]
+    TestPass -->|Yes| Review[Review Feature]
+    
+    ImplementCode --> RunTest
+    
+    Review --> Refine[Refine Feature]
+    Refine --> Document[Document Behavior]
+    Document --> End([Feature Complete])
+    
+    style Start fill:#e1f5ff
+    style End fill:#fff4e6
+```
+
+### BDD Process Flow
+
+```mermaid
+sequenceDiagram
+    participant Stakeholder
+    participant Developer
+    participant Tester
+    participant BDDTool as BDD Tool<br/>Cucumber/SpecFlow
+    participant Code as Production Code
+    
+    Stakeholder->>Developer: Describe Feature Behavior
+    Developer->>BDDTool: Write Feature File<br/>Given-When-Then
+    BDDTool->>Tester: Review Feature
+    Tester->>BDDTool: Add Test Scenarios
+    
+    Developer->>BDDTool: Write Step Definitions
+    BDDTool->>Code: Execute Step Definitions
+    Code-->>BDDTool: Test Results
+    
+    alt Tests Fail
+        BDDTool-->>Developer: Tests Failing
+        Developer->>Code: Implement Feature
+        Developer->>BDDTool: Run Tests Again
+    else Tests Pass
+        BDDTool-->>Stakeholder: Feature Verified
+        Stakeholder->>Stakeholder: Accept Feature
+    end
+```
 
 ### BDD with Cucumber
 
@@ -589,6 +725,214 @@ describe('Penetration Tests', () => {
 - [ ] Secure headers
 - [ ] Sensitive data exposure
 - [ ] API rate limiting
+
+---
+
+## Test Automation
+
+### Test Automation Architecture
+
+```mermaid
+graph TB
+    subgraph Source[Source Code]
+        Code[Application Code]
+        TestCode[Test Code]
+    end
+    
+    subgraph TestFramework[Test Framework]
+        UnitFramework[Unit Test Framework<br/>Jest/Mocha]
+        IntegrationFramework[Integration Framework<br/>Supertest]
+        E2EFramework[E2E Framework<br/>Playwright/Cypress]
+    end
+    
+    subgraph TestRunner[Test Runner]
+        TestExecutor[Test Executor]
+        TestOrchestrator[Test Orchestrator]
+        ParallelRunner[Parallel Test Runner]
+    end
+    
+    subgraph Reporting[Reporting]
+        TestResults[Test Results]
+        CoverageReport[Coverage Report]
+        TestDashboard[Test Dashboard]
+    end
+    
+    subgraph CI[CI/CD Integration]
+        Pipeline[CI Pipeline]
+        TestTrigger[Test Trigger]
+        QualityGate[Quality Gate]
+    end
+    
+    Code --> TestCode
+    TestCode --> UnitFramework
+    TestCode --> IntegrationFramework
+    TestCode --> E2EFramework
+    
+    UnitFramework --> TestExecutor
+    IntegrationFramework --> TestExecutor
+    E2EFramework --> TestExecutor
+    
+    TestExecutor --> TestOrchestrator
+    TestOrchestrator --> ParallelRunner
+    
+    ParallelRunner --> TestResults
+    ParallelRunner --> CoverageReport
+    TestResults --> TestDashboard
+    
+    TestResults --> QualityGate
+    QualityGate --> Pipeline
+    Pipeline --> TestTrigger
+    
+    style TestFramework fill:#e1f5ff
+    style TestRunner fill:#fff4e6
+    style Reporting fill:#e1f5ff
+    style CI fill:#fff4e6
+```
+
+### Test Execution Flow
+
+```mermaid
+sequenceDiagram
+    participant Developer
+    participant TestRunner as Test Runner
+    participant TestFramework as Test Framework
+    participant Application as Application
+    participant MockService as Mock Services
+    participant Report as Test Report
+    
+    Developer->>TestRunner: Run Tests
+    TestRunner->>TestFramework: Load Test Files
+    TestFramework->>TestFramework: Discover Tests
+    
+    loop For Each Test
+        TestFramework->>TestFramework: Setup Test Environment
+        TestFramework->>MockService: Setup Mocks/Stubs
+        TestFramework->>Application: Execute Test
+        Application-->>TestFramework: Test Result
+        TestFramework->>TestFramework: Teardown
+    end
+    
+    TestFramework->>Report: Collect Results
+    Report->>Report: Generate Coverage
+    Report-->>TestRunner: Test Report
+    TestRunner-->>Developer: Display Results
+```
+
+---
+
+## Continuous Testing
+
+### Continuous Testing Pipeline
+
+```mermaid
+flowchart TD
+    Start([Code Commit]) --> Trigger[CI Pipeline Triggered]
+    Trigger --> Checkout[Checkout Code]
+    Checkout --> Install[Install Dependencies]
+    
+    Install --> UnitTests[Run Unit Tests]
+    UnitTests --> UnitPass{Unit Tests<br/>Pass?}
+    UnitPass -->|No| Fail1[Fail Pipeline]
+    UnitPass -->|Yes| IntegrationTests[Run Integration Tests]
+    
+    IntegrationTests --> IntPass{Integration Tests<br/>Pass?}
+    IntPass -->|No| Fail2[Fail Pipeline]
+    IntPass -->|Yes| E2ETests[Run E2E Tests]
+    
+    E2ETests --> E2EPass{E2E Tests<br/>Pass?}
+    E2EPass -->|No| Fail3[Fail Pipeline]
+    E2EPass -->|Yes| Coverage[Generate Coverage Report]
+    
+    Coverage --> CoverageCheck{Coverage<br/>Threshold Met?}
+    CoverageCheck -->|No| Fail4[Fail Pipeline]
+    CoverageCheck -->|Yes| PerformanceTests[Run Performance Tests]
+    
+    PerformanceTests --> PerfPass{Performance<br/>Tests Pass?}
+    PerfPass -->|No| Fail5[Fail Pipeline]
+    PerfPass -->|Yes| SecurityTests[Run Security Tests]
+    
+    SecurityTests --> SecPass{Security Tests<br/>Pass?}
+    SecPass -->|No| Fail6[Fail Pipeline]
+    SecPass -->|Yes| Deploy[Deploy to Environment]
+    
+    Deploy --> SmokeTests[Run Smoke Tests]
+    SmokeTests --> SmokePass{Smoke Tests<br/>Pass?}
+    SmokePass -->|No| Rollback[Rollback Deployment]
+    SmokePass -->|Yes| Success([Deployment Successful])
+    
+    Fail1 --> End([Pipeline Failed])
+    Fail2 --> End
+    Fail3 --> End
+    Fail4 --> End
+    Fail5 --> End
+    Fail6 --> End
+    Rollback --> End
+    
+    style Start fill:#e1f5ff
+    style Success fill:#6bcf7f
+    style End fill:#ff6b6b
+```
+
+### Continuous Testing Architecture
+
+```mermaid
+graph TB
+    subgraph Development[Development]
+        CodeCommit[Code Commit]
+        PreCommit[Pre-commit Hooks]
+    end
+    
+    subgraph CI[Continuous Integration]
+        Build[Build Stage]
+        UnitStage[Unit Test Stage]
+        IntegrationStage[Integration Test Stage]
+        E2EStage[E2E Test Stage]
+    end
+    
+    subgraph TestEnvironments[Test Environments]
+        DevEnv[Dev Environment]
+        TestEnv[Test Environment]
+        StagingEnv[Staging Environment]
+    end
+    
+    subgraph Monitoring[Test Monitoring]
+        TestMetrics[Test Metrics]
+        CoverageTracking[Coverage Tracking]
+        FlakyTestDetection[Flaky Test Detection]
+    end
+    
+    subgraph Reporting[Test Reporting]
+        TestDashboard[Test Dashboard]
+        Notifications[Notifications]
+        Trends[Test Trends]
+    end
+    
+    CodeCommit --> PreCommit
+    PreCommit --> Build
+    Build --> UnitStage
+    UnitStage --> IntegrationStage
+    IntegrationStage --> E2EStage
+    
+    E2EStage --> DevEnv
+    DevEnv --> TestEnv
+    TestEnv --> StagingEnv
+    
+    UnitStage --> TestMetrics
+    IntegrationStage --> TestMetrics
+    E2EStage --> TestMetrics
+    
+    TestMetrics --> CoverageTracking
+    CoverageTracking --> FlakyTestDetection
+    
+    TestMetrics --> TestDashboard
+    FlakyTestDetection --> Notifications
+    TestDashboard --> Trends
+    
+    style CI fill:#e1f5ff
+    style TestEnvironments fill:#fff4e6
+    style Monitoring fill:#e1f5ff
+    style Reporting fill:#fff4e6
+```
 
 ---
 

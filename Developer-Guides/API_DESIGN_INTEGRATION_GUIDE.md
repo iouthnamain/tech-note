@@ -35,6 +35,71 @@ This guide covers API design principles, best practices, and integration pattern
 
 ## RESTful API Design
 
+### API Architecture Overview
+
+```mermaid
+graph TB
+    subgraph Clients[API Clients]
+        WebApp[Web Application]
+        MobileApp[Mobile App]
+        ThirdParty[Third-Party Services]
+    end
+    
+    subgraph Gateway[API Gateway]
+        LoadBalancer[Load Balancer]
+        RateLimiter[Rate Limiter]
+        AuthMiddleware[Auth Middleware]
+        RequestRouter[Request Router]
+    end
+    
+    subgraph APIServices[API Services]
+        RESTAPI[REST API]
+        GraphQLAPI[GraphQL API]
+        gRPCAPI[gRPC API]
+    end
+    
+    subgraph BackendServices[Backend Services]
+        UserService[User Service]
+        OrderService[Order Service]
+        ProductService[Product Service]
+    end
+    
+    subgraph DataLayer[Data Layer]
+        Database[(Database)]
+        Cache[(Cache)]
+        MessageQueue[Message Queue]
+    end
+    
+    WebApp --> LoadBalancer
+    MobileApp --> LoadBalancer
+    ThirdParty --> LoadBalancer
+    
+    LoadBalancer --> RateLimiter
+    RateLimiter --> AuthMiddleware
+    AuthMiddleware --> RequestRouter
+    
+    RequestRouter --> RESTAPI
+    RequestRouter --> GraphQLAPI
+    RequestRouter --> gRPCAPI
+    
+    RESTAPI --> UserService
+    RESTAPI --> OrderService
+    GraphQLAPI --> ProductService
+    gRPCAPI --> UserService
+    
+    UserService --> Database
+    OrderService --> Database
+    ProductService --> Cache
+    
+    UserService --> MessageQueue
+    OrderService --> MessageQueue
+    
+    style Gateway fill:#e1f5ff
+    style APIServices fill:#fff4e6
+    style BackendServices fill:#e1f5ff
+    style DataLayer fill:#fff4e6
+```
+
 ### REST API Request Flow
 
 ```mermaid
@@ -54,6 +119,39 @@ sequenceDiagram
     Service-->>API: Processed Result
     API-->>LoadBalancer: HTTP Response
     LoadBalancer-->>Client: Response
+```
+
+### REST API Design Flow
+
+```mermaid
+flowchart TD
+    Start([API Design Requirement]) --> IdentifyResources[Identify Resources]
+    IdentifyResources --> DesignURLs[Design URL Structure]
+    DesignURLs --> DefineMethods[Define HTTP Methods]
+    
+    DefineMethods --> DesignRequest[Design Request Format]
+    DesignRequest --> DesignResponse[Design Response Format]
+    DesignResponse --> DefineStatusCodes[Define Status Codes]
+    
+    DefineStatusCodes --> AddAuth[Add Authentication]
+    AddAuth --> AddVersioning[Add Versioning]
+    AddVersioning --> AddRateLimit[Add Rate Limiting]
+    
+    AddRateLimit --> WriteDocs[Write Documentation]
+    WriteDocs --> Implement[Implement API]
+    Implement --> Test[Test API]
+    
+    Test --> Validate{API<br/>Valid?}
+    Validate -->|No| DesignRequest
+    Validate -->|Yes| Deploy[Deploy API]
+    
+    Deploy --> Monitor[Monitor Usage]
+    Monitor --> Iterate{Needs<br/>Changes?}
+    Iterate -->|Yes| IdentifyResources
+    Iterate -->|No| End([API Complete])
+    
+    style Start fill:#e1f5ff
+    style End fill:#fff4e6
 ```
 
 ### REST Principles
@@ -168,6 +266,72 @@ app.delete('/api/users/:id', async (req, res) => {
 
 ## GraphQL Design
 
+### GraphQL Architecture
+
+```mermaid
+graph TB
+    subgraph Client[GraphQL Client]
+        WebApp[Web Application]
+        MobileApp[Mobile App]
+    end
+    
+    subgraph GraphQLServer[GraphQL Server]
+        GraphQLAPI[GraphQL API]
+        Schema[Schema Definition]
+        Resolvers[Resolvers]
+        DataLoaders[Data Loaders]
+    end
+    
+    subgraph DataSources[Data Sources]
+        RESTAPI[REST APIs]
+        Database[(Database)]
+        Microservices[Microservices]
+        Cache[(Cache)]
+    end
+    
+    WebApp --> GraphQLAPI
+    MobileApp --> GraphQLAPI
+    
+    GraphQLAPI --> Schema
+    GraphQLAPI --> Resolvers
+    Resolvers --> DataLoaders
+    
+    DataLoaders --> RESTAPI
+    DataLoaders --> Database
+    DataLoaders --> Microservices
+    DataLoaders --> Cache
+    
+    style GraphQLServer fill:#e1f5ff
+    style DataSources fill:#fff4e6
+```
+
+### GraphQL Request Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant GraphQLAPI as GraphQL API
+    participant Schema as Schema
+    participant Resolver as Resolver
+    participant DataLoader as Data Loader
+    participant DataSource as Data Source
+    
+    Client->>GraphQLAPI: GraphQL Query
+    GraphQLAPI->>Schema: Validate Query
+    Schema-->>GraphQLAPI: Query Valid
+    
+    GraphQLAPI->>Resolver: Execute Resolvers
+    Resolver->>DataLoader: Load Data
+    DataLoader->>DataSource: Fetch Data
+    DataSource-->>DataLoader: Return Data
+    DataLoader->>DataLoader: Batch & Cache
+    DataLoader-->>Resolver: Processed Data
+    Resolver-->>GraphQLAPI: Resolved Data
+    
+    GraphQLAPI->>GraphQLAPI: Format Response
+    GraphQLAPI-->>Client: JSON Response
+```
+
 ### GraphQL Schema
 
 ```graphql
@@ -260,6 +424,77 @@ const resolvers = {
 
 ## gRPC for Microservices
 
+### gRPC Architecture
+
+```mermaid
+graph TB
+    subgraph Client[gRPC Clients]
+        Client1[Client 1]
+        Client2[Client 2]
+    end
+    
+    subgraph gRPCServer[gRPC Server]
+        gRPCAPI[gRPC API]
+        ServiceDefinitions[Service Definitions<br/>.proto files]
+        Stubs[Stubs]
+    end
+    
+    subgraph Backend[Backend Services]
+        Service1[Service 1]
+        Service2[Service 2]
+        Service3[Service 3]
+    end
+    
+    subgraph Data[Data Layer]
+        Database[(Database)]
+        Cache[(Cache)]
+    end
+    
+    Client1 --> gRPCAPI
+    Client2 --> gRPCAPI
+    
+    gRPCAPI --> ServiceDefinitions
+    ServiceDefinitions --> Stubs
+    Stubs --> Service1
+    Stubs --> Service2
+    Stubs --> Service3
+    
+    Service1 --> Database
+    Service2 --> Database
+    Service3 --> Cache
+    
+    style gRPCServer fill:#e1f5ff
+    style Backend fill:#fff4e6
+    style Data fill:#e1f5ff
+```
+
+### gRPC Communication Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Stub as Client Stub
+    participant Network as Network<br/>HTTP/2
+    participant ServerStub as Server Stub
+    participant Service as gRPC Service
+    participant Backend as Backend Service
+    
+    Client->>Stub: Method Call
+    Stub->>Stub: Serialize Request<br/>Protocol Buffers
+    Stub->>Network: Send Request<br/>HTTP/2
+    Network->>ServerStub: Receive Request
+    ServerStub->>ServerStub: Deserialize Request
+    ServerStub->>Service: Invoke Method
+    Service->>Backend: Process Request
+    Backend-->>Service: Return Data
+    Service-->>ServerStub: Response
+    ServerStub->>ServerStub: Serialize Response
+    ServerStub->>Network: Send Response
+    Network->>Stub: Receive Response
+    Stub->>Stub: Deserialize Response
+    Stub-->>Client: Return Result
+```
+
 ### Protocol Buffers Definition
 
 ```protobuf
@@ -335,6 +570,68 @@ server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () =>
 
 ## API Versioning
 
+### API Versioning Strategy
+
+```mermaid
+graph TB
+    subgraph Strategies[Versioning Strategies]
+        URLVersioning[URL Versioning<br/>/api/v1/users]
+        HeaderVersioning[Header Versioning<br/>Accept: application/vnd.api+json;version=1]
+        QueryVersioning[Query Versioning<br/>/api/users?version=1]
+        MediaTypeVersioning[Media Type Versioning<br/>application/vnd.api.v1+json]
+    end
+    
+    subgraph Considerations[Considerations]
+        BreakingChanges[Breaking Changes]
+        BackwardCompatibility[Backward Compatibility]
+        Deprecation[Deprecation Policy]
+        Migration[Migration Path]
+    end
+    
+    URLVersioning --> BreakingChanges
+    HeaderVersioning --> BreakingChanges
+    QueryVersioning --> BreakingChanges
+    MediaTypeVersioning --> BreakingChanges
+    
+    BreakingChanges --> BackwardCompatibility
+    BackwardCompatibility --> Deprecation
+    Deprecation --> Migration
+    
+    style Strategies fill:#e1f5ff
+    style Considerations fill:#fff4e6
+```
+
+### API Versioning Flow
+
+```mermaid
+flowchart TD
+    Start([API Change]) --> CheckChange{Breaking<br/>Change?}
+    
+    CheckChange -->|No| MinorVersion[Minor Version<br/>v1.1.0]
+    CheckChange -->|Yes| MajorVersion[Major Version<br/>v2.0.0]
+    
+    MajorVersion --> MaintainOld[Maintain Old Version]
+    MajorVersion --> CreateNew[Create New Version]
+    
+    MaintainOld --> Deprecate[Deprecate Old Version]
+    CreateNew --> Document[Document Changes]
+    
+    Deprecate --> NotifyUsers[Notify Users]
+    Document --> NotifyUsers
+    
+    NotifyUsers --> SupportPeriod[Support Period<br/>6-12 months]
+    SupportPeriod --> Sunset[Sunset Old Version]
+    
+    MinorVersion --> UpdateDocs[Update Documentation]
+    UpdateDocs --> Deploy[Deploy Update]
+    
+    Sunset --> End([Version Retired])
+    Deploy --> End
+    
+    style Start fill:#e1f5ff
+    style End fill:#fff4e6
+```
+
 ### URL Versioning
 
 ```typescript
@@ -380,6 +677,48 @@ app.use('/api', (req, res, next) => {
 ---
 
 ## Authentication & Authorization
+
+### API Authentication Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API as API Gateway
+    participant AuthService as Auth Service
+    participant TokenService as Token Service
+    participant Database as Database
+    
+    Client->>API: API Request
+    API->>API: Extract Token
+    
+    alt No Token
+        API-->>Client: 401 Unauthorized
+    else Token Present
+        API->>TokenService: Validate Token
+        TokenService->>TokenService: Verify Signature
+        TokenService->>TokenService: Check Expiration
+        
+        alt Token Invalid
+            TokenService-->>API: Token Invalid
+            API-->>Client: 401 Unauthorized
+        else Token Valid
+            TokenService-->>API: User Claims
+            API->>AuthService: Check Authorization
+            AuthService->>Database: Verify Permissions
+            
+            alt Authorized
+                Database-->>AuthService: Authorized
+                AuthService-->>API: Allow Request
+                API->>API: Process Request
+                API-->>Client: 200 OK + Data
+            else Not Authorized
+                Database-->>AuthService: Forbidden
+                AuthService-->>API: 403 Forbidden
+                API-->>Client: Access Denied
+            end
+        end
+    end
+```
 
 ### JWT Authentication Flow
 
@@ -458,6 +797,64 @@ app.post('/oauth/token', async (req, res) => {
 ---
 
 ## Rate Limiting and Throttling
+
+### Rate Limiting Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API as API Gateway
+    participant RateLimiter as Rate Limiter
+    participant Cache as Cache/Storage
+    participant Backend as Backend API
+    
+    Client->>API: API Request
+    API->>RateLimiter: Check Rate Limit
+    
+    RateLimiter->>Cache: Get Request Count
+    Cache-->>RateLimiter: Current Count
+    
+    alt Under Limit
+        RateLimiter->>Cache: Increment Count
+        RateLimiter-->>API: Allow Request
+        API->>Backend: Forward Request
+        Backend-->>API: Response
+        API-->>Client: 200 OK + Data
+    else At Limit
+        RateLimiter-->>API: Rate Limit Exceeded
+        API-->>Client: 429 Too Many Requests<br/>+ Retry-After Header
+    else Over Limit
+        RateLimiter-->>API: Rate Limit Exceeded
+        API-->>Client: 429 Too Many Requests
+    end
+```
+
+### Rate Limiting Strategies
+
+```mermaid
+graph TB
+    subgraph Strategies[Rate Limiting Strategies]
+        FixedWindow[Fixed Window<br/>100 requests/hour]
+        SlidingWindow[Sliding Window<br/>100 requests/hour<br/>rolling]
+        TokenBucket[Token Bucket<br/>Refill tokens]
+        LeakyBucket[Leaky Bucket<br/>Constant rate]
+    end
+    
+    subgraph Implementation[Implementation]
+        InMemory[In-Memory<br/>Redis/Memcached]
+        Distributed[Distributed<br/>Shared Cache]
+        PerUser[Per User Limits]
+        PerEndpoint[Per Endpoint Limits]
+    end
+    
+    FixedWindow --> InMemory
+    SlidingWindow --> Distributed
+    TokenBucket --> PerUser
+    LeakyBucket --> PerEndpoint
+    
+    style Strategies fill:#e1f5ff
+    style Implementation fill:#fff4e6
+```
 
 ```typescript
 import rateLimit from 'express-rate-limit';
@@ -631,7 +1028,200 @@ app.get('/api/users', async (req, res) => {
 
 ---
 
+## API Gateway Patterns
+
+### API Gateway Architecture
+
+```mermaid
+graph TB
+    subgraph Clients[API Clients]
+        WebApp[Web Application]
+        MobileApp[Mobile App]
+        ThirdParty[Third-Party Services]
+    end
+    
+    subgraph Gateway[API Gateway]
+        LoadBalancer[Load Balancer]
+        RateLimiter[Rate Limiter]
+        AuthMiddleware[Authentication]
+        RequestRouter[Request Router]
+        ResponseAggregator[Response Aggregator]
+        CircuitBreaker[Circuit Breaker]
+        Logging[Logging & Monitoring]
+    end
+    
+    subgraph BackendServices[Backend Services]
+        UserService[User Service]
+        OrderService[Order Service]
+        ProductService[Product Service]
+        PaymentService[Payment Service]
+    end
+    
+    subgraph Infrastructure[Infrastructure]
+        ServiceDiscovery[Service Discovery]
+        ConfigServer[Config Server]
+        MessageQueue[Message Queue]
+    end
+    
+    WebApp --> LoadBalancer
+    MobileApp --> LoadBalancer
+    ThirdParty --> LoadBalancer
+    
+    LoadBalancer --> RateLimiter
+    RateLimiter --> AuthMiddleware
+    AuthMiddleware --> RequestRouter
+    RequestRouter --> ResponseAggregator
+    ResponseAggregator --> CircuitBreaker
+    CircuitBreaker --> Logging
+    
+    RequestRouter --> UserService
+    RequestRouter --> OrderService
+    RequestRouter --> ProductService
+    RequestRouter --> PaymentService
+    
+    UserService -.->|Register| ServiceDiscovery
+    OrderService -.->|Register| ServiceDiscovery
+    ProductService -.->|Register| ServiceDiscovery
+    
+    UserService --> ConfigServer
+    OrderService --> MessageQueue
+    
+    style Gateway fill:#e1f5ff
+    style BackendServices fill:#fff4e6
+    style Infrastructure fill:#e1f5ff
+```
+
+### API Gateway Request Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Gateway as API Gateway
+    participant Auth as Auth Service
+    participant RateLimit as Rate Limiter
+    participant Router as Request Router
+    participant Service as Backend Service
+    participant Cache as Cache
+    
+    Client->>Gateway: API Request
+    Gateway->>RateLimit: Check Rate Limit
+    
+    alt Rate Limit Exceeded
+        RateLimit-->>Gateway: 429 Too Many Requests
+        Gateway-->>Client: Rate Limit Error
+    else Within Limit
+        RateLimit-->>Gateway: Allow
+        Gateway->>Auth: Authenticate Request
+        Auth-->>Gateway: Auth Result
+        
+        alt Not Authenticated
+            Gateway-->>Client: 401 Unauthorized
+        else Authenticated
+            Gateway->>Cache: Check Cache
+            Cache-->>Gateway: Cache Miss
+            
+            Gateway->>Router: Route Request
+            Router->>Service: Forward Request
+            Service->>Service: Process Request
+            Service-->>Router: Response
+            Router-->>Gateway: Response
+            
+            Gateway->>Cache: Store in Cache
+            Gateway-->>Client: HTTP Response
+        end
+    end
+```
+
+---
+
 ## API Testing
+
+### API Testing Flow
+
+```mermaid
+flowchart TD
+    Start([API Testing]) --> UnitTests[Unit Tests<br/>Test Individual Functions]
+    UnitTests --> IntegrationTests[Integration Tests<br/>Test API Endpoints]
+    IntegrationTests --> ContractTests[Contract Tests<br/>Test API Contracts]
+    ContractTests --> E2ETests[E2E Tests<br/>Test Complete Flows]
+    
+    UnitTests --> MockData[Use Mocks/Stubs]
+    IntegrationTests --> TestDB[Use Test Database]
+    ContractTests --> ContractValidation[Validate Contracts]
+    E2ETests --> RealServices[Use Real Services]
+    
+    MockData --> TestResults[Test Results]
+    TestDB --> TestResults
+    ContractValidation --> TestResults
+    RealServices --> TestResults
+    
+    TestResults --> Coverage[Coverage Report]
+    Coverage --> Performance[Performance Tests]
+    Performance --> Security[Security Tests]
+    
+    Security --> AllPass{All Tests<br/>Pass?}
+    AllPass -->|No| FixIssues[Fix Issues]
+    AllPass -->|Yes| Deploy[Approve for Deployment]
+    
+    FixIssues --> UnitTests
+    
+    style Start fill:#e1f5ff
+    style Deploy fill:#fff4e6
+```
+
+### API Testing Architecture
+
+```mermaid
+graph TB
+    subgraph TestTypes[Test Types]
+        UnitTest[Unit Tests]
+        IntegrationTest[Integration Tests]
+        ContractTest[Contract Tests]
+        E2ETest[E2E Tests]
+        PerformanceTest[Performance Tests]
+        SecurityTest[Security Tests]
+    end
+    
+    subgraph TestTools[Test Tools]
+        Jest[Jest/Mocha]
+        Supertest[Supertest]
+        Postman[Postman]
+        Newman[Newman]
+        k6[k6/Load Testing]
+    end
+    
+    subgraph TestEnvironments[Test Environments]
+        Local[Local Environment]
+        CI[CI Environment]
+        Staging[Staging Environment]
+    end
+    
+    subgraph Reporting[Test Reporting]
+        TestResults[Test Results]
+        CoverageReport[Coverage Report]
+        PerformanceReport[Performance Report]
+    end
+    
+    UnitTest --> Jest
+    IntegrationTest --> Supertest
+    ContractTest --> Postman
+    E2ETest --> Newman
+    PerformanceTest --> k6
+    SecurityTest --> Postman
+    
+    Jest --> Local
+    Supertest --> CI
+    Postman --> Staging
+    
+    Local --> TestResults
+    CI --> CoverageReport
+    Staging --> PerformanceReport
+    
+    style TestTypes fill:#e1f5ff
+    style TestTools fill:#fff4e6
+    style TestEnvironments fill:#e1f5ff
+    style Reporting fill:#fff4e6
+```
 
 ```typescript
 // Jest + Supertest

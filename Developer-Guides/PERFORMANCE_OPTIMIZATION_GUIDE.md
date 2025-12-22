@@ -33,6 +33,46 @@ This guide covers performance optimization techniques for frontend, backend, dat
 
 ## Frontend Performance
 
+### Performance Optimization Process
+
+```mermaid
+flowchart TD
+    Start([Performance Issue]) --> Measure[Measure Current Performance]
+    Measure --> Baseline[Establish Baseline Metrics]
+    Baseline --> Profile[Profile Application]
+    
+    Profile --> Identify{Identify Bottleneck?}
+    Identify -->|Frontend| FrontendOpt[Frontend Optimization]
+    Identify -->|Backend| BackendOpt[Backend Optimization]
+    Identify -->|Database| DatabaseOpt[Database Optimization]
+    Identify -->|Network| NetworkOpt[Network Optimization]
+    
+    FrontendOpt --> FrontendImpl[Implement Frontend Fixes]
+    BackendOpt --> BackendImpl[Implement Backend Fixes]
+    DatabaseOpt --> DatabaseImpl[Implement Database Fixes]
+    NetworkOpt --> NetworkImpl[Implement Network Fixes]
+    
+    FrontendImpl --> Test[Test Changes]
+    BackendImpl --> Test
+    DatabaseImpl --> Test
+    NetworkImpl --> Test
+    
+    Test --> Remeasure[Re-measure Performance]
+    Remeasure --> Compare{Performance<br/>Improved?}
+    
+    Compare -->|Yes| Deploy[Deploy Changes]
+    Compare -->|No| Analyze[Analyze Why]
+    Analyze --> Identify
+    
+    Deploy --> Monitor[Monitor in Production]
+    Monitor --> Iterate{More<br/>Optimization<br/>Needed?}
+    Iterate -->|Yes| Measure
+    Iterate -->|No| End([Optimization Complete])
+    
+    style Start fill:#e1f5ff
+    style End fill:#fff4e6
+```
+
 ### Performance Optimization Flow
 
 ```mermaid
@@ -77,6 +117,54 @@ graph TB
     Measure --> Improve{Improved?}
     Improve -->|Yes| Deploy[Deploy]
     Improve -->|No| Analyze
+```
+
+### Frontend Optimization Flow
+
+```mermaid
+flowchart TD
+    Start([Frontend Performance Issue]) --> Analyze[Analyze Bundle Size]
+    Analyze --> CheckBundle{Bundle Size<br/>Large?}
+    
+    CheckBundle -->|Yes| CodeSplit[Code Splitting]
+    CheckBundle -->|No| CheckImages{Images<br/>Optimized?}
+    
+    CodeSplit --> LazyLoad[Lazy Loading]
+    LazyLoad --> TreeShake[Tree Shaking]
+    TreeShake --> Minify[Minification]
+    
+    CheckImages -->|No| ImageOpt[Image Optimization]
+    CheckImages -->|Yes| CheckRender{Rendering<br/>Optimized?}
+    
+    ImageOpt --> CompressImages[Compress Images]
+    CompressImages --> WebPFormat[Use WebP/AVIF]
+    WebPFormat --> LazyImages[Lazy Load Images]
+    
+    CheckRender -->|No| RenderOpt[Render Optimization]
+    CheckRender -->|Yes| CheckNetwork{Network<br/>Optimized?}
+    
+    RenderOpt --> Memoization[React Memoization]
+    Memoization --> VirtualScroll[Virtual Scrolling]
+    VirtualScroll --> Debounce[Debounce/Throttle]
+    
+    CheckNetwork -->|No| NetworkOpt[Network Optimization]
+    CheckNetwork -->|Yes| Measure[Measure Results]
+    
+    NetworkOpt --> CDN[Use CDN]
+    CDN --> Compression[Gzip/Brotli]
+    Compression --> HTTP2[HTTP/2]
+    
+    Minify --> Measure
+    LazyImages --> Measure
+    Debounce --> Measure
+    HTTP2 --> Measure
+    
+    Measure --> Improved{Performance<br/>Improved?}
+    Improved -->|Yes| Deploy[Deploy]
+    Improved -->|No| Analyze
+    
+    style Start fill:#e1f5ff
+    style Deploy fill:#fff4e6
 ```
 
 ### Code Splitting
@@ -131,6 +219,89 @@ module.exports = {
 
 ## Backend Performance
 
+### Backend Optimization Flow
+
+```mermaid
+flowchart TD
+    Start([Backend Performance Issue]) --> Profile[Profile Backend]
+    Profile --> Identify{Identify Issue?}
+    
+    Identify -->|Slow Queries| QueryOpt[Query Optimization]
+    Identify -->|High Memory| MemoryOpt[Memory Optimization]
+    Identify -->|High CPU| CPUOpt[CPU Optimization]
+    Identify -->|Slow API| APIOpt[API Optimization]
+    
+    QueryOpt --> AddIndexes[Add Indexes]
+    AddIndexes --> OptimizeQueries[Optimize Queries]
+    OptimizeQueries --> QueryCache[Query Caching]
+    
+    MemoryOpt --> MemoryPool[Connection Pooling]
+    MemoryPool --> GarbageCollection[GC Tuning]
+    GarbageCollection --> MemoryLimit[Set Memory Limits]
+    
+    CPUOpt --> AsyncProcessing[Async Processing]
+    AsyncProcessing --> WorkerThreads[Worker Threads]
+    WorkerThreads --> LoadBalance[Load Balancing]
+    
+    APIOpt --> ResponseCache[Response Caching]
+    ResponseCache --> Compression[Response Compression]
+    Compression --> Pagination[Pagination]
+    
+    QueryCache --> Measure[Measure Results]
+    MemoryLimit --> Measure
+    LoadBalance --> Measure
+    Pagination --> Measure
+    
+    Measure --> Improved{Performance<br/>Improved?}
+    Improved -->|Yes| Deploy[Deploy]
+    Improved -->|No| Profile
+    
+    style Start fill:#e1f5ff
+    style Deploy fill:#fff4e6
+```
+
+### Caching Strategy
+
+```mermaid
+graph TB
+    subgraph Request[Incoming Request]
+        APIRequest[API Request]
+    end
+    
+    subgraph CacheLayers[Cache Layers]
+        BrowserCache[Browser Cache<br/>Cache-Control Headers]
+        CDNCache[CDN Cache<br/>Edge Caching]
+        ApplicationCache[Application Cache<br/>In-Memory]
+        DistributedCache[Distributed Cache<br/>Redis/Memcached]
+        DatabaseCache[Database Cache<br/>Query Cache]
+    end
+    
+    subgraph DataSources[Data Sources]
+        Database[(Database)]
+        ExternalAPI[External APIs]
+    end
+    
+    APIRequest --> BrowserCache
+    BrowserCache -->|Cache Miss| CDNCache
+    CDNCache -->|Cache Miss| ApplicationCache
+    ApplicationCache -->|Cache Miss| DistributedCache
+    DistributedCache -->|Cache Miss| DatabaseCache
+    DatabaseCache -->|Cache Miss| Database
+    
+    DistributedCache -->|Cache Miss| ExternalAPI
+    Database --> DatabaseCache
+    ExternalAPI --> DistributedCache
+    
+    DatabaseCache --> DistributedCache
+    DistributedCache --> ApplicationCache
+    ApplicationCache --> CDNCache
+    CDNCache --> BrowserCache
+    BrowserCache --> APIRequest
+    
+    style CacheLayers fill:#e1f5ff
+    style DataSources fill:#fff4e6
+```
+
 ### Caching
 
 ```typescript
@@ -172,6 +343,55 @@ const pool = new Pool({
 ---
 
 ## Database Performance
+
+### Database Optimization Flow
+
+```mermaid
+flowchart TD
+    Start([Database Performance Issue]) --> Analyze[Analyze Queries]
+    Analyze --> SlowQueries[Identify Slow Queries]
+    SlowQueries --> Explain[EXPLAIN Query Plan]
+    
+    Explain --> CheckIndex{Has<br/>Indexes?}
+    CheckIndex -->|No| CreateIndex[Create Indexes]
+    CheckIndex -->|Yes| CheckQuery{Query<br/>Optimized?}
+    
+    CreateIndex --> AnalyzeIndex[Analyze Index Usage]
+    AnalyzeIndex --> CheckQuery
+    
+    CheckQuery -->|No| OptimizeQuery[Optimize Query]
+    CheckQuery -->|Yes| CheckJoin{Joins<br/>Optimized?}
+    
+    OptimizeQuery --> AvoidSelectStar[Avoid SELECT *]
+    AvoidSelectStar --> UseWhere[Use WHERE Efficiently]
+    UseWhere --> LimitResults[LIMIT Results]
+    
+    CheckJoin -->|No| OptimizeJoin[Optimize Joins]
+    CheckJoin -->|Yes| CheckConnection{Connection<br/>Pooling?}
+    
+    OptimizeJoin --> ProperIndexes[Proper Indexes on JOIN Keys]
+    ProperIndexes --> JoinOrder[Optimize Join Order]
+    
+    CheckConnection -->|No| SetupPool[Setup Connection Pool]
+    CheckConnection -->|Yes| CheckPartition{Partitioning<br/>Needed?}
+    
+    SetupPool --> ConfigurePool[Configure Pool Size]
+    
+    CheckPartition -->|Yes| PartitionTable[Partition Large Tables]
+    CheckPartition -->|No| Measure[Measure Results]
+    
+    LimitResults --> Measure
+    JoinOrder --> Measure
+    ConfigurePool --> Measure
+    PartitionTable --> Measure
+    
+    Measure --> Improved{Performance<br/>Improved?}
+    Improved -->|Yes| Deploy[Deploy]
+    Improved -->|No| Analyze
+    
+    style Start fill:#e1f5ff
+    style Deploy fill:#fff4e6
+```
 
 ### Indexing
 
@@ -541,6 +761,145 @@ app.get('/api/products', async (req, res) => {
 - API response time: 2s → 150ms (92% improvement)
 - Throughput: 100 req/s → 1000 req/s (10x improvement)
 - Server costs: Reduced by 60%
+
+---
+
+## Profiling and Monitoring
+
+### Profiling Workflow
+
+```mermaid
+flowchart TD
+    Start([Performance Issue]) --> SelectTool[Select Profiling Tool]
+    
+    SelectTool --> FrontendTool{Frontend<br/>Issue?}
+    SelectTool --> BackendTool{Backend<br/>Issue?}
+    SelectTool --> DatabaseTool{Database<br/>Issue?}
+    
+    FrontendTool -->|Yes| ChromeDevTools[Chrome DevTools]
+    FrontendTool -->|Yes| ReactProfiler[React Profiler]
+    FrontendTool -->|Yes| Lighthouse[Lighthouse]
+    
+    BackendTool -->|Yes| NodeProfiler[Node.js Profiler]
+    BackendTool -->|Yes| APM[APM Tools]
+    BackendTool -->|Yes| FlameGraph[Flame Graphs]
+    
+    DatabaseTool -->|Yes| QueryProfiler[Query Profiler]
+    DatabaseTool -->|Yes| SlowQueryLog[Slow Query Log]
+    DatabaseTool -->|Yes| ExplainPlan[EXPLAIN Plans]
+    
+    ChromeDevTools --> CollectData[Collect Performance Data]
+    ReactProfiler --> CollectData
+    Lighthouse --> CollectData
+    NodeProfiler --> CollectData
+    APM --> CollectData
+    QueryProfiler --> CollectData
+    
+    CollectData --> Analyze[Analyze Data]
+    Analyze --> Identify[Identify Bottlenecks]
+    Identify --> Optimize[Apply Optimizations]
+    Optimize --> Remeasure[Re-measure]
+    Remeasure --> Verify{Performance<br/>Improved?}
+    
+    Verify -->|Yes| Document[Document Changes]
+    Verify -->|No| Analyze
+    
+    Document --> End([Optimization Complete])
+    
+    style Start fill:#e1f5ff
+    style End fill:#fff4e6
+```
+
+### Performance Monitoring Architecture
+
+```mermaid
+graph TB
+    subgraph Application[Application Layer]
+        FrontendApp[Frontend Application]
+        BackendApp[Backend Application]
+        APIService[API Services]
+    end
+    
+    subgraph Instrumentation[Instrumentation]
+        APMAgent[APM Agent]
+        MetricsCollector[Metrics Collector]
+        ErrorTracker[Error Tracker]
+        LogCollector[Log Collector]
+    end
+    
+    subgraph Monitoring[Monitoring Platform]
+        MetricsDB[(Metrics Database)]
+        LogAggregator[Log Aggregator]
+        TracingSystem[Tracing System]
+        AlertManager[Alert Manager]
+    end
+    
+    subgraph Visualization[Visualization]
+        Dashboards[Dashboards]
+        Reports[Reports]
+        Alerts[Alerts]
+    end
+    
+    FrontendApp --> APMAgent
+    BackendApp --> APMAgent
+    APIService --> APMAgent
+    
+    APMAgent --> MetricsCollector
+    APMAgent --> ErrorTracker
+    APMAgent --> LogCollector
+    
+    MetricsCollector --> MetricsDB
+    ErrorTracker --> MetricsDB
+    LogCollector --> LogAggregator
+    APMAgent --> TracingSystem
+    
+    MetricsDB --> Dashboards
+    LogAggregator --> Dashboards
+    TracingSystem --> Dashboards
+    
+    MetricsDB --> AlertManager
+    AlertManager --> Alerts
+    
+    Dashboards --> Reports
+    
+    style Application fill:#e1f5ff
+    style Instrumentation fill:#fff4e6
+    style Monitoring fill:#e1f5ff
+    style Visualization fill:#fff4e6
+```
+
+### Performance Metrics Collection Flow
+
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant Agent as APM Agent
+    participant Collector as Metrics Collector
+    participant Storage as Metrics Storage
+    participant Dashboard as Dashboard
+    participant Alert as Alert System
+    
+    App->>Agent: Instrument Code
+    Agent->>Agent: Collect Metrics
+    Agent->>Collector: Send Metrics
+    
+    Collector->>Storage: Store Metrics
+    Storage->>Dashboard: Query Metrics
+    Dashboard->>Dashboard: Visualize Data
+    
+    Storage->>Alert: Check Thresholds
+    alt Threshold Exceeded
+        Alert->>Alert: Trigger Alert
+        Alert->>Team: Notify Team
+    end
+    
+    Team->>App: Investigate Issue
+    Team->>App: Apply Fix
+    App->>Agent: Updated Metrics
+    Agent->>Collector: Send New Metrics
+    Collector->>Storage: Update Metrics
+    Storage->>Dashboard: Update Dashboard
+```
 
 ---
 

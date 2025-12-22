@@ -22,6 +22,33 @@
 
 This guide covers database design principles, optimization techniques, and best practices for both SQL and NoSQL databases. Master these concepts to build scalable, performant data storage solutions.
 
+### Database Design Process
+
+```mermaid
+flowchart TD
+    Start([Start Design]) --> Requirements[Gather Requirements]
+    Requirements --> Analyze[Analyze Data Requirements]
+    Analyze --> Conceptual[Create Conceptual Model<br/>ER Diagram]
+    Conceptual --> Logical[Create Logical Model<br/>Normalize to 3NF]
+    Logical --> Physical[Create Physical Model<br/>Add Indexes, Constraints]
+    Physical --> Optimize[Optimize for Performance<br/>Denormalize if needed]
+    Optimize --> Test[Test & Validate]
+    Test --> Review{Review Results}
+    Review -->|Needs Changes| Analyze
+    Review -->|Approved| Deploy[Deploy Database]
+    Deploy --> Monitor[Monitor & Tune]
+    Monitor --> End([Complete])
+    
+    style Start fill:#e1f5ff
+    style Requirements fill:#fff4e6
+    style Conceptual fill:#e1f5ff
+    style Logical fill:#fff4e6
+    style Physical fill:#e1f5ff
+    style Optimize fill:#fff4e6
+    style Deploy fill:#e1f5ff
+    style End fill:#fff4e6
+```
+
 ### Who This Guide Is For
 - Database administrators
 - Backend developers
@@ -88,6 +115,34 @@ graph TB
 ---
 
 ## Normalization
+
+### Normalization Process Flow
+
+```mermaid
+flowchart TD
+    Start([Unnormalized Data]) --> Check1{Has Repeating<br/>Groups or<br/>Non-Atomic Values?}
+    Check1 -->|Yes| Apply1NF[Apply 1NF<br/>Separate into Tables<br/>Atomic Values Only]
+    Check1 -->|No| Check2{Has Partial<br/>Dependencies?}
+    Apply1NF --> Check2
+    Check2 -->|Yes| Apply2NF[Apply 2NF<br/>Remove Partial Dependencies<br/>Create Separate Tables]
+    Check2 -->|No| Check3{Has Transitive<br/>Dependencies?}
+    Apply2NF --> Check3
+    Check3 -->|Yes| Apply3NF[Apply 3NF<br/>Remove Transitive Dependencies<br/>Extract Dependent Attributes]
+    Check3 -->|No| CheckBCNF{Every Determinant<br/>is a Key?}
+    Apply3NF --> CheckBCNF
+    CheckBCNF -->|No| ApplyBCNF[Apply BCNF<br/>Further Decompose]
+    CheckBCNF -->|Yes| Check4NF{Has Multi-valued<br/>Dependencies?}
+    ApplyBCNF --> Check4NF
+    Check4NF -->|Yes| Apply4NF[Apply 4NF<br/>Remove Multi-valued Dependencies]
+    Check4NF -->|No| Check5NF{Has Join<br/>Dependencies?}
+    Apply4NF --> Check5NF
+    Check5NF -->|Yes| Apply5NF[Apply 5NF<br/>Project-Join Normal Form]
+    Check5NF -->|No| Normalized([Fully Normalized])
+    Apply5NF --> Normalized
+    
+    style Start fill:#e1f5ff
+    style Normalized fill:#fff4e6
+```
 
 ### Normalization Levels
 
@@ -227,6 +282,74 @@ CREATE TABLE OrderSummary (
 
 ## Indexing Strategies
 
+### Index Strategy Decision Flow
+
+```mermaid
+flowchart TD
+    Start([Query Performance Issue?]) --> Analyze[Analyze Query Pattern]
+    Analyze --> CheckType{Query Type?}
+    
+    CheckType -->|Equality Lookup| HashIndex[Consider Hash Index<br/>O(1) Lookup]
+    CheckType -->|Range Query| BTreeIndex[Use B-Tree Index<br/>O(log n) Lookup]
+    CheckType -->|Full Text Search| FullTextIndex[Use Full-Text Index<br/>Inverted Index]
+    CheckType -->|Spatial Data| SpatialIndex[Use Spatial Index<br/>R-Tree/GiST]
+    
+    HashIndex --> CheckColumns{Multiple Columns?}
+    BTreeIndex --> CheckColumns
+    FullTextIndex --> CheckColumns
+    SpatialIndex --> CheckColumns
+    
+    CheckColumns -->|Yes| CompositeIndex[Create Composite Index<br/>Order Matters]
+    CheckColumns -->|No| SingleIndex[Single Column Index]
+    
+    CompositeIndex --> CheckCovering{Covering Index<br/>Possible?}
+    SingleIndex --> CheckCovering
+    
+    CheckCovering -->|Yes| CoveringIndex[Create Covering Index<br/>Include All Query Columns]
+    CheckCovering -->|No| StandardIndex[Standard Index]
+    
+    CoveringIndex --> Monitor[Monitor Index Usage]
+    StandardIndex --> Monitor
+    Monitor --> End([Optimized])
+    
+    style Start fill:#e1f5ff
+    style End fill:#fff4e6
+```
+
+### Index Architecture
+
+```mermaid
+graph TB
+    subgraph Table[Table: Users]
+        Row1[Row 1: id=1, email='user1@example.com']
+        Row2[Row 2: id=2, email='user2@example.com']
+        Row3[Row 3: id=3, email='user3@example.com']
+        RowN[Row N: id=N, email='userN@example.com']
+    end
+    
+    subgraph BTreeIndex[B-Tree Index on email]
+        Root[Root Node<br/>email < 'm']
+        Left[Left Child<br/>email < 'g']
+        Right[Right Child<br/>email >= 'm']
+        Leaf1[Leaf: user1@example.com → Row 1]
+        Leaf2[Leaf: user2@example.com → Row 2]
+        Leaf3[Leaf: user3@example.com → Row 3]
+    end
+    
+    Root --> Left
+    Root --> Right
+    Left --> Leaf1
+    Right --> Leaf2
+    Right --> Leaf3
+    
+    Leaf1 -.->|Points to| Row1
+    Leaf2 -.->|Points to| Row2
+    Leaf3 -.->|Points to| Row3
+    
+    style Table fill:#e1f5ff
+    style BTreeIndex fill:#fff4e6
+```
+
 ### B-Tree Indexes
 - Default index type in most databases
 - Good for equality and range queries
@@ -269,6 +392,73 @@ SELECT order_id, customer_id, total, status FROM Orders WHERE customer_id = 123;
 ---
 
 ## Query Optimization
+
+### Query Execution Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Parser as SQL Parser
+    participant Optimizer as Query Optimizer
+    participant Planner as Execution Planner
+    participant Executor as Query Executor
+    participant Cache as Query Cache
+    participant Index as Index Manager
+    participant Storage as Storage Engine
+    
+    Client->>Parser: SQL Query
+    Parser->>Parser: Parse & Validate
+    Parser->>Cache: Check Cache
+    Cache-->>Parser: Cache Miss
+    
+    Parser->>Optimizer: Query Tree
+    Optimizer->>Optimizer: Analyze Statistics
+    Optimizer->>Optimizer: Generate Plans
+    Optimizer->>Optimizer: Cost Estimation
+    Optimizer->>Planner: Optimal Plan
+    
+    Planner->>Executor: Execution Plan
+    Executor->>Index: Use Index?
+    Index-->>Executor: Index Scan
+    Executor->>Storage: Read Data
+    Storage-->>Executor: Data Rows
+    Executor->>Executor: Process & Filter
+    Executor-->>Client: Result Set
+    
+    Executor->>Cache: Cache Result
+```
+
+### Query Optimization Process
+
+```mermaid
+flowchart TD
+    Start([SQL Query]) --> Parse[Parse Query]
+    Parse --> Validate{Valid Syntax?}
+    Validate -->|No| Error[Return Error]
+    Validate -->|Yes| CheckCache{In Cache?}
+    
+    CheckCache -->|Yes| ReturnCache[Return Cached Result]
+    CheckCache -->|No| Analyze[Analyze Query]
+    
+    Analyze --> Optimize[Query Optimizer]
+    Optimize --> GeneratePlans[Generate Execution Plans]
+    GeneratePlans --> EstimateCost[Estimate Cost for Each Plan]
+    EstimateCost --> SelectPlan[Select Best Plan]
+    
+    SelectPlan --> Execute[Execute Plan]
+    Execute --> UseIndex{Use Index?}
+    UseIndex -->|Yes| IndexScan[Index Scan]
+    UseIndex -->|No| TableScan[Full Table Scan]
+    
+    IndexScan --> Process[Process Results]
+    TableScan --> Process
+    Process --> Cache[Cache Result]
+    Cache --> Return[Return Results]
+    
+    style Start fill:#e1f5ff
+    style Return fill:#fff4e6
+    style ReturnCache fill:#fff4e6
+```
 
 ### EXPLAIN Plans
 
@@ -335,6 +525,81 @@ WHERE c.id = 1;
 
 ## Transaction Management
 
+### Transaction Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant App as Application
+    participant DB as Database
+    participant Lock as Lock Manager
+    participant Log as Transaction Log
+    participant Storage as Storage
+    
+    Client->>App: Begin Transaction
+    App->>DB: BEGIN TRANSACTION
+    DB->>Lock: Acquire Locks
+    Lock-->>DB: Locks Acquired
+    DB->>Log: Log Transaction Start
+    DB-->>App: Transaction Started
+    
+    App->>DB: UPDATE Account SET balance = balance - 100
+    DB->>Lock: Check Lock
+    DB->>Log: Log Change
+    DB->>Storage: Write to Buffer
+    Storage-->>DB: Buffered
+    
+    App->>DB: UPDATE Account SET balance = balance + 100
+    DB->>Lock: Check Lock
+    DB->>Log: Log Change
+    DB->>Storage: Write to Buffer
+    Storage-->>DB: Buffered
+    
+    App->>DB: COMMIT
+    DB->>Log: Log Commit
+    DB->>Storage: Flush to Disk
+    Storage-->>DB: Persisted
+    DB->>Lock: Release Locks
+    Lock-->>DB: Locks Released
+    DB-->>App: Committed
+    
+    Note over Client,Storage: If ROLLBACK instead
+    App->>DB: ROLLBACK
+    DB->>Log: Log Rollback
+    DB->>Storage: Discard Changes
+    DB->>Lock: Release Locks
+    DB-->>App: Rolled Back
+```
+
+### Transaction States
+
+```mermaid
+stateDiagram-v2
+    [*] --> Active: BEGIN TRANSACTION
+    Active --> PartiallyCommitted: All Operations Complete
+    Active --> Failed: Error Occurs
+    PartiallyCommitted --> Committed: COMMIT Successful
+    PartiallyCommitted --> Failed: Commit Fails
+    Failed --> Aborted: ROLLBACK
+    Committed --> [*]: Transaction Complete
+    Aborted --> [*]: Transaction Complete
+    
+    note right of Active
+        Reading/Writing
+        Data
+    end note
+    
+    note right of PartiallyCommitted
+        Changes Written
+        to Log
+    end note
+    
+    note right of Committed
+        Changes
+        Persisted
+    end note
+```
+
 ### ACID Properties
 
 #### Atomicity
@@ -394,7 +659,9 @@ COMMIT;
 
 ## Database Design Patterns
 
-### Entity-Relationship Diagram Example
+### Entity-Relationship Diagram Examples
+
+#### E-Commerce ER Diagram
 
 ```mermaid
 erDiagram
@@ -425,6 +692,93 @@ erDiagram
         string name
         decimal price
         int stock
+    }
+```
+
+#### Social Media ER Diagram
+
+```mermaid
+erDiagram
+    USERS ||--o{ POSTS : creates
+    USERS ||--o{ COMMENTS : writes
+    USERS ||--o{ LIKES : gives
+    USERS ||--o{ FOLLOWS : follows
+    POSTS ||--o{ COMMENTS : has
+    POSTS ||--o{ LIKES : receives
+    
+    USERS {
+        int id PK
+        string username
+        string email
+        datetime created_at
+    }
+    
+    POSTS {
+        int id PK
+        int user_id FK
+        string content
+        datetime created_at
+    }
+    
+    COMMENTS {
+        int id PK
+        int user_id FK
+        int post_id FK
+        string content
+        datetime created_at
+    }
+    
+    LIKES {
+        int id PK
+        int user_id FK
+        int post_id FK
+        datetime created_at
+    }
+    
+    FOLLOWS {
+        int follower_id FK
+        int following_id FK
+        datetime created_at
+    }
+```
+
+#### Blog System ER Diagram
+
+```mermaid
+erDiagram
+    AUTHORS ||--o{ ARTICLES : writes
+    ARTICLES ||--o{ TAGS : has
+    ARTICLES ||--o{ COMMENTS : receives
+    READERS ||--o{ COMMENTS : writes
+    CATEGORIES ||--o{ ARTICLES : contains
+    
+    AUTHORS {
+        int id PK
+        string name
+        string email
+        string bio
+    }
+    
+    ARTICLES {
+        int id PK
+        int author_id FK
+        int category_id FK
+        string title
+        string content
+        datetime published_at
+    }
+    
+    TAGS {
+        int id PK
+        string name
+    }
+    
+    COMMENTS {
+        int id PK
+        int article_id FK
+        int reader_id FK
+        string content
+        datetime created_at
     }
 ```
 
@@ -508,6 +862,127 @@ class UserQueryService {
 
 ## Scaling Strategies
 
+### Database Scaling Decision Flow
+
+```mermaid
+flowchart TD
+    Start([Performance Issue?]) --> Analyze[Analyze Bottleneck]
+    Analyze --> CheckType{What Type?}
+    
+    CheckType -->|Read Heavy| ReadScaling[Read Scaling]
+    CheckType -->|Write Heavy| WriteScaling[Write Scaling]
+    CheckType -->|Storage Limit| StorageScaling[Storage Scaling]
+    
+    ReadScaling --> ReadReplicas[Add Read Replicas]
+    ReadReplicas --> Cache[Add Caching Layer]
+    Cache --> ReadEnd([Scaled for Reads])
+    
+    WriteScaling --> Sharding[Implement Sharding]
+    Sharding --> Partitioning[Add Partitioning]
+    Partitioning --> WriteEnd([Scaled for Writes])
+    
+    StorageScaling --> Archive[Archive Old Data]
+    Archive --> Compress[Compress Data]
+    Compress --> StorageEnd([Storage Optimized])
+    
+    style Start fill:#e1f5ff
+    style ReadEnd fill:#fff4e6
+    style WriteEnd fill:#fff4e6
+    style StorageEnd fill:#fff4e6
+```
+
+### Scaling Strategies Comparison
+
+```mermaid
+graph TB
+    subgraph Vertical[Vertical Scaling<br/>Scale Up]
+        MoreCPU[More CPU]
+        MoreRAM[More RAM]
+        MoreStorage[More Storage]
+        FasterDisk[Faster Disk]
+    end
+    
+    subgraph Horizontal[Horizontal Scaling<br/>Scale Out]
+        Replicas[Read Replicas]
+        Sharding[Sharding]
+        Partitioning[Partitioning]
+        Clustering[Clustering]
+    end
+    
+    subgraph Hybrid[Hybrid Approach]
+        Both[Combine Both]
+    end
+    
+    Vertical --> Both
+    Horizontal --> Both
+    
+    style Vertical fill:#e1f5ff
+    style Horizontal fill:#fff4e6
+    style Hybrid fill:#ffcccc
+```
+
+### Database Replication Architecture
+
+```mermaid
+graph TB
+    subgraph Primary[Primary Database]
+        Master[(Master DB<br/>Write Operations)]
+    end
+    
+    subgraph Replicas[Read Replicas]
+        Replica1[(Replica 1<br/>Read Operations)]
+        Replica2[(Replica 2<br/>Read Operations)]
+        Replica3[(Replica 3<br/>Read Operations)]
+    end
+    
+    subgraph Application[Application Layer]
+        App1[App Server 1]
+        App2[App Server 2]
+        App3[App Server N]
+    end
+    
+    Master -->|Binary Log Replication| Replica1
+    Master -->|Binary Log Replication| Replica2
+    Master -->|Binary Log Replication| Replica3
+    
+    App1 -->|Writes| Master
+    App2 -->|Writes| Master
+    App3 -->|Writes| Master
+    
+    App1 -->|Reads| Replica1
+    App2 -->|Reads| Replica2
+    App3 -->|Reads| Replica3
+    
+    style Primary fill:#e1f5ff
+    style Replicas fill:#fff4e6
+    style Application fill:#e1f5ff
+```
+
+### Replication Flow
+
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant Master as Master DB
+    participant BinLog as Binary Log
+    participant Replica1 as Replica 1
+    participant Replica2 as Replica 2
+    
+    App->>Master: INSERT/UPDATE/DELETE
+    Master->>Master: Execute Write
+    Master->>BinLog: Write to Binary Log
+    Master-->>App: Success
+    
+    BinLog->>Replica1: Replicate Changes
+    Replica1->>Replica1: Apply Changes
+    BinLog->>Replica2: Replicate Changes
+    Replica2->>Replica2: Apply Changes
+    
+    Note over App,Replica2: Read Operations
+    App->>Replica1: SELECT Query
+    Replica1-->>App: Return Data
+```
+
 ### Read Replicas
 
 ```sql
@@ -526,6 +1001,65 @@ await writeDb.query('INSERT INTO users ...');
 ```
 
 ### Sharding
+
+### Sharding Architecture
+
+```mermaid
+graph TB
+    subgraph Application[Application Layer]
+        App[Application]
+        Router[Shard Router]
+    end
+    
+    subgraph Shards[Database Shards]
+        Shard1[(Shard 1<br/>Users 0-999)]
+        Shard2[(Shard 2<br/>Users 1000-1999)]
+        Shard3[(Shard 3<br/>Users 2000-2999)]
+        ShardN[(Shard N<br/>Users N*1000-...)]
+    end
+    
+    App --> Router
+    Router -->|Hash(user_id) % N = 0| Shard1
+    Router -->|Hash(user_id) % N = 1| Shard2
+    Router -->|Hash(user_id) % N = 2| Shard3
+    Router -->|Hash(user_id) % N = N-1| ShardN
+    
+    style Application fill:#e1f5ff
+    style Shards fill:#fff4e6
+```
+
+### Sharding Strategies
+
+```mermaid
+graph LR
+    subgraph Strategies[Sharding Strategies]
+        Range[Range Sharding<br/>By ID Range]
+        Hash[Hash Sharding<br/>Hash Function]
+        Directory[Directory Sharding<br/>Lookup Table]
+        Geographic[Geographic Sharding<br/>By Location]
+    end
+    
+    subgraph RangeExample[Range Example]
+        R1[Shard 1: 0-1M]
+        R2[Shard 2: 1M-2M]
+        R3[Shard 3: 2M-3M]
+    end
+    
+    subgraph HashExample[Hash Example]
+        H1[Shard 1: hash % 3 = 0]
+        H2[Shard 2: hash % 3 = 1]
+        H3[Shard 3: hash % 3 = 2]
+    end
+    
+    Range --> RangeExample
+    Hash --> HashExample
+    
+    style Strategies fill:#e1f5ff
+    style RangeExample fill:#fff4e6
+    style HashExample fill:#e1f5ff
+```
+
+### Sharding Implementation
 
 ```typescript
 // Shard by user_id

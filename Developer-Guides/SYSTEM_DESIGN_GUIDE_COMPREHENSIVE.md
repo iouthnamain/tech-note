@@ -74,29 +74,105 @@ System design is the process of defining the architecture, components, modules, 
 
 ```mermaid
 graph TB
-    Client[Client Applications] --> LB[Load Balancer]
-    LB --> App1[App Server 1]
-    LB --> App2[App Server 2]
-    LB --> App3[App Server N]
+    subgraph Clients[Client Layer]
+        Web[Web Browser]
+        Mobile[Mobile App]
+        API_Client[API Clients]
+    end
     
-    App1 --> Cache[Cache Layer]
-    App2 --> Cache
-    App3 --> Cache
+    subgraph CDN[CDN Layer]
+        CDN_Edge[CDN Edge Servers]
+    end
     
-    Cache --> DB1[(Primary DB)]
-    Cache --> DB2[(Read Replica)]
+    subgraph LoadBalancing[Load Balancing Layer]
+        LB[Load Balancer]
+    end
     
-    App1 --> Queue[Message Queue]
+    subgraph Application[Application Layer]
+        App1[App Server 1]
+        App2[App Server 2]
+        App3[App Server N]
+    end
+    
+    subgraph Caching[Cache Layer]
+        Redis[Redis Cache]
+        Memcached[Memcached]
+    end
+    
+    subgraph Database[Database Layer]
+        PrimaryDB[(Primary Database)]
+        ReadReplica1[(Read Replica 1)]
+        ReadReplica2[(Read Replica 2)]
+    end
+    
+    subgraph MessageQueue[Message Queue Layer]
+        Queue[Message Queue<br/>RabbitMQ/Kafka]
+    end
+    
+    subgraph Workers[Worker Layer]
+        Worker1[Worker 1]
+        Worker2[Worker 2]
+        WorkerN[Worker N]
+    end
+    
+    subgraph Storage[Storage Layer]
+        ObjectStorage[Object Storage<br/>S3]
+        FileStorage[File Storage]
+    end
+    
+    subgraph Monitoring[Monitoring Layer]
+        Monitoring[Monitoring & Logging]
+    end
+    
+    Web --> CDN_Edge
+    Mobile --> CDN_Edge
+    API_Client --> CDN_Edge
+    
+    CDN_Edge --> LB
+    LB --> App1
+    LB --> App2
+    LB --> App3
+    
+    App1 --> Redis
+    App2 --> Redis
+    App3 --> Redis
+    App1 --> Memcached
+    App2 --> Memcached
+    App3 --> Memcached
+    
+    Redis --> PrimaryDB
+    Memcached --> PrimaryDB
+    App1 --> PrimaryDB
+    App2 --> PrimaryDB
+    App3 --> PrimaryDB
+    
+    PrimaryDB --> ReadReplica1
+    PrimaryDB --> ReadReplica2
+    App1 --> ReadReplica1
+    App2 --> ReadReplica2
+    
+    App1 --> Queue
     App2 --> Queue
     App3 --> Queue
     
-    Queue --> Worker1[Worker 1]
-    Queue --> Worker2[Worker 2]
+    Queue --> Worker1
+    Queue --> Worker2
+    Queue --> WorkerN
     
-    Worker1 --> Storage[Object Storage]
-    Worker2 --> Storage
+    Worker1 --> ObjectStorage
+    Worker2 --> ObjectStorage
+    WorkerN --> FileStorage
     
-    DB1 --> Backup[(Backup Storage)]
+    App1 --> Monitoring
+    App2 --> Monitoring
+    PrimaryDB --> Monitoring
+    Queue --> Monitoring
+    
+    style Clients fill:#e1f5ff
+    style LoadBalancing fill:#fff4e6
+    style Application fill:#e1f5ff
+    style Database fill:#fff4e6
+    style MessageQueue fill:#e1f5ff
 ```
 
 ---
@@ -120,10 +196,11 @@ graph TB
 ### Scaling Comparison
 
 ```mermaid
-graph LR
+graph TB
     subgraph Vertical["Vertical Scaling (Scale Up)"]
         V1[Server<br/>2 CPU, 4GB RAM] --> V2[Server<br/>4 CPU, 8GB RAM]
         V2 --> V3[Server<br/>8 CPU, 16GB RAM]
+        V3 --> V4[Server<br/>16 CPU, 32GB RAM]
     end
     
     subgraph Horizontal["Horizontal Scaling (Scale Out)"]
@@ -132,6 +209,66 @@ graph LR
         H3[Server 3<br/>2 CPU, 4GB RAM]
         H4[Server N<br/>2 CPU, 4GB RAM]
     end
+    
+    subgraph LoadBalancer[Load Balancer]
+        LB[Load Balancer]
+    end
+    
+    LB --> H1
+    LB --> H2
+    LB --> H3
+    LB --> H4
+    
+    style Vertical fill:#fff4e6
+    style Horizontal fill:#e1f5ff
+    style LoadBalancer fill:#fff4e6
+```
+
+### Scalability Patterns
+
+```mermaid
+flowchart TD
+    Start([System Needs Scaling]) --> Analyze[Analyze Bottleneck]
+    
+    Analyze --> Bottleneck{Bottleneck Type?}
+    
+    Bottleneck -->|Application| AppScaling[Application Scaling]
+    Bottleneck -->|Database| DBScaling[Database Scaling]
+    Bottleneck -->|Storage| StorageScaling[Storage Scaling]
+    Bottleneck -->|Network| NetworkScaling[Network Scaling]
+    
+    AppScaling --> Stateless{Stateless<br/>Design?}
+    Stateless -->|Yes| HorizontalApp[Horizontal Scaling]
+    Stateless -->|No| Refactor[Refactor to Stateless]
+    Refactor --> HorizontalApp
+    HorizontalApp --> LoadBalancer[Add Load Balancer]
+    
+    DBScaling --> ReadHeavy{Read<br/>Heavy?}
+    ReadHeavy -->|Yes| ReadReplicas[Add Read Replicas]
+    ReadHeavy -->|No| WriteHeavy{Write<br/>Heavy?}
+    WriteHeavy -->|Yes| Sharding[Database Sharding]
+    WriteHeavy -->|No| Optimize[Optimize Queries]
+    ReadReplicas --> Cache[Add Caching]
+    Sharding --> Cache
+    
+    StorageScaling --> ObjectStorage[Object Storage]
+    ObjectStorage --> CDN[CDN for Static Content]
+    
+    NetworkScaling --> CDN
+    
+    LoadBalancer --> Monitor[Monitor Performance]
+    Cache --> Monitor
+    CDN --> Monitor
+    
+    Monitor --> Sufficient{Scaling<br/>Sufficient?}
+    Sufficient -->|No| Analyze
+    Sufficient -->|Yes| End([Scaling Complete])
+    
+    style Start fill:#e1f5ff
+    style Analyze fill:#fff4e6
+    style HorizontalApp fill:#e1f5ff
+    style Sharding fill:#fff4e6
+    style End fill:#e1f5ff
 ```
 
 ### Scaling Strategies
@@ -664,6 +801,92 @@ class ServiceRegistry {
 - Materialized views
 - Read replicas
 
+### Caching Architecture
+
+```mermaid
+graph TB
+    subgraph Client[Client Layer]
+        Browser[Browser Cache]
+    end
+    
+    subgraph CDN[CDN Layer]
+        CDN_Edge[CDN Edge Servers]
+    end
+    
+    subgraph Application[Application Layer]
+        App1[App Server 1]
+        App2[App Server 2]
+        App3[App Server 3]
+    end
+    
+    subgraph CacheLayer[Cache Layer]
+        Redis[Redis Cache]
+        Memcached[Memcached]
+    end
+    
+    subgraph Database[Database Layer]
+        PrimaryDB[(Primary Database)]
+        ReadReplica[(Read Replica)]
+    end
+    
+    Browser -->|Static Assets| CDN_Edge
+    CDN_Edge -->|Cache Miss| App1
+    CDN_Edge -->|Cache Miss| App2
+    CDN_Edge -->|Cache Miss| App3
+    
+    App1 -->|Check Cache| Redis
+    App2 -->|Check Cache| Redis
+    App3 -->|Check Cache| Memcached
+    
+    Redis -->|Cache Miss| PrimaryDB
+    Memcached -->|Cache Miss| ReadReplica
+    App1 -->|Write| PrimaryDB
+    App2 -->|Write| PrimaryDB
+    
+    PrimaryDB -->|Replication| ReadReplica
+    
+    style Client fill:#e1f5ff
+    style CDN fill:#fff4e6
+    style CacheLayer fill:#e1f5ff
+    style Database fill:#fff4e6
+```
+
+### Caching Strategy Flow
+
+```mermaid
+flowchart TD
+    Start([Data Request]) --> CheckCache[Check Cache]
+    
+    CheckCache --> CacheHit{Cache<br/>Hit?}
+    
+    CacheHit -->|Yes| ReturnCached[Return Cached Data]
+    ReturnCached --> UpdateTTL[Update TTL if Needed]
+    UpdateTTL --> End([Return Data])
+    
+    CacheHit -->|No| LoadDB[Load from Database]
+    LoadDB --> StoreCache[Store in Cache]
+    StoreCache --> SetTTL[Set TTL]
+    SetTTL --> End
+    
+    Start2([Data Update]) --> UpdateDB[Update Database]
+    UpdateDB --> Strategy{Cache Strategy?}
+    
+    Strategy -->|Write-Through| UpdateCache[Update Cache]
+    Strategy -->|Write-Behind| QueueUpdate[Queue Cache Update]
+    Strategy -->|Cache-Aside| Invalidate[Invalidate Cache]
+    
+    UpdateCache --> End2([Update Complete])
+    QueueUpdate --> AsyncUpdate[Async Cache Update]
+    AsyncUpdate --> End2
+    Invalidate --> DeleteCache[Delete from Cache]
+    DeleteCache --> End2
+    
+    style Start fill:#e1f5ff
+    style CheckCache fill:#fff4e6
+    style LoadDB fill:#e1f5ff
+    style End fill:#fff4e6
+```
+
 ### Caching Patterns
 
 #### 1. **Cache-Aside (Lazy Loading)**
@@ -740,22 +963,87 @@ class CacheInvalidator {
 
 ```mermaid
 graph TB
-    Clients[Multiple Clients] --> LoadBalancer[Load Balancer]
+    subgraph Clients[Client Layer]
+        Client1[Client 1]
+        Client2[Client 2]
+        ClientN[Client N]
+    end
     
-    LoadBalancer --> Server1[Server 1]
-    LoadBalancer --> Server2[Server 2]
-    LoadBalancer --> Server3[Server 3]
-    LoadBalancer --> ServerN[Server N]
+    subgraph LoadBalancing[Load Balancing Layer]
+        LB[Load Balancer<br/>HAProxy/Nginx]
+    end
     
-    Server1 --> Database[(Database)]
-    Server2 --> Database
-    Server3 --> Database
-    ServerN --> Database
+    subgraph Application[Application Layer]
+        App1[App Server 1]
+        App2[App Server 2]
+        App3[App Server 3]
+        AppN[App Server N]
+    end
     
-    Server1 --> Cache[Shared Cache]
-    Server2 --> Cache
-    Server3 --> Cache
-    ServerN --> Cache
+    subgraph Backend[Backend Services]
+        Database[(Database)]
+        Cache[Shared Cache]
+        Queue[Message Queue]
+    end
+    
+    Client1 --> LB
+    Client2 --> LB
+    ClientN --> LB
+    
+    LB -->|Round Robin| App1
+    LB -->|Round Robin| App2
+    LB -->|Round Robin| App3
+    LB -->|Round Robin| AppN
+    
+    App1 --> Database
+    App2 --> Database
+    App3 --> Database
+    AppN --> Database
+    
+    App1 --> Cache
+    App2 --> Cache
+    App3 --> Cache
+    AppN --> Cache
+    
+    App1 --> Queue
+    App2 --> Queue
+    App3 --> Queue
+    
+    style Clients fill:#e1f5ff
+    style LoadBalancing fill:#fff4e6
+    style Application fill:#e1f5ff
+    style Backend fill:#fff4e6
+```
+
+### Load Balancing Algorithms Flow
+
+```mermaid
+flowchart TD
+    Start([Request Arrives]) --> LB[Load Balancer]
+    LB --> SelectAlgorithm{Select Algorithm}
+    
+    SelectAlgorithm -->|Round Robin| RoundRobin[Round Robin<br/>Sequential Distribution]
+    SelectAlgorithm -->|Weighted Round Robin| WeightedRR[Weighted Round Robin<br/>Based on Server Capacity]
+    SelectAlgorithm -->|Least Connections| LeastConn[Least Connections<br/>Fewest Active Connections]
+    SelectAlgorithm -->|IP Hash| IPHash[IP Hash<br/>Session Affinity]
+    SelectAlgorithm -->|Geographic| GeoRouting[Geographic Routing<br/>Based on Location]
+    
+    RoundRobin --> HealthCheck[Health Check]
+    WeightedRR --> HealthCheck
+    LeastConn --> HealthCheck
+    IPHash --> HealthCheck
+    GeoRouting --> HealthCheck
+    
+    HealthCheck --> Healthy{Server<br/>Healthy?}
+    Healthy -->|No| NextServer[Try Next Server]
+    NextServer --> HealthCheck
+    Healthy -->|Yes| Route[Route Request]
+    Route --> End([Request Routed])
+    
+    style Start fill:#e1f5ff
+    style LB fill:#fff4e6
+    style HealthCheck fill:#e1f5ff
+    style End fill:#fff4e6
 ```
 
 ### Load Balancing Algorithms
@@ -1272,6 +1560,104 @@ class MonitoringService {
 
 ### 1. Design a URL Shortener (like bit.ly)
 
+#### System Architecture
+
+```mermaid
+graph TB
+    subgraph Client[Client Layer]
+        User[User]
+    end
+    
+    subgraph LoadBalancing[Load Balancing]
+        LB[Load Balancer]
+    end
+    
+    subgraph Application[Application Layer]
+        API1[API Server 1]
+        API2[API Server 2]
+        API3[API Server N]
+    end
+    
+    subgraph Caching[Cache Layer]
+        Redis[Redis Cache<br/>Hot URLs]
+    end
+    
+    subgraph Database[Database Layer]
+        Shard1[(Database Shard 1)]
+        Shard2[(Database Shard 2)]
+        ShardN[(Database Shard N)]
+    end
+    
+    subgraph IDGenerator[ID Generation Service]
+        IDGen[ID Generator<br/>Counter Service]
+    end
+    
+    User -->|POST /api/v1/shorten| LB
+    User -->|GET /{shortUrl}| LB
+    
+    LB --> API1
+    LB --> API2
+    LB --> API3
+    
+    API1 -->|Check Cache| Redis
+    API2 -->|Check Cache| Redis
+    API3 -->|Check Cache| Redis
+    
+    Redis -->|Cache Miss| Shard1
+    Redis -->|Cache Miss| Shard2
+    Redis -->|Cache Miss| ShardN
+    
+    API1 -->|Generate ID| IDGen
+    API2 -->|Generate ID| IDGen
+    API3 -->|Generate ID| IDGen
+    
+    IDGen -->|Return ID| API1
+    IDGen -->|Return ID| API2
+    IDGen -->|Return ID| API3
+    
+    style Client fill:#e1f5ff
+    style LoadBalancing fill:#fff4e6
+    style Application fill:#e1f5ff
+    style Caching fill:#fff4e6
+    style Database fill:#e1f5ff
+```
+
+#### URL Shortener Data Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant LB as Load Balancer
+    participant API as API Server
+    participant Cache as Redis Cache
+    participant DB as Database
+    participant IDGen as ID Generator
+    
+    Note over User,IDGen: Shorten URL Flow
+    User->>LB: POST /api/v1/shorten<br/>{longUrl}
+    LB->>API: Route Request
+    API->>IDGen: Get Next ID
+    IDGen-->>API: Return ID
+    API->>API: Base62 Encode ID
+    API->>DB: Store Mapping<br/>(shortUrl, longUrl)
+    DB-->>API: Success
+    API->>Cache: Cache Hot URL
+    API-->>User: Return shortUrl
+    
+    Note over User,IDGen: Redirect Flow
+    User->>LB: GET /{shortUrl}
+    LB->>API: Route Request
+    API->>Cache: Check Cache
+    alt Cache Hit
+        Cache-->>API: Return longUrl
+    else Cache Miss
+        API->>DB: Query by shortUrl
+        DB-->>API: Return longUrl
+        API->>Cache: Cache URL
+    end
+    API-->>User: 302 Redirect to longUrl
+```
+
 #### Requirements
 - Shorten long URLs
 - Redirect to original URL
@@ -1307,6 +1693,109 @@ class MonitoringService {
 
 ### 2. Design a Chat System (like WhatsApp)
 
+#### Chat System Architecture
+
+```mermaid
+graph TB
+    subgraph Clients[Client Layer]
+        Mobile1[Mobile App 1]
+        Mobile2[Mobile App 2]
+        WebApp[Web App]
+    end
+    
+    subgraph LoadBalancing[Load Balancing]
+        LB[Load Balancer]
+    end
+    
+    subgraph ChatServers[Chat Servers]
+        Chat1[Chat Server 1<br/>WebSocket]
+        Chat2[Chat Server 2<br/>WebSocket]
+        ChatN[Chat Server N<br/>WebSocket]
+    end
+    
+    subgraph MessageQueue[Message Queue]
+        Queue[Message Queue<br/>Kafka/RabbitMQ]
+    end
+    
+    subgraph Services[Backend Services]
+        Presence[Presence Service]
+        Notification[Notification Service]
+        Media[Media Service]
+    end
+    
+    subgraph Database[Database Layer]
+        MessageDB[(Message Database<br/>Sharded by User)]
+        UserDB[(User Database)]
+        ConversationDB[(Conversation Database)]
+    end
+    
+    subgraph Cache[Cache Layer]
+        Redis[Redis<br/>Recent Messages]
+    end
+    
+    Mobile1 -->|WebSocket| LB
+    Mobile2 -->|WebSocket| LB
+    WebApp -->|WebSocket| LB
+    
+    LB --> Chat1
+    LB --> Chat2
+    LB --> ChatN
+    
+    Chat1 --> Queue
+    Chat2 --> Queue
+    ChatN --> Queue
+    
+    Queue --> Presence
+    Queue --> Notification
+    Queue --> Media
+    
+    Chat1 --> MessageDB
+    Chat2 --> MessageDB
+    ChatN --> UserDB
+    
+    Chat1 --> Redis
+    Chat2 --> Redis
+    ChatN --> ConversationDB
+    
+    style Clients fill:#e1f5ff
+    style ChatServers fill:#fff4e6
+    style MessageQueue fill:#e1f5ff
+    style Database fill:#fff4e6
+```
+
+#### Chat Message Flow
+
+```mermaid
+sequenceDiagram
+    participant User1 as User 1
+    participant ChatServer1 as Chat Server 1
+    participant Queue as Message Queue
+    participant ChatServer2 as Chat Server 2
+    participant User2 as User 2
+    participant DB as Database
+    participant Cache as Redis Cache
+    
+    User1->>ChatServer1: Send Message
+    ChatServer1->>DB: Store Message
+    ChatServer1->>Cache: Cache Recent Message
+    ChatServer1->>Queue: Publish Message Event
+    
+    Queue->>ChatServer2: Route to User 2's Server
+    ChatServer2->>User2: Deliver via WebSocket
+    
+    alt User 2 Offline
+        ChatServer2->>Notification: Send Push Notification
+    end
+    
+    Note over User1,User2: Group Message Flow
+    User1->>ChatServer1: Send Group Message
+    ChatServer1->>DB: Store Message
+    ChatServer1->>Queue: Publish to Group Topic
+    Queue->>ChatServer1: Route to Member 1
+    Queue->>ChatServer2: Route to Member 2
+    Queue->>ChatServerN: Route to Member N
+```
+
 #### Requirements
 - One-on-one messaging
 - Group messaging
@@ -1340,6 +1829,108 @@ class MonitoringService {
    - Caching recent messages
 
 ### 3. Design a News Feed (like Facebook)
+
+#### News Feed Architecture
+
+```mermaid
+graph TB
+    subgraph Client[Client Layer]
+        User[User]
+    end
+    
+    subgraph LoadBalancing[Load Balancing]
+        LB[Load Balancer]
+    end
+    
+    subgraph Application[Application Layer]
+        FeedAPI[Feed API Server]
+        PostAPI[Post API Server]
+    end
+    
+    subgraph FeedGeneration[Feed Generation Service]
+        FeedGen[Feed Generator<br/>Ranking Algorithm]
+    end
+    
+    subgraph MessageQueue[Message Queue]
+        Queue[Message Queue<br/>Kafka]
+    end
+    
+    subgraph Cache[Cache Layer]
+        FeedCache[Feed Cache<br/>Pre-computed Feeds]
+        PostCache[Post Cache]
+    end
+    
+    subgraph Database[Database Layer]
+        UserDB[(User Database)]
+        PostDB[(Post Database<br/>Sharded)]
+        FeedDB[(Feed Database<br/>Pre-computed)]
+        GraphDB[(Social Graph DB)]
+    end
+    
+    User -->|GET /feed| LB
+    User -->|POST /posts| LB
+    
+    LB --> FeedAPI
+    LB --> PostAPI
+    
+    FeedAPI -->|Check Cache| FeedCache
+    FeedCache -->|Cache Hit| FeedAPI
+    FeedCache -->|Cache Miss| FeedGen
+    
+    FeedGen --> GraphDB
+    FeedGen --> PostDB
+    FeedGen --> FeedDB
+    FeedGen --> FeedCache
+    
+    PostAPI --> PostDB
+    PostAPI --> Queue
+    PostAPI --> PostCache
+    
+    Queue --> FeedGen
+    FeedGen --> FeedCache
+    
+    style Client fill:#e1f5ff
+    style Application fill:#fff4e6
+    style FeedGeneration fill:#e1f5ff
+    style Cache fill:#fff4e6
+```
+
+#### News Feed Generation Flow
+
+```mermaid
+flowchart TD
+    Start([User Requests Feed]) --> CheckCache[Check Feed Cache]
+    
+    CheckCache --> CacheHit{Cache<br/>Hit?}
+    
+    CacheHit -->|Yes| ReturnFeed[Return Cached Feed]
+    ReturnFeed --> Rank[Re-rank Feed]
+    Rank --> End([Return Feed])
+    
+    CacheHit -->|No| UserActive{User<br/>Active?}
+    
+    UserActive -->|Yes| PushModel[Push Model<br/>Pre-computed Feed]
+    UserActive -->|No| PullModel[Pull Model<br/>Generate On-Demand]
+    
+    PushModel --> GetFeed[Get Pre-computed Feed]
+    PullModel --> GetFriends[Get Friends/Follows]
+    GetFriends --> GetPosts[Get Recent Posts]
+    GetPosts --> GenerateFeed[Generate Feed]
+    
+    GetFeed --> Rank
+    GenerateFeed --> Rank
+    
+    Start2([New Post Created]) --> PublishEvent[Publish to Queue]
+    PublishEvent --> UpdateFeeds[Update Affected Feeds]
+    UpdateFeeds --> InvalidateCache[Invalidate Feed Cache]
+    InvalidateCache --> Regenerate[Regenerate Feeds]
+    Regenerate --> StoreCache[Store in Cache]
+    
+    style Start fill:#e1f5ff
+    style CheckCache fill:#fff4e6
+    style Rank fill:#e1f5ff
+    style End fill:#fff4e6
+```
 
 #### Requirements
 - Personalized feed
@@ -1437,6 +2028,89 @@ class MonitoringService {
 - **SQL**: PostgreSQL, MySQL, SQL Server
 - **NoSQL**: MongoDB, Cassandra, Redis, DynamoDB
 - **Search**: Elasticsearch, Solr
+
+### Message Queue Architecture
+
+```mermaid
+graph TB
+    subgraph Producers[Producer Services]
+        Service1[Service 1]
+        Service2[Service 2]
+        Service3[Service 3]
+    end
+    
+    subgraph MessageQueue[Message Queue Layer]
+        Broker[Message Broker<br/>Kafka/RabbitMQ]
+        Topic1[Topic/Queue 1]
+        Topic2[Topic/Queue 2]
+        TopicN[Topic/Queue N]
+    end
+    
+    subgraph Consumers[Consumer Services]
+        Consumer1[Consumer 1<br/>Worker Service]
+        Consumer2[Consumer 2<br/>Worker Service]
+        Consumer3[Consumer 3<br/>Worker Service]
+        ConsumerN[Consumer N<br/>Worker Service]
+    end
+    
+    subgraph Storage[Storage Layer]
+        Database[(Database)]
+        ObjectStorage[Object Storage]
+        Cache[Cache]
+    end
+    
+    Service1 -->|Publish Events| Broker
+    Service2 -->|Publish Events| Broker
+    Service3 -->|Publish Events| Broker
+    
+    Broker --> Topic1
+    Broker --> Topic2
+    Broker --> TopicN
+    
+    Topic1 --> Consumer1
+    Topic1 --> Consumer2
+    Topic2 --> Consumer3
+    TopicN --> ConsumerN
+    
+    Consumer1 --> Database
+    Consumer2 --> ObjectStorage
+    Consumer3 --> Cache
+    ConsumerN --> Database
+    
+    style Producers fill:#e1f5ff
+    style MessageQueue fill:#fff4e6
+    style Consumers fill:#e1f5ff
+    style Storage fill:#fff4e6
+```
+
+### Message Queue Processing Flow
+
+```mermaid
+sequenceDiagram
+    participant Producer as Producer Service
+    participant Queue as Message Queue
+    participant Consumer as Consumer Service
+    participant DB as Database
+    
+    Note over Producer,DB: Publish Message
+    Producer->>Queue: Publish Message
+    Queue-->>Producer: Acknowledge
+    
+    Note over Queue,DB: Message Processing
+    Queue->>Consumer: Deliver Message
+    Consumer->>Consumer: Process Message
+    Consumer->>DB: Update Database
+    DB-->>Consumer: Success
+    Consumer->>Queue: Acknowledge Processing
+    
+    alt Processing Failed
+        Queue->>Queue: Retry Message
+        Queue->>Consumer: Redeliver
+        Consumer->>Queue: Acknowledge or Reject
+    end
+    
+    Note over Queue: Message Removed from Queue
+```
 
 ### Message Queues
 - **RabbitMQ**: General purpose

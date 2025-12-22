@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PM-Guides/PROJECT_METHODOLOGIES_GUIDE.md",
-                "mode": "source",
+                "file": "SAP-Guides/SAP_CAPSTONE_EXAMPLES.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PROJECT_METHODOLOGIES_GUIDE"
+              "title": "SAP_CAPSTONE_EXAMPLES"
             }
           }
         ]
@@ -75,7 +75,7 @@
             }
           },
           {
-            "id": "82b2191f39d20c9a",
+            "id": "cfa95a61c8de399c",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -89,7 +89,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 377.50000381469727
   },
   "right": {
     "id": "6d0bfa2a0e22d198",
@@ -198,41 +198,41 @@
   },
   "active": "b7515867cb4cd1ae",
   "lastOpenFiles": [
-    "Business-Management-Guides/PRACTICAL_APPLICATION_GUIDE.md",
-    "Business-Management-Guides/ENTREPRENEURSHIP_GUIDE.md",
-    "Business-Management-Guides/GLOBAL_BUSINESS_LEGAL_GUIDE.md",
-    "Business-Management-Guides/CHANGE_MANAGEMENT_GUIDE.md",
-    "Business-Management-Guides/OPERATIONS_PROJECT_MANAGEMENT_GUIDE.md",
-    "Business-Management-Guides/HUMAN_RESOURCE_MANAGEMENT_GUIDE.md",
-    "Business-Management-Guides/MARKETING_MANAGEMENT_GUIDE.md",
-    "Business-Management-Guides/FINANCIAL_ACCOUNTING_GUIDE.md",
-    "Business-Management-Guides/STRATEGIC_MANAGEMENT_GUIDE.md",
-    "Business-Management-Guides/MANAGEMENT_FUNDAMENTALS_GUIDE.md",
-    "Business-Management-Guides/README.md",
-    "Business-Management-Guides",
-    "PM-Guides/DELIVERY_HANDOVER_GUIDE.md",
-    "PM-Guides/RISK_ISSUE_MANAGEMENT_GUIDE.md",
-    "PM-Guides/MONITORING_CONTROL_REPORTING_GUIDE.md",
-    "PM-Guides/COMMUNICATION_NEGOTIATION_GUIDE.md",
-    "Excalidraw/Drawing 2025-12-14 05.10.39.excalidraw.md",
-    "PM-Guides/TEAM_MANAGEMENT_LEADERSHIP_GUIDE.md",
+    "SAP-Guides/Sample.md",
+    "SAP-Guides/SAP_CAPSTONE_EXAMPLES.md",
+    "SAP-Guides/SAP_CAPSTONE_PROJECT_GUIDE.md",
     "SAP/SAP 19-12-25.md",
+    "SAP-Guides/SAP_REPORTING_ANALYTICS_GUIDE.md",
+    "SAP-Guides/SAP_INTEGRATION_GUIDE.md",
+    "PM-Guides/MONITORING_CONTROL_REPORTING_GUIDE.md",
     "PM-Guides/PLANNING_ESTIMATION_GUIDE.md",
     "PM-Guides/PROJECT_METHODOLOGIES_GUIDE.md",
-    "References/Mini_MBA.md",
+    "SAP-Guides/SAP_HR_GUIDE.md",
+    "Developer-Guides/README.md",
+    "URL.md",
+    "SAP-Guides/README.md",
+    "PM-Guides/COMMUNICATION_NEGOTIATION_GUIDE.md",
     "PM-Guides/README.md",
+    "PM-Guides/DELIVERY_HANDOVER_GUIDE.md",
+    "PM-Guides/RISK_ISSUE_MANAGEMENT_GUIDE.md",
+    "PM-Guides/TEAM_MANAGEMENT_LEADERSHIP_GUIDE.md",
+    "SAP CAPSTONE.md",
+    "project management.md",
+    "Untitled Kanban.md",
+    "SAP-Guides/SAP_TESTING_GUIDE.md",
+    "SAP-Guides/SAP_SECURITY_AUTHORIZATION_GUIDE.md",
+    "SAP-Guides/SAP_FORMS_GUIDE.md",
+    "SAP-Guides/SAP_WORKFLOW_GUIDE.md",
+    "SAP-Guides/SAP_CUSTOMIZATION_ENHANCEMENT_GUIDE.md",
+    "SAP-Guides",
+    "Business-Management-Guides",
     "PM-Guides",
-    "References/NOI_DUNG_KHOA_HOC_CHI_TIET.md",
-    "References/PM.md",
     "References",
-    "Developer-Guides/SYSTEM_DESIGN_GUIDE_COMPREHENSIVE.md",
-    "Developer-Guides/ARCHITECTURE_PATTERNS_GUIDE.md",
     "SAP",
     "Tags",
     "temp.txt",
     "Group-01-Foundation-Review/Topic-1.15-Environment-Variables-và-Configuration/examples/env-config-example.ts",
     "Group-01-Foundation-Review/Topic-1.15-Environment-Variables-và-Configuration/examples/env-config-example.js",
-    "Group-01-Foundation-Review/Topic-1.12-Database-Normalization-1NF-2NF-3NF/examples/normalization-example.sql",
-    "Group-01-Foundation-Review/Topic-1.14-Error-Handling-cơ-bản/examples/error-handling-example.ts"
+    "Group-01-Foundation-Review/Topic-1.12-Database-Normalization-1NF-2NF-3NF/examples/normalization-example.sql"
   ]
 }

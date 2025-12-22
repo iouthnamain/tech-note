@@ -45,17 +45,32 @@ The Waterfall model is a linear, sequential approach to project management where
 ### Waterfall Process Flow
 
 ```mermaid
-graph TD
-    A[Requirements] --> B[Design]
-    B --> C[Implementation]
-    C --> D[Verification]
-    D --> E[Maintenance]
+flowchart TD
+    Start([Project Start]) --> Requirements[Requirements Phase<br/>2-4 weeks]
+    Requirements --> ReqReview{Requirements<br/>Approved?}
+    ReqReview -->|No| Requirements
+    ReqReview -->|Yes| Design[Design Phase<br/>3-6 weeks]
     
-    style A fill:#e1f5ff
-    style B fill:#e1f5ff
-    style C fill:#e1f5ff
-    style D fill:#e1f5ff
-    style E fill:#e1f5ff
+    Design --> DesignReview{Design<br/>Approved?}
+    DesignReview -->|No| Design
+    DesignReview -->|Yes| Implementation[Implementation Phase<br/>8-20 weeks]
+    
+    Implementation --> Verification[Verification/Testing Phase<br/>4-8 weeks]
+    Verification --> TestPass{Testing<br/>Passed?}
+    TestPass -->|No| Implementation
+    TestPass -->|Yes| Deployment[Deployment Phase<br/>1-2 weeks]
+    
+    Deployment --> Maintenance[Maintenance Phase<br/>Ongoing]
+    Maintenance --> End([Project Complete])
+    
+    style Start fill:#e1f5ff
+    style Requirements fill:#fff4e6
+    style Design fill:#e1f5ff
+    style Implementation fill:#fff4e6
+    style Verification fill:#e1f5ff
+    style Deployment fill:#fff4e6
+    style Maintenance fill:#e1f5ff
+    style End fill:#fff4e6
 ```
 
 ### Phases of Waterfall
@@ -301,20 +316,42 @@ The Agile Manifesto values:
 ### Agile Process Flow
 
 ```mermaid
-graph LR
-    A[Plan] --> B[Design]
-    B --> C[Develop]
-    C --> D[Test]
-    D --> E[Review]
-    E --> F[Retrospect]
-    F --> A
+flowchart TD
+    Start([Project Start]) --> Sprint1[Sprint 1]
+    Sprint1 --> Plan1[Plan]
+    Plan1 --> Design1[Design]
+    Design1 --> Develop1[Develop]
+    Develop1 --> Test1[Test]
+    Test1 --> Review1[Review]
+    Review1 --> Retro1[Retrospect]
     
-    style A fill:#fff4e6
-    style B fill:#fff4e6
-    style C fill:#fff4e6
-    style D fill:#fff4e6
-    style E fill:#fff4e6
-    style F fill:#fff4e6
+    Retro1 --> Sprint2[Sprint 2]
+    Sprint2 --> Plan2[Plan]
+    Plan2 --> Design2[Design]
+    Design2 --> Develop2[Develop]
+    Develop2 --> Test2[Test]
+    Test2 --> Review2[Review]
+    Review2 --> Retro2[Retrospect]
+    
+    Retro2 --> MoreSprints{More Sprints?}
+    MoreSprints -->|Yes| Sprint3[Sprint N]
+    MoreSprints -->|No| Release[Release]
+    
+    Sprint3 --> Plan3[Plan]
+    Plan3 --> Design3[Design]
+    Design3 --> Develop3[Develop]
+    Develop3 --> Test3[Test]
+    Test3 --> Review3[Review]
+    Review3 --> Retro3[Retrospect]
+    Retro3 --> MoreSprints
+    
+    Release --> End([Project Complete])
+    
+    style Start fill:#e1f5ff
+    style Sprint1 fill:#fff4e6
+    style Sprint2 fill:#e1f5ff
+    style Release fill:#fff4e6
+    style End fill:#e1f5ff
 ```
 
 ### Advantages of Agile
@@ -565,20 +602,70 @@ Common criteria:
 - No known bugs
 - Product Owner acceptance
 
-### Sprint Cycle
+### Sprint Lifecycle
 
 ```mermaid
-gantt
-    title Sprint Cycle (2 weeks)
-    dateFormat YYYY-MM-DD
-    section Sprint Planning
-    Sprint Planning    :2024-01-01, 4h
-    section Development
-    Daily Standups      :2024-01-02, 15m
-    Development Work    :2024-01-02, 9d
-    section Review
-    Sprint Review       :2024-01-11, 3h
-    Sprint Retrospective :2024-01-11, 2h
+flowchart TD
+    Start([Sprint Start]) --> Planning[Sprint Planning<br/>2-4 hours]
+    Planning --> BacklogRefinement[Backlog Refinement<br/>Ongoing]
+    
+    Planning --> DailyStandup[Daily Standup<br/>15 minutes<br/>Every Day]
+    DailyStandup --> Development[Development Work]
+    Development --> Testing[Testing]
+    Testing --> Integration[Integration]
+    
+    Integration --> NextDay{More Days?}
+    NextDay -->|Yes| DailyStandup
+    NextDay -->|No| SprintReview[Sprint Review<br/>2-4 hours]
+    
+    SprintReview --> Retrospective[Sprint Retrospective<br/>1-3 hours]
+    Retrospective --> ActionItems[Action Items]
+    ActionItems --> NextSprint{Next Sprint?}
+    
+    NextSprint -->|Yes| Start
+    NextSprint -->|No| Release[Release Increment]
+    Release --> End([Sprint Complete])
+    
+    BacklogRefinement -.->|Prepares| Planning
+    
+    style Start fill:#e1f5ff
+    style Planning fill:#fff4e6
+    style DailyStandup fill:#e1f5ff
+    style Development fill:#fff4e6
+    style SprintReview fill:#e1f5ff
+    style Retrospective fill:#fff4e6
+    style End fill:#e1f5ff
+```
+
+### Scrum Ceremonies Flow
+
+```mermaid
+sequenceDiagram
+    participant PO as Product Owner
+    participant SM as Scrum Master
+    participant Team as Development Team
+    participant Stakeholders
+    
+    Note over PO,Team: Sprint Planning
+    PO->>Team: Present Product Backlog
+    Team->>Team: Estimate Stories
+    Team->>PO: Select Sprint Backlog
+    Team->>Team: Create Sprint Goal
+    
+    Note over Team: Daily Standup (Every Day)
+    Team->>Team: Share Progress
+    Team->>Team: Identify Blockers
+    SM->>Team: Remove Impediments
+    
+    Note over PO,Stakeholders: Sprint Review
+    Team->>Stakeholders: Demo Working Software
+    Stakeholders->>PO: Provide Feedback
+    PO->>PO: Update Product Backlog
+    
+    Note over PO,Team: Sprint Retrospective
+    Team->>Team: What Went Well?
+    Team->>Team: What to Improve?
+    Team->>Team: Action Items
 ```
 
 ### Scrum Best Practices
@@ -620,10 +707,60 @@ gantt
 
 Many organizations use hybrid approaches combining Waterfall and Agile elements to suit their specific needs.
 
+### Hybrid Approach Flow
+
+```mermaid
+flowchart TD
+    Start([Project Start]) --> Phase1[Phase 1: Requirements<br/>Waterfall Approach]
+    Phase1 --> Phase2[Phase 2: Design<br/>Waterfall Approach]
+    Phase2 --> Phase3[Phase 3: Development<br/>Scrum/Agile Approach]
+    
+    Phase3 --> Sprint1[Sprint 1]
+    Sprint1 --> Sprint2[Sprint 2]
+    Sprint2 --> SprintN[Sprint N]
+    SprintN --> Phase3Complete{Development<br/>Complete?}
+    Phase3Complete -->|No| Sprint1
+    Phase3Complete -->|Yes| Phase4[Phase 4: Testing<br/>Waterfall Approach]
+    
+    Phase4 --> Phase5[Phase 5: Deployment<br/>Waterfall Approach]
+    Phase5 --> End([Project Complete])
+    
+    style Start fill:#e1f5ff
+    style Phase1 fill:#FFB6C1
+    style Phase2 fill:#FFB6C1
+    style Phase3 fill:#90EE90
+    style Phase4 fill:#FFB6C1
+    style Phase5 fill:#FFB6C1
+    style End fill:#e1f5ff
+```
+
 ### Common Hybrid Models
 
 #### 1. Water-Scrum-Fall
 **Description**: Waterfall for planning and design, Scrum for development, Waterfall for deployment
+
+**Water-Scrum-Fall Process Flow**:
+
+```mermaid
+flowchart LR
+    A[Requirements<br/>Waterfall] --> B[Design<br/>Waterfall]
+    B --> C[Development<br/>Scrum Sprints]
+    C --> D[Testing<br/>Waterfall]
+    D --> E[Deployment<br/>Waterfall]
+    
+    C --> C1[Sprint 1]
+    C --> C2[Sprint 2]
+    C --> C3[Sprint N]
+    
+    style A fill:#FFB6C1
+    style B fill:#FFB6C1
+    style C fill:#90EE90
+    style C1 fill:#90EE90
+    style C2 fill:#90EE90
+    style C3 fill:#90EE90
+    style D fill:#FFB6C1
+    style E fill:#FFB6C1
+```
 
 **When to Use**:
 - Large organizations
@@ -704,23 +841,67 @@ Many organizations use hybrid approaches combining Waterfall and Agile elements 
 ### Decision Tree
 
 ```mermaid
-graph TD
-    A[Start] --> B{Requirements Stable?}
-    B -->|Yes| C{Regulatory Requirements?}
-    B -->|No| D[Agile/Scrum]
-    C -->|High| E[Waterfall]
-    C -->|Low| F{Team Experience?}
-    F -->|High| D
-    F -->|Low| G[Hybrid]
-    E --> H[End]
-    D --> H
-    G --> H
+flowchart TD
+    Start([Project Start]) --> ReqStable{Requirements<br/>Stable?}
     
-    style A fill:#e1f5ff
-    style H fill:#e1f5ff
-    style D fill:#fff4e6
-    style E fill:#fff4e6
-    style G fill:#fff4e6
+    ReqStable -->|No| Agile[Agile/Scrum]
+    ReqStable -->|Yes| Regulatory{Regulatory<br/>Requirements?}
+    
+    Regulatory -->|High| Waterfall[Waterfall]
+    Regulatory -->|Low| TeamExp{Team<br/>Experience?}
+    
+    TeamExp -->|High| Agile
+    TeamExp -->|Low| Hybrid[Hybrid Approach]
+    
+    Regulatory -->|Medium| CustomerInvolve{Customer<br/>Involvement?}
+    CustomerInvolve -->|High| Agile
+    CustomerInvolve -->|Low| Hybrid
+    
+    Agile --> End([Methodology Selected])
+    Waterfall --> End
+    Hybrid --> End
+    
+    style Start fill:#e1f5ff
+    style ReqStable fill:#fff4e6
+    style Agile fill:#90EE90
+    style Waterfall fill:#FFB6C1
+    style Hybrid fill:#FFD700
+    style End fill:#e1f5ff
+```
+
+### Methodology Comparison Matrix
+
+```mermaid
+graph TB
+    subgraph Comparison[Methodology Comparison]
+        A[Waterfall]
+        B[Agile/Scrum]
+        C[Hybrid]
+    end
+    
+    subgraph Factors[Key Factors]
+        D[Requirements Stability]
+        E[Regulatory Requirements]
+        F[Team Experience]
+        G[Time to Market]
+        H[Documentation Needs]
+    end
+    
+    A -->|Best for| D1[Stable Requirements]
+    A -->|Best for| E1[High Regulatory]
+    A -->|Best for| H1[Comprehensive Docs]
+    
+    B -->|Best for| D2[Changing Requirements]
+    B -->|Best for| F1[Experienced Team]
+    B -->|Best for| G1[Fast Delivery]
+    
+    C -->|Best for| D3[Partially Stable]
+    C -->|Best for| E2[Medium Regulatory]
+    C -->|Best for| F2[Mixed Experience]
+    
+    style A fill:#FFB6C1
+    style B fill:#90EE90
+    style C fill:#FFD700
 ```
 
 ### Key Decision Questions
@@ -1246,6 +1427,39 @@ graph TD
 
 ### Methodology Comparison
 
+**Visual Comparison Diagram**:
+
+```mermaid
+graph LR
+    subgraph Waterfall[Waterfall Characteristics]
+        W1[Sequential Phases]
+        W2[Fixed Requirements]
+        W3[Comprehensive Docs]
+        W4[Late Testing]
+        W5[Predictable Timeline]
+    end
+    
+    subgraph Agile[Agile/Scrum Characteristics]
+        A1[Iterative Sprints]
+        A2[Changing Requirements]
+        A3[Minimal Docs]
+        A4[Continuous Testing]
+        A5[Flexible Timeline]
+    end
+    
+    subgraph Hybrid[Hybrid Characteristics]
+        H1[Mixed Phases]
+        H2[Partially Stable]
+        H3[Moderate Docs]
+        H4[Phased Testing]
+        H5[Balanced Timeline]
+    end
+    
+    style Waterfall fill:#FFB6C1
+    style Agile fill:#90EE90
+    style Hybrid fill:#FFD700
+```
+
 | Aspect | Waterfall | Agile/Scrum |
 |--------|-----------|-------------|
 | **Flexibility** | Low | High |
@@ -1277,4 +1491,7 @@ Remember: The best methodology is the one that works for your specific project, 
 - [Planning & Estimation Guide](./PLANNING_ESTIMATION_GUIDE.md)
 - [Team Management & Leadership Guide](./TEAM_MANAGEMENT_LEADERSHIP_GUIDE.md)
 - [Monitoring, Control & Reporting Guide](./MONITORING_CONTROL_REPORTING_GUIDE.md)
+
+
+
 

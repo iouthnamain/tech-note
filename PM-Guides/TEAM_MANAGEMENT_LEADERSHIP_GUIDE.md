@@ -50,18 +50,45 @@ Task assignment is the process of allocating work to team members based on their
 ### Task Assignment Process
 
 ```mermaid
-graph TD
-    A[Identify Tasks] --> B[Assess Team Skills]
-    B --> C[Check Availability]
-    C --> D[Consider Development Goals]
-    D --> E[Assign Tasks]
-    E --> F[Communicate Assignment]
-    F --> G[Monitor Progress]
-    G --> H[Provide Support]
+flowchart TD
+    Start([New Tasks Available]) --> Identify[Identify All Tasks]
+    Identify --> Analyze[Analyze Task Requirements]
     
-    style A fill:#e1f5ff
-    style E fill:#fff4e6
-    style H fill:#e1f5ff
+    Analyze --> AssessSkills[Assess Team Skills]
+    AssessSkills --> CheckAvailability[Check Team Availability]
+    CheckAvailability --> ConsiderGoals[Consider Development Goals]
+    
+    ConsiderGoals --> SelectStrategy{Select Assignment<br/>Strategy}
+    SelectStrategy -->|Critical| SkillBased[Skill-Based Assignment]
+    SelectStrategy -->|Development| DevBased[Development-Based Assignment]
+    SelectStrategy -->|Balanced| Balanced[Balanced Assignment]
+    
+    SkillBased --> Match[Match Task to Team Member]
+    DevBased --> Match
+    Balanced --> Match
+    
+    Match --> Assign[Assign Task]
+    Assign --> Communicate[Communicate Assignment]
+    Communicate --> SetExpectations[Set Clear Expectations]
+    SetExpectations --> ProvideSupport[Provide Initial Support]
+    
+    ProvideSupport --> Monitor[Monitor Progress]
+    Monitor --> Issues{Issues<br/>Identified?}
+    
+    Issues -->|Yes| Resolve[Resolve Issues]
+    Resolve --> Adjust[Adjust if Needed]
+    Adjust --> Monitor
+    
+    Issues -->|No| Complete{Task<br/>Complete?}
+    Complete -->|No| Monitor
+    Complete -->|Yes| Review[Review Task Completion]
+    Review --> End([Task Assignment Complete])
+    
+    style Start fill:#e1f5ff
+    style Identify fill:#fff4e6
+    style Assign fill:#e1f5ff
+    style Monitor fill:#fff4e6
+    style End fill:#e1f5ff
 ```
 
 ### Factors to Consider
@@ -212,6 +239,45 @@ Mix of skill-based and development-based
 ### Overview
 
 Team composition refers to the mix of skills, experience levels, and roles in a project team. Optimal team composition balances productivity, cost, and team development.
+
+### Team Structure Hierarchy
+
+```mermaid
+graph TD
+    PM[Project Manager] --> TL[Tech Lead/Architect]
+    PM --> QA[QA Lead]
+    
+    TL --> Senior1[Senior Developer 1]
+    TL --> Senior2[Senior Developer 2]
+    
+    Senior1 --> Mid1[Mid-level Developer 1]
+    Senior1 --> Mid2[Mid-level Developer 2]
+    Senior2 --> Mid3[Mid-level Developer 3]
+    
+    Mid1 --> Junior1[Junior Developer 1]
+    Mid2 --> Junior2[Junior Developer 2]
+    
+    QA --> QAMid[QA Engineer]
+    
+    style PM fill:#e1f5ff
+    style TL fill:#fff4e6
+    style Senior1 fill:#e1f5ff
+    style Senior2 fill:#e1f5ff
+    style Mid1 fill:#fff4e6
+    style Mid2 fill:#fff4e6
+    style Mid3 fill:#fff4e6
+    style Junior1 fill:#e1f5ff
+    style Junior2 fill:#e1f5ff
+```
+
+### Team Composition Visualization
+
+```mermaid
+pie title Team Composition - Standard Project (10 people)
+    "Senior (30%)" : 3
+    "Mid-level (50%)" : 5
+    "Junior (20%)" : 2
+```
 
 ### Team Composition Models
 
@@ -377,18 +443,69 @@ Team composition refers to the mix of skills, experience levels, and roles in a 
 
 Effective onboarding and training of new team members is crucial for project success. Well-trained team members become productive faster and integrate better into the team.
 
-### Onboarding Process
+### Onboarding Process Flow
 
 ```mermaid
-graph LR
-    A[Pre-arrival] --> B[Day 1]
-    B --> C[Week 1]
-    C --> D[Month 1]
-    D --> E[Month 3]
-    E --> F[Fully Integrated]
+flowchart TD
+    Start([New Team Member Hired]) --> PreArrival[Pre-Arrival Preparation]
     
-    style A fill:#e1f5ff
-    style F fill:#fff4e6
+    PreArrival --> SetupEnv[Setup Work Environment]
+    PreArrival --> PrepDocs[Prepare Documentation]
+    PreArrival --> AssignBuddy[Assign Buddy/Mentor]
+    
+    SetupEnv --> Day1[Day 1: Orientation]
+    PrepDocs --> Day1
+    AssignBuddy --> Day1
+    
+    Day1 --> Welcome[Welcome Meeting]
+    Welcome --> TeamIntro[Team Introduction]
+    TeamIntro --> ProjectOverview[Project Overview]
+    ProjectOverview --> FirstTask[First Simple Task]
+    
+    FirstTask --> Week1[Week 1: Learning Phase]
+    Week1 --> ExploreCodebase[Explore Codebase]
+    ExploreCodebase --> CompleteTasks[Complete Initial Tasks]
+    CompleteTasks --> CodeReviews[Participate in Code Reviews]
+    
+    CodeReviews --> Month1[Month 1: Integration]
+    Month1 --> ComplexTasks[More Complex Tasks]
+    ComplexTasks --> IndependentWork[Independent Work]
+    IndependentWork --> TeamMeetings[Regular Team Participation]
+    
+    TeamMeetings --> Month3[Month 3: Full Integration]
+    Month3 --> RegularContributor[Regular Contributor]
+    RegularContributor --> MentoringOthers[Mentoring Others]
+    
+    MentoringOthers --> FullyIntegrated[Fully Integrated Team Member]
+    FullyIntegrated --> End([Onboarding Complete])
+    
+    style Start fill:#e1f5ff
+    style PreArrival fill:#fff4e6
+    style Day1 fill:#e1f5ff
+    style Week1 fill:#fff4e6
+    style Month1 fill:#e1f5ff
+    style FullyIntegrated fill:#fff4e6
+    style End fill:#e1f5ff
+```
+
+### Training and Onboarding Activities
+
+```mermaid
+gantt
+    title Onboarding Timeline (First Month)
+    dateFormat YYYY-MM-DD
+    section Week 1
+    Environment Setup    :2024-01-01, 1d
+    Project Overview    :2024-01-02, 1d
+    First Task          :2024-01-03, 2d
+    Code Review         :2024-01-05, 1d
+    section Week 2
+    Complex Tasks       :2024-01-08, 3d
+    Pair Programming    :2024-01-11, 2d
+    section Week 3
+    Independent Work    :2024-01-15, 5d
+    section Week 4
+    Regular Contributor :2024-01-22, 5d
 ```
 
 ### Pre-Arrival Preparation
@@ -925,21 +1042,63 @@ Conflicts are inevitable in teams. Effective conflict resolution maintains team 
 2. Schedule for later
 3. Address when appropriate
 
-### Conflict Resolution Process
+### Conflict Resolution Process Flow
 
 ```mermaid
-graph TD
-    A[Identify Conflict] --> B[Assess Situation]
-    B --> C[Choose Strategy]
-    C --> D[Facilitate Discussion]
-    D --> E[Find Solution]
-    E --> F[Agree on Action]
-    F --> G[Implement]
-    G --> H[Follow Up]
+flowchart TD
+    Start([Conflict Identified]) --> Acknowledge[Acknowledge Conflict Exists]
+    Acknowledge --> Assess[Assess Conflict Type]
     
-    style A fill:#e1f5ff
-    style E fill:#fff4e6
-    style H fill:#e1f5ff
+    Assess --> Type{Conflict Type}
+    Type -->|Task| TaskConflict[Task Conflict]
+    Type -->|Relationship| RelConflict[Relationship Conflict]
+    Type -->|Process| ProcessConflict[Process Conflict]
+    
+    TaskConflict --> Understand[Understand Perspectives]
+    RelConflict --> Understand
+    ProcessConflict --> Understand
+    
+    Understand --> Listen[Listen to Both Sides]
+    Listen --> RootCause[Identify Root Causes]
+    RootCause --> CommonGround[Find Common Ground]
+    
+    CommonGround --> SelectStrategy{Select Resolution<br/>Strategy}
+    SelectStrategy -->|Important| Collaborate[Collaboration Win-Win]
+    SelectStrategy -->|Moderate| Compromise[Compromise]
+    SelectStrategy -->|Minor| Accommodate[Accommodation]
+    SelectStrategy -->|Critical| Compete[Competition]
+    SelectStrategy -->|Trivial| Avoid[Avoidance]
+    
+    Collaborate --> GenerateSolutions[Generate Solutions]
+    Compromise --> GenerateSolutions
+    Accommodate --> GenerateSolutions
+    Compete --> GenerateSolutions
+    Avoid --> Postpone[Postpone Resolution]
+    
+    GenerateSolutions --> Evaluate[Evaluate Solutions]
+    Evaluate --> Agree[Agree on Solution]
+    Agree --> DefineActions[Define Action Items]
+    DefineActions --> Implement[Implement Solution]
+    
+    Postpone --> Schedule[Schedule for Later]
+    Schedule --> Implement
+    
+    Implement --> Monitor[Monitor Progress]
+    Monitor --> Working{Solution<br/>Working?}
+    
+    Working -->|Yes| FollowUp[Follow Up]
+    Working -->|No| Adjust[Adjust Solution]
+    Adjust --> Implement
+    
+    FollowUp --> Resolved[Conflict Resolved]
+    Resolved --> End([Resolution Complete])
+    
+    style Start fill:#e1f5ff
+    style Acknowledge fill:#fff4e6
+    style Understand fill:#e1f5ff
+    style Agree fill:#fff4e6
+    style Resolved fill:#e1f5ff
+    style End fill:#fff4e6
 ```
 
 ### Conflict Resolution Steps
@@ -1023,6 +1182,59 @@ graph TD
 ### Overview
 
 Fair and timely performance evaluation motivates team members, identifies development needs, and recognizes contributions. Effective evaluation is ongoing, not just annual.
+
+### Performance Evaluation Process Flow
+
+```mermaid
+flowchart TD
+    Start([Evaluation Period]) --> Continuous[Continuous Evaluation<br/>Ongoing]
+    Start --> Periodic[Periodic Evaluation<br/>Quarterly/Annually]
+    
+    Continuous --> Regular1on1[Regular 1-on-1s]
+    Regular1on1 --> ProjectFeedback[Project Feedback]
+    ProjectFeedback --> CodeReviews[Code Reviews]
+    CodeReviews --> PeerFeedback[Peer Feedback]
+    
+    Periodic --> Prepare[Preparation Phase]
+    Prepare --> GatherData[Gather Performance Data]
+    GatherData --> ReviewGoals[Review Goals & Objectives]
+    ReviewGoals --> PrepareExamples[Prepare Examples]
+    
+    PrepareExamples --> SelfAssessment[Self-Assessment]
+    SelfAssessment --> TeamMemberEval[Team Member Evaluates Self]
+    TeamMemberEval --> IdentifyStrengths[Identify Strengths/Weaknesses]
+    IdentifyStrengths --> SetGoals[Set Development Goals]
+    
+    SetGoals --> EvalMeeting[Evaluation Meeting]
+    EvalMeeting --> DiscussPerformance[Discuss Performance]
+    DiscussPerformance --> ReviewExamples[Review Examples]
+    ReviewExamples --> GiveFeedback[Give Feedback]
+    GiveFeedback --> ListenConcerns[Listen to Concerns]
+    ListenConcerns --> SetNewGoals[Set New Goals]
+    
+    SetNewGoals --> Document[Documentation Phase]
+    Document --> RecordEval[Record Evaluation]
+    RecordEval --> RecordFeedback[Record Feedback]
+    RecordFeedback --> ActionItems[Set Action Items]
+    ActionItems --> DevPlan[Create Development Plan]
+    
+    DevPlan --> FollowUp[Follow-Up Phase]
+    FollowUp --> RegularCheckins[Regular Check-ins]
+    RegularCheckins --> MonitorProgress[Monitor Progress]
+    MonitorProgress --> ProvideSupport[Provide Support]
+    ProvideSupport --> Adjust[Adjust as Needed]
+    
+    Adjust --> NextPeriod[Next Evaluation Period]
+    NextPeriod --> End([Evaluation Cycle Complete])
+    
+    style Start fill:#e1f5ff
+    style Continuous fill:#fff4e6
+    style Periodic fill:#e1f5ff
+    style EvalMeeting fill:#fff4e6
+    style Document fill:#e1f5ff
+    style FollowUp fill:#fff4e6
+    style End fill:#e1f5ff
+```
 
 ### Performance Evaluation Types
 
@@ -1598,4 +1810,7 @@ Remember: Great teams don't just happen - they're built through effective manage
 - [Project Methodologies Guide](./PROJECT_METHODOLOGIES_GUIDE.md)
 - [Communication & Negotiation Guide](./COMMUNICATION_NEGOTIATION_GUIDE.md)
 - [Monitoring, Control & Reporting Guide](./MONITORING_CONTROL_REPORTING_GUIDE.md)
+
+
+
 

@@ -188,6 +188,45 @@ Choosing the right communication channel is crucial for effective communication.
 - Team coordination
 - Status checks
 
+### Communication Channel Selection Flow
+
+```mermaid
+flowchart TD
+    Start([Need to Communicate]) --> Assess[Assess Communication Need]
+    
+    Assess --> Urgency{How Urgent?}
+    Urgency -->|Very Urgent| UrgentCheck{Can Wait<br/>Few Minutes?}
+    Urgency -->|Not Urgent| Formality{How Formal?}
+    
+    UrgentCheck -->|No| FaceToFace[Face-to-Face]
+    UrgentCheck -->|Yes| VideoCall[Video Call]
+    
+    Formality -->|Very Formal| Email[Email]
+    Formality -->|Informal| Complexity{How Complex?}
+    
+    Complexity -->|Simple| Chat[Chat/Instant Message]
+    Complexity -->|Complex| Sensitive{Sensitive Topic?}
+    
+    Sensitive -->|Yes| FaceToFace
+    Sensitive -->|No| VideoCall
+    
+    Assess --> Decision{Decision<br/>Required?}
+    Decision -->|Yes| FaceToFace
+    Decision -->|No| Documentation{Need<br/>Documentation?}
+    
+    Documentation -->|Yes| Email
+    Documentation -->|No| Quick{Quick<br/>Question?}
+    
+    Quick -->|Yes| Chat
+    Quick -->|No| VideoCall
+    
+    style Start fill:#e1f5ff
+    style FaceToFace fill:#fff4e6
+    style VideoCall fill:#e1f5ff
+    style Email fill:#fff4e6
+    style Chat fill:#e1f5ff
+```
+
 ### Communication Channel Selection Matrix
 
 | Situation | Face-to-Face | Video Call | Email | Chat |
@@ -204,6 +243,34 @@ Choosing the right communication channel is crucial for effective communication.
 | **Documentation** | ✗ | ✗ | ✓✓✓ | ✗ |
 
 **Legend**: ✓✓✓ Best | ✓✓ Good | ✓ Acceptable | ✗ Not Suitable
+
+### Communication Flow Diagram
+
+```mermaid
+graph LR
+    subgraph Internal[Internal Communication]
+        PM[Project Manager]
+        Team[Development Team]
+        QA[QA Team]
+        DevOps[DevOps Team]
+    end
+    
+    subgraph External[External Communication]
+        Client[Client]
+        Stakeholders[Stakeholders]
+        Vendors[Vendors]
+    end
+    
+    PM <-->|Daily Standup| Team
+    PM <-->|Status Updates| QA
+    PM <-->|Deployment Coordination| DevOps
+    PM <-->|Status Reports| Client
+    PM <-->|Requirements| Stakeholders
+    PM <-->|Integration| Vendors
+    
+    style PM fill:#e1f5ff
+    style Client fill:#fff4e6
+```
 
 ### Communication Channel Best Practices
 
@@ -240,6 +307,56 @@ Choosing the right communication channel is crucial for effective communication.
 ### Overview
 
 Client negotiation is about reaching agreements that benefit both your team and the client. Successful negotiation maintains relationships while protecting project interests.
+
+### Negotiation Process Flow
+
+```mermaid
+flowchart TD
+    Start([Negotiation Needed]) --> Prepare[Preparation Phase]
+    
+    Prepare --> UnderstandNeeds[Understand Client Needs]
+    UnderstandNeeds --> KnowLimits[Know Your Limits]
+    KnowLimits --> PrepareAlternatives[Prepare Alternatives]
+    PrepareAlternatives --> ResearchClient[Research Client]
+    
+    ResearchClient --> Initiate[Initiate Negotiation]
+    Initiate --> BuildRapport[Build Rapport]
+    BuildRapport --> PresentPosition[Present Your Position]
+    
+    PresentPosition --> Listen[Active Listening]
+    Listen --> UnderstandConcerns[Understand Concerns]
+    UnderstandConcerns --> IdentifyInterests[Identify Interests]
+    
+    IdentifyInterests --> GenerateOptions[Generate Options]
+    GenerateOptions --> EvaluateOptions[Evaluate Options]
+    EvaluateOptions --> PresentOptions[Present Options to Client]
+    
+    PresentOptions --> ClientResponse{Client<br/>Response?}
+    ClientResponse -->|Accepts| Agree[Reach Agreement]
+    ClientResponse -->|Rejects| Counter[Client Counter-Offer]
+    ClientResponse -->|Questions| Clarify[Clarify Questions]
+    
+    Counter --> EvaluateCounter[Evaluate Counter-Offer]
+    EvaluateCounter --> WithinLimits{Within<br/>Your Limits?}
+    WithinLimits -->|Yes| Agree
+    WithinLimits -->|No| ProposeAlternative[Propose Alternative]
+    ProposeAlternative --> ClientResponse
+    
+    Clarify --> Explain[Explain Further]
+    Explain --> ClientResponse
+    
+    Agree --> Document[Document Agreement]
+    Document --> Confirm[Confirm Understanding]
+    Confirm --> Implement[Implement Agreement]
+    Implement --> FollowUp[Follow Up]
+    FollowUp --> End([Negotiation Complete])
+    
+    style Start fill:#e1f5ff
+    style Prepare fill:#fff4e6
+    style Listen fill:#e1f5ff
+    style Agree fill:#fff4e6
+    style End fill:#e1f5ff
+```
 
 ### Negotiation Principles
 
@@ -813,16 +930,67 @@ Working with clients and teams from different cultures requires cultural awarene
 ### Cultural Adaptation Framework
 
 ```mermaid
-graph TD
-    A[Identify Culture] --> B[Research Characteristics]
-    B --> C[Adapt Communication]
-    C --> D[Build Relationships]
-    D --> E[Respect Differences]
-    E --> F[Learn and Adjust]
+flowchart TD
+    Start([Working with Different Culture]) --> Identify[Identify Culture Type]
     
-    style A fill:#e1f5ff
-    style D fill:#fff4e6
-    style F fill:#e1f5ff
+    Identify --> Research[Research Cultural Characteristics]
+    Research --> CommunicationStyle{Communication<br/>Style?}
+    
+    CommunicationStyle -->|Direct| DirectComm[Use Direct Communication]
+    CommunicationStyle -->|Indirect| IndirectComm[Use Indirect Communication]
+    
+    DirectComm --> DecisionStyle{Decision<br/>Making?}
+    IndirectComm --> DecisionStyle
+    
+    DecisionStyle -->|Fast| QuickDecisions[Prepare for Quick Decisions]
+    DecisionStyle -->|Consensus| SlowDecisions[Allow Time for Consensus]
+    
+    QuickDecisions --> Relationship{Relationship<br/>Focus?}
+    SlowDecisions --> Relationship
+    
+    Relationship -->|Task-Focused| TaskFirst[Focus on Business First]
+    Relationship -->|Relationship-Focused| RelFirst[Build Relationships First]
+    
+    TaskFirst --> Adapt[Adapt Communication Style]
+    RelFirst --> Adapt
+    
+    Adapt --> BuildRel[Build Relationships]
+    BuildRel --> Respect[Respect Cultural Differences]
+    Respect --> Learn[Learn and Adjust]
+    Learn --> Monitor[Monitor Effectiveness]
+    
+    Monitor --> Effective{Effective?}
+    Effective -->|Yes| Continue[Continue Approach]
+    Effective -->|No| Adjust[Adjust Strategy]
+    Adjust --> Adapt
+    
+    Continue --> End([Successful Cultural Adaptation])
+    
+    style Start fill:#e1f5ff
+    style Research fill:#fff4e6
+    style Adapt fill:#e1f5ff
+    style BuildRel fill:#fff4e6
+    style End fill:#e1f5ff
+```
+
+### Stakeholder Management Matrix
+
+```mermaid
+quadrantChart
+    title Stakeholder Management Matrix
+    x-axis Low Interest --> High Interest
+    y-axis Low Power --> High Power
+    quadrant-1 Manage Closely
+    quadrant-2 Keep Satisfied
+    quadrant-3 Monitor
+    quadrant-4 Keep Informed
+    Client: [0.9, 0.9]
+    Sponsor: [0.8, 0.9]
+    Team: [0.7, 0.6]
+    End Users: [0.6, 0.4]
+    Management: [0.5, 0.8]
+    Vendors: [0.4, 0.5]
+    Support: [0.3, 0.3]
 ```
 
 ### Cultural Best Practices
@@ -1099,4 +1267,7 @@ Remember: Effective communication and negotiation are skills that improve with p
 - [Team Management & Leadership Guide](./TEAM_MANAGEMENT_LEADERSHIP_GUIDE.md)
 - [Project Methodologies Guide](./PROJECT_METHODOLOGIES_GUIDE.md)
 - [Monitoring, Control & Reporting Guide](./MONITORING_CONTROL_REPORTING_GUIDE.md)
+
+
+
 

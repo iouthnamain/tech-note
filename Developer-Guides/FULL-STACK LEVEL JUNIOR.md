@@ -9,6 +9,210 @@ Dưới đây là **phần Nội dung khóa đào tạo** được viết lại 
 
 ## 🎯 Self-Learning Guide
 
+### Full-Stack Architecture Overview
+
+```mermaid
+graph TB
+    subgraph Frontend[Frontend Layer]
+        HTML[HTML5]
+        CSS[CSS3]
+        JavaScript[JavaScript ES6+]
+        React[React/Vue/Angular]
+        StateManagement[State Management]
+    end
+    
+    subgraph Backend[Backend Layer]
+        Server[Server-Side Language<br/>Node.js/Python/Java]
+        APIServer[API Server]
+        BusinessLogic[Business Logic]
+        DataValidation[Data Validation]
+    end
+    
+    subgraph Database[Database Layer]
+        SQLDB[(SQL Database<br/>PostgreSQL/MySQL)]
+        NoSQLDB[(NoSQL Database<br/>MongoDB/Redis)]
+        ORM[ORM/ODM]
+    end
+    
+    subgraph DevOps[DevOps & Infrastructure]
+        Git[Git/GitHub]
+        CI[CI/CD Pipeline]
+        Docker[Docker]
+        Cloud[Cloud Platform]
+    end
+    
+    subgraph Tools[Development Tools]
+        IDE[IDE/Editor]
+        PackageManager[Package Manager]
+        TestingTools[Testing Tools]
+        DebuggingTools[Debugging Tools]
+    end
+    
+    HTML --> React
+    CSS --> React
+    JavaScript --> React
+    React --> StateManagement
+    
+    StateManagement --> APIServer
+    APIServer --> Server
+    Server --> BusinessLogic
+    BusinessLogic --> DataValidation
+    
+    DataValidation --> ORM
+    ORM --> SQLDB
+    ORM --> NoSQLDB
+    
+    Server --> Git
+    Git --> CI
+    CI --> Docker
+    Docker --> Cloud
+    
+    IDE --> PackageManager
+    PackageManager --> TestingTools
+    TestingTools --> DebuggingTools
+    
+    style Frontend fill:#e1f5ff
+    style Backend fill:#fff4e6
+    style Database fill:#e1f5ff
+    style DevOps fill:#fff4e6
+    style Tools fill:#e1f5ff
+```
+
+### Learning Path Flow
+
+```mermaid
+flowchart TD
+    Start([Start Learning]) --> Foundation[Foundation Review<br/>Group 1]
+    Foundation --> BasicFunctions[Basic Functions<br/>Group 2]
+    BasicFunctions --> Algorithms[Algorithms & Optimization<br/>Group 3]
+    Algorithms --> Research[Research & Q&A<br/>Group 4]
+    Research --> AICoding[AI-Assisted Coding<br/>Group 5]
+    AICoding --> Database[Database & SQL<br/>Group 6]
+    Database --> Testing[Testing & Debugging<br/>Group 7]
+    Testing --> CodeReview[Code Review<br/>Group 8]
+    CodeReview --> ComplexFeatures[Complex Features<br/>Group 9]
+    ComplexFeatures --> TeamWork[Team Collaboration<br/>Group 10]
+    TeamWork --> Agile[Agile & Scrum<br/>Group 11]
+    Agile --> Estimation[Estimation & Management<br/>Group 12]
+    Estimation --> DesignPatterns[Design Patterns<br/>Group 13]
+    DesignPatterns --> AdvancedTech[Advanced Technologies<br/>Group 14]
+    AdvancedTech --> SoftSkills[Soft Skills<br/>Group 15]
+    SoftSkills --> Performance[Performance & Optimization<br/>Group 16]
+    Performance --> DevOps[DevOps & Automation<br/>Group 17]
+    DevOps --> JuniorReady([Junior Developer Ready])
+    
+    style Start fill:#e1f5ff
+    style JuniorReady fill:#6bcf7f
+```
+
+### Technology Stack Diagram
+
+```mermaid
+graph TB
+    subgraph FrontendStack[Frontend Stack]
+        HTML5[HTML5]
+        CSS3[CSS3]
+        JavaScript[JavaScript ES6+]
+        Framework[React/Vue/Angular]
+        BuildTools[Webpack/Vite]
+    end
+    
+    subgraph BackendStack[Backend Stack]
+        NodeJS[Node.js]
+        Python[Python]
+        Java[Java]
+        Express[Express/FastAPI/Spring]
+        APIDesign[API Design]
+    end
+    
+    subgraph DatabaseStack[Database Stack]
+        PostgreSQL[PostgreSQL]
+        MySQL[MySQL]
+        MongoDB[MongoDB]
+        Redis[Redis]
+        ORM[TypeORM/Sequelize/Mongoose]
+    end
+    
+    subgraph DevOpsStack[DevOps Stack]
+        Git[Git/GitHub]
+        Docker[Docker]
+        CI[CI/CD]
+        Cloud[AWS/Azure/GCP]
+    end
+    
+    subgraph ToolsStack[Tools Stack]
+        VS Code[VS Code]
+        Postman[Postman]
+        Jest[Jest/Mocha]
+        ChromeDevTools[Chrome DevTools]
+    end
+    
+    HTML5 --> Framework
+    CSS3 --> Framework
+    JavaScript --> Framework
+    Framework --> BuildTools
+    
+    NodeJS --> Express
+    Python --> Express
+    Java --> Express
+    Express --> APIDesign
+    
+    PostgreSQL --> ORM
+    MySQL --> ORM
+    MongoDB --> ORM
+    Redis --> ORM
+    
+    Git --> Docker
+    Docker --> CI
+    CI --> Cloud
+    
+    VS Code --> Postman
+    Postman --> Jest
+    Jest --> ChromeDevTools
+    
+    style FrontendStack fill:#e1f5ff
+    style BackendStack fill:#fff4e6
+    style DatabaseStack fill:#e1f5ff
+    style DevOpsStack fill:#fff4e6
+    style ToolsStack fill:#e1f5ff
+```
+
+### Development Workflow
+
+```mermaid
+flowchart TD
+    Start([Start Development]) --> Plan[Plan Feature]
+    Plan --> Design[Design Solution]
+    Design --> Setup[Setup Development Environment]
+    
+    Setup --> WriteCode[Write Code]
+    WriteCode --> Test[Run Tests]
+    Test --> TestPass{Tests<br/>Pass?}
+    
+    TestPass -->|No| Debug[Debug & Fix]
+    Debug --> WriteCode
+    
+    TestPass -->|Yes| CodeReview[Self Code Review]
+    CodeReview --> Commit[Commit to Git]
+    Commit --> Push[Push to Repository]
+    
+    Push --> CICD[CI/CD Pipeline]
+    CICD --> Build[Build Application]
+    Build --> AutoTest[Automated Tests]
+    AutoTest --> Deploy{Deploy<br/>Success?}
+    
+    Deploy -->|No| FixIssues[Fix Issues]
+    FixIssues --> WriteCode
+    
+    Deploy -->|Yes| Monitor[Monitor Application]
+    Monitor --> Iterate{More<br/>Features?}
+    Iterate -->|Yes| Plan
+    Iterate -->|No| Complete([Feature Complete])
+    
+    style Start fill:#e1f5ff
+    style Complete fill:#6bcf7f
+```
+
 This course includes **260+ topics** organized into **17 content groups**. Each group is designed to take you from foundation → practical → Junior-ready.
 
 ### 📁 Folder Structure

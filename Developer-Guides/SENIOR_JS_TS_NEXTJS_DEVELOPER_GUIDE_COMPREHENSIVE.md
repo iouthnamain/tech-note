@@ -510,22 +510,95 @@ function processValue(value: unknown) {
 
 ```mermaid
 graph TB
-    Client[Client Browser] --> Router[Next.js Router]
+    subgraph Client[Client Browser]
+        Browser[Browser]
+        React[React Client Runtime]
+    end
     
-    Router --> ServerComponent[Server Components<br/>Default]
-    Router --> ClientComponent[Client Components<br/>'use client']
+    subgraph NextJS[Next.js Framework]
+        Router[App Router]
+        Middleware[Middleware]
+        Proxy[proxy.ts]
+    end
     
-    ServerComponent --> ServerAction[Server Actions]
-    ServerComponent --> RouteHandler[Route Handlers<br/>API Routes]
+    subgraph Server[Server Runtime]
+        ServerComponent[Server Components<br/>Default]
+        ServerAction[Server Actions<br/>'use server']
+        RouteHandler[Route Handlers<br/>API Routes]
+        StaticGen[Static Generation]
+        ISR[Incremental Static<br/>Regeneration]
+    end
     
-    ClientComponent --> BrowserAPI[Browser APIs<br/>useState, useEffect]
+    subgraph ClientSide[Client Components]
+        ClientComponent[Client Components<br/>'use client']
+        BrowserAPI[Browser APIs<br/>useState, useEffect]
+        Hooks[React Hooks]
+    end
+    
+    subgraph Data[Data Layer]
+        Database[(Database)]
+        Cache[Next.js Cache]
+        ExternalAPI[External APIs]
+    end
+    
+    Browser --> Router
+    Router --> Middleware
+    Middleware --> Proxy
+    Proxy --> ServerComponent
+    Router --> ClientComponent
+    
+    ServerComponent --> ServerAction
+    ServerComponent --> RouteHandler
+    ServerComponent --> StaticGen
+    ServerComponent --> ISR
+    
+    ClientComponent --> BrowserAPI
+    ClientComponent --> Hooks
     ClientComponent --> ServerComponent
     
-    ServerAction --> Database[(Database)]
+    ServerAction --> Database
     RouteHandler --> Database
+    ServerComponent --> Cache
+    RouteHandler --> ExternalAPI
     
     style ServerComponent fill:#6bcf7f
     style ClientComponent fill:#ffd93d
+    style Server fill:#e1f5ff
+    style ClientSide fill:#fff4e6
+```
+
+### Next.js Request Flow
+
+```mermaid
+sequenceDiagram
+    participant Browser
+    participant Router as Next.js Router
+    participant Middleware as Middleware
+    participant ServerComp as Server Component
+    participant ClientComp as Client Component
+    participant ServerAction as Server Action
+    participant DB as Database
+    
+    Browser->>Router: Request Page
+    Router->>Middleware: Process Request
+    Middleware-->>Router: Continue/Redirect
+    Router->>ServerComp: Render Server Component
+    ServerComp->>DB: Fetch Data
+    DB-->>ServerComp: Return Data
+    ServerComp->>ServerComp: Generate HTML
+    ServerComp-->>Router: HTML + Client Components
+    Router-->>Browser: Stream HTML
+    
+    Browser->>ClientComp: Hydrate Client Component
+    ClientComp->>ClientComp: Initialize State
+    
+    Note over Browser,DB: User Interaction
+    Browser->>ClientComp: User Action
+    ClientComp->>ServerAction: Call Server Action
+    ServerAction->>DB: Update Data
+    DB-->>ServerAction: Success
+    ServerAction-->>ClientComp: Result
+    ClientComp-->>Browser: Update UI
 ```
 
 ### App Router (Next.js 13+)
@@ -605,6 +678,88 @@ export function CreateUserForm() {
 }
 ```
 
+#### Server-Side Rendering (SSR) Flow
+
+```mermaid
+sequenceDiagram
+    participant Browser
+    participant NextJS as Next.js Server
+    participant ServerComp as Server Component
+    participant DB as Database
+    participant ClientComp as Client Component
+    
+    Browser->>NextJS: Request Page
+    NextJS->>ServerComp: Render Server Component
+    ServerComp->>DB: Fetch Data
+    DB-->>ServerComp: Return Data
+    ServerComp->>ServerComp: Generate HTML
+    ServerComp-->>NextJS: HTML + JSON
+    NextJS-->>Browser: Stream HTML
+    
+    Browser->>Browser: Parse HTML
+    Browser->>ClientComp: Hydrate Client Components
+    ClientComp->>ClientComp: Attach Event Listeners
+    ClientComp-->>Browser: Interactive Page
+```
+
+#### Client-Side Rendering (CSR) Flow
+
+```mermaid
+sequenceDiagram
+    participant Browser
+    participant NextJS as Next.js
+    participant ClientComp as Client Component
+    participant API as API Route
+    participant DB as Database
+    
+    Browser->>NextJS: Request Page
+    NextJS-->>Browser: Minimal HTML + JS Bundle
+    
+    Browser->>Browser: Execute JavaScript
+    Browser->>ClientComp: Render Component
+    ClientComp->>ClientComp: Show Loading State
+    ClientComp->>API: Fetch Data
+    API->>DB: Query Database
+    DB-->>API: Return Data
+    API-->>ClientComp: JSON Response
+    ClientComp->>ClientComp: Update State
+    ClientComp-->>Browser: Render with Data
+```
+
+#### API Route Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant NextJS as Next.js Router
+    participant Middleware as Middleware
+    participant RouteHandler as Route Handler
+    participant Auth as Auth Service
+    participant DB as Database
+    participant Cache as Cache
+    
+    Client->>NextJS: API Request
+    NextJS->>Middleware: Process Request
+    Middleware->>Auth: Authenticate
+    Auth-->>Middleware: Auth Result
+    
+    alt Authenticated
+        Middleware->>RouteHandler: Forward Request
+        RouteHandler->>Cache: Check Cache
+        Cache-->>RouteHandler: Cache Miss
+        
+        RouteHandler->>DB: Query Database
+        DB-->>RouteHandler: Return Data
+        RouteHandler->>Cache: Store in Cache
+        RouteHandler->>RouteHandler: Process Data
+        RouteHandler-->>NextJS: JSON Response
+        NextJS-->>Client: HTTP Response
+    else Not Authenticated
+        Middleware-->>NextJS: 401 Unauthorized
+        NextJS-->>Client: Error Response
+    end
+```
+
 #### Route Handlers
 
 ```typescript
@@ -651,6 +806,80 @@ export async function POST(request: NextRequest) {
 ---
 
 ## React Advanced Patterns
+
+### React Component Lifecycle
+
+#### Component Lifecycle Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> Mounting: Component Created
+    
+    state Mounting {
+        [*] --> Constructor: Initialize
+        Constructor --> GetDerivedState: getDerivedStateFromProps
+        GetDerivedState --> Render: render()
+        Render --> ComponentDidMount: componentDidMount()
+        ComponentDidMount --> [*]
+    }
+    
+    Mounting --> Updating: Props/State Change
+    
+    state Updating {
+        [*] --> GetDerivedState: getDerivedStateFromProps
+        GetDerivedState --> ShouldUpdate: shouldComponentUpdate()
+        ShouldUpdate --> Render: render()
+        Render --> GetSnapshot: getSnapshotBeforeUpdate()
+        GetSnapshot --> ComponentDidUpdate: componentDidUpdate()
+        ComponentDidUpdate --> [*]
+    }
+    
+    Updating --> Unmounting: Component Removed
+    
+    state Unmounting {
+        [*] --> ComponentWillUnmount: componentWillUnmount()
+        ComponentWillUnmount --> [*]
+    }
+    
+    Unmounting --> [*]
+    
+    note right of Mounting
+        Class Components
+        Lifecycle
+    end note
+```
+
+#### React Hooks Lifecycle (Functional Components)
+
+```mermaid
+flowchart TD
+    Start([Component Created]) --> UseState[useState<br/>Initialize State]
+    UseState --> UseEffect[useEffect<br/>Mount Effect]
+    UseEffect --> Render[Render Component]
+    
+    Render --> UserAction{User Action?}
+    UserAction -->|Yes| UpdateState[Update State]
+    UserAction -->|No| PropsChange{Props Change?}
+    
+    UpdateState --> UseEffectCleanup[useEffect Cleanup]
+    UseEffectCleanup --> UseEffectUpdate[useEffect<br/>Update Effect]
+    UseEffectUpdate --> Render
+    
+    PropsChange -->|Yes| UseMemo[useMemo<br/>Memoize Value]
+    PropsChange -->|No| Render
+    
+    UseMemo --> UseCallback[useCallback<br/>Memoize Function]
+    UseCallback --> Render
+    
+    Render --> Unmount{Component<br/>Unmount?}
+    Unmount -->|Yes| Cleanup[Cleanup Effects]
+    Unmount -->|No| UserAction
+    
+    Cleanup --> End([Component Destroyed])
+    
+    style Start fill:#e1f5ff
+    style End fill:#fff4e6
+```
 
 ### React Component Lifecycle
 
@@ -804,6 +1033,73 @@ export function AccordionHeader({ id, isOpen }: { id: string; isOpen: boolean })
 ---
 
 ## State Management
+
+### State Management Architecture
+
+```mermaid
+graph TB
+    subgraph Components[React Components]
+        Component1[Component 1]
+        Component2[Component 2]
+        Component3[Component 3]
+    end
+    
+    subgraph StateLayers[State Management Layers]
+        LocalState[Local State<br/>useState]
+        ContextState[Context API<br/>useContext]
+        GlobalState[Global State<br/>Zustand/Redux]
+        ServerState[Server State<br/>TanStack Query]
+    end
+    
+    subgraph DataSources[Data Sources]
+        API[API Endpoints]
+        Cache[React Query Cache]
+        LocalStorage[Local Storage]
+    end
+    
+    Component1 --> LocalState
+    Component2 --> ContextState
+    Component3 --> GlobalState
+    Component1 --> ServerState
+    
+    GlobalState --> LocalStorage
+    ServerState --> API
+    ServerState --> Cache
+    
+    style Components fill:#e1f5ff
+    style StateLayers fill:#fff4e6
+    style DataSources fill:#e1f5ff
+```
+
+### State Management Flow
+
+```mermaid
+flowchart TD
+    Start([User Action]) --> Determine{State Type?}
+    
+    Determine -->|Component Only| LocalState[Local State<br/>useState]
+    Determine -->|Shared in Tree| ContextState[Context API<br/>useContext]
+    Determine -->|Global| GlobalState[Global State<br/>Zustand/Redux]
+    Determine -->|Server Data| ServerState[Server State<br/>TanStack Query]
+    
+    LocalState --> UpdateLocal[Update Local State]
+    ContextState --> UpdateContext[Update Context]
+    GlobalState --> UpdateGlobal[Update Store]
+    ServerState --> FetchData[Fetch/Refetch Data]
+    
+    UpdateLocal --> ReRender[Re-render Component]
+    UpdateContext --> ReRenderTree[Re-render Tree]
+    UpdateGlobal --> ReRenderSubscribers[Re-render Subscribers]
+    FetchData --> UpdateCache[Update Cache]
+    UpdateCache --> ReRender
+    
+    ReRender --> End([UI Updated])
+    ReRenderTree --> End
+    ReRenderSubscribers --> End
+    
+    style Start fill:#e1f5ff
+    style End fill:#fff4e6
+```
 
 ### State Management Flow
 
@@ -1027,6 +1323,102 @@ export class PrismaUserRepository implements UserRepository {
 ---
 
 ## DevOps & Deployment
+
+### Next.js Build & Deployment Flow
+
+```mermaid
+flowchart TD
+    Start([Code Commit]) --> CI[CI Pipeline Triggered]
+    CI --> Install[Install Dependencies]
+    Install --> Lint[Run Linter]
+    Lint --> Test[Run Tests]
+    Test --> Build{Tests Pass?}
+    
+    Build -->|No| Fail[Build Failed]
+    Build -->|Yes| NextBuild[Next.js Build]
+    
+    NextBuild --> Analyze[Analyze Bundle]
+    Analyze --> Optimize[Optimize Assets]
+    Optimize --> StaticGen[Generate Static Pages]
+    StaticGen --> ServerComp[Compile Server Components]
+    ServerComp --> ClientComp[Compile Client Components]
+    
+    ClientComp --> Turbopack{Turbopack?}
+    Turbopack -->|Yes| TurboBuild[Turbopack Build]
+    Turbopack -->|No| WebpackBuild[Webpack Build]
+    
+    TurboBuild --> Output[Output Files]
+    WebpackBuild --> Output
+    
+    Output --> Deploy[Deploy to Platform]
+    Deploy --> Vercel{Vercel?}
+    Vercel -->|Yes| VercelDeploy[Vercel Deployment]
+    Vercel -->|No| CustomDeploy[Custom Deployment]
+    
+    VercelDeploy --> CDN[CDN Distribution]
+    CustomDeploy --> CDN
+    CDN --> Live([Live Site])
+    
+    style Start fill:#e1f5ff
+    style Live fill:#fff4e6
+    style Fail fill:#ffcccc
+```
+
+### Build Process Architecture
+
+```mermaid
+graph TB
+    subgraph Source[Source Code]
+        Pages[Pages/App Router]
+        Components[Components]
+        API[API Routes]
+        Config[Next.js Config]
+    end
+    
+    subgraph Build[Build Process]
+        Compiler[TypeScript/JavaScript Compiler]
+        Bundler[Turbopack/Webpack]
+        Optimizer[Optimizer]
+        StaticGen[Static Generator]
+    end
+    
+    subgraph Output[Build Output]
+        Static[Static Files]
+        Server[Server Functions]
+        Client[Client Bundles]
+        Manifest[Build Manifest]
+    end
+    
+    subgraph Runtime[Runtime]
+        NodeJS[Node.js Server]
+        Edge[Edge Runtime]
+        CDN[CDN]
+    end
+    
+    Pages --> Compiler
+    Components --> Compiler
+    API --> Compiler
+    Config --> Compiler
+    
+    Compiler --> Bundler
+    Bundler --> Optimizer
+    Optimizer --> StaticGen
+    
+    StaticGen --> Static
+    StaticGen --> Server
+    StaticGen --> Client
+    StaticGen --> Manifest
+    
+    Static --> CDN
+    Server --> NodeJS
+    Server --> Edge
+    Client --> CDN
+    
+    style Source fill:#e1f5ff
+    style Build fill:#fff4e6
+    style Output fill:#e1f5ff
+    style Runtime fill:#fff4e6
+```
 
 ### Next.js 16 Build & Cache Strategy
 
