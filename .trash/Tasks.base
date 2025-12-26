@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "Tasks",
+  "type": "table",
+  "sources": [
+    { "type": "folder", "path": "Projects", "recursive": true }
+  ],
+  "filters": [
+    { "property": "type", "operator": "equals", "value": "task" },
+    { "property": "project", "operator": "exists", "value": true },
+    { "property": "file.folder", "operator": "not_contains", "value": "Templates" }
+  ],
+  "columns": [
+    { "label": "Task", "property": "task-name" },
+    { "label": "Project", "property": "project" },
+    { "label": "Status", "property": "status" },
+    { "label": "Priority", "property": "priority" },
+    { "label": "Assignee", "property": "assignee" },
+    { "label": "Due", "property": "due-date" },
+    { "label": "Est (h)", "property": "estimated-hours" },
+    { "label": "Actual (h)", "property": "actual-hours" }
+  ],
+  "sort": [
+    { "property": "due-date", "direction": "asc" },
+    { "property": "priority", "direction": "desc" }
+  ]
+}
+

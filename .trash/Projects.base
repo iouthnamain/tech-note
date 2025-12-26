@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "name": "Projects",
+  "type": "table",
+  "sources": [
+    { "type": "folder", "path": "Projects", "recursive": true }
+  ],
+  "filters": [
+    { "property": "type", "operator": "equals", "value": "project" },
+    { "property": "project-name", "operator": "exists", "value": true },
+    { "property": "file.folder", "operator": "not_contains", "value": "Templates" }
+  ],
+  "columns": [
+    { "label": "Project", "property": "project-name" },
+    { "label": "Status", "property": "status" },
+    { "label": "Priority", "property": "priority" },
+    { "label": "Progress %", "property": "progress" },
+    { "label": "Start", "property": "start-date" },
+    { "label": "End", "property": "end-date" },
+    { "label": "Tags", "property": "tags" }
+  ],
+  "sort": [
+    { "property": "status", "direction": "asc" },
+    { "property": "priority", "direction": "desc" }
+  ]
+}
+

@@ -2,5 +2,12 @@
   "diagram-zoom-drag",
   "obsidian-excalidraw-plugin",
   "obsidian-kanban",
-  "make-md"
+  "dataview",
+  "obsidian-tasks-plugin",
+  "tag-wrangler",
+  "calendar",
+  "table-editor-obsidian",
+  "editing-toolbar",
+  "make-md",
+  "templater-obsidian"
 ]

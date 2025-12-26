@@ -1,5 +1,8 @@
 {
   "readableLineLength": false,
   "spellcheck": false,
-  "promptDelete": false
+  "promptDelete": false,
+  "alwaysUpdateLinks": true,
+  "strictLineBreaks": false,
+  "propertiesInDocument": "hidden"
 }

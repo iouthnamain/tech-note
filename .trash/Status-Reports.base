@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "name": "Status Reports",
+  "type": "table",
+  "sources": [
+    { "type": "folder", "path": "Projects", "recursive": true }
+  ],
+  "filters": [
+    { "property": "type", "operator": "equals", "value": "status-report" },
+    { "property": "project", "operator": "exists", "value": true },
+    { "property": "file.folder", "operator": "not_contains", "value": "Templates" }
+  ],
+  "columns": [
+    { "label": "Project", "property": "project" },
+    { "label": "Report Date", "property": "report-date" },
+    { "label": "Status", "property": "status" },
+    { "label": "Period Start", "property": "period-start" },
+    { "label": "Period End", "property": "period-end" }
+  ],
+  "sort": [
+    { "property": "report-date", "direction": "desc" }
+  ]
+}
+

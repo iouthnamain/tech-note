@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "name": "Issues",
+  "type": "table",
+  "sources": [
+    { "type": "folder", "path": "Projects", "recursive": true }
+  ],
+  "filters": [
+    { "property": "type", "operator": "equals", "value": "issue" },
+    { "property": "project", "operator": "exists", "value": true },
+    { "property": "file.folder", "operator": "not_contains", "value": "Templates" }
+  ],
+  "columns": [
+    { "label": "Issue", "property": "issue-name" },
+    { "label": "Project", "property": "project" },
+    { "label": "Priority", "property": "priority" },
+    { "label": "Severity", "property": "severity" },
+    { "label": "Status", "property": "status" },
+    { "label": "Assigned To", "property": "assigned-to" },
+    { "label": "Reported", "property": "date-reported" }
+  ],
+  "sort": [
+    { "property": "priority", "direction": "desc" },
+    { "property": "date-reported", "direction": "desc" }
+  ]
+}
+
