@@ -1,5 +1,4 @@
 [
-  "diagram-zoom-drag",
   "obsidian-excalidraw-plugin",
   "obsidian-kanban",
   "dataview",
@@ -9,5 +8,6 @@
   "table-editor-obsidian",
   "editing-toolbar",
   "make-md",
-  "templater-obsidian"
+  "templater-obsidian",
+  "diagram-zoom-drag"
 ]

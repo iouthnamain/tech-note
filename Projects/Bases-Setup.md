@@ -51,3 +51,5 @@ Use this checklist to create/update Bases that sit on top of `Projects/`. Align 
 - If a base shows extra template files, add a filter to exclude `contains(path, "Templates")`.
 - Use card/grouped views for pipelines (e.g., project status) and table views for bulk edits (e.g., progress updates).
 
+
+

@@ -4,5 +4,7 @@
   "promptDelete": false,
   "alwaysUpdateLinks": true,
   "strictLineBreaks": false,
-  "propertiesInDocument": "hidden"
+  "propertiesInDocument": "hidden",
+  "defaultViewMode": "preview",
+  "livePreview": false
 }

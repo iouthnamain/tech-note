@@ -9,11 +9,11 @@
         "autoDetect": true
       },
       "picker": {
-        "enabled": false
+        "enabled": true
       }
     },
     "folding": {
-      "foldByDefault": false,
+      "foldByDefault": true,
       "autoFoldOnFocusChange": false
     },
     "settingsPagination": {
@@ -22,21 +22,21 @@
     "size": {
       "expanded": {
         "width": {
-          "value": 100,
+          "value": 90,
           "type": "%"
         },
         "height": {
-          "value": 100,
+          "value": 90,
           "type": "%"
         }
       },
       "folded": {
         "width": {
-          "value": 40,
+          "value": 50,
           "type": "%"
         },
         "height": {
-          "value": 40,
+          "value": 50,
           "type": "%"
         }
       }

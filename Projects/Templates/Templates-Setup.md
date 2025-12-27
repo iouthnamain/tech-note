@@ -33,3 +33,5 @@ Feel free to swap keys to avoid conflicts; keep them grouped for muscle memory.
 - Replace all `{{...}}` placeholders immediately (project names, dates, scope).
 - For overview templates, ensure frontmatter `project` matches the display name in the main project file; FROM paths use the project **folder** name.
 
+
+

@@ -1,32 +1,156 @@
-# SAP ABAP Programming Guide - Comprehensive
+# SAP ABAP Programming Guide - Comprehensive Index
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [ABAP Language Overview](#abap-language-overview)
-3. [Data Types and Variables](#data-types-and-variables)
-4. [Internal Tables](#internal-tables)
-5. [Control Structures](#control-structures)
-6. [Data Dictionary](#data-dictionary)
-7. [Report Programming](#report-programming)
-8. [Screen Programming](#screen-programming)
-9. [Function Modules and BAPIs](#function-modules-and-bapis)
-10. [ABAP Objects](#abap-objects)
-11. [Enhancement Framework](#enhancement-framework)
-12. [Performance Optimization](#performance-optimization)
-13. [Debugging Techniques](#debugging-techniques)
-14. [Best Practices](#best-practices)
-15. [Common Pitfalls](#common-pitfalls)
-16. [Real-World Examples](#real-world-examples)
-17. [Templates & Checklists](#templates--checklists)
-18. [Tools & Software](#tools--software)
-19. [Resources](#resources)
-20. [Summary](#summary)
+## 📚 Navigation Guide
+
+This comprehensive guide has been reorganized into **18 focused guides** for better learning and navigation. This document now serves as an **index and navigation hub** to help you find the right guide for your needs.
+
+**👉 Start your learning journey: [ABAP-Guides/README.md](./ABAP-Guides/README.md)**
+
+---
+
+## 🎯 Quick Navigation by Topic
+
+### Beginner Level (Start Here)
+
+| Guide | Topic | Description |
+|-------|-------|-------------|
+| **[01 - Basics](./ABAP-Guides/01_SAP_ABAP_BASICS_GUIDE.md)** | ABAP Fundamentals | Language overview, data types, control structures, first program |
+| **[02 - Data Dictionary](./ABAP-Guides/02_SAP_ABAP_DATA_DICTIONARY_GUIDE.md)** | Data Dictionary | Domains, data elements, tables, views, search helps |
+| **[03 - Internal Tables](./ABAP-Guides/03_SAP_ABAP_INTERNAL_TABLES_GUIDE.md)** | Internal Tables | Table types, operations, performance, modern ABAP |
+| **[04 - Reports](./ABAP-Guides/04_SAP_ABAP_REPORTS_GUIDE.md)** | Report Programming | Classic, interactive, and ALV reports |
+| **[05 - Function Modules](./ABAP-Guides/05_SAP_ABAP_FUNCTION_MODULES_GUIDE.md)** | Function Modules | Reusable code, BAPIs, RFC-enabled modules |
+
+### Intermediate Level
+
+| Guide | Topic | Description |
+|-------|-------|-------------|
+| **[06 - Screen Programming](./ABAP-Guides/06_SAP_ABAP_SCREEN_PROGRAMMING_GUIDE.md)** | Screen Programming | Custom UIs, PBO/PAI, module pools |
+| **[07 - ALV Programming](./ABAP-Guides/07_SAP_ABAP_ALV_PROGRAMMING_GUIDE.md)** | ALV Reports | SALV framework, ALV Grid, customization |
+| **[08 - ABAP Objects](./ABAP-Guides/08_SAP_ABAP_OBJECTS_GUIDE.md)** | Object-Oriented | Classes, interfaces, inheritance, polymorphism |
+| **[09 - Debugging](./ABAP-Guides/09_SAP_ABAP_DEBUGGING_GUIDE.md)** | Debugging | Debugger, breakpoints, watchpoints, techniques |
+| **[10 - Performance](./ABAP-Guides/10_SAP_ABAP_PERFORMANCE_GUIDE.md)** | Performance | Database optimization, table optimization, runtime analysis |
+
+### Advanced Level
+
+| Guide | Topic | Description |
+|-------|-------|-------------|
+| **[11 - Enhancement Framework](./ABAP-Guides/11_SAP_ABAP_ENHANCEMENT_FRAMEWORK_GUIDE.md)** | Enhancements | BADIs, user exits, customer exits, enhancement points |
+| **[12 - Best Practices](./ABAP-Guides/12_SAP_ABAP_BEST_PRACTICES_GUIDE.md)** | Best Practices | Coding standards, naming, structure, quality |
+| **[13 - Security](./ABAP-Guides/13_SAP_ABAP_SECURITY_GUIDE.md)** | Security | Authorization checks, secure coding, data protection |
+| **[14 - Unit Testing](./ABAP-Guides/14_SAP_ABAP_UNIT_TESTING_GUIDE.md)** | Unit Testing | ABAP Unit framework, test classes, test doubles |
+| **[15 - Integration](./ABAP-Guides/15_SAP_ABAP_INTEGRATION_GUIDE.md)** | Integration | RFC, IDoc, web services, API integration |
+
+### Specialized Topics
+
+| Guide | Topic | Description |
+|-------|-------|-------------|
+| **[16 - Web Dynpro](./ABAP-Guides/16_SAP_ABAP_WEB_DYNPRO_GUIDE.md)** | Web Dynpro | Web-based UIs, components, controllers |
+| **[17 - OData Services](./ABAP-Guides/17_SAP_ABAP_ODATA_SERVICES_GUIDE.md)** | OData | OData services, entity sets, operations |
+| **[18 - RESTful Programming](./ABAP-Guides/18_SAP_ABAP_RESTFUL_PROGRAMMING_GUIDE.md)** | RAP Model | RESTful ABAP, CDS views, behavior definitions, S/4HANA |
+
+---
+
+## 📖 Learning Paths
+
+### Complete Beginner Path
+1. [01 - Basics](./ABAP-Guides/01_SAP_ABAP_BASICS_GUIDE.md) → 
+2. [02 - Data Dictionary](./ABAP-Guides/02_SAP_ABAP_DATA_DICTIONARY_GUIDE.md) → 
+3. [03 - Internal Tables](./ABAP-Guides/03_SAP_ABAP_INTERNAL_TABLES_GUIDE.md) → 
+4. [04 - Reports](./ABAP-Guides/04_SAP_ABAP_REPORTS_GUIDE.md) → 
+5. [05 - Function Modules](./ABAP-Guides/05_SAP_ABAP_FUNCTION_MODULES_GUIDE.md)
+
+### Report Development Path
+1. [01 - Basics](./ABAP-Guides/01_SAP_ABAP_BASICS_GUIDE.md)
+2. [02 - Data Dictionary](./ABAP-Guides/02_SAP_ABAP_DATA_DICTIONARY_GUIDE.md)
+3. [03 - Internal Tables](./ABAP-Guides/03_SAP_ABAP_INTERNAL_TABLES_GUIDE.md)
+4. [04 - Reports](./ABAP-Guides/04_SAP_ABAP_REPORTS_GUIDE.md)
+5. [07 - ALV Programming](./ABAP-Guides/07_SAP_ABAP_ALV_PROGRAMMING_GUIDE.md)
+
+### Modern ABAP / S/4HANA Path
+1. [01 - Basics](./ABAP-Guides/01_SAP_ABAP_BASICS_GUIDE.md)
+2. [08 - ABAP Objects](./ABAP-Guides/08_SAP_ABAP_OBJECTS_GUIDE.md)
+3. [17 - OData Services](./ABAP-Guides/17_SAP_ABAP_ODATA_SERVICES_GUIDE.md)
+4. [18 - RESTful Programming](./ABAP-Guides/18_SAP_ABAP_RESTFUL_PROGRAMMING_GUIDE.md)
+
+### Performance Optimization Path
+1. [03 - Internal Tables](./ABAP-Guides/03_SAP_ABAP_INTERNAL_TABLES_GUIDE.md)
+2. [10 - Performance](./ABAP-Guides/10_SAP_ABAP_PERFORMANCE_GUIDE.md)
+
+---
+
+## 🔍 Find by Topic
+
+**Looking for a specific topic?** Use this index:
+
+- **ABAP Language Basics**: [01 - Basics](./ABAP-Guides/01_SAP_ABAP_BASICS_GUIDE.md)
+- **Data Dictionary**: [02 - Data Dictionary](./ABAP-Guides/02_SAP_ABAP_DATA_DICTIONARY_GUIDE.md)
+- **Internal Tables**: [03 - Internal Tables](./ABAP-Guides/03_SAP_ABAP_INTERNAL_TABLES_GUIDE.md)
+- **Reports**: [04 - Reports](./ABAP-Guides/04_SAP_ABAP_REPORTS_GUIDE.md), [07 - ALV](./ABAP-Guides/07_SAP_ABAP_ALV_PROGRAMMING_GUIDE.md)
+- **Function Modules**: [05 - Function Modules](./ABAP-Guides/05_SAP_ABAP_FUNCTION_MODULES_GUIDE.md)
+- **Screens**: [06 - Screen Programming](./ABAP-Guides/06_SAP_ABAP_SCREEN_PROGRAMMING_GUIDE.md)
+- **Object-Oriented**: [08 - ABAP Objects](./ABAP-Guides/08_SAP_ABAP_OBJECTS_GUIDE.md)
+- **Debugging**: [09 - Debugging](./ABAP-Guides/09_SAP_ABAP_DEBUGGING_GUIDE.md)
+- **Performance**: [10 - Performance](./ABAP-Guides/10_SAP_ABAP_PERFORMANCE_GUIDE.md)
+- **Enhancements**: [11 - Enhancement Framework](./ABAP-Guides/11_SAP_ABAP_ENHANCEMENT_FRAMEWORK_GUIDE.md)
+- **Best Practices**: [12 - Best Practices](./ABAP-Guides/12_SAP_ABAP_BEST_PRACTICES_GUIDE.md)
+- **Security**: [13 - Security](./ABAP-Guides/13_SAP_ABAP_SECURITY_GUIDE.md)
+- **Testing**: [14 - Unit Testing](./ABAP-Guides/14_SAP_ABAP_UNIT_TESTING_GUIDE.md)
+- **Integration**: [15 - Integration](./ABAP-Guides/15_SAP_ABAP_INTEGRATION_GUIDE.md)
+- **Web Dynpro**: [16 - Web Dynpro](./ABAP-Guides/16_SAP_ABAP_WEB_DYNPRO_GUIDE.md)
+- **OData**: [17 - OData Services](./ABAP-Guides/17_SAP_ABAP_ODATA_SERVICES_GUIDE.md)
+- **RAP / S/4HANA**: [18 - RESTful Programming](./ABAP-Guides/18_SAP_ABAP_RESTFUL_PROGRAMMING_GUIDE.md)
+
+---
+
+## 📚 Original Comprehensive Content
+
+The original comprehensive content has been reorganized into the 18 focused guides above. Each guide contains:
+- **Extensive explanations** with context
+- **Visual diagrams** (flowcharts, sequence diagrams, architecture diagrams)
+- **Multiple code examples** (basic, use cases, step-by-step, before/after)
+- **Best practices** and common pitfalls
+- **Real-world examples**
+- **Cross-references** to related guides
+
+---
+
+## 🚀 Getting Started
+
+1. **New to ABAP?** → Start with [01 - Basics](./ABAP-Guides/01_SAP_ABAP_BASICS_GUIDE.md)
+2. **Need specific topic?** → Use the table above to find the right guide
+3. **Want complete path?** → Follow the learning paths section above
+4. **See all guides?** → [ABAP-Guides/README.md](./ABAP-Guides/README.md)
+
+---
+
+## 📋 Original Table of Contents (Reference)
+
+The following sections were covered in the original comprehensive guide and are now in the focused guides:
+
+1. [ABAP Language Overview](#abap-language-overview) → [01 - Basics](./ABAP-Guides/01_SAP_ABAP_BASICS_GUIDE.md)
+2. [Data Types and Variables](#data-types-and-variables) → [01 - Basics](./ABAP-Guides/01_SAP_ABAP_BASICS_GUIDE.md)
+3. [Internal Tables](#internal-tables) → [03 - Internal Tables](./ABAP-Guides/03_SAP_ABAP_INTERNAL_TABLES_GUIDE.md)
+4. [Control Structures](#control-structures) → [01 - Basics](./ABAP-Guides/01_SAP_ABAP_BASICS_GUIDE.md)
+5. [Data Dictionary](#data-dictionary) → [02 - Data Dictionary](./ABAP-Guides/02_SAP_ABAP_DATA_DICTIONARY_GUIDE.md)
+6. [Report Programming](#report-programming) → [04 - Reports](./ABAP-Guides/04_SAP_ABAP_REPORTS_GUIDE.md)
+7. [Screen Programming](#screen-programming) → [06 - Screen Programming](./ABAP-Guides/06_SAP_ABAP_SCREEN_PROGRAMMING_GUIDE.md)
+8. [Function Modules and BAPIs](#function-modules-and-bapis) → [05 - Function Modules](./ABAP-Guides/05_SAP_ABAP_FUNCTION_MODULES_GUIDE.md)
+9. [ABAP Objects](#abap-objects) → [08 - ABAP Objects](./ABAP-Guides/08_SAP_ABAP_OBJECTS_GUIDE.md)
+10. [Enhancement Framework](#enhancement-framework) → [11 - Enhancement Framework](./ABAP-Guides/11_SAP_ABAP_ENHANCEMENT_FRAMEWORK_GUIDE.md)
+11. [Performance Optimization](#performance-optimization) → [10 - Performance](./ABAP-Guides/10_SAP_ABAP_PERFORMANCE_GUIDE.md)
+12. [Debugging Techniques](#debugging-techniques) → [09 - Debugging](./ABAP-Guides/09_SAP_ABAP_DEBUGGING_GUIDE.md)
+13. [Best Practices](#best-practices) → [12 - Best Practices](./ABAP-Guides/12_SAP_ABAP_BEST_PRACTICES_GUIDE.md)
+14. [Common Pitfalls](#common-pitfalls) → Included in each guide
+15. [Real-World Examples](#real-world-examples) → Included in each guide
+16. [Templates & Checklists](#templates--checklists) → [12 - Best Practices](./ABAP-Guides/12_SAP_ABAP_BEST_PRACTICES_GUIDE.md)
+17. [Tools & Software](#tools--software) → Included in each guide
+18. [Resources](#resources) → Included in each guide
 
 ---
 
 ## Introduction
 
-ABAP (Advanced Business Application Programming) is SAP's proprietary programming language used to develop and customize SAP applications. This guide covers ABAP language fundamentals, development techniques, and best practices for SAP development.
+ABAP (Advanced Business Application Programming) is SAP's proprietary programming language used to develop and customize SAP applications. This guide serves as a navigation hub to the comprehensive ABAP learning materials organized into 18 focused guides.
 
 ### Who This Guide Is For
 - ABAP developers

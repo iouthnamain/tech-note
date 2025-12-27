@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projects/Sample-Project-Reference.md",
-                "mode": "source",
-                "source": false
+                "file": "Full-Stack-Guides/Group-01-Foundation-Review/01.15_Environment_Variables_Configuration.md",
+                "mode": "preview",
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "Sample-Project-Reference"
+              "title": "01.15_Environment_Variables_Configuration"
             }
           }
         ]
@@ -75,7 +75,7 @@
             }
           },
           {
-            "id": "17c5a43c0a973345",
+            "id": "fde7c1598131a634",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -89,7 +89,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 284.50000381469727
+    "width": 327.50000381469727
   },
   "right": {
     "id": "6d0bfa2a0e22d198",
@@ -192,10 +192,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "Projects/Sample-Project-Reference.md"
+                "file": "Full-Stack-Guides/Group-01-Foundation-Review/01.15_Environment_Variables_Configuration.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for Sample-Project-Reference"
+              "title": "File properties for 01.15_Environment_Variables_Configuration"
             }
           }
         ],
@@ -203,10 +203,12 @@
       }
     ],
     "direction": "horizontal",
-    "width": 283.5
+    "width": 283.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
+      "diagram-zoom-drag:Picker mode": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -222,41 +224,41 @@
   },
   "active": "6e99bc18625cab57",
   "lastOpenFiles": [
-    "Projects/Bases-Setup.md",
-    "Projects/Workflow.md",
-    "Projects/Sample-Project-Reference.md",
-    "Projects/Active/E-Commerce-Platform-Enhancement/Members/Alice-Developer.md",
-    "Projects/Templates/Templates-Setup.md",
-    "Projects/Active/E-Commerce-Platform-Enhancement/Members/Members.md",
-    "Projects/Active/E-Commerce-Platform-Enhancement/E-Commerce-Platform-Enhancement.md",
-    "Projects/Active/Active.md",
-    "Projects/Project-Dashboard.md",
-    "Developer/WORKFLOWS.md",
-    "Developer/Personal-Tasks/Personal-Tasks.md",
-    "Developer/Personal-Projects/Personal-Projects.md",
-    "Developer/Personal-Tasks/Task-1-Sample.md",
-    "Developer/Templates/Personal-Task-Template.md",
-    "Developer/Templates/Templates.md",
-    "Developer/README.md",
-    "Teams/Active/Example-Team/Projects/Projects.md",
-    "Teams/Active/Example-Team/Performance-Reviews/Performance-Reviews.md",
-    "Teams/Active/Example-Team/One-on-Ones/One-on-Ones.md",
-    "Teams/Active/Example-Team/Mentoring/Mentoring.md",
-    "Teams/Active/Example-Team/Members/Members.md",
-    "Teams/Active/Example-Team/Incidents/Incidents.md",
-    "Teams/Active/Example-Team/Backlog/Backlog.md",
-    "Teams/Active/Example-Team/Architecture-Reviews/Architecture-Reviews.md",
-    "Teams/Active/Example-Team/Example-Team.md",
-    "Teams/Teams-Dashboard.md",
-    "Teams/Active/Example-Team/Mentoring/Sessions",
-    "Teams/Active/Example-Team/Mentoring/Development-Plans",
-    "Teams/Active/Example-Team/Technical-Decisions",
-    "Teams/Active/Example-Team/Team-Retros",
-    "Teams/Active/Example-Team/Team-Health",
-    "Teams/Active/Example-Team/Projects",
-    "Teams/Active/Example-Team/Performance-Reviews",
-    "Teams/Active/Example-Team/One-on-Ones",
-    "Teams/Active/Example-Team/Mentoring",
-    "Teams/Active/Example-Team/Members"
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.16_System_Integration.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.15_Complex_Reporting.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.14_Data_Synchronization.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.13_Multi_tenancy.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.12_Business_Rules_Engine.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.11_Complex_Validation.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.10_State_Machines.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.09_Workflow_Management.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.08_Event_Driven_Architecture.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.07_Real_time_Updates.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.06_Background_Jobs.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.05_Scheduled_Tasks.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.04_Batch_Operations.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.03_Data_Aggregation.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.02_Complex_Filtering.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/09.01_Advanced_Search.md",
+    "Full-Stack-Guides/Group-09-Complex-Functions/README.md",
+    "Full-Stack-Guides/Group-08-Code-Review/08.15_Review_Metrics.md",
+    "Full-Stack-Guides/Group-08-Code-Review/08.14_Code_Review_Culture.md",
+    "Full-Stack-Guides/Group-08-Code-Review/08.13_Review_Automation.md",
+    "Full-Stack-Guides/Group-08-Code-Review/08.12_Common_Review_Issues.md",
+    "Full-Stack-Guides/Group-08-Code-Review/08.11_Review_Best_Practices.md",
+    "Full-Stack-Guides/Group-08-Code-Review/08.10_Review_Tools.md",
+    "Full-Stack-Guides/Group-08-Code-Review/08.09_Handling_Review_Comments.md",
+    "Full-Stack-Guides/Group-08-Code-Review/08.08_Providing_Feedback.md",
+    "Full-Stack-Guides/Group-08-Code-Review/08.07_Architecture_Review.md",
+    "Full-Stack-Guides/Group-17-DevOps-Automation",
+    "Full-Stack-Guides/Group-16-Performance-Testing",
+    "Full-Stack-Guides/Group-15-Soft-Skills",
+    "Full-Stack-Guides/Group-14-Advanced-Tech",
+    "Full-Stack-Guides/Group-13-Design-Patterns",
+    "Full-Stack-Guides/Group-12-Time-Management",
+    "Full-Stack-Guides/Group-11-Agile-Scrum",
+    "Full-Stack-Guides/Group-10-Team-Projects",
+    "Full-Stack-Guides/Group-09-Complex-Functions",
+    "Full-Stack-Guides/Group-08-Code-Review"
   ]
 }

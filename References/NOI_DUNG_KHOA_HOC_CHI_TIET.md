@@ -2,6 +2,47 @@
 
 Khóa học bao gồm **250+ topic** được chia thành **17 nhóm nội dung lớn**. Mỗi topic được mô tả chi tiết với mục tiêu học tập và kỹ năng đạt được cụ thể.
 
+## 📚 Comprehensive Guides Available / Hướng dẫn toàn diện có sẵn
+
+**English**: Comprehensive bilingual (Vietnamese/English) guides have been created based on this content. Each guide includes:
+- Detailed explanations with diagrams
+- 5-10+ code examples in JavaScript/TypeScript, React, Next.js, Node.js, NestJS, Python
+- Real-world scenarios and best practices
+- Performance and security considerations
+
+**Vietnamese**: Các hướng dẫn toàn diện song ngữ (Tiếng Việt/Tiếng Anh) đã được tạo dựa trên nội dung này. Mỗi hướng dẫn bao gồm:
+- Giải thích chi tiết với sơ đồ
+- 5-10+ ví dụ mã trong JavaScript/TypeScript, React, Next.js, Node.js, NestJS, Python
+- Tình huống thực tế và thực hành tốt nhất
+- Xem xét hiệu năng và bảo mật
+
+### Available Guides / Hướng dẫn có sẵn
+
+- **[Full-Stack-Guides/](../Full-Stack-Guides/)** - Main directory / Thư mục chính
+- **[Group 01: Foundation Review](../Full-Stack-Guides/Group-01-Foundation-Review/)** - 15 comprehensive guides (✅ Completed)
+- **[Comprehensive Index](../Full-Stack-Guides/Comprehensive_Index.md)** - Complete navigation hub
+
+### Group 01 Guides / Hướng dẫn Nhóm 1
+
+All 15 topics from NHÓM 1 have been expanded into comprehensive guides:
+- 01.01 Data Structures (Array, List, Map, Set)
+- 01.02 Algorithms (Sorting, Searching)
+- 01.03 OOP (Inheritance, Polymorphism, Encapsulation)
+- 01.04 Interface and Abstract Class
+- 01.05 HTTP Protocol and RESTful API
+- 01.06 MVC/MVVM/Layered Architecture
+- 01.07 Git Basics (Commit, Branch, Merge)
+- 01.08 HTML5 (Structure and Semantic Elements)
+- 01.09 CSS3 (Layout and Styling)
+- 01.10 JavaScript ES6+ (Modern JavaScript)
+- 01.11 Database Basics (SQL and Queries)
+- 01.12 Database Normalization (1NF, 2NF, 3NF)
+- 01.13 JSON and XML (Data Format)
+- 01.14 Error Handling Basics
+- 01.15 Environment Variables and Configuration
+
+**Note**: This document serves as the source reference. For learning, use the comprehensive guides in `Full-Stack-Guides/`.
+
 ---
 
 ## 🔹 NHÓM 1: ÔN LẠI KIẾN THỨC NỀN TẢNG (LEVEL FRESHER)

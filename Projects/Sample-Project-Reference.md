@@ -37,3 +37,5 @@ flowchart TD
 4) Clear task/risk/issue/status-report content; keep frontmatter keys.
 5) Verify with `Project-Dashboard.md` that the new project appears and queries run without errors.
 
+
+
