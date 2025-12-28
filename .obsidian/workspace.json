@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Full-Stack-Guides/Group-01-Foundation-Review/01.15_Environment_Variables_Configuration.md",
+                "file": "Full-Stack-Guides/Group-04-Requirements-Research/04.03_Acceptance_Criteria.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "01.15_Environment_Variables_Configuration"
+              "title": "04.03_Acceptance_Criteria"
             }
           }
         ]
@@ -75,7 +75,7 @@
             }
           },
           {
-            "id": "fde7c1598131a634",
+            "id": "270c891a73017685",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -192,10 +192,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "Full-Stack-Guides/Group-01-Foundation-Review/01.15_Environment_Variables_Configuration.md"
+                "file": "Full-Stack-Guides/Group-01-Foundation-Review/01.03_OOP_Inheritance_Polymorphism_Encapsulation.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for 01.15_Environment_Variables_Configuration"
+              "title": "File properties for 01.03_OOP_Inheritance_Polymorphism_Encapsulation"
             }
           }
         ],
@@ -224,6 +224,18 @@
   },
   "active": "6e99bc18625cab57",
   "lastOpenFiles": [
+    "Full-Stack-Guides/Group-04-Requirements-Research/04.02_User_Story_Understanding.md",
+    "Full-Stack-Guides/Group-04-Requirements-Research/README.md",
+    "Full-Stack-Guides/Group-04-Requirements-Research/04.01_Business_Requirements_Analysis.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.04_Interface_Abstract_Class.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.02_Algorithms_Sorting_Searching.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.07_Git_Basics_Commit_Branch_Merge.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/README.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.03_OOP_Inheritance_Polymorphism_Encapsulation.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.05_HTTP_Protocol_RESTful_API.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.08_HTML5_Structure_Semantic_Elements.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.01_Data_Structures_Array_List_Map_Set.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.15_Environment_Variables_Configuration.md",
     "Full-Stack-Guides/Group-09-Complex-Functions/09.16_System_Integration.md",
     "Full-Stack-Guides/Group-09-Complex-Functions/09.15_Complex_Reporting.md",
     "Full-Stack-Guides/Group-09-Complex-Functions/09.14_Data_Synchronization.md",
@@ -238,18 +250,6 @@
     "Full-Stack-Guides/Group-09-Complex-Functions/09.05_Scheduled_Tasks.md",
     "Full-Stack-Guides/Group-09-Complex-Functions/09.04_Batch_Operations.md",
     "Full-Stack-Guides/Group-09-Complex-Functions/09.03_Data_Aggregation.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.02_Complex_Filtering.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.01_Advanced_Search.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/README.md",
-    "Full-Stack-Guides/Group-08-Code-Review/08.15_Review_Metrics.md",
-    "Full-Stack-Guides/Group-08-Code-Review/08.14_Code_Review_Culture.md",
-    "Full-Stack-Guides/Group-08-Code-Review/08.13_Review_Automation.md",
-    "Full-Stack-Guides/Group-08-Code-Review/08.12_Common_Review_Issues.md",
-    "Full-Stack-Guides/Group-08-Code-Review/08.11_Review_Best_Practices.md",
-    "Full-Stack-Guides/Group-08-Code-Review/08.10_Review_Tools.md",
-    "Full-Stack-Guides/Group-08-Code-Review/08.09_Handling_Review_Comments.md",
-    "Full-Stack-Guides/Group-08-Code-Review/08.08_Providing_Feedback.md",
-    "Full-Stack-Guides/Group-08-Code-Review/08.07_Architecture_Review.md",
     "Full-Stack-Guides/Group-17-DevOps-Automation",
     "Full-Stack-Guides/Group-16-Performance-Testing",
     "Full-Stack-Guides/Group-15-Soft-Skills",
