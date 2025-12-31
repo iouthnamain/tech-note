@@ -11,14 +11,10 @@
             "id": "6e99bc18625cab57",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Full-Stack-Guides/Group-04-Requirements-Research/04.03_Acceptance_Criteria.md",
-                "mode": "preview",
-                "source": true
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "04.03_Acceptance_Criteria"
+              "title": "New tab"
             }
           }
         ]
@@ -75,7 +71,7 @@
             }
           },
           {
-            "id": "270c891a73017685",
+            "id": "f121c317c7e3498c",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -89,7 +85,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 327.50000381469727
+    "width": 351.50000381469727
   },
   "right": {
     "id": "6d0bfa2a0e22d198",
@@ -98,6 +94,7 @@
       {
         "id": "588644315c6d543d",
         "type": "tabs",
+        "dimension": 42.183908045977006,
         "children": [
           {
             "id": "7b6c9921ad62dc73",
@@ -162,21 +159,6 @@
             }
           },
           {
-            "id": "0a2a2c2e25a069a2",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "FULL-STACK LEVEL JUNIOR.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "Outline of FULL-STACK LEVEL JUNIOR"
-            }
-          },
-          {
             "id": "aee2b19e6f520b9c",
             "type": "leaf",
             "state": {
@@ -191,20 +173,38 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {
-                "file": "Full-Stack-Guides/Group-01-Foundation-Review/01.03_OOP_Inheritance_Polymorphism_Encapsulation.md"
-              },
+              "state": {},
               "icon": "lucide-info",
-              "title": "File properties for 01.03_OOP_Inheritance_Polymorphism_Encapsulation"
+              "title": "File properties"
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 4
+      },
+      {
+        "id": "ff96ad4ee4beaeba",
+        "type": "tabs",
+        "dimension": 57.81609195402299,
+        "children": [
+          {
+            "id": "0a2a2c2e25a069a2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 283.5,
-    "collapsed": true
+    "width": 283.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -224,41 +224,41 @@
   },
   "active": "6e99bc18625cab57",
   "lastOpenFiles": [
-    "Full-Stack-Guides/Group-04-Requirements-Research/04.02_User_Story_Understanding.md",
-    "Full-Stack-Guides/Group-04-Requirements-Research/README.md",
-    "Full-Stack-Guides/Group-04-Requirements-Research/04.01_Business_Requirements_Analysis.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.04_Interface_Abstract_Class.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.02_Algorithms_Sorting_Searching.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.07_Git_Basics_Commit_Branch_Merge.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/README.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.03_OOP_Inheritance_Polymorphism_Encapsulation.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.05_HTTP_Protocol_RESTful_API.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.08_HTML5_Structure_Semantic_Elements.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/Project_Management/README.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/Project_Management/Project_Management_Plan.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/Project_Management",
+    "Dailies/2025/12/29.md",
+    "Dailies/2025/12/30.md",
+    "Dailies/2025/12/31.md",
+    "Dailies/2025/12",
+    "Dailies/2025",
+    "Dailies/2026/01/01.md",
+    "Dailies/2026/01",
+    "Dailies/2026",
+    "Dailies/Dailies.md",
+    "Dailies/2025/12-30.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/00_Project_Overview.md",
+    "Dailies",
+    "SAP-Guides/Capstone/Employee-Leave-System/Team_Members_Tasks.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/Project_Management_Plan.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/README.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/Phase1_Requirements_Design.md",
+    "SAP-Guides/SAP_CAPSTONE_PROJECT_GUIDE.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/Phase2_Development.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/Technical_Architecture.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/References_Resources.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/Phase4_Documentation_Presentation.md",
+    "SAP-Guides/Capstone/Employee-Leave-System/Phase3_Testing_QA.md",
+    "Phase1_Requirements_Design.md",
+    "SAP-Guides/Capstone/Abap-4.md",
+    "SAP-Guides/Capstone/Employee-Leave-System",
+    "SAP-Guides/Capstone/SAP_Topics_Thesis_Sprint_2026.xlsx",
+    "SAP-Guides/Capstone",
+    "SAP/SAP.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.13_JSON_XML_Data_Format.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.11_Database_Basics_SQL_Queries.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.10_JavaScript_ES6_Modern_JavaScript.md",
     "Full-Stack-Guides/Group-01-Foundation-Review/01.01_Data_Structures_Array_List_Map_Set.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.15_Environment_Variables_Configuration.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.16_System_Integration.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.15_Complex_Reporting.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.14_Data_Synchronization.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.13_Multi_tenancy.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.12_Business_Rules_Engine.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.11_Complex_Validation.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.10_State_Machines.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.09_Workflow_Management.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.08_Event_Driven_Architecture.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.07_Real_time_Updates.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.06_Background_Jobs.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.05_Scheduled_Tasks.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.04_Batch_Operations.md",
-    "Full-Stack-Guides/Group-09-Complex-Functions/09.03_Data_Aggregation.md",
-    "Full-Stack-Guides/Group-17-DevOps-Automation",
-    "Full-Stack-Guides/Group-16-Performance-Testing",
-    "Full-Stack-Guides/Group-15-Soft-Skills",
-    "Full-Stack-Guides/Group-14-Advanced-Tech",
-    "Full-Stack-Guides/Group-13-Design-Patterns",
-    "Full-Stack-Guides/Group-12-Time-Management",
-    "Full-Stack-Guides/Group-11-Agile-Scrum",
-    "Full-Stack-Guides/Group-10-Team-Projects",
-    "Full-Stack-Guides/Group-09-Complex-Functions",
-    "Full-Stack-Guides/Group-08-Code-Review"
+    "Tags/#retro"
   ]
 }
