@@ -36,6 +36,7 @@ This documentation provides the framework for managing the capstone project usin
 
 ---
 
-**Last Updated**: 2024  
+**Last Updated**: 2026  
 **Status**: Active
+
 

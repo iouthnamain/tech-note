@@ -1,6 +1,6 @@
 # Project Overview - Employee Leave Request and Approval System
 
-**← [Back to README](README.md)**
+**← [Back to README](SAP-Guides/Capstone/Employee-Leave-System/README.md)**
 
 ---
 
@@ -206,7 +206,7 @@ gantt
     title Employee Leave System - 12 Week Project Timeline
     dateFormat YYYY-MM-DD
     section Phase 1: Requirements
-    Week 1: Requirements Gathering    :a1, 2024-01-01, 7d
+    Week 1: Requirements Gathering    :a1, 2026-01-05, 7d
     Week 2: Detailed Design           :a2, after a1, 7d
     section Phase 2: Development
     Week 3: Foundation & Data Model    :b1, after a2, 7d
@@ -547,5 +547,5 @@ sequenceDiagram
 
 ---
 
-**← [Back to README](README.md)** | **Next: [Phase 1: Requirements & Design](Phase1_Requirements_Design.md)**
+**← [Back to README](SAP-Guides/Capstone/Employee-Leave-System/README.md)** | **Next: [Phase 1: Requirements & Design](Phase1_Requirements_Design.md)**
 

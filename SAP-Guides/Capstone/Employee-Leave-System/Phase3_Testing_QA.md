@@ -1,7 +1,7 @@
 # Phase 3: Testing & Quality Assurance
 
 **Duration**: Weeks 9-10  
-**← [Back to README](README.md)** | **Previous: [Phase 2: Development](Phase2_Development.md)** | **Next: [Phase 4: Documentation & Presentation](Phase4_Documentation_Presentation.md)**
+**← [Back to README](SAP-Guides/Capstone/Employee-Leave-System/README.md)** | **Previous: [Phase 2: Development](Phase2_Development.md)** | **Next: [Phase 4: Documentation & Presentation](Phase4_Documentation_Presentation.md)**
 
 ---
 
@@ -29,15 +29,15 @@ gantt
     title Week 9: Comprehensive Testing
     dateFormat YYYY-MM-DD
     section Unit Testing
-    Test Classes           :a1, 2024-03-04, 2d
+    Test Classes           :a1, 2026-03-02, 2d
     Test Methods          :a2, after a1, 2d
     section Integration Testing
-    Test Workflows        :b1, 2024-03-04, 2d
+    Test Workflows        :b1, 2026-03-02, 2d
     Test Integration      :b2, after b1, 2d
     section System Testing
-    Test End-to-End       :c1, 2024-03-06, 3d
+    Test End-to-End       :c1, 2026-03-04, 3d
     section Performance Testing
-    Load Testing          :d1, 2024-03-08, 2d
+    Load Testing          :d1, 2026-03-06, 2d
 ```
 
 ### All Team Members: Shared Testing Responsibilities
@@ -335,13 +335,13 @@ gantt
     title Week 10: UAT & Refinement
     dateFormat YYYY-MM-DD
     section UAT
-    UAT Session 1        :a1, 2024-03-11, 2d
+    UAT Session 1        :a1, 2026-03-09, 2d
     UAT Session 2        :a2, after a1, 2d
     section Refinement
-    Address Feedback     :b1, 2024-03-13, 2d
+    Address Feedback     :b1, 2026-03-11, 2d
     Final Testing        :b2, after b1, 2d
     section Finalization
-    Final Review         :c1, 2024-03-15, 1d
+    Final Review         :c1, 2026-03-13, 1d
 ```
 
 ### Team Member 5: Development & Quality Specialist
@@ -561,8 +561,8 @@ flowchart TD
 2. Employee navigates to "Create Leave Request"
 3. Employee enters leave details:
    - Leave Type: Annual
-   - Start Date: 2024-04-01
-   - End Date: 2024-04-05
+   - Start Date: 2026-03-23
+   - End Date: 2026-03-27
    - Comments: "Family vacation"
 4. Employee clicks "Submit"
 5. System validates input
@@ -656,7 +656,7 @@ flowchart TD
 **Steps**:
 1. User navigates to "Leave History"
 2. User enters filters:
-   - Date Range: 2024-01-01 to 2024-03-31
+   - Date Range: 2026-01-05 to 2026-03-13
    - Status: Approved
    - Leave Type: Annual
 3. User clicks "Search"
@@ -681,7 +681,7 @@ flowchart TD
 **Steps**:
 1. User navigates to "Reports"
 2. User enters report parameters:
-   - Date Range: 2024-01-01 to 2024-12-31
+   - Date Range: 2026-01-05 to 2026-12-31
    - Department: All
 3. User clicks "Generate Report"
 4. System calculates statistics:
@@ -858,5 +858,5 @@ stateDiagram-v2
 
 ---
 
-**← [Back to README](README.md)** | **Previous: [Phase 2: Development](Phase2_Development.md)** | **Next: [Phase 4: Documentation & Presentation](Phase4_Documentation_Presentation.md)**
+**← [Back to README](SAP-Guides/Capstone/Employee-Leave-System/README.md)** | **Previous: [Phase 2: Development](Phase2_Development.md)** | **Next: [Phase 4: Documentation & Presentation](Phase4_Documentation_Presentation.md)**
 

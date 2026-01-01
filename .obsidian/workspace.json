@@ -11,10 +11,14 @@
             "id": "6e99bc18625cab57",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "SAP-Guides/Capstone/Employee-Leave-System-VN/00_Project_Overview.md",
+                "mode": "preview",
+                "source": true
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "00_Project_Overview"
             }
           }
         ]
@@ -71,7 +75,7 @@
             }
           },
           {
-            "id": "f121c317c7e3498c",
+            "id": "cb3fe403c40b3e7c",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -173,9 +177,11 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {},
+              "state": {
+                "file": "SAP-Guides/Capstone/Employee-Leave-System/sprints/Sprint01_Requirements_Gathering.md"
+              },
               "icon": "lucide-info",
-              "title": "File properties"
+              "title": "File properties for Sprint01_Requirements_Gathering"
             }
           }
         ],
@@ -192,12 +198,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "SAP-Guides/Capstone/Employee-Leave-System-VN/00_Project_Overview.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of 00_Project_Overview"
             }
           }
         ]
@@ -224,41 +231,41 @@
   },
   "active": "6e99bc18625cab57",
   "lastOpenFiles": [
-    "SAP-Guides/Capstone/Employee-Leave-System/Project_Management/README.md",
-    "SAP-Guides/Capstone/Employee-Leave-System/Project_Management/Project_Management_Plan.md",
-    "SAP-Guides/Capstone/Employee-Leave-System/Project_Management",
-    "Dailies/2025/12/29.md",
-    "Dailies/2025/12/30.md",
-    "Dailies/2025/12/31.md",
-    "Dailies/2025/12",
-    "Dailies/2025",
-    "Dailies/2026/01/01.md",
-    "Dailies/2026/01",
-    "Dailies/2026",
-    "Dailies/Dailies.md",
-    "Dailies/2025/12-30.md",
-    "SAP-Guides/Capstone/Employee-Leave-System/00_Project_Overview.md",
-    "Dailies",
-    "SAP-Guides/Capstone/Employee-Leave-System/Team_Members_Tasks.md",
-    "SAP-Guides/Capstone/Employee-Leave-System/Project_Management_Plan.md",
-    "SAP-Guides/Capstone/Employee-Leave-System/README.md",
-    "SAP-Guides/Capstone/Employee-Leave-System/Phase1_Requirements_Design.md",
-    "SAP-Guides/SAP_CAPSTONE_PROJECT_GUIDE.md",
-    "SAP-Guides/Capstone/Employee-Leave-System/Phase2_Development.md",
-    "SAP-Guides/Capstone/Employee-Leave-System/Technical_Architecture.md",
-    "SAP-Guides/Capstone/Employee-Leave-System/References_Resources.md",
-    "SAP-Guides/Capstone/Employee-Leave-System/Phase4_Documentation_Presentation.md",
-    "SAP-Guides/Capstone/Employee-Leave-System/Phase3_Testing_QA.md",
-    "Phase1_Requirements_Design.md",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/Phase2_Development.md",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/Phase1_Requirements_Design.md",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/README.md",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/References_Resources.md",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/00_Project_Overview.md",
+    "SAP-Guides/SAP_WM_GUIDE.md",
+    "SAP-Guides/SAP_HR_GUIDE.md",
+    "SAP-Guides/README.md",
+    "SAP-Guides/SAP_PP_GUIDE.md",
+    "SAP-Guides/SAP_MM_GUIDE.md",
+    "SAP-Guides/SAP_QM_GUIDE.md",
+    "SAP-Guides/SAP_FI_GUIDE.md",
+    "SAP-Guides/SAP_SD_GUIDE.md",
+    "SAP-Guides/SAP_BASIS_ADMINISTRATION_GUIDE.md",
+    "SAP-Guides/SAP_ABAP_PROGRAMMING_GUIDE.md",
+    "SAP-Guides/SAP_CO_GUIDE.md",
+    "SAP-Guides/SAP_S4HANA_GUIDE.md",
+    "SAP-Guides/SAP_CUSTOMIZATION_ENHANCEMENT_GUIDE.md",
+    "SAP-Guides/SAP_WORKFLOW_GUIDE.md",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/Team_Members_Tasks.md",
     "SAP-Guides/Capstone/Abap-4.md",
-    "SAP-Guides/Capstone/Employee-Leave-System",
-    "SAP-Guides/Capstone/SAP_Topics_Thesis_Sprint_2026.xlsx",
-    "SAP-Guides/Capstone",
-    "SAP/SAP.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.13_JSON_XML_Data_Format.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.11_Database_Basics_SQL_Queries.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.10_JavaScript_ES6_Modern_JavaScript.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.01_Data_Structures_Array_List_Map_Set.md",
-    "Tags/#retro"
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/Project_Management/Project_Management_Plan.md",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/Sprints/Sprint01_Requirements_Gathering.md",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/Phase4_Documentation_Presentation.md",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/Phase3_Testing_QA.md",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/Technical_Architecture.md",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/Sprints",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN/Project_Management",
+    "SAP-Guides/Capstone/Employee-Leave-System-VN",
+    "SAP-Guides/Capstone/Personal-Practice-Leave-System/Sprints",
+    "SAP-Guides/Capstone/Personal-Practice-Leave-System",
+    "SAP-Guides/Capstone/Employee-Leave-System/sprints",
+    "SAP-Guides/Capstone/Employee-Leave-System/Sprints",
+    "SAP-Guides/Capstone/Employee-Leave-System/Project_Management",
+    "Dailies/2025/12",
+    "Dailies/2025"
   ]
 }

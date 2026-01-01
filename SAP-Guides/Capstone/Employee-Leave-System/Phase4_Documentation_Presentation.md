@@ -1,7 +1,7 @@
 # Phase 4: Documentation & Presentation
 
 **Duration**: Weeks 11-12  
-**← [Back to README](README.md)** | **Previous: [Phase 3: Testing & QA](Phase3_Testing_QA.md)**
+**← [Back to README](SAP-Guides/Capstone/Employee-Leave-System/README.md)** | **Previous: [Phase 3: Testing & QA](Phase3_Testing_QA.md)**
 
 ---
 
@@ -27,13 +27,13 @@ gantt
     title Week 11: Documentation
     dateFormat YYYY-MM-DD
     section Technical Docs
-    Architecture Doc      :a1, 2024-03-18, 2d
+    Architecture Doc      :a1, 2026-03-16, 2d
     Class Documentation   :a2, after a1, 2d
     section User Docs
-    User Manual           :b1, 2024-03-18, 3d
+    User Manual           :b1, 2026-03-16, 3d
     Training Materials    :b2, after b1, 2d
     section Project Docs
-    Test Documentation    :c1, 2024-03-20, 2d
+    Test Documentation    :c1, 2026-03-18, 2d
     FAQ Document          :c2, after c1, 1d
 ```
 
@@ -261,11 +261,11 @@ gantt
     title Week 12: Presentation & Finalization
     dateFormat YYYY-MM-DD
     section Preparation
-    Prepare Presentation  :a1, 2024-03-25, 2d
+    Prepare Presentation  :a1, 2026-03-23, 2d
     Create Demo           :a2, after a1, 2d
     Practice              :a3, after a2, 1d
     section Finalization
-    Final Review          :b1, 2024-03-28, 1d
+    Final Review          :b1, 2026-03-27, 1d
     Project Handover      :b2, after b1, 1d
 ```
 
@@ -465,8 +465,8 @@ Documentation/
 2. Navigate to "Create Leave Request"
 3. Enter leave details:
    - Leave Type: Annual
-   - Start Date: 2024-04-01
-   - End Date: 2024-04-05
+   - Start Date: 2026-03-23
+   - End Date: 2026-03-27
    - Comments: "Family vacation"
 4. Submit request
 5. Show request ID generated
@@ -590,5 +590,5 @@ Documentation/
 
 ---
 
-**← [Back to README](README.md)** | **Previous: [Phase 3: Testing & QA](Phase3_Testing_QA.md)**
+**← [Back to README](SAP-Guides/Capstone/Employee-Leave-System/README.md)** | **Previous: [Phase 3: Testing & QA](Phase3_Testing_QA.md)**
 

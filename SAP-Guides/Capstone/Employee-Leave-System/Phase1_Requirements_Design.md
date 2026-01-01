@@ -1,7 +1,7 @@
 # Phase 1: Requirements & Design
 
 **Duration**: Weeks 1-2  
-**← [Back to README](README.md)** | **Next: [Phase 2: Development](Phase2_Development.md)**
+**← [Back to README](SAP-Guides/Capstone/Employee-Leave-System/README.md)** | **Next: [Phase 2: Development](Phase2_Development.md)**
 
 ---
 
@@ -1007,5 +1007,5 @@ TYPES: ztt_leave_request TYPE TABLE OF zst_leave_request.
 
 ---
 
-**← [Back to README](README.md)** | **Next: [Phase 2: Development](Phase2_Development.md)**
+**← [Back to README](SAP-Guides/Capstone/Employee-Leave-System/README.md)** | **Next: [Phase 2: Development](Phase2_Development.md)**
 

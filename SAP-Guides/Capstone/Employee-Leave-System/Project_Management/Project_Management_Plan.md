@@ -19,7 +19,7 @@ gantt
     title 12-Week Sprint Timeline
     dateFormat YYYY-MM-DD
     section Phase 1 Sprints
-    Sprint 1: Requirements Gathering    :s1, 2024-01-01, 7d
+    Sprint 1: Requirements Gathering    :s1, 2026-01-05, 7d
     Sprint 2: Detailed Design             :s2, after s1, 7d
     section Phase 2 Sprints
     Sprint 3: Foundation                  :s3, after s2, 7d
@@ -38,20 +38,20 @@ gantt
 
 ### Sprint Schedule
 
-| Sprint | Week | Phase | Focus | Story Points Target |
-|--------|------|-------|-------|-------------------|
-| **Sprint 1** | Week 1 | Phase 1 | Requirements Gathering | 20-25 |
-| **Sprint 2** | Week 2 | Phase 1 | Detailed Design | 20-25 |
-| **Sprint 3** | Week 3 | Phase 2 | Foundation & Data Model | 25-30 |
-| **Sprint 4** | Week 4 | Phase 2 | Core Functionality | 30-35 |
-| **Sprint 5** | Week 5 | Phase 2 | Workflow Implementation | 30-35 |
-| **Sprint 6** | Week 6 | Phase 2 | History & Filtering | 25-30 |
-| **Sprint 7** | Week 7 | Phase 2 | Reporting & Statistics | 25-30 |
-| **Sprint 8** | Week 8 | Phase 2 | Forms & Integration | 25-30 |
-| **Sprint 9** | Week 9 | Phase 3 | Comprehensive Testing | 20-25 |
-| **Sprint 10** | Week 10 | Phase 3 | UAT & Refinement | 15-20 |
-| **Sprint 11** | Week 11 | Phase 4 | Documentation | 20-25 |
-| **Sprint 12** | Week 12 | Phase 4 | Presentation | 15-20 |
+| Sprint | Week | Dates | Phase | Focus | Story Points Target |
+|--------|------|-------|-------|-------|-------------------|
+| **Sprint 1** | Week 1 | Jan 5-9, 2026 | Phase 1 | Requirements Gathering | 20-25 |
+| **Sprint 2** | Week 2 | Jan 12-16, 2026 | Phase 1 | Detailed Design | 20-25 |
+| **Sprint 3** | Week 3 | Jan 19-23, 2026 | Phase 2 | Foundation & Data Model | 25-30 |
+| **Sprint 4** | Week 4 | Jan 26-30, 2026 | Phase 2 | Core Functionality | 30-35 |
+| **Sprint 5** | Week 5 | Feb 2-6, 2026 | Phase 2 | Workflow Implementation | 30-35 |
+| **Sprint 6** | Week 6 | Feb 9-13, 2026 | Phase 2 | History & Filtering | 25-30 |
+| **Sprint 7** | Week 7 | Feb 16-20, 2026 | Phase 2 | Reporting & Statistics | 25-30 |
+| **Sprint 8** | Week 8 | Feb 23-27, 2026 | Phase 2 | Forms & Integration | 25-30 |
+| **Sprint 9** | Week 9 | Mar 2-6, 2026 | Phase 3 | Comprehensive Testing | 20-25 |
+| **Sprint 10** | Week 10 | Mar 9-13, 2026 | Phase 3 | UAT & Refinement | 15-20 |
+| **Sprint 11** | Week 11 | Mar 16-20, 2026 | Phase 4 | Documentation | 20-25 |
+| **Sprint 12** | Week 12 | Mar 23-27, 2026 | Phase 4 | Presentation | 15-20 |
 
 **Total Story Points**: ~280-320 points
 
@@ -706,5 +706,6 @@ A sprint is considered "Done" when:
 - **[Project Overview](../00_Project_Overview.md)** - Project context
 - **[Team Members Tasks](../Team_Members_Tasks.md)** - Individual task breakdown
 - **[Phase Documents](../Phase1_Requirements_Design.md)** - Detailed phase tasks
+- **[Sprint Documentation](SAP-Guides/Capstone/Employee-Leave-System/Sprints/README.md)** - Detailed sprint-by-sprint documentation
 - **[SAP Capstone Guide](../../../SAP_CAPSTONE_PROJECT_GUIDE.md#development-methodology)** - Development methodology
 

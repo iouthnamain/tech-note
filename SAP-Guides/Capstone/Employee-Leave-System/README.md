@@ -34,7 +34,7 @@ gantt
     title Employee Leave System - 12 Week Timeline
     dateFormat YYYY-MM-DD
     section Phase 1
-    Requirements & Design    :a1, 2024-01-01, 14d
+    Requirements & Design    :a1, 2026-01-05, 14d
     section Phase 2
     Development              :a2, after a1, 42d
     section Phase 3
@@ -85,6 +85,7 @@ gantt
 ### 📚 Resources
 
 - **[References & Resources](References_Resources.md)** - SAP guides, transaction codes, best practices
+- **[Sprint Documentation](SAP-Guides/Capstone/Employee-Leave-System/Sprints/README.md)** - Detailed sprint-by-sprint documentation
 
 ---
 
@@ -191,7 +192,7 @@ For questions or issues:
 
 ---
 
-**Last Updated**: 2024  
+**Last Updated**: 2026  
 **Project Version**: 1.0  
 **Status**: Planning Phase
 
