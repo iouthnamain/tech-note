@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SAP-Guides/Capstone/Employee-Leave-System-VN/00_Project_Overview.md",
+                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Technical_Architecture.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "00_Project_Overview"
+              "title": "Technical_Architecture"
             }
           }
         ]
@@ -198,13 +198,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SAP-Guides/Capstone/Employee-Leave-System-VN/00_Project_Overview.md",
+                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Technical_Architecture.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 00_Project_Overview"
+              "title": "Outline of Technical_Architecture"
             }
           }
         ]
@@ -231,41 +231,41 @@
   },
   "active": "6e99bc18625cab57",
   "lastOpenFiles": [
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/Phase2_Development.md",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/Phase1_Requirements_Design.md",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/README.md",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/References_Resources.md",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/00_Project_Overview.md",
-    "SAP-Guides/SAP_WM_GUIDE.md",
-    "SAP-Guides/SAP_HR_GUIDE.md",
-    "SAP-Guides/README.md",
-    "SAP-Guides/SAP_PP_GUIDE.md",
-    "SAP-Guides/SAP_MM_GUIDE.md",
-    "SAP-Guides/SAP_QM_GUIDE.md",
-    "SAP-Guides/SAP_FI_GUIDE.md",
-    "SAP-Guides/SAP_SD_GUIDE.md",
-    "SAP-Guides/SAP_BASIS_ADMINISTRATION_GUIDE.md",
-    "SAP-Guides/SAP_ABAP_PROGRAMMING_GUIDE.md",
-    "SAP-Guides/SAP_CO_GUIDE.md",
-    "SAP-Guides/SAP_S4HANA_GUIDE.md",
-    "SAP-Guides/SAP_CUSTOMIZATION_ENHANCEMENT_GUIDE.md",
-    "SAP-Guides/SAP_WORKFLOW_GUIDE.md",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/Team_Members_Tasks.md",
-    "SAP-Guides/Capstone/Abap-4.md",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/Project_Management/Project_Management_Plan.md",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/Sprints/Sprint01_Requirements_Gathering.md",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/Phase4_Documentation_Presentation.md",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/Phase3_Testing_QA.md",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/Technical_Architecture.md",
+    "SAP-Guides/SAP-General-Guides/SAP_WORKFLOW_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_WM_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_TESTING_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_SECURITY_AUTHORIZATION_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_SD_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_S4HANA_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_REPORTING_ANALYTICS_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_QM_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_PP_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_MM_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_INTEGRATION_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_HR_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_FORMS_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_FI_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_ERP_FUNDAMENTALS_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_CUSTOMIZATION_ENHANCEMENT_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_CO_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_CAPSTONE_PROJECT_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_CAPSTONE_EXAMPLES.md",
+    "SAP-Guides/SAP-General-Guides/SAP_BASIS_ADMINISTRATION_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/SAP_ABAP_PROGRAMMING_GUIDE.md",
+    "SAP-Guides/SAP-General-Guides/Sample.md",
+    "SAP-Guides/SAP-General-Guides/README.md",
+    "SAP-Guides/SAP-General-Guides",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Team_Members_Tasks.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/References_Resources.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Technical_Architecture.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Sprints",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Project_Management",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN",
     "SAP-Guides/Capstone/Employee-Leave-System-VN/Sprints",
     "SAP-Guides/Capstone/Employee-Leave-System-VN/Project_Management",
     "SAP-Guides/Capstone/Employee-Leave-System-VN",
     "SAP-Guides/Capstone/Personal-Practice-Leave-System/Sprints",
     "SAP-Guides/Capstone/Personal-Practice-Leave-System",
-    "SAP-Guides/Capstone/Employee-Leave-System/sprints",
-    "SAP-Guides/Capstone/Employee-Leave-System/Sprints",
-    "SAP-Guides/Capstone/Employee-Leave-System/Project_Management",
-    "Dailies/2025/12",
-    "Dailies/2025"
+    "SAP-Guides/Capstone/Employee-Leave-System/sprints"
   ]
 }
