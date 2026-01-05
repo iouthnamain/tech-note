@@ -27,3 +27,8 @@
 ### 5. Evidence Attachment
 **English:** Attach evidence to Bug System  
 **Tiếng Việt:** Đính kèm bằng chứng vào Bug System
+
+
+Link Fiori: https://s40lp1.ucc.cit.tum.de:8100/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=324&sap-language=EN#Shell-home  
+  
+Link WebGUI: https://s40lp1.ucc.cit.tum.de:8100/sap/bc/gui/sap/its/webgui
