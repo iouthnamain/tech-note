@@ -18,6 +18,14 @@ Thư mục này chứa tất cả tài liệu liên quan đến quản lý dự 
   - Chỉ số và KPI
   - Kế hoạch giao tiếp
 
+- **[WBS.md](WBS.md)** - Work Breakdown Structure chi tiết bao gồm:
+  - Cấu trúc phân cấp 5 cấp (Project → Phases → Sprints → Work Packages → Tasks)
+  - Ma trận phụ thuộc (Dependency Matrix)
+  - Ma trận phân bổ tài nguyên (Resource Allocation Matrix)
+  - Từ điển WBS (WBS Dictionary) với mô tả chi tiết từng work package
+  - Estimates (Story Points và Giờ) cho từng work package và task
+  - Trạng thái tracking cho từng work package
+
 ## Mục đích
 
 Tài liệu này cung cấp khung quản lý dự án capstone sử dụng phương pháp Agile/Scrum được điều chỉnh cho dự án capstone học thuật. Nó bao gồm:

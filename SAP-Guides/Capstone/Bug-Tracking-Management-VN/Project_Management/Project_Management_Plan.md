@@ -57,6 +57,41 @@ gantt
 
 ---
 
+## Work Breakdown Structure (WBS)
+
+**Tham khảo**: [WBS Chi tiết](WBS.md) - Cấu trúc phân tích công việc đầy đủ với dependencies, resources, và estimates
+
+### Tổng quan WBS
+
+Dự án được chia thành:
+- **Level 1**: Project (1.0)
+- **Level 2**: 4 Phases (1.1 - 1.4)
+- **Level 3**: 12 Sprints (1.1.1 - 1.4.2)
+- **Level 4**: Work Packages (~66 work packages)
+- **Level 5**: Tasks (~200+ tasks)
+
+### Cấu trúc WBS Nhanh
+
+| Phase | Sprints | Work Packages | Story Points |
+|-------|---------|---------------|--------------|
+| Phase 1: Requirements & Design | 2 | 12 | 40-50 |
+| Phase 2: Development | 6 | 36 | 180-210 |
+| Phase 3: Testing & QA | 2 | 10 | 35-45 |
+| Phase 4: Documentation | 2 | 8 | 35-45 |
+| **Total** | **12** | **66** | **290-350** |
+
+### Quy ước Đánh số WBS
+
+- **Level 1**: Project = 1.0
+- **Level 2**: Phase = 1.1, 1.2, 1.3, 1.4
+- **Level 3**: Sprint = 1.1.1, 1.1.2, etc.
+- **Level 4**: Work Package = 1.1.1.1, 1.1.1.2, etc.
+- **Level 5**: Task = 1.1.1.1.1, 1.1.1.1.2, etc.
+
+Xem [WBS.md](WBS.md) để biết chi tiết đầy đủ với dependencies, resource assignments, và estimates cho từng work package và task.
+
+---
+
 ## Đánh giá Story Point
 
 ### Thang Fibonacci
