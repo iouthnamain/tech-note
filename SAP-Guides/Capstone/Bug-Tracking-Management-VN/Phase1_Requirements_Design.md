@@ -85,7 +85,11 @@
 
 - [ ] **Xác định Yêu cầu Phân quyền**
   - Xác định đối tượng phân quyền cần thiết
-  - Tài liệu hóa yêu cầu truy cập dựa trên vai trò
+  - Tài liệu hóa mô hình phân quyền: **2 Business Roles + 3 RBAC Functions**
+    - Business Roles: Reporter, Developer
+    - RBAC Functions: BUG_BASIC, BUG_WORK, BUG_ADMIN
+  - Tài liệu hóa yêu cầu truy cập dựa trên vai trò và RBAC functions
+  - Xác định mapping giữa Business Roles và RBAC Functions
   - Xác định quy tắc quyền phân công
   - Tài liệu hóa yêu cầu bảo mật
 
@@ -644,7 +648,7 @@
 - [ ] **Xác định Test Data Requirements**
 
   **Test Data**:
-  - Test users (Reporter, Developer, Admin)
+  - Test users (Reporter, Developer, Lead Developer với BUG_ADMIN)
   - Test bugs (various types, priorities, statuses)
   - Test attachments (various file types and sizes)
   - Test configuration data
@@ -873,7 +877,7 @@ graph TB
 | ZBUG_ASSIGN_TASK | Standard Task | ZBUG_ASSIGN_METHOD | Determined by Agent Determination |
 | ZBUG_FIX_TASK | Standard Task | ZBUG_FIX_METHOD | Assigned Developer |
 | ZBUG_REJECT_TASK | Standard Task | ZBUG_REJECT_METHOD | Assigned Developer |
-| ZBUG_CLOSE_TASK | Standard Task | ZBUG_CLOSE_METHOD | Reporter or Admin |
+| ZBUG_CLOSE_TASK | Standard Task | ZBUG_CLOSE_METHOD | Reporter hoặc Lead Developer (BUG_ADMIN) |
 
 ---
 

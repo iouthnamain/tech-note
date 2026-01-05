@@ -53,7 +53,7 @@ gantt
 | **Sprint 11** | Tuần 11 | 16-20 tháng 3, 2026 | Giai đoạn 4 | Tài liệu | 20-25 |
 | **Sprint 12** | Tuần 12 | 23-27 tháng 3, 2026 | Giai đoạn 4 | Trình bày | 15-20 |
 
-**Tổng Story Points**: ~280-320 điểm
+**Tổng Story Points**: ~290-350 điểm
 
 ---
 

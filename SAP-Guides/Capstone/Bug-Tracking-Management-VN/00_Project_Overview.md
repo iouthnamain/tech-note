@@ -9,11 +9,12 @@
 1. [Thông tin Dự án](#project-information)
 2. [Cấu trúc Nhóm & Vai trò](#team-structure--roles)
 3. [Tiến độ Dự án](#project-timeline)
-4. [Công nghệ Sử dụng](#technology-stack)
-5. [Ánh xạ Yêu cầu](#requirements-mapping)
-6. [Kiến trúc Cấp cao](#high-level-architecture)
-7. [Quản lý Rủi ro](#risk-management)
-8. [Tiêu chí Thành công](#success-criteria)
+4. [Tóm tắt Phạm vi & Công nghệ](#scope--technology-summary)
+5. [Công nghệ Sử dụng](#technology-stack)
+6. [Ánh xạ Yêu cầu](#requirements-mapping)
+7. [Kiến trúc Cấp cao](#high-level-architecture)
+8. [Quản lý Rủi ro](#risk-management)
+9. [Tiêu chí Thành công](#success-criteria)
 
 ---
 
@@ -40,6 +41,69 @@
 - **Minh bạch**: Khả năng hiển thị theo thời gian thực về trạng thái và tiến độ xử lý lỗi
 - **Tuân thủ**: Đảm bảo phân quyền phù hợp và dấu vết kiểm tra
 - **Sự hài lòng Người dùng**: Cải thiện trải nghiệm người dùng với khả năng theo dõi lỗi
+
+---
+
+## Tóm tắt Phạm vi & Công nghệ (Scope & Technology Summary)
+
+### Phạm vi Nghiệp vụ
+
+- **Đối tượng sử dụng**:
+  - Reporter: người báo lỗi (tester, key user, end user nội bộ SAP) - có quyền BUG_BASIC.
+  - Developer: developer được phân công xử lý lỗi - có quyền BUG_BASIC + BUG_WORK.
+  - Lead Developer: developer có thêm quyền quản trị (optional) - có quyền BUG_BASIC + BUG_WORK + BUG_ADMIN.
+- **Quy trình lỗi chuẩn**:
+  - Reporter ghi nhận lỗi trong chương trình `ZBUG_LOG` → hệ thống tạo Bug ID tự động.
+  - Workflow `ZBUG_WF` phân công developer dựa trên loại lỗi/độ ưu tiên/quy tắc assignment.
+  - Developer cập nhật trạng thái (In Progress, Fixed, Rejected) và ghi chú.
+  - Tester/UAT kiểm tra lại; khi đạt yêu cầu, bug được đóng (Closed).
+- **Trạng thái lỗi**:
+  - New, Assigned, In Progress, Fixed, Rejected, Closed (được lưu và audit trong `ZBUG_HISTORY`).
+- **Tính năng cốt lõi (MVP)**:
+  - Ghi nhận lỗi với ID tự động.
+  - Thông báo email đến team/developer khi có sự kiện chính.
+  - Danh sách lỗi với bộ lọc (status, type, priority, developer) trên ALV.
+  - Thống kê lỗi (Fixed, Waiting, Pending, theo developer/type/priority) với báo cáo và xuất Excel.
+  - Đính kèm và lưu trữ file bằng chứng trong `ZBUG_ATTACHMENTS`.
+- **Yêu cầu phi chức năng chính**:
+  - Hiệu năng mục tiêu:
+    - Báo cáo thống kê: < 2 giây.
+    - Danh sách lỗi với bộ lọc: < 3 giây.
+    - Upload file < 10MB: < 5 giây.
+  - Audit & Compliance:
+    - Không xoá history; tất cả thay đổi được log trong `ZBUG_HISTORY` và `ZBUG_ITEMS`.
+
+### Công nghệ & Kiến trúc
+
+- **Hệ thống mục tiêu**:
+  - SAP ECC hoặc S/4HANA on‑premise (ABAP stack).
+- **Backend**:
+  - ABAP Objects với các lớp cốt lõi:
+    - `ZCL_BUG_REQUEST`, `ZCL_BUG_VALIDATOR`, `ZCL_BUG_STATISTICS`, `ZCL_BUG_ATTACHMENT`, lớp tiện ích.
+  - Z-tables: `ZBUG_HEADER`, `ZBUG_ITEMS`, `ZBUG_HISTORY`, `ZBUG_CONFIG`, `ZBUG_ATTACHMENTS`.
+  - SAP Business Workflow (`ZBUG_WF`) cho quy trình phân công và xử lý bug.
+  - Tích hợp User Management qua bảng chuẩn USR02/USR21 (REPORTER_ID, ASSIGNED_TO).
+  - Thông báo email sử dụng `SO_DOCUMENT_SEND_API1`.
+- **Frontend/UI**:
+  - SAP GUI classic:
+    - Screen Painter (SE51) cho `ZBUG_LOG`, `ZBUG_ASSIGN`, màn hình selection.
+    - ALV (CL_SALV_*) cho `ZBUG_LIST` và `ZBUG_STATISTICS`.
+    - SmartForm `ZBUG_FORM` cho in báo cáo lỗi.
+  - Không sử dụng Fiori/UI5 trong phạm vi capstone; tuy nhiên kiến trúc đã tách rõ Business Logic để có thể mở rộng sang OData/Fiori trong tương lai nếu cần.
+- **Bảo mật & Phân quyền**:
+  - **Mô hình**: 2 Business Roles + 3 RBAC Functions
+  - **Business Roles**:
+    - **Reporter**: Người báo lỗi (được gán `BUG_BASIC`).
+    - **Developer**: Người xử lý lỗi (được gán `BUG_BASIC` + `BUG_WORK`).
+    - **Lead Developer** (optional): Developer có thêm quyền quản trị (được gán `BUG_BASIC` + `BUG_WORK` + `BUG_ADMIN`).
+  - **RBAC Functions**:
+    - **BUG_BASIC**: Tạo bug, xem bug của mình, đính kèm file.
+    - **BUG_WORK**: Xem/sửa bug được phân công, thay đổi trạng thái.
+    - **BUG_ADMIN**: Xem tất cả bug, re-assign, quản lý cấu hình, thống kê đầy đủ.
+  - Authorization objects tùy chỉnh:
+    - `Z_BUG_CREATE`, `Z_BUG_VIEW`, `Z_BUG_UPDATE`, `Z_BUG_ASSIGN`, `Z_BUG_ADMIN`.
+
+Phần tóm tắt này dùng làm “clarified requirements” ở mức cao, giúp người đọc nhanh chóng nắm được phạm vi nghiệp vụ và lựa chọn công nghệ chính trước khi đi vào chi tiết ở các tài liệu giai đoạn.
 
 ---
 
@@ -383,9 +447,9 @@ gantt
 ```mermaid
 graph TB
     subgraph UserLayer[User Layer]
-        Reporter[Reporter]
-        Developer[Developer]
-        Admin[Admin]
+        Reporter[Reporter<br/>BUG_BASIC]
+        Developer[Developer<br/>BUG_BASIC + BUG_WORK]
+        LeadDev[Lead Developer<br/>BUG_BASIC + BUG_WORK + BUG_ADMIN]
     end
     
     subgraph PresentationLayer[Presentation Layer]
@@ -425,8 +489,10 @@ graph TB
     
     Reporter --> LogScreen
     Developer --> AssignScreen
-    Admin --> StatsScreen
+    LeadDev --> StatsScreen
     Reporter --> ListScreen
+    Developer --> ListScreen
+    LeadDev --> ListScreen
     
     LogScreen --> BugClass
     AssignScreen --> Workflow

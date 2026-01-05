@@ -105,7 +105,7 @@
 #### Nhiệm vụ Tuần 1
 - [ ] Xác định yêu cầu workflow phân công
 - [ ] Ánh xạ logic phân công dựa trên loại/độ ưu tiên lỗi
-- [ ] Xác định yêu cầu phân quyền
+- [ ] Xác định yêu cầu phân quyền (2 Business Roles: Reporter, Developer + 3 RBAC Functions: BUG_BASIC, BUG_WORK, BUG_ADMIN)
 - [ ] Thiết kế sơ đồ workflow
 - [ ] Tài liệu hóa quy tắc phân công
 

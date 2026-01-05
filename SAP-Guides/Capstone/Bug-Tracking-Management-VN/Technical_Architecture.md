@@ -25,9 +25,9 @@
 ```mermaid
 graph TB
     subgraph UserLayer[User Layer]
-        Reporter[Reporter Users]
-        Developer[Developer Users]
-        Admin[Administrators]
+        Reporter[Reporter<br/>BUG_BASIC]
+        Developer[Developer<br/>BUG_BASIC + BUG_WORK]
+        LeadDev[Lead Developer<br/>BUG_BASIC + BUG_WORK + BUG_ADMIN]
     end
     
     subgraph PresentationLayer[Presentation Layer]
@@ -67,8 +67,10 @@ graph TB
     
     Reporter --> LogScreen
     Developer --> AssignScreen
-    Admin --> StatsScreen
+    LeadDev --> StatsScreen
     Reporter --> ListScreen
+    Developer --> ListScreen
+    LeadDev --> ListScreen
     
     LogScreen --> BugClass
     AssignScreen --> Workflow
@@ -556,40 +558,79 @@ METHODS download_file
 
 2. **Z_BUG_VIEW** (View Bug):
    - Activity: 03 (Display)
-   - User: Reporter (own bugs), Developer (assigned bugs), Admin (all bugs)
+   - User: Reporter (BUG_BASIC - own bugs), Developer (BUG_WORK - assigned bugs), Lead Developer (BUG_ADMIN - all bugs)
 
 3. **Z_BUG_UPDATE** (Update Bug):
    - Activity: 02 (Change)
-   - User: Reporter (own bugs, status = New), Developer (assigned bugs), Admin (all bugs)
+   - User: Reporter (BUG_BASIC - own bugs, status = New), Developer (BUG_WORK - assigned bugs), Lead Developer (BUG_ADMIN - all bugs)
 
 4. **Z_BUG_ASSIGN** (Assign Bug):
    - Activity: 02 (Change)
-   - User: Admin, Workflow system
+   - User: Lead Developer (BUG_ADMIN), Workflow system
 
-5. **Z_BUG_ADMIN** (Admin):
+5. **Z_BUG_ADMIN** (Admin Functions):
    - Activity: All
-   - User: Admin only
+   - User: Lead Developer only (BUG_ADMIN RBAC function)
 
 ### Role-Based Access Control
 
-**Reporter Role**:
-- Create bugs
-- View own bugs
-- Update own bugs (only if status = New)
-- Upload attachments to own bugs
+**Mô hình Phân quyền**: Hệ thống sử dụng mô hình **2 Business Roles + 3 RBAC Functions** để quản lý quyền truy cập linh hoạt và chuyên nghiệp.
 
-**Developer Role**:
-- View assigned bugs
-- Update assigned bugs
-- Change status (In Progress, Fixed, Rejected)
-- Download attachments from assigned bugs
+#### Business Roles (Vai trò Nghiệp vụ)
 
-**Admin Role**:
-- All permissions
-- Assign bugs
-- View all bugs
-- Manage configuration
-- View statistics
+**Reporter Role** (Người báo lỗi):
+- Vai trò nghiệp vụ: Người dùng báo cáo lỗi trong hệ thống
+- Được gán RBAC Function: `BUG_BASIC`
+- Quyền:
+  - Create bugs
+  - View own bugs
+  - Update own bugs (only if status = New)
+  - Upload attachments to own bugs
+
+**Developer Role** (Người xử lý lỗi):
+- Vai trò nghiệp vụ: Developer xử lý và sửa lỗi
+- Được gán RBAC Functions: `BUG_BASIC` + `BUG_WORK`
+- Quyền:
+  - View assigned bugs
+  - Update assigned bugs
+  - Change status (In Progress, Fixed, Rejected)
+  - Download attachments from assigned bugs
+- **Lưu ý**: Một số Developer có thể được gán thêm `BUG_ADMIN` nếu là Lead Developer hoặc cần quyền quản trị
+
+#### RBAC Functions (Nhóm Quyền Chức năng)
+
+**BUG_BASIC** (Quyền Cơ bản):
+- Tạo bug mới
+- Xem bug của chính mình (reporter_id = sy-uname)
+- Đính kèm file vào bug của mình
+- Comment trên bug của mình
+
+**BUG_WORK** (Quyền Xử lý Công việc):
+- Xem bug được phân công (assigned_to = sy-uname)
+- Cập nhật bug được phân công
+- Thay đổi trạng thái bug (In Progress, Fixed, Rejected)
+- Download attachments từ bug được phân công
+- Xem danh sách bug (bị giới hạn theo quyền)
+
+**BUG_ADMIN** (Quyền Quản trị):
+- Xem **tất cả** bug (không giới hạn theo reporter_id hoặc assigned_to)
+- Re-assign / Override assignment
+- Quản lý cấu hình hệ thống (`ZBUG_CONFIG`)
+- Xem thống kê đầy đủ
+- Audit và báo cáo quản trị
+
+#### Mapping Business Roles ↔ RBAC Functions
+
+| Business Role | RBAC Functions | Mô tả |
+|---------------|----------------|-------|
+| **Reporter** | `BUG_BASIC` | Người dùng cơ bản chỉ có thể tạo và xem bug của mình |
+| **Developer** | `BUG_BASIC` + `BUG_WORK` | Developer có quyền xử lý bug được phân công |
+| **Lead Developer** | `BUG_BASIC` + `BUG_WORK` + `BUG_ADMIN` | Developer có thêm quyền quản trị (optional) |
+
+**Lợi ích của mô hình này**:
+- **Linh hoạt**: Có thể gán nhiều RBAC functions cho một user tùy theo trách nhiệm
+- **Chuyên nghiệp**: Tách biệt vai trò nghiệp vụ và quyền kỹ thuật
+- **Mở rộng**: Dễ dàng thêm RBAC functions mới mà không cần tạo role mới
 
 ### Data Security
 

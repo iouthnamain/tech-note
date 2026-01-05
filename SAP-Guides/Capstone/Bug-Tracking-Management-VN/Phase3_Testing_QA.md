@@ -210,9 +210,22 @@ gantt
 
 ### Kiểm thử Phân quyền
 
-- Reporter chỉ có thể xem và tạo lỗi của mình
-- Developer chỉ có thể xem và xử lý lỗi được phân công
-- Admin có thể xem tất cả lỗi
+**Mô hình Phân quyền**: 2 Business Roles + 3 RBAC Functions
+
+**Reporter Role** (BUG_BASIC):
+- Chỉ có thể xem và tạo lỗi của mình
+- Không thể xem lỗi của người khác
+- Không thể xem lỗi được phân công cho developer khác
+
+**Developer Role** (BUG_BASIC + BUG_WORK):
+- Có thể xem và xử lý lỗi được phân công (assigned_to = sy-uname)
+- Có thể tạo lỗi mới (BUG_BASIC)
+- Không thể xem tất cả lỗi (trừ khi có BUG_ADMIN)
+
+**Lead Developer / Admin** (BUG_BASIC + BUG_WORK + BUG_ADMIN):
+- Có thể xem tất cả lỗi
+- Có thể re-assign lỗi
+- Có thể quản lý cấu hình và xem thống kê đầy đủ
 
 ---
 
