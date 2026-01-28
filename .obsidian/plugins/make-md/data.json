@@ -120,9 +120,11 @@
     "SAP-Guides/SAP-Guides/Capstone/SAP-Guides/Capstone/Employee-Leave-System/SAP-Guides/Capstone/Employee-Leave-System/Sprints",
     "SAP-Guides",
     "SAP-Guides/SAP-Guides/Capstone",
+    "SAP-Guides/SAP-Guides/Capstone/SAP-Guides/Capstone/Bug-Tracking-Management-VN/SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo",
+    "SAP-Guides/SAP-Guides/Capstone/SAP-Guides/Capstone/Bug-Tracking-Management-VN/SAP-Guides/Capstone/Bug-Tracking-Management-VN/code",
+    "SAP-Guides/SAP-Guides/Capstone/SAP-Guides/Capstone/Bug-Tracking-Management-VN/SAP-Guides/Capstone/Bug-Tracking-Management-VN/note",
     "SAP-Guides/SAP-Guides/Capstone/SAP-Guides/Capstone/Bug-Tracking-Management-VN",
-    "SAP-Guides/SAP-Guides/Capstone/SAP-Guides/Capstone/Bug-Tracking-Management-VN/SAP-Guides/Capstone/Bug-Tracking-Management-VN/Project_Management",
-    "SAP-Guides/SAP-Guides/Capstone/SAP-Guides/Capstone/Bug-Tracking-Management-VN/SAP-Guides/Capstone/Bug-Tracking-Management-VN/temp"
+    "SAP-Guides/SAP-Guides/Capstone/SAP-Guides/Capstone/Bug-Tracking-Management-VN/SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",
@@ -134,8 +136,6 @@
     "_assets",
     "_blocks"
   ],
-  "newFileLocation": "root",
-  "newFileFolderPath": "",
   "inlineBacklinks": false,
   "inlineContext": true,
   "inlineBacklinksExpanded": false,

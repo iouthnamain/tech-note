@@ -9,16 +9,16 @@
 **English:** Allow user to log bugs in SAP System  
 **Tiếng Việt:** Cho phép người dùng ghi nhận lỗi trong hệ thống SAP
 
-### 2. Email Notification
-**English:** Send email to Developer team after logging bug  
-**Tiếng Việt:** Gửi Email đến team Developer sau khi ghi nhận lỗi
+### ==2. Email Notification==
+==**English:** Send email to Developer team after logging bug==  
+==**Tiếng Việt:** Gửi Email đến team Developer sau khi ghi nhận lỗi==
 
-### 3. Bug List Display
+### ==3. Bug List Display
 **English:** Show list of bugs in ALV and SmartForm
 - Filter by status, type, priority, developer
 
 **Tiếng Việt:** Hiển thị danh sách lỗi trong ALV và SmartForm
-- Lọc theo trạng thái, loại, độ ưu tiên, developer
+- Lọc theo trạng thái, loại, độ ưu tiên, developer==
 
 ### 4. Bug Statistics
 **English:** Statistics of bugs (fixed, waiting, pending)  

@@ -13,12 +13,68 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SAP-Guides/Capstone/Abap-8.md",
+                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/00_Project_Overview.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "Abap-8"
+              "title": "00_Project_Overview"
+            }
+          },
+          {
+            "id": "b8a9c9682e3cebd2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Phase1_Requirements_Design.md",
+                "mode": "preview",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Phase1_Requirements_Design"
+            }
+          },
+          {
+            "id": "69bfb5b86431fe01",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_LOG.prog.md",
+                "mode": "preview",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "ZRPG_ZBUG_LOG.prog"
+            }
+          },
+          {
+            "id": "a63a9b9d4548cfbc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled.md",
+                "mode": "preview",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Untitled"
+            }
+          },
+          {
+            "id": "7f18f6a40d645831",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/00_Project_Overview.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "00_Project_Overview"
             }
           }
         ]
@@ -75,7 +131,7 @@
             }
           },
           {
-            "id": "4de4fd461d5c6036",
+            "id": "b0915d6522d4969e",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -198,13 +254,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SAP-Guides/Capstone/Abap-8.md",
+                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/00_Project_Overview.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Abap-8"
+              "title": "Outline of 00_Project_Overview"
             }
           }
         ]
@@ -231,43 +287,43 @@
   },
   "active": "6e99bc18625cab57",
   "lastOpenFiles": [
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Technical_Architecture.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/temp/images.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/temp",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/README.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/SOLO_DEVELOPMENT_PLAN.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/00_Project_Overview.md",
+    "SAP-Guides/Capstone/Abap-8.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_LOG.prog.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_STATISTICS.prog.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_LIST.prog.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_ASSIGN.prog.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZCL_BUG_VALIDATOR.cls.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase1_Requirements_Design.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs/Phase1_Requirements_Design.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Technical_Architecture.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/References_Resources.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs/00_Project_Overview.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs/Docs.md",
+    "Untitled.md",
+    "Dailies/Dailies.md",
+    "Phase1_Requirements_Design.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/note/Test_Cases_Spec.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/note/ALV_Report_Spec.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/note/Data_Dictionary_Spec.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase2_Development.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase4_Documentation_Presentation.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase3_Testing_QA.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs/README.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZCL_BUG_REQUEST.cls.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code",
+    "note",
+    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/Workshop Template.pptx",
+    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/Unit_Test.xlsx",
+    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/UAT.xlsx",
+    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/TR_Management.xlsx",
+    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/Test_Scenario.xlsx",
+    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/Test_And_Fix_Bug.xlsx",
     "Pasted image 20260105155135.png",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Team_Members_Tasks.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/00_Project_Overview.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/README.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Project_Management/WBS.md",
-    "Pasted image 20260105151635.png",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Project_Management/Project_Management_Plan.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Sprints/Sprint01_Requirements_Gathering.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Phase1_Requirements_Design.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/References_Resources.md",
-    "SAP-Guides/SAP-General-Guides/SAP_WORKFLOW_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_WM_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_TESTING_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_SECURITY_AUTHORIZATION_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_SD_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_S4HANA_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_REPORTING_ANALYTICS_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_QM_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_PP_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_MM_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_INTEGRATION_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_HR_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_FORMS_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_FI_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_ERP_FUNDAMENTALS_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides/SAP_CUSTOMIZATION_ENHANCEMENT_GUIDE.md",
-    "SAP-Guides/SAP-General-Guides",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Sprints",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Project_Management",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/Sprints",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN/Project_Management",
-    "SAP-Guides/Capstone/Employee-Leave-System-VN",
-    "SAP-Guides/Capstone/Personal-Practice-Leave-System/Sprints",
-    "SAP-Guides/Capstone/Personal-Practice-Leave-System"
+    "Pasted image 20260105151635.png"
   ]
 }
