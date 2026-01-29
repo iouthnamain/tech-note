@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/00_Project_Overview.md",
+                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/TECHNICAL_OBJECTS.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "00_Project_Overview"
+              "title": "TECHNICAL_OBJECTS"
             }
           },
           {
@@ -131,7 +131,7 @@
             }
           },
           {
-            "id": "b0915d6522d4969e",
+            "id": "0301592e6645913a",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -254,13 +254,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/00_Project_Overview.md",
+                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/TECHNICAL_OBJECTS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 00_Project_Overview"
+              "title": "Outline of TECHNICAL_OBJECTS"
             }
           }
         ]
@@ -287,18 +287,21 @@
   },
   "active": "6e99bc18625cab57",
   "lastOpenFiles": [
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/README.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZCL_BUG_REPORT.cls.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/SOLO_DEVELOPMENT_PLAN.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/TECHNICAL_OBJECTS.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase1_Requirements_Design.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/00_Project_Overview.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/README.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Bug_Tracking_System_Review.md",
+    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Technical_Architecture.md",
     "SAP-Guides/Capstone/Abap-8.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_LOG.prog.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_STATISTICS.prog.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_LIST.prog.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_ASSIGN.prog.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZCL_BUG_VALIDATOR.cls.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase1_Requirements_Design.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs/Phase1_Requirements_Design.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Technical_Architecture.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/References_Resources.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs/00_Project_Overview.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs/Docs.md",
@@ -310,11 +313,8 @@
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/note/Data_Dictionary_Spec.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase2_Development.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase4_Documentation_Presentation.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase3_Testing_QA.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs/README.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZCL_BUG_REQUEST.cls.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code",
     "note",
     "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/Workshop Template.pptx",

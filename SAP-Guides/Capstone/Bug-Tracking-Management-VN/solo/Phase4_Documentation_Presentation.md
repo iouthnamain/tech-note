@@ -85,6 +85,7 @@ gantt
     -   **Kiến trúc hệ thống**: Sơ đồ, mô tả các tầng.
     -   **Thiết kế CSDL**: Chi tiết các bảng, trường, chỉ mục.
     -   **Thiết kế Đối tượng**: Chi tiết các lớp, chương trình, workflow.
+    -   **Đánh giá Hệ thống**: [Bug_Tracking_System_Review.md](Bug_Tracking_System_Review.md) - Chi tiết kỹ thuật về 5 yêu cầu cốt lõi.
     -   **Hướng dẫn Cài đặt & Cấu hình**.
 2.  **Hướng dẫn Sử dụng**:
     -   Hướng dẫn từng bước cho người dùng cuối (Reporter, Developer).

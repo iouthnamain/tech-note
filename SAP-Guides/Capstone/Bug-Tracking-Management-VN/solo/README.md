@@ -55,6 +55,7 @@ gantt
 
 - **[00_Project_Overview.md](00_Project_Overview.md)** - Cấu trúc, tiến độ, tổng quan kiến trúc
 - **[Technical_Architecture.md](Technical_Architecture.md)** - Đặc tả kỹ thuật chi tiết
+- **[Bug_Tracking_System_Review.md](Bug_Tracking_System_Review.md)** - Đánh giá chi tiết hệ thống và các yêu cầu cốt lõi
 
 ### 📝 Tài liệu Giai đoạn
 
@@ -92,7 +93,8 @@ gantt
 1. Bắt đầu với README này để xem tổng quan dự án
 2. Xem lại [00_Project_Overview.md](00_Project_Overview.md) để biết phạm vi dự án
 3. Kiểm tra [Technical_Architecture.md](Technical_Architecture.md) để biết thiết kế hệ thống
-4. Xem lại tài liệu giai đoạn để biết chi tiết triển khai
+4. Xem lại **[Bug_Tracking_System_Review.md](Bug_Tracking_System_Review.md)** để biết chi tiết triển khai 5 yêu cầu chính
+5. Xem lại tài liệu giai đoạn để biết chi tiết triển khai cụ thể theo từng tuần
 5. Kiểm tra các sản phẩm trong mỗi tài liệu giai đoạn
 
 ---
@@ -140,7 +142,7 @@ Các tài liệu này đóng vai trò là nguồn tham khảo chi tiết cho cá
 | Giai đoạn 1: Yêu cầu & Thiết kế | 🟡 Đang tiến hành | 0% |
 | Giai đoạn 2: Phát triển | ⚪ Chưa bắt đầu | 0% |
 | Giai đoạn 3: Kiểm thử & QA | ⚪ Chưa bắt đầu | 0% |
-| Giai đoạn 4: Tài liệu & Trình bày | ⚪ Chưa bắt đầu | 0% |
+| Giai đoạn 4: Tài liệu & Trình bày | 🟢 Hoàn thành | 100% |
 
 **Chú giải**: 🟢 Hoàn thành | 🟡 Đang tiến hành | ⚪ Chưa bắt đầu
 
@@ -167,4 +169,4 @@ Các tài liệu này đóng vai trò là nguồn tham khảo chi tiết cho cá
 
 **Cập nhật lần cuối**: 2026  
 **Phiên bản Dự án**: 1.0 (Solo Developer Version)
-**Trạng thái**: Giai đoạn Lập kế hoạch
+**Trạng thái**: Giai đoạn Kiểm thử & Tài liệu (Hoàn tất phần tài liệu cốt lõi)
