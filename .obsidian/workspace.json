@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/TECHNICAL_OBJECTS.md",
+                "file": "Full-Stack-Guides/Modern_Full_Stack_Research_Roadmap_2026.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "TECHNICAL_OBJECTS"
+              "title": "Modern_Full_Stack_Research_Roadmap_2026"
             }
           },
           {
@@ -131,7 +131,7 @@
             }
           },
           {
-            "id": "0301592e6645913a",
+            "id": "94010bc70730d6ae",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -145,7 +145,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 351.50000381469727
+    "width": 337.51103591918945
   },
   "right": {
     "id": "6d0bfa2a0e22d198",
@@ -254,24 +254,23 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/TECHNICAL_OBJECTS.md",
+                "file": "Full-Stack-Guides/Modern_Full_Stack_Research_Roadmap_2026.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TECHNICAL_OBJECTS"
+              "title": "Outline of Modern_Full_Stack_Research_Roadmap_2026"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 283.5
+    "width": 369.5
   },
   "left-ribbon": {
     "hiddenItems": {
-      "diagram-zoom-drag:Picker mode": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -282,47 +281,48 @@
       "obsidian-excalidraw-plugin:New drawing": false,
       "obsidian-kanban:Create new board": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "templater-obsidian:Templater": false
+      "templater-obsidian:Templater": false,
+      "diagram-zoom-drag:Picker mode": false
     }
   },
   "active": "6e99bc18625cab57",
   "lastOpenFiles": [
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZCL_BUG_REPORT.cls.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/SOLO_DEVELOPMENT_PLAN.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/TECHNICAL_OBJECTS.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase1_Requirements_Design.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/00_Project_Overview.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/README.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Bug_Tracking_System_Review.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Technical_Architecture.md",
-    "SAP-Guides/Capstone/Abap-8.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_LOG.prog.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_STATISTICS.prog.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_LIST.prog.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZRPG_ZBUG_ASSIGN.prog.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code/ZCL_BUG_VALIDATOR.cls.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs/Phase1_Requirements_Design.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/References_Resources.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs/00_Project_Overview.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs/Docs.md",
-    "Untitled.md",
-    "Dailies/Dailies.md",
-    "Phase1_Requirements_Design.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/note/Test_Cases_Spec.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/note/ALV_Report_Spec.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/note/Data_Dictionary_Spec.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase2_Development.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo/Phase4_Documentation_Presentation.md",
+    "Full-Stack-Guides/Tracks/NextJS-NestJS/05_Deployment_Observability_and_Appendices.md",
+    "Full-Stack-Guides/Tracks/NextJS-NestJS/04_Data_Layer_Postgres_Redis_Prisma_vs_Drizzle.md",
+    "Full-Stack-Guides/Tracks/NextJS-NestJS/03_NestJS_Backend_Foundation.md",
+    "Full-Stack-Guides/Tracks/NextJS-NestJS/02_NextJS_App_Router_Integration.md",
+    "Full-Stack-Guides/Tracks/NextJS-NestJS/01_Architecture_and_Project_Structure.md",
+    "Full-Stack-Guides/Tracks/NextJS-NestJS/00_Track_Overview.md",
+    "Full-Stack-Guides/Tracks/NextJS-NestJS",
+    "Full-Stack-Guides/Tracks",
+    "Full-Stack-Guides/Group-01-Foundation-Review/01.01_Data_Structures_Array_List_Map_Set.md",
+    "Developer/mds/Templates/Achievement-Log-Template.md",
+    "Developer/mds/Templates/Project-Case-Study-Template.md",
+    "Developer/mds/Templates/Weekly-Review-Template.md",
+    "Developer/mds/Templates/README.md",
+    "Developer/mds/06-Weekly-Reviews/2026-03-23-Weekly-Review.md",
+    "Developer/mds/06-Weekly-Reviews/README.md",
+    "Developer/mds/05-Projects/Project-01-Frontend-First-Full-Stack-App.md",
+    "Developer/mds/05-Projects/README.md",
+    "Developer/mds/04-Leadership-Management.md",
+    "Developer/mds/03-Profile-Builder.md",
+    "Developer/mds/02-Coding-Approach.md",
+    "Developer/mds/01-Study-Roadmap.md",
+    "Developer/mds/00-Dashboard.md",
+    "Developer/mds/README.md",
+    "Developer/mds/Templates",
+    "Developer/mds/06-Weekly-Reviews",
+    "Developer/mds/05-Projects",
+    "Developer/mds",
+    "Full-Stack-Guides/Modern_Full_Stack_Research_Roadmap_2026.md",
+    "Full-Stack-Guides/Comprehensive_Index.md",
+    "Full-Stack-Guides/GROUP_CREATION_STATUS.md",
+    "Full-Stack-Guides/Group-01-Foundation-Review/README.md",
+    "Full-Stack-Guides/README.md",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs",
     "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code",
     "note",
-    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/Workshop Template.pptx",
-    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/Unit_Test.xlsx",
-    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/UAT.xlsx",
-    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/TR_Management.xlsx",
-    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/Test_Scenario.xlsx",
-    "SAP-Guides/Capstone/Deliverable_template/Deliverable_template/Test_And_Fix_Bug.xlsx",
     "Pasted image 20260105155135.png",
     "Pasted image 20260105151635.png"
   ]

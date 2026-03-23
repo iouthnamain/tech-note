@@ -6,7 +6,7 @@
 
 **Vietnamese**: Nhóm này bao gồm phương pháp Agile, framework Scrum và so sánh với Waterfall. Học cách làm việc hiệu quả trong nhóm Agile, tham gia nghi lễ Scrum và hiểu nguyên tắc Agile.
 
-## Learning Path / Lộ trình học tập
+## Best Reading Order / Thứ tự đọc tốt nhất
 
 1. [11.01 Agile Principles](./11.01_Agile_Principles.md) - Agile values and principles
 2. [11.02 Scrum Framework](./11.02_Scrum_Framework.md) - Scrum overview
@@ -23,6 +23,25 @@
 13. [11.13 Agile vs Waterfall](./11.13_Agile_vs_Waterfall.md) - Compare methodologies
 14. [11.14 Scrum Roles](./11.14_Scrum_Roles.md) - Scrum team roles
 
-**Last Updated**: 2024
+## Highest-Value Files / File có giá trị cao nhất
 
+- [11.01 Agile Principles](./11.01_Agile_Principles.md)
+- [11.03 Sprint Planning](./11.03_Sprint_Planning.md)
+- [11.07 User Stories](./11.07_User_Stories.md)
+- [11.09 Product Backlog](./11.09_Product_Backlog.md)
+- [11.10 Sprint Backlog](./11.10_Sprint_Backlog.md)
+- [11.12 Velocity](./11.12_Velocity.md)
+
+## Why This Group Matters For Full-Stack Teams / Tại sao nhóm này quan trọng với team full-stack
+
+- good sprint planning reduces delivery churn
+- good backlog structure improves engineering focus
+- clear scrum roles reduce ownership confusion
+- user stories and acceptance clarity improve implementation quality
+
+## Recommended Next Groups / Nhóm nên đọc tiếp theo
+
+- [Group 04: Requirements Research](../Group-04-Requirements-Research/README.md)
+- [Group 10: Team Projects](../Group-10-Team-Projects/README.md)
+- [Group 12: Time Management](../Group-12-Time-Management/README.md)
 

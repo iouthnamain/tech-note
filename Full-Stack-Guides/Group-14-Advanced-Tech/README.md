@@ -6,7 +6,7 @@
 
 **Vietnamese**: Nhóm này bao gồm công nghệ nâng cao và thực hành phát triển hiện đại. Học microservices, GraphQL, WebSockets, containerization và các chủ đề nâng cao khác.
 
-## Learning Path / Lộ trình học tập
+## Best Reading Order / Thứ tự đọc tốt nhất
 
 1. [14.01 Microservices Architecture](./14.01_Microservices_Architecture.md) - Microservices design
 2. [14.02 GraphQL](./14.02_GraphQL.md) - GraphQL API
@@ -25,6 +25,41 @@
 15. [14.15 Scalability Patterns](./14.15_Scalability_Patterns.md) - Scaling strategies
 16. [14.16 Technology Trends](./14.16_Technology_Trends.md) - Emerging technologies
 
-**Last Updated**: 2024
+## Highest-Value Files For Modern Full-Stack / File có giá trị cao nhất cho full-stack hiện đại
 
+- [14.01 Microservices Architecture](./14.01_Microservices_Architecture.md)
+- [14.03 WebSockets Advanced](./14.03_WebSockets_Advanced.md)
+- [14.04 Docker & Containers](./14.04_Docker_Containers.md)
+- [14.05 Kubernetes Basics](./14.05_Kubernetes_Basics.md)
+- [14.06 Message Queues](./14.06_Message_Queues.md)
+- [14.11 CI/CD Pipelines](./14.11_CI_CD_Pipelines.md)
+- [14.12 Monitoring & Observability](./14.12_Monitoring_Observability.md)
+- [14.15 Scalability Patterns](./14.15_Scalability_Patterns.md)
 
+## Why This Group Matters / Tại sao nhóm này quan trọng
+
+- it connects application code to platform realities
+- it explains how systems grow beyond CRUD
+- it introduces technologies needed for scale, reliability, and distributed systems
+
+## For Next.js + NestJS Track / Dành cho lộ trình Next.js + NestJS
+
+If you are following the dedicated `Option 2` path, read:
+
+- [NestJS Backend Foundation](../Tracks/NextJS-NestJS/03_NestJS_Backend_Foundation.md)
+- [Deployment, Observability, and Appendices](../Tracks/NextJS-NestJS/05_Deployment_Observability_and_Appendices.md)
+
+Use this group mainly for:
+
+- queues
+- API gateway and service boundary patterns
+- CI/CD and observability
+- Docker, Kubernetes, and production platform topics
+
+## Recommended Next Groups / Nhóm nên đọc tiếp theo
+
+- [Group 09: Complex Functions](../Group-09-Complex-Functions/README.md)
+- [Group 16: Performance Testing](../Group-16-Performance-Testing/README.md)
+- [Group 17: DevOps & Automation](../Group-17-DevOps-Automation/README.md)
+- [Modern Full-Stack Research Roadmap 2026](../Modern_Full_Stack_Research_Roadmap_2026.md)
+- [Next.js + NestJS Dedicated Track](../Tracks/NextJS-NestJS/00_Track_Overview.md)

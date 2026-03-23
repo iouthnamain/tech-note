@@ -12,6 +12,7 @@
 Full-Stack-Guides/
 ├── README.md (This file)
 ├── Comprehensive_Index.md (Navigation hub)
+├── Tracks/NextJS-NestJS/ (Dedicated end-to-end track)
 ├── Group-01-Foundation-Review/ (15 guides) ✅
 ├── Group-02-Basic-Functions/ (16 guides) ✅
 ├── Group-03-Algorithm-Analysis/ (15 guides) ✅
@@ -194,7 +195,21 @@ Use the **[Comprehensive Index](./Comprehensive_Index.md)** to find specific top
 ## Navigation / Điều hướng
 
 - **[Comprehensive Index](./Comprehensive_Index.md)** - Complete navigation hub
+- **[Modern Full-Stack Research Roadmap 2026](./Modern_Full_Stack_Research_Roadmap_2026.md)** - Framework-focused roadmap for Next.js, NestJS, Express.js, PostgreSQL, and servers
+- **[Next.js + NestJS Dedicated Track](./Tracks/NextJS-NestJS/00_Track_Overview.md)** - Canonical end-to-end track for Option 2
 - **[Group 01: Foundation Review](./Group-01-Foundation-Review/)** - Start here for fundamentals
+
+## Specialized Guides / Hướng dẫn chuyên sâu
+
+- **[Modern Full-Stack Research Roadmap 2026](./Modern_Full_Stack_Research_Roadmap_2026.md)**
+  - Practical stack-focused roadmap
+  - Architecture diagrams for common deployment options
+  - Modern examples for Next.js, NestJS, Express.js, PostgreSQL
+  - Server and operations priorities for production deployment
+- **[Next.js + NestJS Dedicated Track](./Tracks/NextJS-NestJS/00_Track_Overview.md)**
+  - Canonical implementation path for `Option 2`
+  - End-to-end coverage from App Router to NestJS modules to deployment
+  - PostgreSQL, Redis, Prisma vs Drizzle, observability, and deployment guidance
 
 ## Progress Summary / Tóm tắt tiến độ
 

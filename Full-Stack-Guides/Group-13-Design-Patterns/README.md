@@ -6,7 +6,7 @@
 
 **Vietnamese**: Nhóm này bao gồm design pattern cần thiết cho phát triển phần mềm. Học creational, structural và behavioral patterns với ứng dụng thực tế.
 
-## Learning Path / Lộ trình học tập
+## Best Reading Order / Thứ tự đọc tốt nhất
 
 1. [13.01 Singleton Pattern](./13.01_Singleton_Pattern.md) - Single instance pattern
 2. [13.02 Factory Pattern](./13.02_Factory_Pattern.md) - Object creation
@@ -25,6 +25,43 @@
 15. [13.15 Middleware Pattern](./13.15_Middleware_Pattern.md) - Request processing
 16. [13.16 Design Pattern Best Practices](./13.16_Design_Pattern_Best_Practices.md) - When and how to use
 
-**Last Updated**: 2024
+## Highest-Value Files For Full-Stack Systems / File có giá trị cao nhất cho hệ full-stack
 
+- [13.04 Observer Pattern](./13.04_Observer_Pattern.md)
+- [13.05 Strategy Pattern](./13.05_Strategy_Pattern.md)
+- [13.10 Repository Pattern](./13.10_Repository_Pattern.md)
+- [13.11 Dependency Injection](./13.11_Dependency_Injection.md)
+- [13.12 MVC Pattern](./13.12_MVC_Pattern.md)
+- [13.15 Middleware Pattern](./13.15_Middleware_Pattern.md)
+- [13.16 Design Pattern Best Practices](./13.16_Design_Pattern_Best_Practices.md)
+
+## Best Mapping To Modern Stack / Ánh xạ tốt nhất sang stack hiện đại
+
+### Next.js
+
+- MVVM and presenter-like separation for complex UI logic
+- middleware patterns for auth and request handling
+
+### NestJS
+
+- dependency injection
+- repository and strategy patterns
+- command and observer patterns for domain workflows
+
+### Express.js
+
+- middleware, repository, facade, and strategy patterns
+- cleaner separation between routes, services, and infrastructure
+
+### PostgreSQL and Data Layer
+
+- repository abstraction
+- command boundaries for transactions
+- strategy selection for query behavior and storage approaches
+
+## Recommended Next Groups / Nhóm nên đọc tiếp theo
+
+- [Group 03: Algorithm Analysis](../Group-03-Algorithm-Analysis/README.md)
+- [Group 09: Complex Functions](../Group-09-Complex-Functions/README.md)
+- [Group 14: Advanced Tech](../Group-14-Advanced-Tech/README.md)
 

@@ -6,7 +6,7 @@
 
 **Vietnamese**: Nhóm này bao gồm DevOps cơ bản và tự động hóa AI. Học CI/CD, infrastructure as code, monitoring và công cụ AI low-code.
 
-## Learning Path / Lộ trình học tập
+## Best Reading Order / Thứ tự đọc tốt nhất
 
 1. [17.01 DevOps Fundamentals](./17.01_DevOps_Fundamentals.md) - DevOps basics
 2. [17.02 CI/CD Basics](./17.02_CI_CD_Basics.md) - Continuous integration
@@ -24,6 +24,40 @@
 14. [17.14 Testing Automation](./17.14_Testing_Automation.md) - Automated testing
 15. [17.15 DevOps Best Practices](./17.15_DevOps_Best_Practices.md) - DevOps practices
 
-**Last Updated**: 2024
+## Highest-Value Files For Full-Stack Delivery / File có giá trị cao nhất cho triển khai full-stack
 
+- [17.01 DevOps Fundamentals](./17.01_DevOps_Fundamentals.md)
+- [17.02 CI/CD Basics](./17.02_CI_CD_Basics.md)
+- [17.03 Infrastructure as Code](./17.03_Infrastructure_as_Code.md)
+- [17.04 Container Orchestration](./17.04_Container_Orchestration.md)
+- [17.05 Monitoring & Logging](./17.05_Monitoring_Logging.md)
+- [17.07 Deployment Strategies](./17.07_Deployment_Strategies.md)
+- [17.09 Environment Management](./17.09_Environment_Management.md)
+- [17.15 DevOps Best Practices](./17.15_DevOps_Best_Practices.md)
 
+## Why This Group Matters / Tại sao nhóm này quan trọng
+
+- shipping code reliably requires CI/CD and environment discipline
+- production systems need monitoring, deployment safety, and rollback plans
+- modern full-stack work extends beyond writing features into operations
+
+## For Next.js + NestJS Track / Dành cho lộ trình Next.js + NestJS
+
+If you are following the dedicated `Option 2` path, read:
+
+- [Deployment, Observability, and Appendices](../Tracks/NextJS-NestJS/05_Deployment_Observability_and_Appendices.md)
+
+Use this group mainly to deepen:
+
+- CI/CD
+- infrastructure as code
+- monitoring and logging
+- configuration and environment management
+- deployment strategy and rollback
+
+## Recommended Next Groups / Nhóm nên đọc tiếp theo
+
+- [Group 14: Advanced Tech](../Group-14-Advanced-Tech/README.md)
+- [Group 16: Performance Testing](../Group-16-Performance-Testing/README.md)
+- [Modern Full-Stack Research Roadmap 2026](../Modern_Full_Stack_Research_Roadmap_2026.md)
+- [Next.js + NestJS Dedicated Track](../Tracks/NextJS-NestJS/00_Track_Overview.md)

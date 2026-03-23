@@ -6,7 +6,7 @@
 
 **Vietnamese**: Nhóm này bao gồm kỹ năng mềm cần thiết cho developers. Học giao tiếp, giải quyết vấn đề, quản lý thời gian và kỹ năng phát triển chuyên nghiệp.
 
-## Learning Path / Lộ trình học tập
+## Best Reading Order / Thứ tự đọc tốt nhất
 
 1. [15.01 Communication Skills](./15.01_Communication_Skills.md) - Effective communication
 2. [15.02 Problem Solving](./15.02_Problem_Solving.md) - Solve problems effectively
@@ -24,6 +24,24 @@
 14. [15.14 Feedback](./15.14_Feedback.md) - Give and receive feedback
 15. [15.15 Professionalism](./15.15_Professionalism.md) - Professional behavior
 
-**Last Updated**: 2024
+## Highest-Value Files For Engineers / File có giá trị cao nhất cho kỹ sư
 
+- [15.01 Communication Skills](./15.01_Communication_Skills.md)
+- [15.02 Problem Solving](./15.02_Problem_Solving.md)
+- [15.03 Critical Thinking](./15.03_Critical_Thinking.md)
+- [15.13 Collaboration](./15.13_Collaboration.md)
+- [15.14 Feedback](./15.14_Feedback.md)
+- [15.15 Professionalism](./15.15_Professionalism.md)
+
+## Why This Group Matters / Tại sao nhóm này quan trọng
+
+- technical skill without communication slows teams down
+- clear thinking improves debugging and design decisions
+- professional feedback improves review culture and delivery quality
+
+## Recommended Next Groups / Nhóm nên đọc tiếp theo
+
+- [Group 10: Team Projects](../Group-10-Team-Projects/README.md)
+- [Group 11: Agile Scrum](../Group-11-Agile-Scrum/README.md)
+- [Group 12: Time Management](../Group-12-Time-Management/README.md)
 

@@ -6,7 +6,7 @@
 
 **Vietnamese**: Nhóm này bao gồm kỹ năng cộng tác nhóm cần thiết cho dự án phát triển phần mềm. Học giao tiếp hiệu quả, công cụ cộng tác, giải quyết xung đột và thực hành làm việc nhóm chuyên nghiệp.
 
-## Learning Path / Lộ trình học tập
+## Best Reading Order / Thứ tự đọc tốt nhất
 
 1. [10.01 Team Communication](./10.01_Team_Communication.md) - Effective communication
 2. [10.02 Collaboration Tools](./10.02_Collaboration_Tools.md) - Git, Slack, Jira
@@ -24,6 +24,29 @@
 14. [10.14 Team Culture](./10.14_Team_Culture.md) - Build team culture
 15. [10.15 Project Handoff](./10.15_Project_Handoff.md) - Handoff projects
 
-**Last Updated**: 2024
+## Best Files For Real Project Delivery / File tốt nhất cho triển khai dự án thực tế
 
+- [10.02 Collaboration Tools](./10.02_Collaboration_Tools.md)
+- [10.05 Code Review Process](./10.05_Code_Review_Process.md)
+- [10.08 Documentation Collaboration](./10.08_Documentation_Collaboration.md)
+- [10.09 Task Assignment](./10.09_Task_Assignment.md)
+- [10.10 Progress Reporting](./10.10_Progress_Reporting.md)
+- [10.11 Knowledge Sharing](./10.11_Knowledge_Sharing.md)
+- [10.15 Project Handoff](./10.15_Project_Handoff.md)
+
+## Why This Group Matters / Tại sao nhóm này quan trọng
+
+Strong technical content still fails in real projects if the team cannot:
+
+- share context clearly
+- hand off work safely
+- communicate blockers early
+- document changes and risks
+- align around code review and delivery flow
+
+## Recommended Next Groups / Nhóm nên đọc tiếp theo
+
+- [Group 08: Code Review](../Group-08-Code-Review/README.md)
+- [Group 11: Agile Scrum](../Group-11-Agile-Scrum/README.md)
+- [Group 17: DevOps & Automation](../Group-17-DevOps-Automation/README.md)
 

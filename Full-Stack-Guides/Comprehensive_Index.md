@@ -8,6 +8,7 @@
 
 ## Quick Navigation / Điều hướng nhanh
 
+- [Specialized Guides](#specialized-guides--hướng-dẫn-chuyên-sâu)
 - [Group 01: Foundation Review](#group-01-foundation-review)
 - [Group 02: Basic Functions](#group-02-basic-functions)
 - [Group 03: Algorithm Analysis](#group-03-algorithm-analysis)
@@ -25,6 +26,13 @@
 - [Group 15: Soft Skills](#group-15-soft-skills)
 - [Group 16: Performance Testing](#group-16-performance-testing)
 - [Group 17: DevOps & Automation](#group-17-devops--automation)
+
+---
+
+## Specialized Guides / Hướng dẫn chuyên sâu
+
+1. [Modern Full-Stack Research Roadmap 2026](./Modern_Full_Stack_Research_Roadmap_2026.md) - Next.js, NestJS, Express.js, PostgreSQL, servers
+2. [Next.js + NestJS Dedicated Track](./Tracks/NextJS-NestJS/00_Track_Overview.md) - Canonical Option 2 end-to-end learning path
 
 ---
 

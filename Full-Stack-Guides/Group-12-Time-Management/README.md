@@ -6,7 +6,7 @@
 
 **Vietnamese**: Nhóm này bao gồm ước tính thời gian, lập kế hoạch nhiệm vụ và quản lý bản thân. Học cách ước tính chính xác, quản lý thời gian hiệu quả và theo dõi tiến độ cá nhân.
 
-## Learning Path / Lộ trình học tập
+## Best Reading Order / Thứ tự đọc tốt nhất
 
 1. [12.01 Time Estimation](./12.01_Time_Estimation.md) - Estimate task duration
 2. [12.02 Task Planning](./12.02_Task_Planning.md) - Plan tasks effectively
@@ -24,6 +24,25 @@
 14. [12.14 Learning Planning](./12.14_Learning_Planning.md) - Plan learning
 15. [12.15 Career Planning](./12.15_Career_Planning.md) - Plan career
 
-**Last Updated**: 2024
+## Best Files For Developers / File tốt nhất cho developer
 
+- [12.01 Time Estimation](./12.01_Time_Estimation.md)
+- [12.02 Task Planning](./12.02_Task_Planning.md)
+- [12.03 Priority Management](./12.03_Priority_Management.md)
+- [12.05 Deadline Management](./12.05_Deadline_Management.md)
+- [12.11 Goal Setting](./12.11_Goal_Setting.md)
+- [12.12 Progress Tracking](./12.12_Progress_Tracking.md)
+
+## Why This Group Matters / Tại sao nhóm này quan trọng
+
+- better estimation improves sprint planning
+- better prioritization reduces context switching
+- better progress tracking makes reporting more accurate
+- better learning planning accelerates technical growth
+
+## Recommended Next Groups / Nhóm nên đọc tiếp theo
+
+- [Group 10: Team Projects](../Group-10-Team-Projects/README.md)
+- [Group 11: Agile Scrum](../Group-11-Agile-Scrum/README.md)
+- [Group 15: Soft Skills](../Group-15-Soft-Skills/README.md)
 

@@ -6,7 +6,7 @@
 
 **Vietnamese**: Nhóm này bao gồm kiểm thử hiệu năng, tối ưu và điều chỉnh hệ thống. Học cách kiểm thử hiệu năng, xác định nút thắt và tối ưu hệ thống.
 
-## Learning Path / Lộ trình học tập
+## Best Reading Order / Thứ tự đọc tốt nhất
 
 1. [16.01 Performance Testing Basics](./16.01_Performance_Testing_Basics.md) - Performance testing fundamentals
 2. [16.02 Load Testing](./16.02_Load_Testing.md) - Test under load
@@ -25,6 +25,42 @@
 15. [16.15 Performance Monitoring](./16.15_Performance_Monitoring.md) - Monitor performance
 16. [16.16 Performance Tuning](./16.16_Performance_Tuning.md) - Tune systems
 
-**Last Updated**: 2024
+## Highest-Value Files For Production Systems / File có giá trị cao nhất cho hệ production
 
+- [16.02 Load Testing](./16.02_Load_Testing.md)
+- [16.06 Bottleneck Identification](./16.06_Bottleneck_Identification.md)
+- [16.07 Database Performance](./16.07_Database_Performance.md)
+- [16.08 API Performance](./16.08_API_Performance.md)
+- [16.09 Frontend Performance](./16.09_Frontend_Performance.md)
+- [16.10 Caching Strategies](./16.10_Caching_Strategies.md)
+- [16.15 Performance Monitoring](./16.15_Performance_Monitoring.md)
+- [16.16 Performance Tuning](./16.16_Performance_Tuning.md)
+
+## Best Mapping To Modern Stack / Ánh xạ tốt nhất sang stack hiện đại
+
+### Next.js
+
+- frontend performance
+- caching
+- CDN usage
+- image and rendering optimization
+
+### NestJS and Express.js
+
+- API latency
+- middleware and handler bottlenecks
+- request throughput and monitoring
+
+### PostgreSQL
+
+- query cost
+- index usage
+- pooling behavior
+- response-time regressions under load
+
+## Recommended Next Groups / Nhóm nên đọc tiếp theo
+
+- [Group 03: Algorithm Analysis](../Group-03-Algorithm-Analysis/README.md)
+- [Group 06: Database Analysis](../Group-06-Database-Analysis/README.md)
+- [Group 17: DevOps & Automation](../Group-17-DevOps-Automation/README.md)
 
