@@ -11,14 +11,12 @@
             "id": "6e99bc18625cab57",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "mk-space",
               "state": {
-                "file": "Full-Stack-Guides/Modern_Full_Stack_Research_Roadmap_2026.md",
-                "mode": "preview",
-                "source": true
+                "path": "Sydexa-Full-Stack-Hub"
               },
               "icon": "lucide-file",
-              "title": "Modern_Full_Stack_Research_Roadmap_2026"
+              "title": "Sydexa-Full-Stack-Hub"
             }
           },
           {
@@ -131,7 +129,7 @@
             }
           },
           {
-            "id": "94010bc70730d6ae",
+            "id": "51ee486059dace19",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -254,13 +252,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Full-Stack-Guides/Modern_Full_Stack_Research_Roadmap_2026.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Modern_Full_Stack_Research_Roadmap_2026"
+              "title": "Outline"
             }
           }
         ]
@@ -287,42 +284,42 @@
   },
   "active": "6e99bc18625cab57",
   "lastOpenFiles": [
-    "Full-Stack-Guides/Tracks/NextJS-NestJS/05_Deployment_Observability_and_Appendices.md",
-    "Full-Stack-Guides/Tracks/NextJS-NestJS/04_Data_Layer_Postgres_Redis_Prisma_vs_Drizzle.md",
-    "Full-Stack-Guides/Tracks/NextJS-NestJS/03_NestJS_Backend_Foundation.md",
-    "Full-Stack-Guides/Tracks/NextJS-NestJS/02_NextJS_App_Router_Integration.md",
-    "Full-Stack-Guides/Tracks/NextJS-NestJS/01_Architecture_and_Project_Structure.md",
-    "Full-Stack-Guides/Tracks/NextJS-NestJS/00_Track_Overview.md",
-    "Full-Stack-Guides/Tracks/NextJS-NestJS",
-    "Full-Stack-Guides/Tracks",
-    "Full-Stack-Guides/Group-01-Foundation-Review/01.01_Data_Structures_Array_List_Map_Set.md",
-    "Developer/mds/Templates/Achievement-Log-Template.md",
-    "Developer/mds/Templates/Project-Case-Study-Template.md",
-    "Developer/mds/Templates/Weekly-Review-Template.md",
-    "Developer/mds/Templates/README.md",
-    "Developer/mds/06-Weekly-Reviews/2026-03-23-Weekly-Review.md",
-    "Developer/mds/06-Weekly-Reviews/README.md",
-    "Developer/mds/05-Projects/Project-01-Frontend-First-Full-Stack-App.md",
-    "Developer/mds/05-Projects/README.md",
-    "Developer/mds/04-Leadership-Management.md",
-    "Developer/mds/03-Profile-Builder.md",
-    "Developer/mds/02-Coding-Approach.md",
-    "Developer/mds/01-Study-Roadmap.md",
-    "Developer/mds/00-Dashboard.md",
-    "Developer/mds/README.md",
-    "Developer/mds/Templates",
-    "Developer/mds/06-Weekly-Reviews",
-    "Developer/mds/05-Projects",
-    "Developer/mds",
-    "Full-Stack-Guides/Modern_Full_Stack_Research_Roadmap_2026.md",
-    "Full-Stack-Guides/Comprehensive_Index.md",
-    "Full-Stack-Guides/GROUP_CREATION_STATUS.md",
-    "Full-Stack-Guides/Group-01-Foundation-Review/README.md",
-    "Full-Stack-Guides/README.md",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/solo",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/Docs",
-    "SAP-Guides/Capstone/Bug-Tracking-Management-VN/code",
-    "note",
+    "Sydexa-Full-Stack-Hub/README.md",
+    "Sydexa/sydexa-react-courses.md",
+    "Sydexa-Full-Stack-Hub",
+    "Developer/mds/01A-Sydexa-Full-Stack-12-Week-Schedule.md",
+    "Sydexa/week-08-performance-optimization-2-final-project/06-final-project-large-dataset-app.md",
+    "Sydexa/week-12-nextjs-production-architecture/PROJECT.md",
+    "Sydexa/week-11-nextjs-auth-data-systems/PROJECT.md",
+    "Sydexa/week-10-nextjs-data-rendering/PROJECT.md",
+    "Sydexa/week-09-nextjs-foundations/PROJECT.md",
+    "Sydexa/week-08-performance-optimization-2-final-project/PROJECT.md",
+    "Sydexa/week-07-performance-optimization-1/PROJECT.md",
+    "Sydexa/week-06-routing-ui-libraries/PROJECT.md",
+    "Sydexa/week-05-large-scale-forms/PROJECT.md",
+    "Sydexa/week-04-store-api-react-query/PROJECT.md",
+    "Sydexa/week-03-infinite-loading-virtualization/PROJECT.md",
+    "Sydexa/week-02-rerender-optimization/PROJECT.md",
+    "Sydexa/week-01-javascript-react-foundations/PROJECT.md",
+    "Sydexa/week-09-nextjs-foundations/README.md",
+    "Sydexa/week-09-nextjs-foundations/06-practice-dashboard-shell.md",
+    "Sydexa/week-09-nextjs-foundations/05-metadata-seo-open-graph.md",
+    "Sydexa/week-09-nextjs-foundations/04-navigation-loading-error-states.md",
+    "Sydexa/week-09-nextjs-foundations/03-server-components-vs-client-components.md",
+    "Sydexa/week-09-nextjs-foundations/02-app-router-fundamentals.md",
+    "frontend-guides/README.md",
+    "frontend-guides/sydexa-react-course/README.md",
+    "frontend-guides/sydexa-react-course/week-12-nextjs-production-architecture/README.md",
+    "frontend-guides/sydexa-react-course/week-12-nextjs-production-architecture/06-final-capstone-multi-system-app.md",
+    "frontend-guides/sydexa-react-course/week-12-nextjs-production-architecture",
+    "frontend-guides/sydexa-react-course/week-11-nextjs-auth-data-systems",
+    "frontend-guides/sydexa-react-course/week-10-nextjs-data-rendering",
+    "frontend-guides/sydexa-react-course/week-09-nextjs-foundations",
+    "frontend-guides/sydexa-react-course/week-08-performance-optimization-2-final-project",
+    "frontend-guides/sydexa-react-course/week-07-performance-optimization-1",
+    "frontend-guides/sydexa-react-course/week-06-routing-ui-libraries",
+    "frontend-guides/sydexa-react-course/week-05-large-scale-forms",
+    "frontend-guides/sydexa-react-course/week-04-store-api-react-query",
     "Pasted image 20260105155135.png",
     "Pasted image 20260105151635.png"
   ]

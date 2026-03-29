@@ -2,6 +2,8 @@
 
 This roadmap turns the existing repo into a practical path from beginner to job-ready frontend-first full-stack engineer.
 
+For a concrete 12-week execution plan built on `Sydexa` plus targeted `Full-Stack-Guides` support, use [01A-Sydexa-Full-Stack-12-Week-Schedule](./01A-Sydexa-Full-Stack-12-Week-Schedule.md).
+
 ## Phase 1: Foundations
 
 **Duration:** 6 weeks

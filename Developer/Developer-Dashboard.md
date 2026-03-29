@@ -5,6 +5,7 @@
 - Primary workspace: [Career OS](./mds/README.md)
 - Weekly control page: [Career OS Dashboard](./mds/00-Dashboard.md)
 - Main roadmap: [Study Roadmap](./mds/01-Study-Roadmap.md)
+- Current execution schedule: [Sydexa + Full-Stack 12-Week Schedule](./mds/01A-Sydexa-Full-Stack-12-Week-Schedule.md)
 
 ## Current Priorities
 

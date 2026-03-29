@@ -196,6 +196,7 @@ Use the **[Comprehensive Index](./Comprehensive_Index.md)** to find specific top
 
 - **[Comprehensive Index](./Comprehensive_Index.md)** - Complete navigation hub
 - **[Modern Full-Stack Research Roadmap 2026](./Modern_Full_Stack_Research_Roadmap_2026.md)** - Framework-focused roadmap for Next.js, NestJS, Express.js, PostgreSQL, and servers
+- **[Sydexa + Full-Stack 12-Week Schedule](../Developer/mds/01A-Sydexa-Full-Stack-12-Week-Schedule.md)** - Concrete weekly plan that uses `Sydexa` as the primary spine and this library as just-in-time support
 - **[Next.js + NestJS Dedicated Track](./Tracks/NextJS-NestJS/00_Track_Overview.md)** - Canonical end-to-end track for Option 2
 - **[Group 01: Foundation Review](./Group-01-Foundation-Review/)** - Start here for fundamentals
 

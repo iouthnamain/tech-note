@@ -14,6 +14,7 @@ Use it as an operating system, not as a document archive:
 
 - [00-Dashboard](./00-Dashboard.md)
 - [01-Study-Roadmap](./01-Study-Roadmap.md)
+- [01A-Sydexa-Full-Stack-12-Week-Schedule](./01A-Sydexa-Full-Stack-12-Week-Schedule.md)
 - [02-Coding-Approach](./02-Coding-Approach.md)
 - [03-Profile-Builder](./03-Profile-Builder.md)
 - [04-Leadership-Management](./04-Leadership-Management.md)
